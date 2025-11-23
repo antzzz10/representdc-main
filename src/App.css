@@ -205,6 +205,14 @@ body {
   color: #555;
 }
 
+/* Category Cards List */
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
 .impact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -420,33 +428,51 @@ body {
 
 /* Footer */
 .footer {
-  background: #1a1a1a;
+  background-color: #333;
   color: white;
-  padding: 3rem 0 2rem;
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 3rem;
 }
 
 .footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-statement {
+  margin: 0 0 2rem;
+  font-size: 1rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.footer-sections {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin: 2rem 0;
+  text-align: left;
 }
 
 .footer-section h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: #FFD700;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #fff;
+  font-weight: 600;
 }
 
 .footer-section p {
-  line-height: 1.7;
-  opacity: 0.9;
+  line-height: 1.5;
+  opacity: 0.85;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .footer-section a {
   color: #FFD700;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: opacity 0.3s ease;
 }
 
@@ -455,12 +481,10 @@ body {
   text-decoration: underline;
 }
 
-.footer-bottom {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-style: italic;
-  opacity: 0.8;
+.footer-copyright {
+  margin: 2rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
 /* Responsive Design */

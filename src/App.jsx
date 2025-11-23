@@ -1,6 +1,11 @@
 import './App.css'
+import { useBillStats } from './hooks/useBillStats'
+import CategoryCard from './components/CategoryCard'
+import { categoryDetails } from './data/categoryDetails'
 
 function App() {
+  const { totalBills, pendingBills, passedBills, lastUpdated } = useBillStats()
+
   return (
     <div className="app">
       {/* Hero Section - Loss Framing with Urgency */}
@@ -11,12 +16,15 @@ function App() {
             Congress Is Blocking D.C. Laws <span className="highlight">Right Now</span>
           </h1>
           <p className="hero-subtitle">
-            96 bills pending in Congress to overturn local D.C. decisions—from policing to healthcare to traffic laws
+            {totalBills} bills pending in Congress to overturn local D.C. decisions—from policing to healthcare to traffic laws
           </p>
           <a href="https://billtracker.representdc.org" className="cta-primary">
-            See All 96 Bills →
+            See All {totalBills} Bills →
           </a>
-          <p className="hero-note">Updated November 14, 2025 • 2 bills expected on House floor this week</p>
+          <p className="hero-note">
+            Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            {passedBills > 0 && ` • ${passedBills} bill${passedBills === 1 ? '' : 's'} just passed the House`}
+          </p>
         </div>
       </section>
 
@@ -36,7 +44,7 @@ function App() {
               <div className="fact-detail">D.C.'s delegate can introduce bills but cannot vote on final passage</div>
             </div>
             <div className="fact-card highlight-card">
-              <div className="fact-number">96</div>
+              <div className="fact-number">{totalBills}</div>
               <div className="fact-label">Bills to block local D.C. laws</div>
               <div className="fact-detail">Pending in the current Congress—and counting</div>
             </div>
@@ -49,39 +57,13 @@ function App() {
         <div className="container">
           <h2 className="section-title">What Congress Has Blocked</h2>
           <p className="section-intro">
-            These aren't hypothetical. Congress has used its power to overturn laws passed by D.C. residents:
+            These aren't hypothetical. Congress has used its power to overturn laws passed by D.C. residents.
+            Click each category to see specific examples:
           </p>
-          <div className="impact-grid">
-            <div className="impact-item">
-              <span className="impact-icon">⚖️</span>
-              <h3>Criminal Justice Reform</h3>
-              <p>Local police accountability measures blocked or restricted</p>
-            </div>
-            <div className="impact-item">
-              <span className="impact-icon">🏥</span>
-              <h3>Healthcare Decisions</h3>
-              <p>Abortion access, death with dignity, and insurance regulations overturned</p>
-            </div>
-            <div className="impact-item">
-              <span className="impact-icon">🗳️</span>
-              <h3>Voting Rights</h3>
-              <p>Local voting laws and electoral reforms challenged</p>
-            </div>
-            <div className="impact-item">
-              <span className="impact-icon">🚦</span>
-              <h3>Traffic Safety</h3>
-              <p>Even traffic cameras and turn-on-red laws targeted by Congress</p>
-            </div>
-            <div className="impact-item">
-              <span className="impact-icon">💰</span>
-              <h3>Local Budget</h3>
-              <p>$1+ billion cut from D.C.'s locally-funded budget</p>
-            </div>
-            <div className="impact-item">
-              <span className="impact-icon">🌱</span>
-              <h3>Marijuana Policy</h3>
-              <p>Recreational marijuana commercialization blocked despite voter approval</p>
-            </div>
+          <div className="categories-list">
+            {categoryDetails.map((category) => (
+              <CategoryCard key={category.id} category={category} />
+            ))}
           </div>
         </div>
       </section>
@@ -125,12 +107,12 @@ function App() {
           </p>
           <div className="trend-highlight">
             <div className="trend-stat">
-              <span className="trend-number">96</span>
-              <span className="trend-label">anti-D.C. bills pending</span>
+              <span className="trend-number">{totalBills}</span>
+              <span className="trend-label">anti-D.C. bills total</span>
             </div>
             <div className="trend-stat">
-              <span className="trend-number">10</span>
-              <span className="trend-label">categories of local control under attack</span>
+              <span className="trend-number">{pendingBills}</span>
+              <span className="trend-label">bills still pending</span>
             </div>
           </div>
           <a href="https://billtracker.representdc.org" className="cta-secondary">
@@ -188,23 +170,32 @@ function App() {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <div className="footer-section">
-              <h3>Track the Bills</h3>
-              <p>
-                <a href="https://billtracker.representdc.org">
-                  See all 96 anti-D.C. bills →
-                </a>
-              </p>
+            <p className="footer-statement">
+              D.C. statehood is a civil rights issue. These bills undermine the democratic rights of D.C. residents.
+            </p>
+
+            <div className="footer-sections">
+              <div className="footer-section">
+                <h3>Track the Bills</h3>
+                <p>
+                  <a href="https://billtracker.representdc.org">
+                    See all {totalBills} anti-D.C. bills →
+                  </a>
+                </p>
+              </div>
+              <div className="footer-section">
+                <h3>About This Site</h3>
+                <p>
+                  This is an independent, volunteer-run project created by a proud DC resident
+                  to track anti-DC legislation and advocate for full democracy for D.C. residents.
+                  Not affiliated with any organization.
+                </p>
+              </div>
             </div>
-            <div className="footer-section">
-              <h3>About This Site</h3>
-              <p>
-                RepresentDC.org tracks congressional interference in D.C. home rule and advocates for full democracy for D.C. residents.
-              </p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>This is a civil rights issue. 700,000 Americans deserve representation.</p>
+
+            <p className="footer-copyright">
+              Copyright © 2025 Represent DC
+            </p>
           </div>
         </div>
       </footer>
