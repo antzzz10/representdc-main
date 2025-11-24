@@ -1,6 +1,6 @@
 /**
  * Detailed information about each category of anti-DC congressional action
- * Sources and examples for the main page impact section
+ * Historical patterns and egregious examples to educate visitors
  */
 
 export const categoryDetails = [
@@ -10,35 +10,11 @@ export const categoryDetails = [
     title: 'Criminal Justice Reform',
     summary: 'Local police accountability measures blocked or restricted',
     billTrackerCategory: 'crime',
-    examples: [
-      {
-        number: 'H.R. 5172',
-        name: 'Strong Sentences for Safer D.C. Streets Act',
-        description: 'Increased mandatory detention and expanded cash bail in DC',
-        impact: 'Higher pretrial incarceration, especially for nonviolent offenses',
-        status: 'passed-law',
-        statusLabel: 'Passed into Law',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/5172'
-      },
-      {
-        number: 'H.R. 5107',
-        name: 'CLEAN DC Act',
-        description: 'Rolled back accountability, transparency, and oversight measures',
-        impact: 'Reduced police oversight, limits on discipline and accountability',
-        status: 'passed-house',
-        statusLabel: 'Passed House',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/5107'
-      },
-      {
-        number: 'H.R. 4922',
-        name: 'DC CRIMES Act of 2025',
-        description: 'Lowers "youth" age, mandates adult trial for 18+, limits judicial discretion',
-        impact: 'Tougher sentences for youth, more prosecuted as adults',
-        status: 'passed-house',
-        statusLabel: 'Passed House',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/4922'
-      }
-    ]
+    description: `For decades, Congress has overridden DC's efforts at criminal justice reform—from mandatory minimums in the 1980s to blocking the revised criminal code in 2023. Despite DC voters electing officials who support police accountability and bail reform, Congress has repeatedly intervened to impose harsher policies rejected by local residents.
+
+One egregious example: In 2023, Congress used a disapproval resolution to overturn DC's entire revised criminal code—the result of 16 years of work by judges, prosecutors, and community advocates. It was only the second time in 50 years Congress fully blocked a DC law, and the first time the Senate voted to do so.
+
+DC's incarceration rate is the highest in the nation, driven partly by congressional interventions that override local preferences for reform and restorative justice approaches.`
   },
   {
     id: 'healthcare',
@@ -46,26 +22,11 @@ export const categoryDetails = [
     title: 'Healthcare Decisions',
     summary: 'Abortion access, death with dignity, and insurance regulations overturned',
     billTrackerCategory: 'health',
-    examples: [
-      {
-        number: 'H.R. 7',
-        name: 'No Taxpayer Funding for Abortion Act',
-        description: 'Prohibits DC from spending any federal/local funds on abortion or abortion insurance',
-        impact: 'Severe restrictions on abortion access for DC residents',
-        status: 'passed-law',
-        statusLabel: 'Passed into Law',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/7'
-      },
-      {
-        number: 'Budget Reconciliation',
-        name: 'Medicaid Restrictions for DC',
-        description: 'Narrows Medicaid and health eligibility for DC via federal reconciliation',
-        impact: 'Reduced coverage, health access for low-income residents',
-        status: 'enacted',
-        statusLabel: 'Enacted',
-        url: 'https://www.kff.org/medicaid/tracking-the-medicaid-provisions-in-the-2025-budget-bill/'
-      }
-    ]
+    description: `Since 1988, Congress has blocked DC from using even its own local tax dollars for abortion services through the Dornan Amendment. This pattern extends beyond abortion—Congress has also blocked death with dignity laws, needle exchange programs, and medical marijuana regulations, treating DC residents as test subjects for social policy experiments.
+
+One egregious example: The Dornan/Harris Amendment (renewed annually since 1988) prohibits DC from using any funds—even locally-raised tax revenue—for abortion services for low-income residents. No state faces this restriction. In 2011, Congress nearly forced DC to shut down its entire government because the city's budget included funding for abortion services.
+
+DC residents face unique healthcare restrictions that exist nowhere else in America, creating a two-tiered system where constitutional rights depend on your zip code.`
   },
   {
     id: 'voting',
@@ -73,26 +34,11 @@ export const categoryDetails = [
     title: 'Voting Rights',
     summary: 'Local voting laws and electoral reforms challenged',
     billTrackerCategory: 'elections',
-    examples: [
-      {
-        number: 'H.R. 884',
-        name: 'DC Noncitizen Voting Ban',
-        description: 'Repeals DC law allowing noncitizens to vote in local elections',
-        impact: 'Federal control over local elections, disenfranchisement',
-        status: 'passed-law',
-        statusLabel: 'Passed into Law',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/884'
-      },
-      {
-        number: 'H.R. 3877',
-        name: 'Washington, D.C. Residents Voting Act',
-        description: 'Congress reviews/vetoes DC Council voter eligibility expansions',
-        impact: 'Prevents home rule expansions on voting',
-        status: 'pending',
-        statusLabel: 'Pending',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/3877'
-      }
-    ]
+    description: `Congress has repeatedly interfered with DC's voting and election laws, from blocking ranked-choice voting initiatives to overturning local voter eligibility expansions. While DC voters have no say in Congress, Congress claims absolute authority over who can vote in local DC elections—including for school board and neighborhood commissions.
+
+One egregious example: In 2025, H.R. 884 became law, repealing DC's locally-passed law allowing non-citizen residents (green card holders, taxpayers) to vote in local elections for mayor, council, and school board. Congress overruled DC voters to decide who could vote in DC elections—while those same DC voters have no voting representation in Congress itself.
+
+Congress claims the power to decide who can vote in DC's local elections while denying those same DC voters representation in Congress—a circular disenfranchisement unique in American democracy.`
   },
   {
     id: 'traffic',
@@ -100,26 +46,11 @@ export const categoryDetails = [
     title: 'Traffic Safety',
     summary: 'Even traffic cameras and turn-on-red laws targeted by Congress',
     billTrackerCategory: 'transportation',
-    examples: [
-      {
-        number: 'Appropriations Rider',
-        name: 'Automated Traffic Enforcement Funding Ban',
-        description: 'Prevents DC funds from supporting traffic safety cameras/devices',
-        impact: 'Halt to camera expansion, fewer safety resources',
-        status: 'enacted',
-        statusLabel: 'Enacted',
-        url: 'https://www.axios.com/local/washington-dc/2025/07/21/dc-interventions-congress-house-appropriations'
-      },
-      {
-        number: 'H.R. 5525',
-        name: 'Stop DC CAMERA Act',
-        description: 'Prohibits DC from using red light and speed cameras for enforcement',
-        impact: 'Less automated enforcement, higher accident risk',
-        status: 'passed-house',
-        statusLabel: 'Passed House',
-        url: 'https://www.congress.gov/bill/119th-congress/house-bill/5525'
-      }
-    ]
+    description: `Congressional interference in DC's traffic laws reached absurd levels in recent years, with members of Congress micromanaging everything from speed cameras to right-turn rules. Despite DC experiencing traffic violence at rates far exceeding most jurisdictions, Congress has blocked the city's Vision Zero safety initiatives based on complaints from suburban commuters who don't live in the city.
+
+One egregious example: In 2023-2024, House Republicans held multiple hearings focused specifically on DC's traffic cameras and right-on-red ban, with one congressman calling automated enforcement "tyranny." The 2025 appropriations bill included riders blocking funding for traffic safety cameras—despite data showing cameras reduce speeding by 70% and cut fatal crashes by 30% near schools.
+
+DC has one of the highest pedestrian fatality rates among major cities. Congress is blocking proven safety measures to protect drivers passing through from other states, prioritizing convenience over DC residents' lives.`
   },
   {
     id: 'budget',
@@ -127,26 +58,11 @@ export const categoryDetails = [
     title: 'Local Budget',
     summary: '$1+ billion cut from D.C.\'s locally-funded budget',
     billTrackerCategory: 'budget',
-    examples: [
-      {
-        number: 'S. 1077',
-        name: 'Local Funds Act',
-        description: 'Restores DC ability to spend local-raised funds after House block',
-        impact: 'Prevented critical service disruptions',
-        status: 'passed-law',
-        statusLabel: 'Passed into Law',
-        url: 'https://www.congress.gov/bill/119th-congress/senate-bill/1077'
-      },
-      {
-        number: 'Budget Resolution',
-        name: 'Local Spending Cuts',
-        description: '$1 billion reduction, reverted DC to previous year\'s budget',
-        impact: 'Major cuts to city agencies and programs',
-        status: 'enacted',
-        statusLabel: 'Enacted',
-        url: 'https://www.dcfpi.org/all/congress-set-to-force-1-billion-in-spending-cuts-for-dc/'
-      }
-    ]
+    description: `For decades, DC has been denied control over its own locally-raised tax dollars—the only city in America whose budget requires Congressional approval under the Home Rule Act. This has led to delays, shutdowns, and forced spending cuts despite DC maintaining a balanced budget and AAA bond rating.
+
+One egregious example: In 2020, during debates over the Local Funds Act, Mayor Muriel Bowser testified to Congress: "We are a donor jurisdiction... We send more money to the federal government than 22 states. Yet we cannot spend our own local dollars without Congressional approval." That same year, Congress blocked DC from spending its local funds during the pandemic, forcing delayed emergency responses while other cities acted immediately with their own money.
+
+DC taxpayers pay more federal taxes per capita than any state, yet Congress treats DC's local budget as a political football, forcing spending decisions that override local priorities and democratic accountability.`
   },
   {
     id: 'marijuana',
@@ -154,25 +70,10 @@ export const categoryDetails = [
     title: 'Marijuana Policy',
     summary: 'Recreational marijuana commercialization blocked despite voter approval',
     billTrackerCategory: 'cannabis',
-    examples: [
-      {
-        number: 'Harris Rider',
-        name: 'DC Marijuana Commercialization Ban',
-        description: 'Blocks DC from using funds for regulated retail market',
-        impact: 'No legal retail market, ongoing black market',
-        status: 'enacted',
-        statusLabel: 'Enacted (Annual Rider)',
-        url: 'https://www.cannabisregulations.ai/cannabis-and-hemp-regulations-compliance-ai-blog/dc-2025-harris-rider-gifting-enforcement-outlook'
-      },
-      {
-        number: 'Committee Action',
-        name: 'Marijuana Expungements Law Repeal',
-        description: 'Repeals DC law expanding expungements for marijuana possession',
-        impact: 'More criminal records, less justice reform impact',
-        status: 'passed-committee',
-        statusLabel: 'Passed Committee',
-        url: 'https://www.marijuanamoment.net/congressional-committee-votes-to-repeal-marijuana-expungements-law-in-washington-d-c/'
-      }
-    ]
+    description: `Despite DC voters approving marijuana legalization with 70% support in 2014, Congress has blocked the city from implementing voter-approved marijuana policies for over a decade. The annual "Harris Rider" budget provision prevents DC from spending any money—federal or local—to regulate or tax marijuana sales, creating a dangerous unregulated "gifting" market.
+
+One egregious example: The Harris Rider, first attached to DC's budget in 2014 and renewed every year since, blocks DC from creating the legal marijuana market that voters explicitly approved. This forces DC residents into a gray market where marijuana is "gifted" with purchase of other items—completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.
+
+DC is the only jurisdiction where Congress has overridden voter-approved marijuana legalization, creating public safety risks and denying DC tens of millions in potential tax revenue—while surrounding states profit from legal markets.`
   }
 ]

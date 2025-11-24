@@ -1,4 +1,4 @@
-/* CategoryCard - Expandable category cards with bill examples */
+/* CategoryCard - Expandable category cards with historical narratives */
 
 .category-card {
   background: white;
@@ -64,41 +64,7 @@
   line-height: 1.5;
 }
 
-/* Header Actions */
-.category-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-shrink: 0;
-}
-
-.status-counts {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.status-count {
-  padding: 0.25rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.enacted-count {
-  background-color: #fee;
-  color: #c00;
-  border: 1px solid #fcc;
-}
-
-.pending-count {
-  background-color: #fff4e6;
-  color: #d97706;
-  border: 1px solid #fed7aa;
-}
-
+/* Expand Button */
 .expand-button {
   width: 32px;
   height: 32px;
@@ -139,138 +105,35 @@
   }
 }
 
-.examples-header {
-  margin-bottom: 1rem;
+/* Description/Narrative */
+.category-description {
   padding-top: 1rem;
   border-top: 1px solid #e0e0e0;
 }
 
-.examples-header h4 {
-  margin: 0;
+.category-description p {
+  margin: 0 0 1rem;
+  color: #444;
   font-size: 1rem;
-  color: #333;
-  font-weight: 600;
+  line-height: 1.7;
 }
 
-.examples-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+.category-description p:last-child {
+  margin-bottom: 0;
 }
 
-/* Bill Examples */
-.bill-example {
-  background: #fafafa;
+/* Highlight egregious examples */
+.category-description p:nth-child(2) {
+  background: #fef9f8;
   border-left: 3px solid #DC143C;
   padding: 1rem;
   border-radius: 6px;
-}
-
-.bill-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.bill-number-title {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.bill-number {
-  font-weight: 700;
-  color: #DC143C;
-  font-size: 0.95rem;
-}
-
-.bill-status {
-  padding: 0.25rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.status-passed-law {
-  background-color: #dc2626;
-  color: white;
-  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
-}
-
-.status-enacted {
-  background-color: #b91c1c;
-  color: white;
-  box-shadow: 0 2px 4px rgba(185, 28, 28, 0.2);
-}
-
-.status-passed-chamber {
-  background-color: #f59e0b;
-  color: white;
-  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
-}
-
-.status-passed-committee {
-  background-color: #fbbf24;
-  color: #78350f;
-}
-
-.status-pending {
-  background-color: #e5e7eb;
-  color: #4b5563;
-}
-
-.bill-link {
-  color: #DC143C;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: color 0.2s ease;
-}
-
-.bill-link:hover {
-  color: #A00000;
-  text-decoration: underline;
-}
-
-.bill-name {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  color: #333;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.bill-description {
-  margin: 0 0 0.5rem;
-  color: #555;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.bill-impact {
-  margin: 0;
-  color: #666;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  padding: 0.5rem;
-  background: white;
-  border-radius: 4px;
-}
-
-.bill-impact strong {
-  color: #DC143C;
+  margin: 1rem 0;
 }
 
 /* Footer */
 .category-footer {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid #e0e0e0;
   text-align: center;
@@ -314,33 +177,12 @@
     font-size: 0.9rem;
   }
 
-  .category-header-actions {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-end;
-  }
-
-  .status-counts {
-    flex-direction: column;
-    gap: 0.25rem;
-    align-items: flex-end;
-  }
-
   .category-card-content {
     padding: 0 1.25rem 1.25rem;
   }
 
-  .bill-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .bill-number-title {
-    width: 100%;
-  }
-
-  .bill-link {
-    align-self: flex-start;
+  .category-description p {
+    font-size: 0.95rem;
   }
 
   .expand-button {
