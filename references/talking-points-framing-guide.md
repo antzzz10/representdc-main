@@ -126,6 +126,43 @@ Refine messaging based on what resonates, but maintain the core distinction betw
 
 ---
 
-**Document Version:** 1.0
-**Last Updated:** December 2025
+## Hypocrisy Research Examples
+
+### Traffic Safety (Completed December 2025)
+
+**Primary Sponsor:** Rep. Scott Perry (R-PA-10)
+- **District:** Pennsylvania's 10th (Harrisburg, York, Dauphin County)
+- **Bills Introduced:**
+  - H.R. 5525 (Stop DC CAMERA Act)
+  - H.R. 5242 amendments (Traffic Camera Repeal, Right Turn Prohibition Repeal)
+
+**Hypocrisy Points:**
+
+1. **His State Uses the Very Thing He Blocks DC From Using**
+   - Pennsylvania law permits municipalities to use red light cameras
+   - Philadelphia operates 34 camera intersections with 71 more planned
+   - Multiple PA suburbs use cameras: Pittsburgh, Abington Township, Montgomery Township, Bensalem Township, Warrington Township
+   - Perry blocks DC from using cameras while his own state allows and expands them
+
+2. **His State's Safety Record is Getting Worse**
+   - Pennsylvania saw pedestrian deaths INCREASE in 2023 (192 deaths, up from 184 in 2022)
+   - PA was one of only 21 states where pedestrian deaths rose (most saw decreases)
+   - Yet Perry prevents DC from using proven safety tools that could help
+
+**Research Sources:**
+- [Spotlight PA: Red light traffic cameras could expand across Pennsylvania](https://www.spotlightpa.org/news/2025/03/traffic-camera-bill-traffic-philadelphia-safety-legislature/)
+- [Philadelphia Parking Authority: Red Light Cameras](https://philapark.org/red-light-cameras/)
+- [The Center Square: Drivers killed fewer pedestrians in 2023, except in Pennsylvania](https://www.thecentersquare.com/pennsylvania/article_3274cee0-358d-11ef-8ba4-03448e933927.html)
+- [PhotoEnforced: Pennsylvania Red Light Camera Locations](https://www.photoenforced.com/pennsylvania.html)
+
+**How to Use This Research:**
+
+*For Allies:* "Rep. Scott Perry blocks DC's traffic cameras while his own state of Pennsylvania allows them—Philadelphia has 34 camera intersections with 71 more planned. This is pure hypocrisy: local control for thee but not for DC."
+
+*For Persuadables:* "Rep. Perry introduced three bills blocking DC's traffic cameras. Yet Pennsylvania law permits red light cameras, and multiple Pennsylvania cities use them—including Philadelphia with 34 intersections. If automated enforcement is good enough for Pennsylvania communities, why can't DC make the same local decision?"
+
+---
+
+**Document Version:** 1.1
+**Last Updated:** December 2025 (Added Hypocrisy Research Examples)
 **Maintained By:** RepresentDC Project
