@@ -58,9 +58,13 @@ DC has one of the highest pedestrian fatality rates among major cities. Congress
     title: 'Local Budget',
     summary: '$1+ billion cut from D.C.\'s locally-funded budget',
     billTrackerCategory: 'budget',
-    description: `For decades, DC has been denied control over its own locally-raised tax dollars—the only city in America whose budget requires Congressional approval under the Home Rule Act. This has led to delays, shutdowns, and forced spending cuts despite DC maintaining a balanced budget and AAA bond rating.
+    description: `For decades, DC has been denied control over its own locally-raised tax dollars—the only city in America whose budget requires Congressional approval under the Home Rule Act. This fundamental restriction has led to repeated crises, shutdowns, and forced spending cuts.
 
-One egregious example: In 2020, during debates over the Local Funds Act, Mayor Muriel Bowser testified to Congress: "We are a donor jurisdiction... We send more money to the federal government than 22 states. Yet we cannot spend our own local dollars without Congressional approval." That same year, Congress blocked DC from spending its local funds during the pandemic, forcing delayed emergency responses while other cities acted immediately with their own money.
+One egregious example: In March 2025, House Republicans passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a roughly 16 percent hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
+
+The $1.1 billion gap requires cutting 16% of planned spending—money from DC residents and businesses, not federal aid. This generates no savings for the federal government while restricting what DC can do with its own tax dollars. To avoid mass layoffs, Mayor Bowser imposed hiring freezes, suspended raises and overtime, and targeted contracts for cuts affecting schools, public safety, and human services.
+
+The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore DC's authority, and President Trump publicly urged the House to approve it. As of fall 2025, House leaders have repeatedly declined to bring the fix to a vote. Because the city must balance its budget over four years, the withheld $1.1 billion will count as surplus and be locked into reserves if not spent, further limiting flexibility.
 
 DC taxpayers pay more federal taxes per capita than any state, yet Congress treats DC's local budget as a political football, forcing spending decisions that override local priorities and democratic accountability.`
   },
