@@ -10,6 +10,12 @@ function TalkingPoints({ categoryId, talkingPoints }) {
     return null
   }
 
+  // Convert markdown links [text](url) to HTML <a> tags
+  const renderMarkdownLinks = (text) => {
+    const html = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    return { __html: html }
+  }
+
   const copyToClipboard = async (text, label) => {
     try {
       await navigator.clipboard.writeText(text)
@@ -80,7 +86,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>📱 One-Liner <span className="char-count">({currentPoints.oneLiner.length} chars)</span></h4>
                   <p className="usage-hint">Perfect for social media posts</p>
                 </div>
-                <p className="talking-point-text">{currentPoints.oneLiner}</p>
+                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.oneLiner)} />
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.oneLiner, 'oneLiner')}
@@ -102,7 +108,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>🗣️ Elevator Pitch</h4>
                   <p className="usage-hint">For conversations and longer posts</p>
                 </div>
-                <p className="talking-point-text">{currentPoints.elevatorPitch}</p>
+                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.elevatorPitch)} />
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.elevatorPitch, 'elevatorPitch')}
@@ -124,7 +130,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>📄 Full Argument</h4>
                   <p className="usage-hint">Detailed version with complete context</p>
                 </div>
-                <p className="talking-point-text">{currentPoints.fullArgument}</p>
+                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.fullArgument)} />
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.fullArgument, 'fullArgument')}
@@ -141,9 +147,9 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <p className="hypocrisy-intro">Use these to counter opposition:</p>
                   {talkingPoints.hypocrisy.map((item, index) => (
                     <div key={index} className="hypocrisy-item">
-                      <p className="hypocrisy-point">{item.point}</p>
+                      <p className="hypocrisy-point" dangerouslySetInnerHTML={renderMarkdownLinks(item.point)} />
                       {item.examples && (
-                        <p className="hypocrisy-examples"><em>{item.examples}</em></p>
+                        <p className="hypocrisy-examples"><em dangerouslySetInnerHTML={renderMarkdownLinks(item.examples)} /></p>
                       )}
                     </div>
                   ))}

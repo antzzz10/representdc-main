@@ -163,6 +163,20 @@
   font-size: 0.95rem;
 }
 
+.talking-point-text a,
+.hypocrisy-point a,
+.hypocrisy-examples a {
+  color: #667eea;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.talking-point-text a:hover,
+.hypocrisy-point a:hover,
+.hypocrisy-examples a:hover {
+  color: #764ba2;
+}
+
 .talking-point-actions {
   display: flex;
   gap: 0.75rem;
