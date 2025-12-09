@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './CategoryCard.css'
+import TalkingPoints from './TalkingPoints'
+import { talkingPoints } from '../data/talkingPoints'
 
 /**
  * Expandable category card showing historical patterns of anti-DC congressional actions
@@ -7,6 +9,7 @@ import './CategoryCard.css'
  */
 function CategoryCard({ category }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const categoryTalkingPoints = talkingPoints[category.billTrackerCategory]
 
   return (
     <div className={`category-card ${isExpanded ? 'expanded' : ''}`}>
@@ -37,6 +40,14 @@ function CategoryCard({ category }) {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
+
+          {categoryTalkingPoints && (
+            <TalkingPoints
+              categoryId={category.billTrackerCategory}
+              talkingPoints={categoryTalkingPoints}
+            />
+          )}
+
           <div className="category-footer">
             <a
               href={`https://billtracker.representdc.org?category=${category.billTrackerCategory}`}
