@@ -79,5 +79,17 @@ DC taxpayers pay more federal taxes per capita than any state, yet Congress trea
 One egregious example: The Harris Rider, first attached to DC's budget in 2014 and renewed every year since, blocks DC from creating the legal marijuana market that voters explicitly approved. This forces DC residents into a gray market where marijuana is "gifted" with purchase of other items—completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.
 
 DC is the only jurisdiction where Congress has overridden voter-approved marijuana legalization, creating public safety risks and denying DC tens of millions in potential tax revenue—while surrounding states profit from legal markets.`
+  },
+  {
+    id: 'civic-spaces',
+    icon: '🏛️',
+    title: 'Civic Spaces & Local Autonomy',
+    summary: 'Congress renames DC streets and plazas to override local values and decisions',
+    billTrackerCategory: 'civic-spaces',
+    description: `Congress regularly exercises authority over DC's civic spaces—renaming streets, plazas, and monuments—in ways that contradict local values and decisions. These bills use DC as a battleground for national culture wars, treating the city's public spaces as federal property rather than community assets that belong to DC residents.
+
+One egregious example: In December 2025, Rep. Nancy Mace (R-SC) introduced the Charlie Kirk Freedom of Speech Plaza Act to redesignate Black Lives Matter Plaza—named by DC to honor the racial justice movement—as "Charlie Kirk Freedom of Speech Plaza." This would force DC to install new street signs and update all official records, overriding a local naming decision that reflects DC community values.
+
+While some street renaming bills are routine, others are intentionally provocative, using DC's lack of autonomy to make political statements that contradict what DC residents have chosen for their own community. No state would tolerate Congress renaming its state capital's streets and plazas to impose political messages rejected by local residents. DC's civic spaces should reflect DC values, not be tools for congressional culture wars.`
   }
 ]
