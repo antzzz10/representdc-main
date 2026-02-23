@@ -176,10 +176,15 @@ function App() {
 
             <div className="footer-sections">
               <div className="footer-section">
-                <h3>Track the Bills</h3>
+                <h3>Represent DC Tools</h3>
                 <p>
                   <a href="https://billtracker.representdc.org">
-                    See all {totalBills} anti-D.C. bills →
+                    Anti-DC Bill Tracker →
+                  </a>
+                </p>
+                <p>
+                  <a href="https://candidates.representdc.org">
+                    Candidate Tracker →
                   </a>
                 </p>
               </div>
@@ -190,11 +195,20 @@ function App() {
                   to track anti-DC legislation and advocate for full democracy for D.C. residents.
                   Not affiliated with any organization.
                 </p>
+                <p>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScoQfgfU-vHBN0EXqGp51Vv79oT2iS-1_uPTzoPtpmFlQ58kQ/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Send Feedback →
+                  </a>
+                </p>
               </div>
             </div>
 
             <p className="footer-copyright">
-              Copyright © 2025 Represent DC
+              Copyright © 2026 Represent DC
             </p>
           </div>
         </div>
