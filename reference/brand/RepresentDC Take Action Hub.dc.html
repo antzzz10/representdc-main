@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.hub-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:56px 0 60px}
+.hub-hero .eyebrow{color:var(--gold)}
+.hub-hero h1{font-size:38px;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px;max-width:760px}
+.hub-hero p{font-size:16.5px;color:rgba(255,255,255,.86);max-width:620px;margin:0}
+.hub-jump{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.hub-jump a{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:8px 15px;border-radius:var(--r-pill);font-size:13.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.hub-jump a:hover{background:rgba(255,255,255,.2);color:#fff}
+.hubsec{padding:56px 0}
+.hubsec.alt{background:#fff}
+.hubsec h2{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin:0 0 8px}
+.hubsec .lead{font-size:15px;color:var(--slate-500);max-width:640px;margin:0 0 26px}
+.audience-toggle{display:inline-flex;background:var(--surface-2);border-radius:var(--r-pill);padding:4px;gap:4px;margin-bottom:22px}
+.audience-toggle button{border:none;background:transparent;font-family:var(--font-sans);font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:var(--r-pill);cursor:pointer;color:var(--slate-500)}
+.audience-toggle button.on{background:var(--navy);color:#fff}
+.cat-chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+.cat-chip{background:#fff;border:1.5px solid var(--line-2);color:var(--slate-700);padding:7px 14px;border-radius:var(--r-pill);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-sans)}
+.cat-chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tp-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:20px 22px}
+.tp-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.tp-head .picon{width:34px;height:34px;border-radius:8px;background:var(--navy-tint);color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tp-head h3{font-size:15.5px;font-weight:700;color:var(--ink);margin:0}
+.tp-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin:0 0 5px}
+.tp-oneliner p{font-size:14px;color:var(--ink);line-height:1.55;margin:0 0 10px}
+.tp-actions{display:flex;gap:8px;margin-bottom:14px}
+.tp-actions button{font-family:var(--font-sans);font-size:12.5px;font-weight:700;color:var(--navy);background:var(--navy-tint);border:none;padding:6px 12px;border-radius:var(--r-sm);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.tp-actions button:hover{background:#e3e8f1}
+.tp-actions button.copied{background:var(--dc-red);color:#fff}
+.tp-expand-btn{width:100%;text-align:left;background:none;border:none;border-top:1px solid var(--line);padding:10px 0 0;font-family:var(--font-sans);font-size:12.5px;font-weight:700;color:var(--navy);cursor:pointer}
+.tp-detail{margin-top:12px;display:flex;flex-direction:column;gap:14px}
+.tp-detail h4{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate-400);margin:0 0 5px}
+.tp-detail p{font-size:13px;color:var(--slate-700);line-height:1.55;margin:0 0 6px}
+.src-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.src-list a{font-size:11px;color:var(--slate-500);background:var(--surface-2);padding:2px 8px;border-radius:5px;text-decoration:none}
+.src-list a:hover{color:var(--navy)}
+.hyp{background:var(--dc-red-tint);border-left:3px solid var(--dc-red);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;margin-top:4px}
+.hyp p{color:#7A1020}
+.news-list{display:flex;flex-direction:column;gap:0}
+.news-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.news-item:last-child{border-bottom:none}
+.news-date{font-family:var(--font-mono);font-size:12px;color:var(--slate-400);white-space:nowrap;width:92px;flex-shrink:0;padding-top:2px}
+.news-body p{font-size:14px;color:var(--slate-700);line-height:1.55;margin:0 0 6px}
+.news-src{font-size:12px;color:var(--slate-400)}
+.news-src a{color:var(--slate-500)}
+.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+.event-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow-xs)}
+.event-card h4{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 6px}
+.event-card .ewhen{font-family:var(--font-mono);font-size:12px;color:var(--navy);margin:0 0 8px;font-weight:600}
+.event-card p{font-size:13px;color:var(--slate-500);line-height:1.5;margin:0 0 10px}
+.event-card a.rsvp{font-size:13px;font-weight:700;color:var(--dc-red)}
+.event-host{font-size:11.5px;color:var(--slate-400);margin-top:8px}
+.movement-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 22px}
+.movement-card h4{font-size:14px;font-weight:700;color:var(--ink);margin:0 0 10px}
+.org-list{display:flex;flex-wrap:wrap;gap:8px}
+.org-list a{font-size:12.5px;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--line-2);padding:6px 12px;border-radius:var(--r-pill);text-decoration:none}
+.org-list a:hover{border-color:var(--navy)}
+@media(max-width:860px){.tp-grid,.events-grid{grid-template-columns:1fr}}
+</style></helmet>
+<nav class="nav"><div class="wrap nav-inner"><img class="logo" src="assets/logo-representdc.svg" alt="RepresentDC"><div class="nav-links"><a class="nav-link" href="RepresentDC Homepage.dc.html">Home</a><a class="nav-link" href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help</a><a class="nav-link" href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ</a><a class="nav-link" href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a><a class="nav-cta" href="RepresentDC Take Action Hub.dc.html">Take action</a></div></div></nav>
+
+<header class="hub-hero"><div class="wrap"><div class="eyebrow">The action hub</div><h1>Everything you need to argue, organize, and stay current</h1><p>Sourced talking points, the latest statehood news, and real ways to get involved — no persuasion pitch, just the tools.</p><div class="hub-jump"><a href="#talking-points"><i data-lucide="message-square"></i>Talking points</a><a href="#news"><i data-lucide="clock"></i>Latest news</a><a href="#events"><i data-lucide="calendar"></i>Actions &amp; events</a></div></div></header>
+
+<section class="hubsec alt" id="talking-points"><div class="wrap">
+<h2>Talking points</h2><p class="lead">Ready-to-use copy for every major category — pick your audience, then copy or share.</p>
+<div class="audience-toggle"><button class="{{allyBtnClass}}" onClick="{{setAllies}}">For allies</button><button class="{{persBtnClass}}" onClick="{{setPersuadable}}">For persuadables</button></div>
+<div class="cat-chips"><sc-for list="{{categoryChips}}" as="chip" hint-placeholder-count="4"><button class="{{chip.cls}}" onClick="{{chip.toggle}}">{{chip.label}}</button></sc-for></div>
+<div class="tp-grid"><sc-for list="{{cards}}" as="card" hint-placeholder-count="4">
+<div class="tp-card">
+<div class="tp-head"><span class="picon"><i data-lucide="{{card.icon}}"></i></span><h3>{{card.label}}</h3></div>
+<div class="tp-oneliner"><p class="tp-label">One-liner</p><p>{{card.oneLinerText}}</p><div class="src-list"><sc-for list="{{card.oneLinerSources}}" as="s" hint-placeholder-count="0"><a href="{{s.url}}" target="_blank" rel="noopener">{{s.label}}</a></sc-for></div>
+<div class="tp-actions"><button class="{{card.copyOneClass}}" onClick="{{card.copyOne}}">{{card.copyOneLabel}}</button><button onClick="{{card.shareOne}}"><i data-lucide="share-2"></i>Share</button></div></div>
+<button class="tp-expand-btn" onClick="{{card.toggleExpand}}">{{card.expandLabel}}</button>
+<sc-if value="{{card.expanded}}" hint-placeholder-val="{{false}}"><div class="tp-detail">
+<div><h4>Elevator pitch</h4><p>{{card.pitchText}}</p><div class="src-list"><sc-for list="{{card.pitchSources}}" as="s" hint-placeholder-count="0"><a href="{{s.url}}" target="_blank" rel="noopener">{{s.label}}</a></sc-for></div></div>
+<div><h4>Full argument</h4><p>{{card.argText}}</p><div class="src-list"><sc-for list="{{card.argSources}}" as="s" hint-placeholder-count="0"><a href="{{s.url}}" target="_blank" rel="noopener">{{s.label}}</a></sc-for></div></div>
+<sc-if value="{{card.hasHypocrisy}}" hint-placeholder-val="{{false}}"><div><h4>Hypocrisy angle</h4><sc-for list="{{card.hypocrisy}}" as="h" hint-placeholder-count="1"><div class="hyp"><p>{{h.point}}</p><p style="font-size:12px;font-style:italic">{{h.examples}}</p><div class="src-list"><sc-for list="{{h.exampleSources}}" as="s" hint-placeholder-count="0"><a href="{{s.url}}" target="_blank" rel="noopener">{{s.label}}</a></sc-for></div></div></sc-for></div></sc-if>
+</div></sc-if>
+</div>
+</sc-for></div>
+</div></section>
+
+<section class="hubsec" id="news"><div class="wrap">
+<h2>Latest statehood news</h2><p class="lead">A quick skim of recent developments — full detail and vote history live in the Bill Tracker.</p>
+<div class="news-list">
+<div class="news-item"><div class="news-date">DEC 2025</div><div class="news-body"><p>Rep. Nancy Mace introduces a bill to redesignate Black Lives Matter Plaza — a locally-chosen name — as "Charlie Kirk Freedom of Speech Plaza."</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=civic-spaces" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+<div class="news-item"><div class="news-date">MAR 2025</div><div class="news-body"><p>A House continuing resolution omits the routine language letting D.C. spend its own already-approved budget — blocking roughly $1.1 billion in local funds.</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=budget" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+<div class="news-item"><div class="news-date">2025</div><div class="news-body"><p>H.R. 884 is signed into law, repealing D.C.'s locally-passed law letting green-card-holding residents vote in local elections.</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=elections" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+<div class="news-item"><div class="news-date">2023</div><div class="news-body"><p>Congress overturns D.C.'s revised criminal code — 16 years in the making — only the second full block of a D.C. law in 50 years, and the first time the Senate voted to do so.</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=crime" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+</div>
+<p style="font-size:13px;color:var(--slate-400);margin-top:18px">Checked July 9, 2026 — for real-time updates and the full 96-bill list, see the <a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a>.</p>
+</div></section>
+
+<section class="hubsec alt" id="events"><div class="wrap">
+<h2>Actions &amp; events</h2><p class="lead">Ways to show up in person, credited to the organizations actually running them.</p>
+<div class="events-grid">
+<div class="event-card"><h4>"DC Statehood Now!" board game session</h4><p class="ewhen">Sat, July 25, 2026 · 2:00–4:00pm ET</p><p>Play a board game that walks 4–6 players through the real legislative path to statehood — setbacks and progress included. RSVP required.</p><a class="rsvp" href="https://www.lwvdc.org/content.aspx?page_id=4091&club_id=263021&item_id=3010847" target="_blank" rel="noopener">RSVP on LWVDC's site →</a><p class="event-host">Hosted by League of Women Voters of DC · 2475 Virginia Ave NW, Washington, DC</p></div>
+<div class="event-card"><h4>"DC Statehood Now!" board game session</h4><p class="ewhen">Sat, Aug 29, 2026 · 2:00–4:00pm ET</p><p>A second session of the same game — additional date and capacity.</p><a class="rsvp" href="https://www.lwvdc.org/content.aspx?page_id=4091&club_id=263021&item_id=3010853" target="_blank" rel="noopener">RSVP on LWVDC's site →</a><p class="event-host">Hosted by League of Women Voters of DC · 2475 Virginia Ave NW, Washington, DC</p></div>
+</div>
+<div class="movement-card"><h4>No event that fits your schedule? Meet the organizations doing this work year-round:</h4><div class="org-list">
+<a href="https://www.dcvote.org" target="_blank" rel="noopener">DC Vote</a>
+<a href="https://www.lwvdc.org" target="_blank" rel="noopener">League of Women Voters of DC</a>
+<a href="https://www.the51st.org" target="_blank" rel="noopener">Neighbors United for DC Statehood</a>
+<a href="https://togetherfordc.org" target="_blank" rel="noopener">Together for DC coalition</a>
+</div></div>
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><p class="footer-creed">"D.C. statehood is a civil rights issue. These bills undermine the democratic rights of D.C. residents."</p><div class="footer-cols">
+<div class="footer-col"><h5>About this project</h5><p>An independent, volunteer-run project created by a proud D.C. resident to track anti-D.C. legislation and advocate for full democracy. Not affiliated with any organization or party.</p></div>
+<div class="footer-col"><h5>RepresentDC tools</h5><div class="footer-links"><a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Anti-DC bill tracker <i data-lucide="arrow-right"></i></a><a href="https://candidates.representdc.org" target="_blank" rel="noopener">Candidate tracker <i data-lucide="arrow-right"></i></a><a href="RepresentDC Homepage.dc.html">Home <i data-lucide="arrow-right"></i></a></div></div>
+<div class="footer-col"><h5>Get involved</h5><div class="footer-links"><a href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help <i data-lucide="arrow-right"></i></a><a href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ <i data-lucide="arrow-right"></i></a></div></div>
+</div><div class="footer-bottom"><span>Copyright © 2026 RepresentDC</span><span>No taxation without representation.</span></div></div></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CATEGORIES = [
+  { id: 'transportation', label: 'Traffic safety', icon: 'traffic-cone',
+    allies: {
+      oneLiner: "House Republicans are literally micromanaging DC's traffic lights while 700,000 residents have no vote in Congress—blocking proven safety measures that save children's lives.",
+      elevatorPitch: "House Republicans held hearings to block DC's traffic cameras and right-on-red ban, with one congressman calling safety enforcement 'tyranny.' Meanwhile, DC has one of the worst pedestrian death rates in America. This is what taxation without representation looks like: suburban drivers' convenience matters more than DC kids walking to school. No state would tolerate Congress micromanaging their stop signs.",
+      fullArgument: "This is authoritarian control, plain and simple. House Republicans are micromanaging DC's traffic lights, speed cameras, and crosswalk rules while 700,000 DC residents have zero voting representation in Congress. They held multiple hearings in 2023-2024 specifically targeting DC's traffic safety measures—cameras that [reduce fatal crashes by 30%](https://www.iihs.org/news/detail/study-red-light-cameras-cut-fatal-crashes) and [speeding by 70%](https://ddot.dc.gov/page/vision-zero-initiative) near schools. One congressman called automated enforcement 'tyranny' and the 2025 appropriations bill blocked funding for these life-saving cameras. DC has [one of the highest pedestrian fatality rates](https://www.ghsa.org/resources/Pedestrians24) among major cities, yet Congress prioritizes the convenience of drivers passing through from Virginia and Maryland over DC children's lives. No state—red or blue—would tolerate this level of federal interference in their local traffic enforcement. We need statehood now."
+    },
+    persuadable: {
+      oneLiner: "Federal politicians are micromanaging DC's traffic policy—blocking evidence-based safety tools (30% crash reduction) funded entirely by local taxpayers, not federal dollars.",
+      elevatorPitch: "Traffic cameras near schools reduce fatal crashes 30% and are used in communities nationwide, red states and blue. Yet federal politicians blocked DC from funding its own traffic safety program—zero federal money involved, 100% local taxpayer dollars. If your town council voted for speed cameras to protect kids, should Washington politicians override that decision? This is federal overreach that violates the conservative principle of local control.",
+      fullArgument: "Evidence-based traffic enforcement works: cameras [reduce speeding by 70%](https://ddot.dc.gov/page/vision-zero-initiative) and [cut fatal crashes by 30%](https://www.iihs.org/news/detail/study-red-light-cameras-cut-fatal-crashes) near schools. Congress blocked DC from spending its own locally-raised tax dollars on this program—not federal funds, DC taxpayer money that DC residents voted to spend on protecting their own children. Apply the conservative principle consistently: if a Texas town council votes for traffic cameras near schools, should federal politicians in Washington override that local decision? DC funds its entire traffic enforcement program with local dollars, generating [zero cost to the federal budget](https://ddot.dc.gov/page/automated-traffic-enforcement)."
+    },
+    hypocrisy: [{ point: "Rep. Scott Perry (R-PA) introduced three bills blocking DC's traffic cameras—yet Pennsylvania law allows red light cameras, and Philadelphia has 34 intersections with cameras (with 71 more planned).", examples: "Perry sponsors H.R. 5525 (Stop DC CAMERA Act). Meanwhile, [Pennsylvania permits municipalities to use red light cameras](https://www.spotlightpa.org/news/2025/03/traffic-camera-bill-traffic-philadelphia-safety-legislature/), and [Philadelphia operates 34 camera intersections](https://philapark.org/red-light-cameras/) with 71 more planned." }]
+  },
+  { id: 'health', label: 'Healthcare', icon: 'stethoscope',
+    allies: {
+      oneLiner: "For 37 years, Congress has blocked DC from using its own local tax dollars for abortion services—a restriction no state faces—while overriding DC laws protecting reproductive and gender-affirming care.",
+      elevatorPitch: "Since 1988, the Dornan Amendment has banned DC from spending even its own locally-raised tax revenue on abortion services for low-income residents. In 2011, Congress nearly shut down DC's government over abortion funding. This is taxation without representation: DC residents pay federal taxes but can't make their own healthcare decisions.",
+      fullArgument: "Since 1988, Congress has renewed the Dornan Amendment annually, blocking DC from using any funds—even locally-raised tax revenue—for abortion services. No state faces this restriction. In 2011, [Congress nearly forced a government shutdown](https://www.washingtonpost.com/local/dc-politics/congress-dc-abortion-funding-fight/2011/04/08/) because DC's budget included local abortion funding. House Republicans have also blocked DC's [death with dignity laws](https://dcist.com/story/17/01/23/congress-blocks-dc-death-with-dignity-law/), needle exchange programs, and medical marijuana regulations. This creates a two-tiered system where constitutional rights depend on your zip code."
+    },
+    persuadable: {
+      oneLiner: "Congress blocks DC from spending its own locally-raised tax dollars on healthcare services—including abortion and end-of-life care—a restriction zero states face, violating the principle of local control.",
+      elevatorPitch: "Since 1988, federal law has banned DC from spending even locally-raised tax revenue (zero federal dollars) on abortion services—a restriction no state faces. Congress has also blocked DC's death with dignity law and other local healthcare decisions. If your state legislature funded a service with its own tax dollars, should federal politicians override that decision?",
+      fullArgument: "Local communities should control healthcare policy funded with their own tax dollars. Since 1988, Congress has annually renewed the Dornan Amendment, blocking DC from spending locally-raised revenue (not federal funds) on abortion services—unique to DC. Beyond abortion, Congress has blocked DC's [death with dignity law](https://dcist.com/story/17/01/23/congress-blocks-dc-death-with-dignity-law/)—supported by DC voters—and interfered with needle exchange programs and medical marijuana regulations. This isn't about red or blue politics—it's about whether local communities can make healthcare decisions with their own money."
+    },
+    hypocrisy: [{ point: "Rep. Christopher Smith (R-NJ) sponsors bills blocking DC's reproductive healthcare funding—yet his home state of New Jersey codified abortion as a fundamental right in 2022.", examples: "Smith sponsors H.R. 7 (No Taxpayer Funding for Abortion Act). Yet [New Jersey's Freedom of Reproductive Choice Act](https://www.nj.gov/health/news/2022/approved/20220113a.shtml) enshrined abortion rights as fundamental in 2022." }]
+  },
+  { id: 'elections', label: 'Elections & voting', icon: 'vote',
+    allies: {
+      oneLiner: "Congress overruled DC voters to ban non-citizen residents (green card holders, taxpayers) from voting in local elections—while 18 cities in other states have the same policy and Congress doesn't interfere.",
+      elevatorPitch: "In 2022, DC voters approved allowing non-citizen residents to vote in local elections for mayor and city council. H.R. 884 repealed that law. Meanwhile, 18 cities in California, Maryland, and Vermont allow noncitizen voting in local elections, and Congress doesn't try to override them. This is taxation without representation: Congress claims absolute power over who can vote in DC's local elections while those same DC voters have zero representation in Congress itself.",
+      fullArgument: "In 2022, DC passed the Local Resident Voting Rights Amendment Act, allowing non-citizen residents who meet residency requirements to vote in local elections for mayor, city council, and school board—not federal elections. H.R. 884, sponsored by Rep. August Pfluger (R-TX), passed the House in June 2025 and repealed this law. [18 municipalities in California, Maryland, and Vermont](https://ballotpedia.org/Laws_permitting_noncitizens_to_vote_in_the_United_States) allow noncitizen voting in local elections; Congress doesn't try to override any of them. Congress claims the power to decide who can vote in DC's local elections while denying DC residents voting representation in that same Congress."
+    },
+    persuadable: {
+      oneLiner: "Congress overrides DC's local voting laws—blocking non-citizen local voting and ranked choice voting—while leaving identical policies in dozens of other cities untouched, violating the principle of local control.",
+      elevatorPitch: "DC voters approved allowing non-citizen residents to vote in local elections—not federal elections, just mayor and city council. H.R. 884 repealed that law. Yet 18 cities in California, Maryland, and Vermont have identical policies, and Congress doesn't interfere. If your city council voted to allow local taxpayers to vote in local elections, should Washington override that decision?",
+      fullArgument: "Local communities should control their own election procedures and voter eligibility for local offices. DC's Local Resident Voting Rights Amendment Act allowed non-citizen residents who pay DC taxes to vote in local elections only. H.R. 884 repealed this local decision. [18 municipalities in California, Maryland, and Vermont](https://ballotpedia.org/Laws_permitting_noncitizens_to_vote_in_the_United_States) allow noncitizen voting in local elections, some since the 1990s, with zero federal interference. The same federalism principle that protects your community's election procedures should apply to DC."
+    },
+    hypocrisy: [{ point: "Congress singles out DC's noncitizen local voting law while 18 cities in California, Maryland, and Vermont have identical policies—some since the 1990s—yet face zero federal interference.", examples: "H.R. 884 repealed DC's law. Yet [18 municipalities in other states](https://ballotpedia.org/Laws_permitting_noncitizens_to_vote_in_the_United_States) allow noncitizen local voting, including Takoma Park, Maryland (since 1992)." }]
+  },
+  { id: 'crime', label: 'Criminal justice', icon: 'scale',
+    allies: {
+      oneLiner: "In 2023, Congress overturned DC's entire revised criminal code—16 years of work by judges and prosecutors—while DC has one of the highest incarceration rates in the nation and no vote in Congress to defend local reforms.",
+      elevatorPitch: "In 2023, Congress used a rare disapproval resolution to overturn DC's revised criminal code—16 years of work by judges, prosecutors, and community advocates. It was only the second time in 50 years Congress fully blocked a DC law. DC has one of the highest incarceration rates in the nation, yet Congress blocks every effort at reform.",
+      fullArgument: "In 2023, Congress passed H.J.Res. 26 to overturn DC's [Revised Criminal Code Act of 2022](https://www.congress.gov/bill/118th-congress/house-joint-resolution/26)—16 years in the making, passed the DC Council unanimously. The Senate voted 81-14 to block it, [only the second time in 50 years](https://www.npr.org/2023/03/08/1161902691/d-c-crime-bill-biden-overturn) Congress fully overturned a DC law. DC has [one of the highest incarceration rates in the United States](https://www.prisonpolicy.org/global/appendix_states_2024.html). DC voters elect officials who support reform, but Congress blocks it while DC residents have no vote to defend these policies."
+    },
+    persuadable: {
+      oneLiner: "Congress overrode 16 years of DC criminal justice work in 2023 and now blocks police accountability measures used in 20 states—while DC has zero voting representation to defend local public safety decisions.",
+      elevatorPitch: "In 2023, Congress overturned DC's revised criminal code—16 years of local work—using a disapproval resolution. Congress also blocks DC's police accountability policies while 20 states have similar laws, and forces DC to reinstate cash bail while Illinois, New Jersey, and New York have eliminated or limited it without federal interference.",
+      fullArgument: "In 2023, Congress used the Congressional Review Act to overturn DC's [Revised Criminal Code Act of 2022](https://www.congress.gov/bill/118th-congress/house-joint-resolution/26)—16 years of work, passed unanimously by the DC Council. [20 states mandate body cameras](https://worldpopulationreview.com/state-rankings/body-camera-laws-by-state) for law enforcement, yet Congress blocks DC's similar policy. [Illinois eliminated cash bail entirely](https://worldpopulationreview.com/state-rankings/no-cash-bail-states) in 2023; Congress doesn't override that, but forces DC to reinstate cash bail. This isn't about red or blue politics—it's whether local communities can make evidence-based criminal justice decisions."
+    },
+    hypocrisy: [{ point: "Rep. Andrew Clyde (R-GA) sponsors a bill to repeal DC's police accountability law—yet his home state of Georgia mandates body camera footage retention.", examples: "Clyde sponsors the CLEAN DC Act (H.R. 5107). Yet [Georgia law requires](https://law.justia.com/codes/georgia/title-50/chapter-18/article-5/section-50-18-96/) departments using body cameras to retain footage for 180 days." }]
+  }
+];
+class Component extends DCLogic {
+  state = { audience: 'allies', selectedCats: [], expanded: {}, copied: null };
+  componentDidMount() { this.tryIcons(0); }
+  componentDidUpdate() { this.tryIcons(0); }
+  tryIcons(n) { if (window.lucide && window.lucide.createIcons) { window.lucide.createIcons(); } else if (n < 20) { setTimeout(() => this.tryIcons(n + 1), 100); } }
+  parse(text) {
+    if (!text) return { text: '', links: [] };
+    const links = [];
+    const plain = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => { links.push({ label, url }); return label; });
+    return { text: plain, links };
+  }
+  copyText(text, key) {
+    try { navigator.clipboard.writeText(text); } catch (e) {}
+    this.setState({ copied: key });
+    setTimeout(() => this.setState(s => s.copied === key ? { copied: null } : {}), 2000);
+  }
+  shareText(text) {
+    if (navigator.share) { navigator.share({ text }).catch(() => this.copyText(text, 'share')); }
+    else { this.copyText(text, 'share'); }
+  }
+  toggleCat(id) {
+    this.setState(s => ({ selectedCats: s.selectedCats.includes(id) ? s.selectedCats.filter(c => c !== id) : [...s.selectedCats, id] }));
+  }
+  toggleExpand(id) {
+    this.setState(s => ({ expanded: { ...s.expanded, [id]: !s.expanded[id] } }));
+  }
+  renderVals() {
+    const { audience, selectedCats, expanded, copied } = this.state;
+    const visible = CATEGORIES.filter(c => selectedCats.length === 0 || selectedCats.includes(c.id));
+    const cards = visible.map(c => {
+      const set = c[audience];
+      const one = this.parse(set.oneLiner);
+      const pitch = this.parse(set.elevatorPitch);
+      const arg = this.parse(set.fullArgument);
+      const hyp = (c.hypocrisy || []).map(h => {
+        const p = this.parse(h.point);
+        const e = this.parse(h.examples || '');
+        return { point: p.text, examples: e.text, exampleSources: e.links };
+      });
+      const copyKey = c.id + '-one';
+      return {
+        id: c.id, label: c.label, icon: c.icon,
+        oneLinerText: one.text, oneLinerSources: one.links,
+        pitchText: pitch.text, pitchSources: pitch.links,
+        argText: arg.text, argSources: arg.links,
+        hypocrisy: hyp, hasHypocrisy: hyp.length > 0,
+        expanded: !!expanded[c.id],
+        expandLabel: expanded[c.id] ? 'Show less −' : 'Elevator pitch, full argument & hypocrisy angle +',
+        toggleExpand: () => this.toggleExpand(c.id),
+        copyOne: () => this.copyText(set.oneLiner, copyKey),
+        copyOneLabel: copied === copyKey ? 'Copied ✓' : 'Copy',
+        copyOneClass: copied === copyKey ? 'copied' : '',
+        shareOne: () => this.shareText(set.oneLiner)
+      };
+    });
+    return {
+      allyBtnClass: audience === 'allies' ? 'on' : '',
+      persBtnClass: audience === 'persuadable' ? 'on' : '',
+      setAllies: () => this.setState({ audience: 'allies' }),
+      setPersuadable: () => this.setState({ audience: 'persuadable' }),
+      categoryChips: CATEGORIES.map(c => ({ id: c.id, label: c.label, cls: selectedCats.includes(c.id) ? 'cat-chip on' : 'cat-chip', toggle: () => this.toggleCat(c.id) })),
+      cards
+    };
+  }
+}
+</script>
+</body>
+</html>

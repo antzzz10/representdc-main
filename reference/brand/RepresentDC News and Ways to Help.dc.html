@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.cur-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:52px 0 56px}
+.cur-hero .eyebrow{color:var(--gold)}
+.cur-hero h1{font-size:36px;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px;max-width:680px}
+.cur-hero p{font-size:16px;color:rgba(255,255,255,.86);max-width:600px;margin:0}
+.cur-sec{padding:52px 0}
+.cur-sec.alt{background:#fff;border-top:1px solid var(--line)}
+.cur-sec h2{font-size:24px;font-weight:800;color:var(--ink);margin:0 0 8px}
+.cur-sec .lead{font-size:14.5px;color:var(--slate-500);max-width:600px;margin:0 0 24px}
+.news-list{display:flex;flex-direction:column}
+.news-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.news-item:last-child{border-bottom:none}
+.news-date{font-family:var(--font-mono);font-size:12px;color:var(--slate-400);white-space:nowrap;width:92px;flex-shrink:0;padding-top:2px}
+.news-body p{font-size:14px;color:var(--slate-700);line-height:1.55;margin:0 0 6px}
+.news-src{font-size:12px;color:var(--slate-400)}
+.news-src a{color:var(--slate-500)}
+.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.help-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.help-card .picon{width:38px;height:38px;border-radius:9px;background:var(--navy-tint);color:var(--navy);display:flex;align-items:center;justify-content:center}
+.help-card h3{font-size:15px;font-weight:700;color:var(--ink);margin:0}
+.help-card p{font-size:13px;color:var(--slate-500);line-height:1.5;margin:0;flex:1}
+.help-card a.go{font-size:13px;font-weight:700;color:var(--navy)}
+.help-card:hover a.go{color:var(--dc-red)}
+@media(max-width:860px){.help-grid{grid-template-columns:1fr}}
+</style></helmet>
+<nav class="nav"><div class="wrap nav-inner"><img class="logo" src="assets/logo-representdc.svg" alt="RepresentDC"><div class="nav-links"><a class="nav-link" href="RepresentDC Homepage.dc.html">Home</a><a class="nav-link active" href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help</a><a class="nav-link" href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ</a><a class="nav-link" href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a><a class="nav-cta" href="RepresentDC Take Action Hub.dc.html">Take action</a></div></div></nav>
+
+<header class="cur-hero"><div class="wrap"><div class="eyebrow">Statehood, in progress</div><h1>You know the problem. Here's what's moving, and how to help.</h1><p>A quick read on recent developments, plus low-commitment ways to plug in today.</p></div></header>
+
+<section class="cur-sec"><div class="wrap">
+<h2>What's happened recently</h2><p class="lead">Full bill detail and vote history live in the Bill Tracker — this is the 30-second version.</p>
+<div class="news-list">
+<div class="news-item"><div class="news-date">DEC 2025</div><div class="news-body"><p>Rep. Nancy Mace introduces a bill to redesignate Black Lives Matter Plaza — a locally-chosen name — as "Charlie Kirk Freedom of Speech Plaza."</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=civic-spaces" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+<div class="news-item"><div class="news-date">MAR 2025</div><div class="news-body"><p>A House continuing resolution omits the routine language letting D.C. spend its own already-approved budget — blocking roughly $1.1 billion in local funds.</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=budget" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+<div class="news-item"><div class="news-date">2025</div><div class="news-body"><p>H.R. 884 is signed into law, repealing D.C.'s locally-passed law letting green-card-holding residents vote in local elections.</p><p class="news-src">Source: <a href="https://billtracker.representdc.org?category=elections" target="_blank" rel="noopener">Anti-DC Bill Tracker</a></p></div></div>
+</div>
+<p style="font-size:13px;color:var(--slate-400);margin-top:18px">Checked July 9, 2026. For the full 96-bill list and real-time updates, see the <a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a>.</p>
+</div></section>
+
+<section class="cur-sec alt"><div class="wrap">
+<h2>Easy ways to help</h2><p class="lead">No commitment required to start.</p>
+<div class="help-grid">
+<div class="help-card"><span class="picon"><i data-lucide="message-square"></i></span><h3>Share a talking point</h3><p>Grab a ready-to-use one-liner or elevator pitch, tailored to who you're talking to.</p><a class="go" href="RepresentDC Take Action Hub.dc.html#talking-points">Open talking points →</a></div>
+<div class="help-card"><span class="picon"><i data-lucide="calendar"></i></span><h3>Show up in person</h3><p>Play the "DC Statehood Now!" board game at an upcoming League of Women Voters of DC session.</p><a class="go" href="RepresentDC Take Action Hub.dc.html#events">See upcoming events →</a></div>
+<div class="help-card"><span class="picon"><i data-lucide="vote"></i></span><h3>Check where candidates stand</h3><p>See which 2026 candidates have taken the D.C. statehood pledge.</p><a class="go" href="https://candidates.representdc.org" target="_blank" rel="noopener">Open the pledge tracker →</a></div>
+</div>
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><p class="footer-creed">"D.C. statehood is a civil rights issue. These bills undermine the democratic rights of D.C. residents."</p><div class="footer-cols">
+<div class="footer-col"><h5>About this project</h5><p>An independent, volunteer-run project created by a proud D.C. resident to track anti-D.C. legislation and advocate for full democracy. Not affiliated with any organization or party.</p></div>
+<div class="footer-col"><h5>RepresentDC tools</h5><div class="footer-links"><a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Anti-DC bill tracker <i data-lucide="arrow-right"></i></a><a href="RepresentDC Take Action Hub.dc.html">Take action hub <i data-lucide="arrow-right"></i></a><a href="RepresentDC Homepage.dc.html">Home <i data-lucide="arrow-right"></i></a></div></div>
+<div class="footer-col"><h5>Get involved</h5><div class="footer-links"><a href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ <i data-lucide="arrow-right"></i></a></div></div>
+</div><div class="footer-bottom"><span>Copyright © 2026 RepresentDC</span><span>No taxation without representation.</span></div></div></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { this.tryIcons(0); }
+  tryIcons(n) { if (window.lucide && window.lucide.createIcons) { window.lucide.createIcons(); } else if (n < 20) { setTimeout(() => this.tryIcons(n + 1), 100); } }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

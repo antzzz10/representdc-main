@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.hg-nav{border-bottom:1px solid var(--line);background:#fff}
+.hg-nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.hg-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:48px 0 52px}
+.hg-hero span.eb{color:var(--gold);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.hg-hero h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:12px 0 12px;max-width:700px}
+.hg-hero p{font-size:16px;color:rgba(255,255,255,.86);max-width:660px;margin:0}
+.hg-sec{padding:44px 0;border-bottom:1px solid var(--line)}
+.hg-sec h2{font-size:21px;font-weight:800;color:var(--ink);margin:0 0 6px}
+.hg-sec .sub{font-size:13.5px;color:var(--slate-500);margin:0 0 22px;max-width:680px;line-height:1.6}
+.dcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow-xs)}
+.q{font-size:13.5px;font-weight:700;color:var(--navy);margin:0 0 6px;display:flex;gap:8px;align-items:baseline}
+.q .qn{font-family:var(--font-mono);font-size:11px;background:var(--navy-tint);color:var(--navy);padding:2px 7px;border-radius:5px;font-weight:700;flex-shrink:0}
+.a{font-size:13.5px;color:var(--slate-700);line-height:1.6;margin:0}
+.decision-list{display:flex;flex-direction:column;gap:14px}
+.remap-table{width:100%;border-collapse:collapse;font-size:13px}
+.remap-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);padding:8px 12px;border-bottom:1.5px solid var(--line-2)}
+.remap-table td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.remap-table tr:last-child td{border-bottom:none}
+.old{font-family:var(--font-mono);font-size:12px;color:var(--slate-500)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:12px;padding:2px 8px;border-radius:5px;color:#fff}
+.swatch-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;color:var(--slate-500)}
+.sw .box{width:44px;height:44px;border-radius:8px;border:1px solid var(--line)}
+.conflict{background:var(--navy-tint);border-radius:var(--r-md);padding:16px 18px;font-size:13.5px;color:var(--navy-700);line-height:1.6}
+.conflict b{color:var(--navy)}
+@media(max-width:860px){.remap-table{font-size:12px}}
+</style></helmet>
+
+<nav class="hg-nav"><div class="wrap hg-nav-inner"><span style="font:800 15px var(--font-sans);color:var(--navy)">RepresentDC</span><a href="RepresentDC Homepage.dc.html" style="font-size:13.5px;font-weight:600;color:var(--slate-500);text-decoration:none">← Back to site</a></div></nav>
+
+<header class="hg-hero"><div class="wrap"><span class="eb">Design → Engineering handoff</span><h1>Applying the design system to billtracker.representdc.org</h1><p>Confirmed color semantics from the live dc-bills-tracker repo, the exact token remap, and decisions on the open questions raised before starting this pass. Sequenced first because it's the flagship, highest-traffic product.</p></div></header>
+
+<section class="hg-sec"><div class="wrap">
+<h2>Confirmed semantics (read from the repo, not guessed)</h2><p class="sub">Pulled from DEVELOPMENT-GUIDELINES.md, .claude/CLAUDE.md, and the actual component CSS — this is what each existing color currently encodes.</p>
+<table class="remap-table">
+<tr><th>Signal</th><th>What it actually means</th></tr>
+<tr><td><b>Priority: high</b></td><td>On FreeDC's active opposition list, had a hearing/markup/floor vote, 20+ cosponsors, or manual override — genuine, active threat.</td></tr>
+<tr><td><b>Priority: medium</b></td><td>5–19 cosponsors, in committee, no hearing yet — active but not critical.</td></tr>
+<tr><td><b>Priority: low / watching</b></td><td>Recently introduced, no activity — dormant.</td></tr>
+<tr><td><b>Stage: passed-house / passed-senate / passed-both</b></td><td>Procedural progress through Congress — independent of priority. A bill can be low-priority and still passed-house.</td></tr>
+<tr><td><b>Stage: enacted</b></td><td>Signed into law — the gravest, most final state.</td></tr>
+<tr><td><b>Floor-vote badge</b></td><td>A separate, time-sensitive "act now" flag — not tied to priority tier or stage.</td></tr>
+<tr><td><b>Deep-linked highlight</b></td><td>Wayfinding only — "this is the bill you followed a link to." Not a severity signal.</td></tr>
+<tr><td><b>Disputed by DC</b></td><td>DC government has publicly contested this bill's legal basis or framing — a caveat, not a severity level.</td></tr>
+<tr><td><b>Sponsor party badge (R/D/I)</b></td><td>Neutral data, per the system's non-partisan voice rule — not a value judgment.</td></tr>
+</table>
+</div></section>
+
+<section class="hg-sec"><div class="wrap">
+<h2>Token remap</h2><p class="sub">Every hardcoded color found in the repo's CSS, mapped to the design system token that already encodes the same meaning. No new priority/status tokens were needed — <code>colors_and_type.css</code> already anticipated this exact scheme.</p>
+<table class="remap-table">
+<tr><th>Old value</th><th>File</th><th>New token</th><th></th></tr>
+<tr><td class="old">#DC143C</td><td>BillCard.css — priority-high border</td><td>--prio-high</td><td><span class="chip" style="background:#C8102E">●</span></td></tr>
+<tr><td class="old">#FF8C00</td><td>BillCard.css — priority-medium / rider border</td><td>--prio-medium</td><td><span class="chip" style="background:#B45309">●</span></td></tr>
+<tr><td class="old">#ccc</td><td>BillCard.css — priority-low/watching border</td><td>--prio-low</td><td><span class="chip" style="background:#94A3B0">●</span></td></tr>
+<tr><td class="old">#dc3545 / #ffc107 / #adb5bd</td><td>RecentActivity.css — activity-priority</td><td>--prio-high / --prio-medium / --prio-low</td><td></td></tr>
+<tr><td class="old">linear-gradient(#ff6b00, #ff8c00), pulse</td><td>BillCard.css — floor-vote-badge</td><td>--dc-red, flat, reuse the existing pulsing-dot pattern from .hero-badge / .alert-eb instead of a gradient</td><td><span class="chip" style="background:#C8102E">●</span></td></tr>
+<tr><td class="old">#b71c1c</td><td>BillCard.css — deep-linked ring</td><td>--navy (wayfinding, not severity — keeps red exclusive to urgency)</td><td><span class="chip" style="background:#14213D">●</span></td></tr>
+<tr><td class="old">#dc3545 (sponsor-badge.party-r)</td><td>BillCard.css</td><td>--party-r</td><td><span class="chip" style="background:#B23A48">●</span></td></tr>
+<tr><td class="old">#0066cc (party-d)</td><td>BillCard.css</td><td>--party-d</td><td><span class="chip" style="background:#1D4ED8">●</span></td></tr>
+<tr><td class="old">#6c757d (party-i)</td><td>BillCard.css</td><td>--party-i</td><td><span class="chip" style="background:#64748B">●</span></td></tr>
+<tr><td class="old">#DC143C (category-badge)</td><td>BillCard.css</td><td>--navy (categories are neutral labels — freeing red to mean "urgent" exclusively)</td><td><span class="chip" style="background:#14213D">●</span></td></tr>
+<tr><td class="old">#343a40 (header) / #f8f9fa / #dee2e6</td><td>RecentActivity.css — section chrome</td><td>--navy (header), --paper / --line (chrome)</td><td><span class="chip" style="background:#14213D">●</span></td></tr>
+<tr><td class="old">n/a — new</td><td>PassedBillsSection — "Disputed by DC" tag</td><td>new <code>.tag.disputed</code>: white bg, dashed slate border — same accessible "texture, not just color" device as the logo mark</td><td></td></tr>
+<tr><td class="old">n/a — new</td><td>PassedBillsSection — passed-senate tag (not yet styled)</td><td>--status-senate (already defined, just unused)</td><td><span class="chip" style="background:#6D28D9">●</span></td></tr>
+</table>
+<div class="swatch-row">
+<div class="sw"><div class="box" style="background:#C8102E"></div>--prio-high</div>
+<div class="sw"><div class="box" style="background:#B45309"></div>--prio-medium</div>
+<div class="sw"><div class="box" style="background:#94A3B0"></div>--prio-low</div>
+<div class="sw"><div class="box" style="background:#1D4ED8"></div>--status-house</div>
+<div class="sw"><div class="box" style="background:#6D28D9"></div>--status-senate</div>
+<div class="sw"><div class="box" style="background:#7A0A1C"></div>--status-enacted</div>
+<div class="sw"><div class="box" style="background:#14213D"></div>--navy</div>
+</div>
+</div></section>
+
+<section class="hg-sec"><div class="wrap">
+<h2>New tokens added (for the pledge site, staged now for consistency)</h2><p class="sub">Added to the canonical colors_and_type.css so both repos copy the same source going forward, per your decision to keep this design system authoritative.</p>
+<div class="swatch-row">
+<div class="sw"><div class="box" style="background:#2E6F4F"></div>--support-green</div>
+<div class="sw"><div class="box" style="background:#24573F"></div>--support-green-dark</div>
+<div class="sw"><div class="box" style="background:#E7F0EA;border-color:#d8e6dd"></div>--support-green-tint</div>
+</div>
+<p class="a" style="margin-top:14px">A civic, cool-leaning green — same desaturated register as navy/gold, not a stock "success" green — reserved strictly for an explicit "supports statehood" signal on the pledge site. <b>"Undeliverable / no contact" gets no new token</b>: it's an absence of signal, not a status worth its own color, so it reuses <code>--slate-400</code> text on <code>--surface-2</code>.</p>
+</div></section>
+
+<section class="hg-sec"><div class="wrap">
+<h2>Decisions on the open questions</h2>
+<div class="decision-list">
+<div class="dcard"><p class="q"><span class="qn">1</span>Color remapping accuracy</p><p class="a">Resolved by reading DEVELOPMENT-GUIDELINES.md, .claude/CLAUDE.md, and the component CSS directly rather than guessing — see the confirmed semantics and remap table above. Every existing color had a 1:1 home in tokens the system already defined; nothing needed inventing except the two items below.</p></div>
+<div class="dcard"><p class="q"><span class="qn">2</span>No prototype exists for dc-statehood-pledge</p><p class="a">Sequencing puts billtracker first. When pledge comes up, worth a lightweight prototype here first (status badges, party/response filters, the respond flow) since none of its 3 routes have been designed yet — cheaper to settle layout before code than to iterate in React.</p></div>
+<div class="dcard"><p class="q"><span class="qn">3</span>Token drift risk</p><p class="a">This design system stays the single source; the new green + the "no new neutral" decision are recorded here so both repos' copies stay in sync even without a shared package.</p></div>
+<div class="dcard"><p class="q"><span class="qn">4</span>Sequencing</p><p class="a">Billtracker first (flagship, highest traffic), pledge site second.</p></div>
+</div>
+</div></section>
+
+<section class="hg-sec" style="border-bottom:none"><div class="wrap">
+<h2>Conflicts to hold in mind while implementing</h2>
+<div class="decision-list">
+<div class="conflict"><b>Persuasion architecture doesn't apply here.</b> STRATEGY.md's Hook→Validate→Connect→Pattern→Solution flow is for the main site's landing page. The tracker is a data/utility tool — keep the voice rules (sentence case, no emoji, "D.C." with periods, non-partisan) but don't retrofit loss-framing copy into bill cards.</div>
+<div class="conflict"><b>DEVELOPMENT-GUIDELINES.md's sourcing policy only lives in representdc-main today.</b> The tracker's bill data is where accurate sourcing matters most — worth copying or referencing that guardrail doc into dc-bills-tracker rather than leaving it implicit.</div>
+<div class="conflict"><b>Legacy palette confirmed compatible.</b> dc-bills-tracker's current colors (#DC143C, #FF8C00, bootstrap grays) are the same pre-redesign family as the old main site — the navy-workhorse / red-rationed shift applies cleanly, it's just a volume of CSS to touch, not a conflict.</div>
+<div class="conflict"><b>Uncommitted work stays untouched.</b> dc-bills-tracker has unstaged changes to package.json/package-lock.json/scripts/weekly-digest.js and an untracked CLAUDE.md; dc-statehood-pledge has two untracked draft .md files. None are design-related — leave them alone and keep design commits separate.</div>
+</div>
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><div class="footer-bottom"><span>RepresentDC · design → engineering handoff</span><span>2026</span></div></div></footer>
+</x-dc>
+</body>
+</html>

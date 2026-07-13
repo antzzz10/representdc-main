@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.persona-sec{padding:60px 0 68px;background:var(--white);border-bottom:1px solid var(--line)}
+.persona-head{text-align:center;max-width:640px;margin:0 auto 34px}
+.persona-head h2{font-family:var(--font-sans);font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin:0 0 8px}
+.persona-head p{font-size:15px;color:var(--slate-500);margin:0}
+.persona-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.persona-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 20px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;box-shadow:var(--shadow-xs);transition:all var(--dur) var(--ease)}
+.persona-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--line-2)}
+.picon{width:42px;height:42px;border-radius:10px;background:var(--navy-tint);color:var(--navy);display:flex;align-items:center;justify-content:center}
+.persona-card.accent .picon{background:var(--dc-red-tint);color:var(--dc-red)}
+.persona-card h3{font-size:15.5px;font-weight:700;color:var(--ink);margin:0}
+.persona-card p{font-size:13px;color:var(--slate-500);line-height:1.5;margin:0;flex:1}
+.plink{font-size:13px;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:5px}
+.persona-card:hover .plink{color:var(--dc-red)}
+.stat-source{text-align:center;font-size:12.5px;color:var(--slate-400);margin-top:14px;font-family:var(--font-mono)}
+.gloss{border-bottom:1.5px dotted var(--slate-400);cursor:help}
+.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px}
+.fcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 20px;text-align:center;box-shadow:var(--shadow-xs)}
+.fcard .fn{font-size:42px;font-weight:800;color:var(--dc-red);line-height:1;font-variant-numeric:tabular-nums}
+.fcard .fl{font-size:14.5px;font-weight:700;color:var(--ink);margin:10px 0 5px}
+.fcard .fd{font-size:12.5px;color:var(--slate-500);line-height:1.5}
+.values-sec{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:64px 0}
+.quote{font-family:var(--font-serif);font-style:italic;font-size:30px;font-weight:500;text-align:center;color:var(--gold);max-width:680px;margin:0 auto 12px;line-height:1.3}
+.quote-attr{text-align:center;font-size:13.5px;color:rgba(255,255,255,.72);margin:0 0 40px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:900px;margin:0 auto}
+.vcard{text-align:center}
+.vcard h4{font-size:16px;color:var(--gold);margin:0 0 8px;font-weight:700}
+.vcard p{font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.6;margin:0}
+.solution-list{display:flex;flex-direction:column;gap:14px;max-width:680px;margin:0 auto 28px}
+.spoint{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border-radius:var(--r-md);padding:16px 18px}
+.spoint .chk{width:26px;height:26px;border-radius:50%;background:var(--dc-red);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.spoint .chk .ico svg{width:15px;height:15px}
+.spoint h4{font-size:14.5px;font-weight:700;color:var(--ink);margin:0 0 3px}
+.spoint p{font-size:13px;color:var(--slate-500);line-height:1.5;margin:0}
+.precedent{max-width:680px;margin:0 auto;background:var(--navy-tint);border-left:4px solid var(--navy);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 18px;font-size:13px;color:var(--navy-700)}
+@media(max-width:860px){.persona-grid,.facts-grid,.values-grid{grid-template-columns:1fr}}
+.game-teaser{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-shadow:var(--shadow-xs)}
+.game-teaser h3{font-size:19px;font-weight:800;color:var(--ink);margin:0 0 6px}
+.game-teaser p{font-size:13.5px;color:var(--slate-500);margin:0;max-width:440px}
+.game-teaser .btn{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;font-size:14.5px;padding:11px 20px}
+@media(max-width:640px){.game-teaser{flex-direction:column;align-items:flex-start}}
+</style></helmet>
+<nav class="nav"><div class="wrap nav-inner"><img class="logo" src="assets/logo-representdc.svg" alt="RepresentDC"><div class="nav-links"><a class="nav-link" href="#explainer">Explainer</a><a class="nav-link" href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help</a><a class="nav-link" href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ</a><a class="nav-link" href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a><a class="nav-cta" href="RepresentDC Take Action Hub.dc.html">Take action</a></div></div></nav>
+
+<header class="hero" id="top"><div class="wrap hero-inner"><span class="hero-badge"><span class="dot"></span>Breaking</span><h1>Congress is blocking D.C. laws <span class="hl">right now</span></h1><p class="hero-sub">96 bills pending in Congress to overturn local D.C. decisions — from policing to healthcare to traffic laws.</p><div class="hero-actions"><a class="btn btn-light" href="https://billtracker.representdc.org" target="_blank" rel="noopener"><span>See all 96 bills</span><span class="ico"><i data-lucide="arrow-right"></i></span></a><a class="btn btn-outline" href="#explainer">Why this matters</a></div><p class="hero-note">Updated July 9, 2026 · monitoring runs daily</p></div></header>
+
+<section class="wrap" style="margin-top:-48px"><div class="stats-grid"><div class="stat"><div class="num">0</div><div class="lab">Senators</div><div class="det">representing 700,000 D.C. residents who pay federal taxes</div></div><div class="stat"><div class="num">0</div><div class="lab">Voting House members</div><div class="det">the delegate can introduce bills but cannot vote on final passage</div></div><div class="stat fill"><div class="num">96</div><div class="lab">Anti-D.C. bills</div><div class="det">pending in the current Congress — and counting</div></div></div><p class="stat-source">Sources: Congress.gov, DC Fiscal Policy Institute · figures as of July 2026</p></section>
+
+<section class="persona-sec"><div class="wrap"><div class="persona-head"><h2>Where do you want to start?</h2><p>D.C. residents pay federal taxes but have <span class="gloss" title="Home rule: the limited local self-government Congress granted D.C. in 1973 — Congress can still overturn any D.C. law or budget.">no vote in Congress</span>. Pick the path that fits you — or keep scrolling for the full picture.</p></div><div class="persona-grid">
+<a class="persona-card" href="#explainer"><span class="picon"><i data-lucide="landmark"></i></span><h3>New to D.C.</h3><p>Didn't know D.C. isn't a state? Start with the basics — what home rule means, and why Congress can overturn D.C.'s own laws.</p><span class="plink">Start the explainer <i data-lucide="arrow-down"></i></span></a>
+<a class="persona-card" href="RepresentDC News and Ways to Help.dc.html"><span class="picon"><i data-lucide="rss"></i></span><h3>Statehood-curious</h3><p>Already know the problem? See what's happening right now and the easiest ways to plug in.</p><span class="plink">See what's new <i data-lucide="arrow-right"></i></span></a>
+<a class="persona-card accent" href="RepresentDC Myths and FAQ.dc.html"><span class="picon"><i data-lucide="help-circle"></i></span><h3>Statehood-questioning</h3><p>Have doubts or specific objections? Get direct, sourced answers — no persuasion pitch required.</p><span class="plink">Read the myths <i data-lucide="arrow-right"></i></span></a>
+<a class="persona-card accent" href="RepresentDC Take Action Hub.dc.html"><span class="picon"><i data-lucide="megaphone"></i></span><h3>Statehood activist</h3><p>Already convinced? Get talking points, sourced data, and ways to organize — built for speed.</p><span class="plink">Open the action hub <i data-lucide="arrow-right"></i></span></a>
+</div></div></section>
+
+<section class="wrap" style="padding:36px 0 4px"><div class="game-teaser"><div><span class="eyebrow" style="display:block;margin-bottom:6px">Learn by playing</span><h3>Think you know D.C.? Test yourself.</h3><p>Trivia, spot the 51-star flag, and match the quote to the person — three quick myth-busting games.</p></div><a class="btn btn-navy" href="RepresentDC Myths and FAQ.dc.html#games">Play now <i data-lucide="arrow-right"></i></a></div></section>
+
+<section class="section wrap" id="explainer"><div class="eyebrow">The explainer</div><h2>The reality for 700,000 Americans</h2><p class="section-intro">Washingtonians pay federal income tax at the highest per-capita rate in the country, serve on federal juries and in the military — and still have no vote in the Congress that can overturn any law their own elected government passes.</p><div class="facts-grid">
+<div class="fcard"><div class="fn">0</div><div class="fl">Senators</div><div class="fd">Despite paying more federal taxes per capita than any state</div></div>
+<div class="fcard"><div class="fn">0</div><div class="fl">Voting members of Congress</div><div class="fd">D.C.'s delegate can introduce bills but not vote on final passage</div></div>
+<div class="fcard"><div class="fn">96</div><div class="fl">Bills to block local D.C. laws</div><div class="fd">Pending in the current Congress — and counting</div></div>
+</div></section>
+
+<section class="values-sec"><div class="wrap"><p class="quote">"No taxation without representation"</p><p class="quote-attr">The rallying cry of the American Revolution — still denied to D.C. residents today</p><div class="values-grid">
+<div class="vcard"><h4>Local control</h4><p>Americans should govern their own communities, not be micromanaged by distant politicians.</p></div>
+<div class="vcard"><h4>Equal rights</h4><p>Every American citizen deserves the same democratic representation.</p></div>
+<div class="vcard"><h4>Accountability</h4><p>D.C. residents can't vote out the members of Congress who control their laws.</p></div>
+</div></div></section>
+
+<section class="section wrap"><div class="eyebrow">The solution</div><h2>Full democracy for D.C.</h2><p class="section-intro">D.C. statehood isn't a radical idea — it's about ensuring all Americans have equal representation.</p><div class="solution-list">
+<div class="spoint"><span class="chk"><span class="ico"><i data-lucide="check"></i></span></span><div><h4>Two senators</h4><p>Like every other state, D.C. would elect two senators to represent 700,000 residents.</p></div></div>
+<div class="spoint"><span class="chk"><span class="ico"><i data-lucide="check"></i></span></span><div><h4>A voting House member</h4><p>D.C.'s representative could vote on the laws that affect their own constituents.</p></div></div>
+<div class="spoint"><span class="chk"><span class="ico"><i data-lucide="check"></i></span></span><div><h4>Local control</h4><p>Congress wouldn't be able to overturn laws passed by D.C. voters and their elected officials.</p></div></div>
+<div class="spoint"><span class="chk"><span class="ico"><i data-lucide="check"></i></span></span><div><h4>Budget autonomy</h4><p>D.C. could spend its own tax revenue without congressional approval.</p></div></div>
+</div><div class="precedent"><b>Precedent:</b> the United States has admitted 37 states since the original 13. D.C. has more residents than Wyoming and Vermont.</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><p class="footer-creed">"D.C. statehood is a civil rights issue. These bills undermine the democratic rights of D.C. residents."</p><div class="footer-cols">
+<div class="footer-col"><h5>About this project</h5><p>An independent, volunteer-run project created by a proud D.C. resident to track anti-D.C. legislation and advocate for full democracy. Not affiliated with any organization or party.</p></div>
+<div class="footer-col"><h5>RepresentDC tools</h5><div class="footer-links"><a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Anti-DC bill tracker <i data-lucide="arrow-right"></i></a><a href="https://candidates.representdc.org" target="_blank" rel="noopener">Candidate tracker <i data-lucide="arrow-right"></i></a><a href="RepresentDC Take Action Hub.dc.html">Take action hub <i data-lucide="arrow-right"></i></a></div></div>
+<div class="footer-col"><h5>Get involved</h5><div class="footer-links"><a href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help <i data-lucide="arrow-right"></i></a><a href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ <i data-lucide="arrow-right"></i></a></div></div>
+</div><div class="footer-bottom"><span>Copyright © 2026 RepresentDC</span><span>No taxation without representation.</span></div></div></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.tryIcons(0);
+  }
+  tryIcons(n) {
+    if (window.lucide && window.lucide.createIcons) { window.lucide.createIcons(); }
+    else if (n < 20) { setTimeout(() => this.tryIcons(n + 1), 100); }
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

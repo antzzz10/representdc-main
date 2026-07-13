@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.rp-word{font:800 1em/1 var(--font-sans);letter-spacing:-.03em}
+.dc-mark{border-bottom:.16em solid currentColor;padding-bottom:.03em}
+.wm2{display:flex;align-items:center}
+.lg-nav{border-bottom:1px solid var(--line);background:#fff}
+.lg-nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.lg-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:52px 0 56px}
+.lg-hero .eyebrow{color:var(--gold)}
+.lg-hero h1{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:0 0 12px;max-width:680px}
+.lg-hero p{font-size:16px;color:rgba(255,255,255,.86);max-width:600px;margin:0}
+.lg-sec{padding:48px 0;border-bottom:1px solid var(--line)}
+.lg-sec h2{font-size:22px;font-weight:800;color:var(--ink);margin:0 0 6px}
+.lg-sec .sub{font-size:13.5px;color:var(--slate-500);margin:0 0 26px;max-width:620px;line-height:1.6}
+.spec-grid{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start}
+.spec-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-xs);display:flex;align-items:center;justify-content:center;padding:28px}
+.spec-list{display:flex;flex-direction:column;gap:14px}
+.spec-row{display:flex;gap:14px;font-size:14px;color:var(--slate-700);line-height:1.55}
+.spec-row .k{font-weight:700;color:var(--ink);min-width:132px;flex-shrink:0}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:20px 24px}
+.faq-item .myth-q{color:var(--navy);font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.faq-item .qtag{font-family:var(--font-mono);font-size:11px;background:var(--navy-tint);color:var(--navy);padding:2px 7px;border-radius:5px;font-weight:700}
+.faq-item .myth-a{font-size:14px;color:var(--slate-700);line-height:1.65;margin:0 0 10px}
+.faq-item .myth-a:last-child{margin-bottom:0}
+.color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.color-card{border-radius:var(--r-lg);border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow-xs)}
+.color-swatch{height:110px;display:flex;align-items:center;justify-content:center}
+.color-label{padding:14px 16px;background:#fff}
+.color-label h4{font-size:13.5px;font-weight:700;color:var(--ink);margin:0 0 5px}
+.color-label p{font-size:12px;color:var(--slate-500);margin:0;line-height:1.5}
+.hexes{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.hex{font-family:var(--font-mono);font-size:10.5px;background:var(--surface-2);color:var(--slate-600);padding:2px 6px;border-radius:4px}
+.usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.usage-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-xs)}
+.usage-card .cap{padding:12px 16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--slate-500)}
+.usage-card .cap b{color:var(--ink)}
+.dd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dd-card{background:#fff;border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;border:1.5px solid var(--line)}
+.dd-card.bad{border-color:#F3C3CB}
+.dd-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.dd-badge.no{background:var(--dc-red)}
+.dd-card p{font-size:12.5px;color:var(--slate-600);margin:0;line-height:1.5}
+.clearspace-box{position:relative;width:180px;height:180px;border:1.5px dashed var(--line-2);display:flex;align-items:center;justify-content:center}
+@media(max-width:860px){.spec-grid{grid-template-columns:1fr}.color-grid,.dd-grid{grid-template-columns:1fr}}
+</style></helmet>
+
+<nav class="lg-nav"><div class="wrap lg-nav-inner"><div class="wm2" style="gap:8px"><svg width="26" height="26" viewBox="0 0 64 64"><defs><pattern id="hnav" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hnav)"/></svg><span class="rp-word" style="font-size:15px;color:#14213D">Represent<span class="dc-mark" style="color:#C8102E">DC</span></span></div><a href="RepresentDC Homepage.dc.html" style="font-size:13.5px;font-weight:600;color:var(--slate-500);text-decoration:none">← Back to site</a></div></nav>
+
+<header class="lg-hero"><div class="wrap"><span class="eyebrow" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em">Brand guidelines</span><h1>Logo &amp; brand mark</h1><p>How the RepresentDC mark is built, what it means, and how to use it consistently across the site, print, and social — plus FAQ-ready language explaining the design to visitors.</p></div></header>
+
+<section class="lg-sec"><div class="wrap">
+<h2>The mark</h2><p class="sub">A five-pointed star with one point rendered differently from the other four.</p>
+<div class="spec-grid">
+<div class="spec-card"><svg width="120" height="120" viewBox="0 0 64 64"><defs><pattern id="hbig" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hbig)"/></svg></div>
+<div class="spec-list">
+<div class="spec-row"><span class="k">Construction</span><span>A regular 5-point star (outer radius 22, inner radius 9 on a 64×64 grid). The upper-left point carries a diagonal hatch texture instead of the flat navy fill used on the other four points.</span></div>
+<div class="spec-row"><span class="k">Why a hatch, not just color</span><span>Texture — not hue alone — carries the meaning, so the mark reads identically to colorblind viewers and in single-color print or grayscale. Color (red, or gold on dark backgrounds) is layered on top for everyone else.</span></div>
+<div class="spec-row"><span class="k">At small sizes</span><span>Below ~24px the hatch simplifies to a flat accent-colored wedge automatically — still a five-point star with one point set apart, just without the fine line detail.</span></div>
+<div class="spec-row"><span class="k">Not the D.C. flag</span><span>Deliberately not a recreation of the District's official three-stars-and-two-bars flag — that mark is used by nearly every statehood organization already. This is an original mark that references the same civic vocabulary (a star, a flag-red accent) without duplicating it.</span></div>
+</div>
+</div>
+</div></section>
+
+<section class="lg-sec"><div class="wrap">
+<h2>Meaning &amp; intent</h2><p class="sub">Written so it can be dropped directly into the site's Myths &amp; FAQ page.</p>
+<div class="faq-item"><p class="myth-q"><span class="qtag">BRAND</span>Why does the RepresentDC logo look the way it does?</p>
+<p class="myth-a">The mark is a five-pointed star with one point set apart in texture and color. It represents D.C.'s incomplete standing in American democracy — one piece of full representation still missing, still being worked on, rather than a finished, static symbol.</p>
+<p class="myth-a">That "different point" is built from a diagonal hatch pattern, not just a different color, so the idea comes through for colorblind visitors and in black-and-white print alike — a small design choice that mirrors the larger argument: equal representation shouldn't depend on who's looking or how.</p>
+<p class="myth-a">We chose an original mark instead of the District's well-known three-stars-and-two-bars flag on purpose. That flag is a strong, recognizable symbol — and it's already the logo of nearly every D.C. statehood group. We wanted RepresentDC to be identifiable at a glance among them, while still speaking the same visual language: a star, a flag-red accent, a civic tone.</p>
+</div>
+</div></section>
+
+<section class="lg-sec"><div class="wrap">
+<h2>Wordmark</h2><p class="sub">"RepresentDC" is always set as one word — never "Represent DC" with a space in the logo itself.</p>
+<div class="spec-grid">
+<div class="spec-card"><span class="rp-word" style="font-size:26px;color:#14213D">Represent<span class="dc-mark" style="color:#C8102E">DC</span></span></div>
+<div class="spec-list">
+<div class="spec-row"><span class="k">Typeface</span><span>Public Sans, weight 800, letter-spacing -0.03em — the system's UI/heading face, kept at full brand weight for presence at small sizes.</span></div>
+<div class="spec-row"><span class="k">"DC" treatment</span><span>Same weight and size as "Represent" — only the color changes (flag red on light backgrounds, gold on navy) with a thin underline matching the star's accent color. No boxed badge: a box read as two separate words, which fights the one-word brand name.</span></div>
+<div class="spec-row"><span class="k">Never</span><span>Don't italicize, don't add a space ("Represent DC"), don't set "DC" in a different typeface, don't drop the underline tie to the mark.</span></div>
+</div>
+</div>
+</div></section>
+
+<section class="lg-sec"><div class="wrap">
+<h2>Color &amp; contrast</h2><p class="sub">Three sanctioned combinations. Never introduce a fourth without a reason.</p>
+<div class="color-grid">
+<div class="color-card"><div class="color-swatch" style="background:#fff"><svg width="52" height="52" viewBox="0 0 64 64"><defs><pattern id="hc1" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hc1)"/></svg></div><div class="color-label"><h4>Full color, on white / paper</h4><p>Default — web, most print.</p><div class="hexes"><span class="hex">#14213D</span><span class="hex">#C8102E</span></div></div></div>
+<div class="color-card"><div class="color-swatch" style="background:#14213D"><svg width="52" height="52" viewBox="0 0 64 64"><defs><pattern id="hc2" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hc2)"/></svg></div><div class="color-label"><h4>Reversed, on navy</h4><p>Footer, hero, dark UI. Gold replaces red so it never competes with the urgent-alert red used elsewhere on navy.</p><div class="hexes"><span class="hex">#fff</span><span class="hex">#E0A500</span></div></div></div>
+<div class="color-card"><div class="color-swatch" style="background:#fff"><svg width="52" height="52" viewBox="0 0 64 64"><defs><pattern id="hc3" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#14213D"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hc3)"/></svg></div><div class="color-label"><h4>Single-ink, monochrome</h4><p>Letterhead, faxes, one-color print runs. Hatch becomes knockout white lines — still one ink.</p><div class="hexes"><span class="hex">#14213D only</span></div></div></div>
+</div>
+</div></section>
+
+<section class="lg-sec"><div class="wrap">
+<h2>Clear space &amp; minimum size</h2><p class="sub">Keep other elements out of the mark's breathing room, and don't shrink it past legibility.</p>
+<div class="spec-grid">
+<div class="spec-card"><div class="clearspace-box"><svg width="90" height="90" viewBox="0 0 64 64"><defs><pattern id="hcs" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hcs)"/></svg></div></div>
+<div class="spec-list">
+<div class="spec-row"><span class="k">Clear space</span><span>Minimum margin on all sides equal to the width of one star point (roughly ¼ of the mark's total width) — the dashed box shown is that minimum.</span></div>
+<div class="spec-row"><span class="k">Minimum digital size</span><span>16px as a standalone favicon tile; 20px mark height when paired with the wordmark.</span></div>
+<div class="spec-row"><span class="k">Minimum print size</span><span>0.25in / 18pt mark height on letterhead and business cards.</span></div>
+<div class="spec-row"><span class="k">Favicon tile</span><span>Rounded square, corner radius ≈23% of the tile's width, navy fill, mark centered and inset ~14%.</span></div>
+</div>
+</div>
+</div></section>
+
+<section class="lg-sec"><div class="wrap">
+<h2>Usage across formats</h2><p class="sub">The same lockup, scaled and recolored for context.</p>
+<div class="usage-grid">
+<div class="usage-card"><div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)"><div class="wm2" style="gap:8px"><svg width="22" height="22" viewBox="0 0 64 64"><defs><pattern id="hu1" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hu1)"/></svg><span class="rp-word" style="font-size:13px;color:#14213D">Represent<span class="dc-mark" style="color:#C8102E">DC</span></span></div><span style="font-size:11px;color:var(--slate-400)">nav ›</span></div><div class="cap"><b>Site header</b> — 22–26px mark, 8px gap to wordmark.</div></div>
+<div class="usage-card"><div style="background:linear-gradient(180deg,#14213D,#243657);padding:24px 20px"><div class="wm2" style="gap:11px"><svg width="36" height="36" viewBox="0 0 64 64"><defs><pattern id="hu2" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hu2)"/></svg><span class="rp-word" style="font-size:17px;color:#fff">Represent<span class="dc-mark" style="color:#E0A500">DC</span></span></div></div><div class="cap"><b>Hero / banner</b> — 32–48px mark, reversed with gold accent.</div></div>
+<div class="usage-card"><div style="display:flex;align-items:center;justify-content:center;padding:24px;gap:16px"><svg width="48" height="48" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg><svg width="20" height="20" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg></div><div class="cap"><b>Favicon / app icon</b> — rounded tile, hatch simplifies to flat fill.</div></div>
+<div class="usage-card"><div style="padding:22px 20px"><div class="wm2" style="gap:9px"><svg width="28" height="28" viewBox="0 0 64 64"><defs><pattern id="hu4" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#14213D"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hu4)"/></svg><span class="rp-word" style="font-size:14px;color:#14213D">Represent<span class="dc-mark" style="color:#14213D">DC</span></span></div><div style="height:1px;background:#14213D;margin-top:16px"></div></div><div class="cap"><b>Letterhead</b> — single-ink navy, hatch as knockout lines.</div></div>
+<div class="usage-card"><div style="background:#14213D;padding:20px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div class="wm2" style="gap:8px"><svg width="20" height="20" viewBox="0 0 64 64"><defs><pattern id="hu5" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hu5)"/></svg><span class="rp-word" style="font-size:12px;color:#fff">Represent<span class="dc-mark" style="color:#E0A500">DC</span></span></div><span style="font-size:10.5px;color:#8b95a8;font-family:var(--font-mono)">© footer</span></div><div class="cap"><b>Footer</b> — smallest reversed use, ~20px.</div></div>
+</div>
+</div></section>
+
+<section class="lg-sec" style="border-bottom:none"><div class="wrap">
+<h2>Don't</h2><p class="sub">Common ways the mark gets diluted.</p>
+<div class="dd-grid">
+<div class="dd-card bad"><div class="dd-badge no">✕</div><svg width="52" height="52" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/></svg><p>Fill every point solid — loses the accessible "one point differs" signal entirely.</p></div>
+<div class="dd-card bad"><div class="dd-badge no">✕</div><svg width="52" height="52" viewBox="0 0 64 64"><g transform="rotate(22 32 32)"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#C8102E"/></g></svg><p>Rotate, skew, or distort the proportions of the star.</p></div>
+<div class="dd-card bad"><div class="dd-badge no">✕</div><svg width="52" height="52" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#C8102E"/></svg><p style="filter:drop-shadow(0 4px 3px rgba(0,0,0,.5))">Add drop shadows, bevels, or gradients to the mark itself.</p></div>
+</div>
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><div class="footer-bottom"><span>RepresentDC brand guidelines · internal reference</span><span>Last updated 2026</span></div></div></footer>
+</x-dc>
+</body>
+</html>

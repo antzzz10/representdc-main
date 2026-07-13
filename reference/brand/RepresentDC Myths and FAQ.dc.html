@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><link rel="stylesheet" href="kit.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script><style>
+a{color:var(--navy)}a:hover{color:var(--dc-red)}
+.myth-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);color:#fff;padding:52px 0 56px}
+.myth-hero .eyebrow{color:var(--gold)}
+.myth-hero h1{font-size:36px;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px;max-width:720px}
+.myth-hero p{font-size:16px;color:rgba(255,255,255,.86);max-width:600px;margin:0}
+.myth-sec{padding:52px 0}
+.myth-sec h2{font-size:22px;font-weight:800;color:var(--ink);margin:0 0 4px}
+.myth-source-note{font-size:13px;color:var(--slate-500);margin:0 0 26px}
+.myth-source-note a{font-weight:600}
+.myth-list{display:flex;flex-direction:column;gap:14px}
+.myth-item{background:#fff;border:1px solid var(--line);border-left:4px solid var(--dc-red);border-radius:0 var(--r-md) var(--r-md) 0;padding:18px 22px;scroll-margin-top:90px}
+.myth-q{font-size:15px;font-weight:700;color:var(--dc-red-dark);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.myth-q .qtag{font-family:var(--font-mono);font-size:11px;background:var(--dc-red-tint);color:var(--dc-red);padding:2px 7px;border-radius:5px;font-weight:700}
+.myth-a{font-size:14px;color:var(--slate-700);line-height:1.6;margin:0}
+.myth-link{font-size:12px;color:var(--slate-400);margin-top:8px;display:inline-block}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;scroll-margin-top:90px}
+.faq-item .myth-q{color:var(--navy)}
+.faq-item .qtag{background:var(--navy-tint);color:var(--navy)}
+.movement-note{background:var(--dc-red-tint);border-left:4px solid var(--dc-red);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 18px;font-size:13px;color:#7A1020;margin-top:24px}
+.game-tabs{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}
+.game-tab{font-family:var(--font-sans);font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--slate-500);cursor:pointer;transition:all var(--dur) var(--ease)}
+.game-tab:hover{border-color:var(--navy);color:var(--navy)}
+.game-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.game-panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 30px;box-shadow:var(--shadow-xs);max-width:640px}
+.game-progress{font-family:var(--font-mono);font-size:12px;color:var(--slate-400);margin:0 0 14px;text-transform:uppercase;letter-spacing:.02em}
+.quiz-q{font-size:17px;font-weight:700;color:var(--ink);margin:0 0 18px;line-height:1.4}
+.quiz-opts{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{text-align:left;font-family:var(--font-sans);font-size:14px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r-md);padding:13px 16px;cursor:pointer;transition:all var(--dur) var(--ease)}
+.quiz-opt:hover{border-color:var(--navy)}
+.quiz-opts.answered .quiz-opt{cursor:default}
+.quiz-opts.answered .quiz-opt:hover{border-color:var(--line)}
+.quiz-opt.opt-correct{background:var(--navy-tint);border-color:var(--navy);color:var(--navy-700)}
+.quiz-opt.opt-wrong{background:var(--dc-red-tint);border-color:var(--dc-red);color:var(--dc-red-dark)}
+.quiz-opt.opt-dim{opacity:.55}
+.quiz-feedback{font-size:13.5px;font-weight:700;color:var(--navy);margin:16px 0 4px}
+.quiz-fact{font-size:13.5px;color:var(--slate-600);line-height:1.55;margin:0 0 18px}
+.quiz-done h3{font-size:20px;font-weight:800;color:var(--ink);margin:0 0 8px}
+.quiz-done .quiz-fact{margin-bottom:20px}
+.quote-card{background:var(--navy-tint);border-radius:var(--r-md);padding:20px 22px;margin-bottom:20px}
+.quote-text{font-family:var(--font-serif);font-style:italic;font-size:18px;color:var(--navy-700);margin:0 0 8px;line-height:1.4}
+.quote-context{font-size:12.5px;color:var(--slate-500);margin:0}
+.flag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:6px}
+.flag-card{border:1.5px solid var(--line);border-radius:var(--r-md);padding:0;overflow:hidden;cursor:pointer;background:#fff;transition:all var(--dur) var(--ease);display:flex;flex-direction:column}
+.flag-card:hover{border-color:var(--navy)}
+.flag-card.opt-correct{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset}
+.flag-card.opt-wrong{border-color:var(--dc-red);box-shadow:0 0 0 2px var(--dc-red) inset}
+.flag-card.opt-dim{opacity:.55}
+.flag-canton{background:var(--navy);aspect-ratio:6/4;display:grid;grid-template-columns:repeat(8,1fr);grid-auto-rows:min-content;justify-items:center;align-content:flex-start;gap:4px 0;padding:10px 6px}
+.flag-dot{width:7px;height:7px;border-radius:50%;background:#fff}
+.flag-stripes{height:22px;background:repeating-linear-gradient(0deg,var(--dc-red) 0 4px,#fff 4px 8px)}
+.flag-count{font-family:var(--font-mono);font-size:11px;text-align:center;padding:6px 4px;color:var(--slate-500)}
+@media(max-width:640px){.flag-grid{grid-template-columns:1fr 1fr 1fr}.game-panel{padding:22px 18px}}
+</style></helmet>
+<nav class="nav"><div class="wrap nav-inner"><img class="logo" src="assets/logo-representdc.svg" alt="RepresentDC"><div class="nav-links"><a class="nav-link" href="RepresentDC Homepage.dc.html">Home</a><a class="nav-link" href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help</a><a class="nav-link active" href="RepresentDC Myths and FAQ.dc.html">Myths &amp; FAQ</a><a class="nav-link" href="https://billtracker.representdc.org" target="_blank" rel="noopener">Bill Tracker</a><a class="nav-cta" href="RepresentDC Take Action Hub.dc.html">Take action</a></div></div></nav>
+
+<header class="myth-hero"><div class="wrap"><div class="eyebrow">Statehood, questioned</div><h1>Straight answers to the most common doubts</h1><p>No persuasion pitch — just direct, sourced rebuttals. Jump to any question and share the link.</p></div></header>
+
+<section class="myth-sec"><div class="wrap">
+<h2>Six popular myths</h2><p class="myth-source-note">Source: DC Vote, "Six Popular Myths about the District of Columbia" — <a href="https://www.dcvote.org" target="_blank" rel="noopener">dcvote.org</a>. Population and per-capita tax figures are as published by DC Vote; verify current figures before citing in new material.</p>
+<div class="myth-list">
+<div class="myth-item" id="myth-1"><p class="myth-q"><span class="qtag">MYTH 1</span>"Most D.C. residents work for the government or military."</p><p class="myth-a">Federal workers are a small slice of the population — D.C. is home to roughly 660,000 people of all occupations, most of whom have lived there 20+ years, across 120 distinct neighborhoods.</p></div>
+<div class="myth-item" id="myth-2"><p class="myth-q"><span class="qtag">MYTH 2</span>"D.C. doesn't pay U.S. taxes but gets lots of federal money."</p><p class="myth-a">D.C. residents pay federal income tax at the highest per-capita rate in the country, plus local "statelike" taxes that Congress must approve. Eight states receive more federal funding as a share of their budget than D.C. does.</p></div>
+<div class="myth-item" id="myth-3"><p class="myth-q"><span class="qtag">MYTH 3</span>"D.C. residents have the same rights as other Americans."</p><p class="myth-a">They pay federal taxes, serve in the military, and sit on federal juries — but have no voting representation in Congress, and Congress must approve every local law and budget, unlike any state.</p></div>
+<div class="myth-item" id="myth-4"><p class="myth-q"><span class="qtag">MYTH 4</span>"Proximity to the Capitol gives D.C. residents influence."</p><p class="myth-a">Proximity isn't access — most members of Congress know their own home districts, not local D.C. issues.</p></div>
+<div class="myth-item" id="myth-5"><p class="myth-q"><span class="qtag">MYTH 5</span>"D.C. is too small to have representation."</p><p class="myth-a">D.C. is 63 square miles with a larger population than Wyoming or Vermont — and every state gets equal Senate representation regardless of size.</p></div>
+<div class="myth-item" id="myth-6"><p class="myth-q"><span class="qtag">MYTH 6</span>"D.C. is treated differently because it belongs to all Americans."</p><p class="myth-a">The National Mall / federal core is a small part of the District; the rest is 120 neighborhoods tourists never see. Eight states have a higher share of federal land ownership than D.C. does.</p></div>
+</div>
+</div></section>
+
+<section class="myth-sec" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+<h2>More questions, answered</h2><p class="myth-source-note">Source: Neighbors United for DC Statehood — <a href="https://www.the51st.org/faqs" target="_blank" rel="noopener">the51st.org/faqs</a>. Some federal-funding comparisons there trace to 2008 Census data; re-verify before reuse.</p>
+<div class="myth-list">
+<div class="faq-item" id="faq-constitutional"><p class="myth-q"><span class="qtag">FAQ</span>Isn't D.C. statehood unconstitutional?</p><p class="myth-a">No — the Constitution sets an upper size limit on the federal district (100 sq. mi.) but no lower limit, and doesn't fix its location. A shrunken federal district (Mall, Capitol, White House, military sites) could remain while the rest becomes a state.</p></div>
+<div class="faq-item" id="faq-size"><p class="myth-q"><span class="qtag">FAQ</span>Isn't D.C. too small or too subsidized to be a state?</p><p class="myth-a">D.C. has more residents than Wyoming or Vermont and, by this source's figures, pays more federal tax than 22 states. Roughly a quarter of its budget comes from federal funds — on par with or less than several states.</p></div>
+<div class="faq-item" id="faq-want"><p class="myth-q"><span class="qtag">FAQ</span>Do D.C. residents actually want statehood?</p><p class="myth-a">86% of D.C. voters approved a 2016 statehood referendum, which also set the proposed state's name, borders, and constitution.</p></div>
+<div class="faq-item" id="faq-achievable"><p class="myth-q"><span class="qtag">FAQ</span>Is statehood actually achievable, or just a slogan?</p><p class="myth-a">The U.S. has admitted a new state 37 times since the original 13 — a plain congressional majority vote plus a presidential signature, no constitutional amendment required.</p></div>
+</div>
+<div class="movement-note"><b>A note on tone:</b> this page deliberately leaves out one comparison from the original FAQ that named a specific political figure's criminal conviction — that framing is off-voice for a non-partisan resource regardless of source.</div>
+</div></section>
+
+<section class="myth-sec" id="games" data-screen-label="Myth-busting games" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+<h2>Myth-busting games</h2><p class="myth-source-note">Same facts as above, in three quick rounds. Nothing is scored or shared beyond this page.</p>
+<div class="game-tabs">
+<button class="{{ triviaTabClass }}" onClick="{{ setTabTrivia }}">Trivia</button>
+<button class="{{ flagTabClass }}" onClick="{{ setTabFlag }}">Spot the 51-star flag</button>
+<button class="{{ quoteTabClass }}" onClick="{{ setTabQuote }}">Match the quote</button>
+</div>
+<div class="game-panel">
+
+<sc-if value="{{ isTrivia }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ triviaDone }}" hint-placeholder-val="{{ false }}"><div class="quiz-done"><h3>{{ triviaScoreLine }}</h3><p class="quiz-fact">Every question came straight from the myths above.</p><button class="btn btn-navy" onClick="{{ restartTrivia }}">Play again</button></div></sc-if>
+<sc-if value="{{ triviaNotDone }}" hint-placeholder-val="{{ true }}">
+<div class="game-progress">Question {{ triviaNum }} of {{ triviaTotal }} · Score {{ triviaScore }}</div>
+<p class="quiz-q">{{ triviaQ.q }}</p>
+<div class="{{ triviaOptsClass }}"><sc-for list="{{ triviaOptions }}" as="opt" hint-placeholder-count="3"><button class="{{ opt.btnClass }}" onClick="{{ opt.onClick }}">{{ opt.text }}</button></sc-for></div>
+<sc-if value="{{ triviaAnswered }}" hint-placeholder-val="{{ false }}"><p class="quiz-feedback">{{ triviaFeedback }}</p><p class="quiz-fact">{{ triviaQ.fact }}</p><button class="btn btn-navy" onClick="{{ nextTrivia }}">{{ triviaNextLabel }}</button></sc-if>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isFlag }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ flagDone }}" hint-placeholder-val="{{ false }}"><div class="quiz-done"><h3>{{ flagScoreLine }}</h3><p class="quiz-fact">The real U.S. flag has flown with 51 stars in official proposals for a future 51st state.</p><button class="btn btn-navy" onClick="{{ restartFlag }}">Play again</button></div></sc-if>
+<sc-if value="{{ flagNotDone }}" hint-placeholder-val="{{ true }}">
+<div class="game-progress">Round {{ flagNum }} of {{ flagTotal }} · Score {{ flagScore }}</div>
+<p class="quiz-q">Which flag has exactly 51 stars?</p>
+<div class="flag-grid"><sc-for list="{{ flagOptions }}" as="opt" hint-placeholder-count="3"><button class="{{ opt.btnClass }}" onClick="{{ opt.onClick }}"><div class="flag-canton"><sc-for list="{{ opt.dots }}" as="d" hint-placeholder-count="50"><span class="flag-dot"></span></sc-for></div><div class="flag-stripes"></div><sc-if value="{{ opt.showCount }}" hint-placeholder-val="{{ false }}"><span class="flag-count">{{ opt.count }} stars</span></sc-if></button></sc-for></div>
+<sc-if value="{{ flagAnswered }}" hint-placeholder-val="{{ false }}"><p class="quiz-feedback">{{ flagFeedback }}</p><button class="btn btn-navy" onClick="{{ nextFlag }}">{{ flagNextLabel }}</button></sc-if>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ quoteDone }}" hint-placeholder-val="{{ false }}"><div class="quiz-done"><h3>{{ quoteScoreLine }}</h3><p class="quiz-fact">Support for D.C. voting rights has come from both parties at different points in history.</p><button class="btn btn-navy" onClick="{{ restartQuote }}">Play again</button></div></sc-if>
+<sc-if value="{{ quoteNotDone }}" hint-placeholder-val="{{ true }}">
+<div class="game-progress">Quote {{ quoteNum }} of {{ quoteTotal }} · Score {{ quoteScore }}</div>
+<div class="quote-card"><p class="quote-text">{{ quoteQ.quote }}</p><p class="quote-context">— {{ quoteQ.context }}</p></div>
+<div class="{{ quoteOptsClass }}"><sc-for list="{{ quoteOptions }}" as="opt" hint-placeholder-count="3"><button class="{{ opt.btnClass }}" onClick="{{ opt.onClick }}">{{ opt.text }}</button></sc-for></div>
+<sc-if value="{{ quoteAnswered }}" hint-placeholder-val="{{ false }}"><p class="quiz-feedback">{{ quoteFeedback }}</p><p class="quiz-fact">{{ quoteQ.fact }}</p><button class="btn btn-navy" onClick="{{ nextQuote }}">{{ quoteNextLabel }}</button></sc-if>
+</sc-if>
+</sc-if>
+
+</div>
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><p class="footer-creed">"D.C. statehood is a civil rights issue. These bills undermine the democratic rights of D.C. residents."</p><div class="footer-cols">
+<div class="footer-col"><h5>About this project</h5><p>An independent, volunteer-run project created by a proud D.C. resident to track anti-D.C. legislation and advocate for full democracy. Not affiliated with any organization or party.</p></div>
+<div class="footer-col"><h5>RepresentDC tools</h5><div class="footer-links"><a href="https://billtracker.representdc.org" target="_blank" rel="noopener">Anti-DC bill tracker <i data-lucide="arrow-right"></i></a><a href="RepresentDC Take Action Hub.dc.html">Take action hub <i data-lucide="arrow-right"></i></a><a href="RepresentDC Homepage.dc.html">Home <i data-lucide="arrow-right"></i></a></div></div>
+<div class="footer-col"><h5>Get involved</h5><div class="footer-links"><a href="RepresentDC News and Ways to Help.dc.html">News &amp; ways to help <i data-lucide="arrow-right"></i></a></div></div>
+</div><div class="footer-bottom"><span>Copyright © 2026 RepresentDC</span><span>No taxation without representation.</span></div></div></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  trivia = [
+    {q:"About how many people live in D.C.?", options:["660,000","200,000","1.2 million"], correct:0, fact:"D.C. is home to roughly 660,000 residents across 120 neighborhoods."},
+    {q:"D.C. residents pay federal income tax at...", options:["No rate — they're exempt","The highest per-capita rate in the country","A reduced rate"], correct:1, fact:"Highest per-capita federal income tax rate in the country — with no vote on how it's spent."},
+    {q:"Who has final say over D.C.'s local laws and budget?", options:["D.C.'s own elected government, like any state","Congress","The Mayor alone"], correct:1, fact:"Congress must approve every D.C. law and budget — a check no state government answers to."},
+    {q:"D.C. has a larger population than how many U.S. states?", options:["Zero","At least two (Wyoming, Vermont)","Fifteen"], correct:1, fact:"D.C. out-populates Wyoming and Vermont — both of which have two senators each."},
+    {q:"What share of D.C. voters approved a 2016 statehood referendum?", options:["34%","52%","86%"], correct:2, fact:"86% of D.C. voters approved the 2016 referendum, which also set the proposed state's name and borders."},
+    {q:"How many times has the U.S. admitted a new state since the original 13?", options:["12","37","50"], correct:1, fact:"37 admissions since 1776 — D.C. would need a simple congressional majority, not a constitutional amendment."}
+  ];
+  quoteQs = [
+    {quote:"“Should offend the democratic sense of this nation.”", context:"on D.C. residents having no vote in Congress, 1968", options:["Richard Nixon (R)","Lyndon B. Johnson (D)","Barry Goldwater (R)"], correct:0, fact:"President Nixon said this in 1968, before D.C. voting rights hardened into a partisan divide."},
+    {quote:"“Power concedes nothing without a demand. It never did and it never will.”", context:"organizing for D.C. voting rights in the 1890s", options:["Susan B. Anthony","Frederick Douglass (R)","W.E.B. Du Bois"], correct:1, fact:"Frederick Douglass, a Republican, spent his final years organizing for D.C. voting rights."},
+    {quote:"“We respect the design of the Framers of the Constitution...”", context:"on keeping D.C. under federal control, 2000s party platform", options:["Democratic Party platform","Republican Party platform","Libertarian Party platform"], correct:1, fact:"Republican platforms backed D.C. congressional representation from 1956–76, before shifting to opposition."},
+    {quote:"“We support equal rights to democratic self-government and Congressional representation for the citizens of our nation's capital.”", context:"2016 party platform", options:["Republican Party platform","Green Party platform","Democratic Party platform"], correct:2, fact:"This line has appeared in Democratic platforms since the 1990s, when the party re-embraced statehood."}
+  ];
+  flagRounds = [
+    {stars:[50,51,48], correctIndex:1},
+    {stars:[51,52,50], correctIndex:0},
+    {stars:[49,51,53], correctIndex:1}
+  ];
+  state = { tab:'trivia', trivia:{i:0,score:0,selected:null,done:false}, quote:{i:0,score:0,selected:null,done:false}, flag:{i:0,score:0,selected:null,done:false} };
+  componentDidMount() { this.tryIcons(0); }
+  tryIcons(n) { if (window.lucide && window.lucide.createIcons) { window.lucide.createIcons(); } else if (n < 20) { setTimeout(() => this.tryIcons(n + 1), 100); } }
+  getCorrect(game) {
+    if (game === 'trivia') return this.trivia[this.state.trivia.i].correct;
+    if (game === 'quote') return this.quoteQs[this.state.quote.i].correct;
+    return this.flagRounds[this.state.flag.i].correctIndex;
+  }
+  totalFor(game) {
+    if (game === 'trivia') return this.trivia.length;
+    if (game === 'quote') return this.quoteQs.length;
+    return this.flagRounds.length;
+  }
+  selectAnswer(game, idx) {
+    this.setState(s => {
+      const g = s[game];
+      if (g.selected != null) return null;
+      const correct = this.getCorrect(game);
+      const gotIt = idx === correct;
+      return { [game]: { ...g, selected: idx, score: g.score + (gotIt ? 1 : 0) } };
+    });
+  }
+  next(game) {
+    this.setState(s => {
+      const g = s[game];
+      const total = this.totalFor(game);
+      const ni = g.i + 1;
+      if (ni >= total) return { [game]: { ...g, done: true } };
+      return { [game]: { ...g, i: ni, selected: null } };
+    });
+  }
+  restart(game) { this.setState({ [game]: { i:0, score:0, selected:null, done:false } }); }
+  setTab(tab) { this.setState({ tab }); }
+  optClass(idx, correctIdx, selected) {
+    let c = 'quiz-opt';
+    if (selected != null) { if (idx === correctIdx) c += ' opt-correct'; else if (idx === selected) c += ' opt-wrong'; else c += ' opt-dim'; }
+    return c;
+  }
+  flagOptClass(idx, correctIdx, selected) {
+    let c = 'flag-card';
+    if (selected != null) { if (idx === correctIdx) c += ' opt-correct'; else if (idx === selected) c += ' opt-wrong'; else c += ' opt-dim'; }
+    return c;
+  }
+  renderVals() {
+    const s = this.state;
+    const tq = this.trivia[s.trivia.i];
+    const qq = this.quoteQs[s.quote.i];
+    const fr = this.flagRounds[s.flag.i];
+    const mkOptions = (opts, correctIdx, selected, game) => opts.map((text, idx) => ({ text, idx, btnClass: this.optClass(idx, correctIdx, selected), onClick: () => this.selectAnswer(game, idx) }));
+    const flagOptions = fr.stars.map((count, idx) => ({ idx, count, dots: Array.from({ length: count }), btnClass: this.flagOptClass(idx, fr.correctIndex, s.flag.selected), showCount: s.flag.selected != null, onClick: () => this.selectAnswer('flag', idx) }));
+    return {
+      isTrivia: s.tab === 'trivia', isFlag: s.tab === 'flag', isQuote: s.tab === 'quote',
+      triviaTabClass: 'game-tab' + (s.tab === 'trivia' ? ' active' : ''),
+      flagTabClass: 'game-tab' + (s.tab === 'flag' ? ' active' : ''),
+      quoteTabClass: 'game-tab' + (s.tab === 'quote' ? ' active' : ''),
+      setTabTrivia: () => this.setTab('trivia'), setTabFlag: () => this.setTab('flag'), setTabQuote: () => this.setTab('quote'),
+
+      triviaDone: s.trivia.done, triviaNotDone: !s.trivia.done,
+      triviaQ: tq, triviaNum: s.trivia.i + 1, triviaTotal: this.trivia.length, triviaScore: s.trivia.score,
+      triviaOptions: mkOptions(tq.options, tq.correct, s.trivia.selected, 'trivia'),
+      triviaOptsClass: 'quiz-opts' + (s.trivia.selected != null ? ' answered' : ''),
+      triviaAnswered: s.trivia.selected != null,
+      triviaFeedback: s.trivia.selected === tq.correct ? 'Correct!' : 'Not quite — the right answer is highlighted above.',
+      triviaNextLabel: (s.trivia.i + 1 >= this.trivia.length) ? 'See your score' : 'Next question',
+      nextTrivia: () => this.next('trivia'), restartTrivia: () => this.restart('trivia'),
+      triviaScoreLine: `You got ${s.trivia.score} of ${this.trivia.length} right`,
+
+      quoteDone: s.quote.done, quoteNotDone: !s.quote.done,
+      quoteQ: qq, quoteNum: s.quote.i + 1, quoteTotal: this.quoteQs.length, quoteScore: s.quote.score,
+      quoteOptions: mkOptions(qq.options, qq.correct, s.quote.selected, 'quote'),
+      quoteOptsClass: 'quiz-opts' + (s.quote.selected != null ? ' answered' : ''),
+      quoteAnswered: s.quote.selected != null,
+      quoteFeedback: s.quote.selected === qq.correct ? 'Correct!' : 'Not quite — the right answer is highlighted above.',
+      quoteNextLabel: (s.quote.i + 1 >= this.quoteQs.length) ? 'See your score' : 'Next quote',
+      nextQuote: () => this.next('quote'), restartQuote: () => this.restart('quote'),
+      quoteScoreLine: `You matched ${s.quote.score} of ${this.quoteQs.length} correctly`,
+
+      flagDone: s.flag.done, flagNotDone: !s.flag.done,
+      flagNum: s.flag.i + 1, flagTotal: this.flagRounds.length, flagScore: s.flag.score,
+      flagOptions,
+      flagAnswered: s.flag.selected != null,
+      flagFeedback: s.flag.selected === fr.correctIndex ? 'Correct!' : 'Not quite — the 51-star flag is highlighted above.',
+      flagNextLabel: (s.flag.i + 1 >= this.flagRounds.length) ? 'See your score' : 'Next round',
+      nextFlag: () => this.next('flag'), restartFlag: () => this.restart('flag'),
+      flagScoreLine: `You spotted ${s.flag.score} of ${this.flagRounds.length} correctly`
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+/* ============================================================
+   RepresentDC Design System — Color & Type Tokens
+   ------------------------------------------------------------
+   Advocacy for D.C. statehood & home rule.
+   Evolution note: the live products lean heavily on flag red.
+   This system keeps DC-flag RED as a deliberate accent and
+   promotes a civic NAVY + warm neutral palette as the workhorse.
+   ============================================================ */
+
+/* --- Webfonts (Google Fonts CDN) ----------------------------
+   Public Sans — the official U.S. Web Design System typeface.
+   Thematically perfect for a civic / representation brand.
+   Source Serif 4 — editorial display for rallying-cry moments.
+   IBM Plex Mono — bill numbers, vote tallies, dates (data).
+   NOTE: originals used the system font stack; these are an
+   intentional upgrade. Flagged to the user — swap for hosted
+   font files if licensing for production is required.
+------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---------- Brand core ---------- */
+  --dc-red:        #C8102E;  /* DC flag red — primary accent, used sparingly */
+  --dc-red-dark:   #9E0C24;  /* hover / pressed */
+  --dc-red-darker: #7A0A1C;  /* enacted / gravest state */
+  --dc-red-tint:   #FBEAEC;  /* faint red wash for urgent surfaces */
+
+  --navy:          #14213D;  /* primary brand surface & headings (workhorse) */
+  --navy-700:      #243657;  /* raised navy, gradient partner */
+  --navy-600:      #33476B;  /* navy hover */
+  --navy-tint:     #EEF1F6;  /* faint navy wash */
+
+  --gold:          #E0A500;  /* accent on dark surfaces, links in footer */
+  --gold-soft:     #F4D88A;
+
+  /* ---------- Neutrals (white / black / warm slate) ---------- */
+  --white:    #FFFFFF;
+  --paper:    #F6F7F9;  /* page background (replaces flat #f5f5f5) */
+  --surface:  #FFFFFF;  /* cards */
+  --surface-2:#F0F2F5;  /* inset / muted surfaces */
+  --line:     #E3E7ED;  /* hairline borders */
+  --line-2:   #D2D8E0;  /* stronger borders */
+
+  --ink:      #161B26;  /* primary text, near-black */
+  --slate-800:#2B3340;
+  --slate-700:#39424E;  /* body text */
+  --slate-500:#5C6675;  /* secondary text */
+  --slate-400:#8A93A1;  /* tertiary / meta */
+
+  /* ---------- Priority scale (red reserved for HIGH only) ---------- */
+  --prio-high:    var(--dc-red);   /* genuine threat */
+  --prio-medium:  #B45309;         /* amber — active but not critical */
+  --prio-low:     #94A3B0;         /* slate — introduced, dormant */
+
+  /* ---------- Status tags ---------- */
+  --status-house:  #1D4ED8;  /* passed House */
+  --status-senate: #6D28D9;  /* passed Senate */
+  --status-both:   #B45309;  /* passed both chambers */
+  --status-enacted:#7A0A1C;  /* enacted into law */
+
+  /* ---------- Party (conventional, kept distinct from brand red) ---------- */
+  --party-r: #B23A48;
+  --party-d: #1D4ED8;
+  --party-i: #64748B;
+
+  /* ---------- Support / affirmative signal (added for pledge/candidate tracking — 2026) ----------
+     A civic, cool-leaning green in the same desaturated register as navy/gold, not a stock
+     "success" green. Used ONLY for an explicit "supports statehood" signal — never a general
+     positive/complete state (that's still navy or a checkmark, not color-coded). */
+  --support-green:      #2E6F4F;
+  --support-green-dark: #24573F;  /* hover / pressed */
+  --support-green-tint: #E7F0EA;  /* faint wash for chips/surfaces */
+
+  /* "No contact / undeliverable" reuses the existing neutral ramp — no new token needed.
+     Use --slate-400 for text/icon, --surface-2 for chip background. Intentional: this is an
+     absence-of-signal, not a distinct status worth its own color. */
+
+  /* ---------- Type families ---------- */
+  --font-sans:    'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:   'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:    'IBM Plex Mono', 'SFMono-Regular', ui-monospace, 'Courier New', monospace;
+
+  /* ---------- Type scale ---------- */
+  --fs-display: 3rem;     /* 48px — hero statements */
+  --fs-h1:      2.25rem;  /* 36px */
+  --fs-h2:      1.625rem; /* 26px */
+  --fs-h3:      1.25rem;  /* 20px */
+  --fs-lg:      1.125rem; /* 18px lead / subhead */
+  --fs-base:    1rem;     /* 16px body */
+  --fs-sm:      0.875rem; /* 14px */
+  --fs-xs:      0.75rem;  /* 12px meta / labels */
+
+  --lh-tight: 1.15;
+  --lh-snug:  1.35;
+  --lh-body:  1.6;
+
+  --ls-tight: -0.02em;  /* big display */
+  --ls-label: 0.08em;   /* uppercase eyebrows */
+
+  /* ---------- Spacing (4px base) ---------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+
+  /* ---------- Radii ---------- */
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   20px;
+  --r-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-xs: 0 1px 2px rgba(20, 33, 61, 0.06);
+  --shadow-sm: 0 1px 3px rgba(20, 33, 61, 0.08), 0 1px 2px rgba(20, 33, 61, 0.04);
+  --shadow-md: 0 4px 12px rgba(20, 33, 61, 0.10);
+  --shadow-lg: 0 10px 30px rgba(20, 33, 61, 0.14);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur:  0.18s;
+}
+
+/* ============================================================
+   Semantic element styles — apply directly or copy as needed
+   ============================================================ */
+
+.ds-display {
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+}
+
+.ds-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+}
+
+.ds-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  color: var(--ink);
+}
+
+.ds-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  color: var(--ink);
+}
+
+.ds-lead {
+  font-family: var(--font-sans);
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  color: var(--slate-500);
+}
+
+.ds-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  color: var(--slate-700);
+}
+
+.ds-small {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  color: var(--slate-500);
+}
+
+/* Uppercase eyebrow / label */
+.ds-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--dc-red);
+}
+
+/* Editorial pull-quote (the "rallying cry") */
+.ds-quote {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: var(--lh-snug);
+  color: var(--ink);
+}
+
+/* Data / bill numbers / vote tallies */
+.ds-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}

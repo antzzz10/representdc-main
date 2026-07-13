@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><style>
+body{margin:0;background:#EDEFF3;font-family:var(--font-sans, 'Public Sans', system-ui, sans-serif)}
+.dv-turn{padding:44px 48px 36px;border-bottom:1px solid rgba(20,33,61,.1)}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 22px}
+.dv-tid{font:700 10px ui-monospace,monospace;padding:3px 8px;background:#14213D;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:700 15px/1.2 var(--font-sans,sans-serif);color:#14213D}
+.dv-opts{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;width:320px;scroll-margin-top:16px}
+.dv-oid{font:700 10.5px ui-monospace,monospace;padding:3px 8px;background:rgba(20,33,61,.1);color:#14213D;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:700 13px/1.3 var(--font-sans,sans-serif);color:#14213D}
+.dv-card{background:#fff;border:1px solid #E3E7ED;border-radius:14px;box-shadow:0 2px 10px rgba(20,33,61,.06);overflow:hidden}
+.lockup-row{display:flex}
+.swatch{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:26px 16px}
+.swatch.light{background:#fff}
+.swatch.dark{background:#14213D}
+.mark-lg{width:56px;height:56px}
+.wordmark{font:800 17px/1 var(--font-sans,sans-serif);letter-spacing:-0.02em;color:#14213D}
+.swatch.dark .wordmark{color:#fff}
+.wordmark .accent{color:#C8102E}
+.swatch.dark .wordmark .accent{color:#E0A500}
+.dv-rationale{font:400 12.5px/1.55 var(--font-sans,sans-serif);color:#4B5768;padding:0 2px}
+.dv-tagline{font:600 11.5px/1.4 var(--font-sans,sans-serif);color:#7A1020;padding:8px 10px;background:#FBEAEC;border-radius:6px;margin-top:2px}
+.dv-next{margin:24px 0 0;font:12.5px/1.6 var(--font-sans,sans-serif);color:rgba(20,33,61,.6);max-width:900px}
+.dv-next a{color:#14213D}
+.rp-word{font:800 1em/1 var(--font-sans,'Public Sans',sans-serif);letter-spacing:-.03em}
+.dc-mark{border-bottom:.16em solid currentColor;padding-bottom:.03em}
+.wm2{display:flex;align-items:center}
+.mockup-card{background:#fff;border:1px solid #E3E7ED;border-radius:14px;box-shadow:0 2px 10px rgba(20,33,61,.06);overflow:hidden}
+</style></helmet>
+
+<section class="dv-turn" id="t4">
+<div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Combining <a class="dv-oid" href="#3b">3b</a>'s scale with <a class="dv-oid" href="#3a">3a</a>'s boldness, new type treatment, shown across formats</span></div>
+<p class="dv-rationale" style="max-width:760px;margin:-8px 0 22px">Wordmark fix: "Represent" stays heavy Public Sans with tight tracking, and "DC" now just picks up the accent color with a thin underline — no box — so the mark and the type share one idea (a piece that's set apart) without breaking RepresentDC's one-word reading. That's what moves it past generic bold-sans-startup-logo territory.</p>
+<div class="dv-opts">
+
+<div class="dv-opt" id="4a" style="width:500px"><div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a>Site header</div>
+<div class="mockup-card" style="width:480px"><div style="display:flex;align-items:center;justify-content:space-between;gap:28px;padding:14px 22px;border-bottom:1px solid #E3E7ED"><div class="wm2" style="gap:8px"><svg width="26" height="26" viewBox="0 0 64 64"><defs><pattern id="h4a" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h4a)"/></svg><span class="rp-word" style="font-size:15px;color:#14213D">Represent<span class="dc-mark" style="color:#C8102E">DC</span></span></div><div style="display:flex;gap:18px;font:600 13px var(--font-sans,sans-serif);color:#4B5768;white-space:nowrap"><span>Bill Tracker</span><span>Myths &amp; FAQ</span><span>Take Action</span></div></div></div>
+<p class="dv-rationale">Compact 26px icon at a tighter 8px gap from the text; a fixed 28px gap now separates the wordmark from the nav no matter the viewport. "DC" keeps its color-tie to the star's accent point via a thin underline instead of a box, so RepresentDC still reads as one word.</p>
+</div>
+
+<div class="dv-opt" id="4b" style="width:460px"><div class="dv-olabel"><a class="dv-oid" href="#4b">4b</a>Hero banner</div>
+<div class="mockup-card" style="width:440px"><div style="background:linear-gradient(180deg,#14213D,#243657);padding:44px 34px 40px;display:flex;flex-direction:column;gap:26px;align-items:flex-start"><div class="wm2" style="gap:11px"><svg width="44" height="44" viewBox="0 0 64 64"><defs><pattern id="h4b" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h4b)"/></svg><span class="rp-word" style="font-size:20px;color:#fff">Represent<span class="dc-mark" style="color:#E0A500">DC</span></span></div><h2 style="font:800 27px/1.25 var(--font-sans,sans-serif);color:#fff;margin:0;letter-spacing:-.02em;max-width:360px">Congress is blocking D.C. laws right now.</h2></div></div>
+<p class="dv-rationale">Icon-to-text gap tightened to 11px so the mark and wordmark read as one lockup, with clear breathing room (26px) before the headline below.</p>
+</div>
+
+<div class="dv-opt" id="4c" style="width:280px"><div class="dv-olabel"><a class="dv-oid" href="#4c">4c</a>Favicon / browser tab</div>
+<div class="mockup-card" style="width:260px;padding:20px"><div style="display:flex;align-items:center;gap:8px;background:#EDEFF3;border-radius:8px 8px 0 0;padding:9px 12px 9px 14px;width:fit-content"><svg width="16" height="16" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg><span style="font:500 12px var(--font-sans,sans-serif);color:#4B5768">RepresentDC</span><span style="color:#9aa3b2;font-size:11px;margin-left:6px">✕</span></div><div style="display:flex;align-items:center;gap:16px;margin-top:16px"><svg width="64" height="64" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg><span style="font:400 12px var(--font-sans,sans-serif);color:#7A8496">16px tab icon, magnified 4×</span></div></div>
+<p class="dv-rationale">At 16px the accent point simplifies to a flat solid wedge (no hatch/dash survives that small) — still unmistakably "a star with one different-colored point," which is the whole idea.</p>
+</div>
+
+<div class="dv-opt" id="4d" style="width:360px"><div class="dv-olabel"><a class="dv-oid" href="#4d">4d</a>Letterhead (print, single ink)</div>
+<div class="mockup-card" style="width:340px;padding:0"><div style="background:#fff;padding:30px 30px 26px;position:relative"><div style="position:absolute;top:30px;right:30px;font:400 10px/1.5 var(--font-mono,monospace);color:#7A8496;text-align:right">representdc.org<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83ebe6efefecc3f1e6f3f1e6f0e6edf7e7e0adecf1e4">[email&#160;protected]</a></div><div class="wm2" style="gap:9px"><svg width="34" height="34" viewBox="0 0 64 64"><defs><pattern id="h4d" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#14213D"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h4d)"/></svg><span class="rp-word" style="font-size:16px;color:#14213D">Represent<span class="dc-mark" style="color:#14213D">DC</span></span></div><div style="height:1px;background:#14213D;margin-top:22px"></div><p style="font:400 11.5px/1.6 var(--font-sans,sans-serif);color:#7A8496;margin:16px 0 0;max-width:260px">Dear Councilmember — writing regarding H.R. 8801 and its impact on D.C. home rule…</p></div></div>
+<p class="dv-rationale">Same hatch treatment as 4a/4b/4e now (was a mismatched dashed outline) — the hatch is knockout white lines on navy, so it's still one ink to print. "DC" drops to a plain underline instead of a box.</p>
+</div>
+
+<div class="dv-opt" id="4e" style="width:440px"><div class="dv-olabel"><a class="dv-oid" href="#4e">4e</a>Footer, reversed contrast</div>
+<div class="mockup-card" style="width:420px"><div style="background:#14213D;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px"><div class="wm2" style="gap:8px"><svg width="24" height="24" viewBox="0 0 64 64"><defs><pattern id="h4e" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h4e)"/></svg><span class="rp-word" style="font-size:13.5px;color:#fff">Represent<span class="dc-mark" style="color:#E0A500">DC</span></span></div><span style="font:400 11.5px var(--font-mono,monospace);color:#8b95a8;white-space:nowrap">© 2026 · independent &amp; volunteer-run</span></div></div>
+<p class="dv-rationale">On navy, gold takes over as the "different piece" accent (matches the footer's existing gold-link convention). Same hatch star as the rest of the set, plain underline instead of a box on "DC."</p>
+</div>
+
+</div>
+<p class="dv-next">Try next: "make 4d the print standard, apply the chip wordmark to the actual site" · "try the DC chip in navy-on-white everywhere instead of switching colors" · "show this on a social/OG share card"</p>
+</section>
+
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Star motif only — colorblind-safe, favicon-tested, icon-forward, type variants</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="3a"><div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Hollow point — shape-coded, not just color</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:12px;padding:24px 20px"><svg width="40" height="40" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff" stroke="#C8102E" stroke-width="2" stroke-dasharray="2.5 2.2"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:12px;padding:24px 20px"><svg width="40" height="40" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D" stroke="#E0A500" stroke-width="2" stroke-dasharray="2.5 2.2"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">The fifth point is punched out and dash-outlined instead of just filled a different color — the "unfinished" signal is a literal hole in the shape, which reads in grayscale and to colorblind viewers exactly as it does in color.</p>
+</div>
+
+<div class="dv-opt" id="3b"><div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a>Hatched point — icon-forward, tracked mono wordmark</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:16px;padding:22px 20px"><svg width="56" height="56" viewBox="0 0 64 64"><defs><pattern id="h3bl" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#C8102E"/><line x1="0" y1="0" x2="0" y2="4" stroke="#fff" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h3bl)"/></svg><div class="wordmark" style="font:700 13px/1.2 var(--font-mono,'IBM Plex Mono',monospace);letter-spacing:.08em">REPRESENT<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:16px;padding:22px 20px"><svg width="56" height="56" viewBox="0 0 64 64"><defs><pattern id="h3bd" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#E0A500"/><line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/></pattern></defs><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#h3bd)"/></svg><div class="wordmark" style="font:700 13px/1.2 var(--font-mono,'IBM Plex Mono',monospace);letter-spacing:.08em">REPRESENT<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Diagonal hatch on the fifth point instead of flat color — texture is the accessible signal, works for colorblind and grayscale print. Mark scaled up against a small tracked Plex Mono wordmark (the tracker's data typeface), so the icon carries the brand and the type reads like a civic data stamp, not a generic startup logo.</p>
+</div>
+
+<div class="dv-opt" id="3c"><div class="dv-olabel"><a class="dv-oid" href="#3c">3c</a>Hollow point — serif + mono type mix</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:14px;padding:24px 20px"><svg width="42" height="42" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff" stroke="#C8102E" stroke-width="2" stroke-dasharray="2.5 2.2"/></svg><div><div style="font:italic 400 18px/1 var(--font-serif,'Source Serif 4',serif);color:#14213D">Represent</div><div style="font:700 12px/1 var(--font-mono,'IBM Plex Mono',monospace);letter-spacing:.14em;color:#C8102E;margin-top:3px">DC</div></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:14px;padding:24px 20px"><svg width="42" height="42" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D" stroke="#E0A500" stroke-width="2" stroke-dasharray="2.5 2.2"/></svg><div><div style="font:italic 400 18px/1 var(--font-serif,'Source Serif 4',serif);color:#fff">Represent</div><div style="font:700 12px/1 var(--font-mono,'IBM Plex Mono',monospace);letter-spacing:.14em;color:#E0A500;margin-top:3px">DC</div></div></div>
+</div></div>
+<p class="dv-rationale">Splits the wordmark across two registers already in the system — an editorial italic serif for "Represent" (the rallying-cry voice) and tracked mono caps for "DC" (the data voice) — stacked, so no other statehood org's single-weight sans wordmark looks like it.</p>
+</div>
+
+<div class="dv-opt" id="3d"><div class="dv-olabel"><a class="dv-oid" href="#3d">3d</a>Hollow point — favicon proof strip</div>
+<div class="dv-card"><div style="padding:22px 20px 18px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:22px;justify-content:center;background:#fff;border-radius:10px;padding:16px">
+<svg width="64" height="64" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#14213D" stroke="#C8102E" stroke-width="2" stroke-dasharray="2 2"/></svg>
+<svg width="32" height="32" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#14213D" stroke="#C8102E" stroke-width="2.4" stroke-dasharray="2 2"/></svg>
+<svg width="16" height="16" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg>
+</div>
+<div class="lockup-row"><div class="swatch light" style="flex-direction:row;gap:12px;padding:6px 0"><svg width="48" height="48" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff" stroke="#C8102E" stroke-width="2" stroke-dasharray="2.5 2.2"/></svg><div class="wordmark" style="font-size:15px">Represent<span class="accent">DC</span></div></div></div>
+</div></div>
+<p class="dv-rationale">64 / 32 / 16px — at 16px the dashed outline simplifies to a flat red wedge automatically (dash pattern disappears at that size, leaving a clean two-tone star), so the mark still reads as "one different point" down to actual favicon size.</p>
+</div>
+
+</div>
+<p class="dv-next">Try next: "make <a href="#3a">3a</a> the pick, apply it everywhere" · "try the hatch from <a href="#3b">3b</a> in gold instead of red" · "combine <a href="#3c">3c</a>'s type mix with <a href="#3b">3b</a>'s bigger icon"</p>
+</section>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Finishing passes on <a class="dv-oid" href="#1a">1a</a> and <a class="dv-oid" href="#1b">1b</a></span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Ascend — tight horizontal lockup</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:12px;padding:24px 20px"><svg width="34" height="34" viewBox="0 0 64 64"><g transform="rotate(-3 32 32)"><rect x="6" y="37" width="34" height="10" rx="5" fill="#14213D"/><rect x="6" y="19" width="50" height="10" rx="5" fill="#C8102E"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:12px;padding:24px 20px"><svg width="34" height="34" viewBox="0 0 64 64"><g transform="rotate(-3 32 32)"><rect x="6" y="37" width="34" height="10" rx="5" fill="#fff"/><rect x="6" y="19" width="50" height="10" rx="5" fill="#E0A500"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Tilt cut from -6° to -3° and the mark sits inline at cap-height, gap tightened to 12px — reads as one lockup instead of a floating icon over a caption. Bars thickened slightly so they hold their own next to bold type.</p>
+</div>
+
+<div class="dv-opt" id="2b"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Ascend — contained tile (favicon-ready)</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:14px;padding:24px 20px"><svg width="40" height="40" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><g transform="rotate(-3 32 32)"><rect x="14" y="38" width="28" height="8" rx="4" fill="#fff"/><rect x="14" y="22" width="40" height="8" rx="4" fill="#C8102E"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:14px;padding:24px 20px"><svg width="40" height="40" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#fff"/><g transform="rotate(-3 32 32)"><rect x="14" y="38" width="28" height="8" rx="4" fill="#14213D"/><rect x="14" y="22" width="40" height="8" rx="4" fill="#C8102E"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Same rising bars, dropped into a rounded-square tile so there's a self-sufficient app-icon/favicon version that doesn't rely on the wordmark to make sense at 16px.</p>
+</div>
+
+<div class="dv-opt" id="2c"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Unfinished Star — the point actually fills</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:12px;padding:22px 20px"><svg width="38" height="38" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L26.71,24.72 Z" fill="#14213D"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:12px;padding:22px 20px"><svg width="38" height="38" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L26.71,24.72 Z" fill="#fff"/><path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#E0A500"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Rebuilt as one solid star with a real fifth point, cut from the same geometry as the other four — just filled in the accent color, like the last puzzle piece snapped into place. No more stray dot floating off the shape.</p>
+</div>
+
+<div class="dv-opt" id="2d"><div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Unfinished Star — contained tile (favicon-ready)</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light" style="flex-direction:row;gap:14px;padding:22px 20px"><svg width="42" height="42" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#14213D"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L26.71,25.72 Z" fill="#fff"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark" style="flex-direction:row;gap:14px;padding:22px 20px"><svg width="42" height="42" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="15" fill="#fff"/><path d="M32,11 L37.29,25.72 L52.92,26.2 L40.56,35.78 L44.93,50.8 L32,42 L19.07,50.8 L23.44,35.78 L26.71,25.72 Z" fill="#14213D"/><path d="M23.44,35.78 L11.08,26.2 L26.71,25.72 Z" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Same fixed star, boxed into a tile so it stands alone as an app icon/favicon — the red point still reads clearly even at small sizes since it's a solid fill, not a thin stroke.</p>
+</div>
+
+</div>
+<p class="dv-next">Try next: "make <a href="#2a">2a</a> the primary, drop the tile version" · "try the star point in gold instead of red" · "show these at 16px favicon size side by side"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Five logo directions — modernized flag references, none of them the literal 3-star/2-bar mark</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Ascend — rising equals</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light"><svg class="mark-lg" viewBox="0 0 64 64"><g transform="rotate(-6 32 32)"><rect x="8" y="38" width="34" height="9" rx="4.5" fill="#14213D"/><rect x="8" y="21" width="48" height="9" rx="4.5" fill="#C8102E"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark"><svg class="mark-lg" viewBox="0 0 64 64"><g transform="rotate(-6 32 32)"><rect x="8" y="38" width="34" height="9" rx="4.5" fill="#fff"/><rect x="8" y="21" width="48" height="9" rx="4.5" fill="#E0A500"/></g></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">The flag's two bars, tilted and unevenly lengthened into an ascending "=" — equality in motion, not at rest. Reads as a trend line too, which ties nicely to the bill tracker's data focus.</p>
+<p class="dv-tagline">Tagline idea: "Equal on paper. Not yet in practice."</p>
+</div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>The Unfinished Star</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light"><svg class="mark-lg" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L18.68,27.67" fill="none" stroke="#14213D" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="11.6" cy="25.6" r="4.4" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark"><svg class="mark-lg" viewBox="0 0 64 64"><path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L18.68,27.67" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="11.6" cy="25.6" r="4.4" fill="#E0A500"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">One point of the star is still a loose, unclosed line — a red spark marks where it's being completed. A single star (not three) standing in for the one vote D.C. is missing, close to whole.</p>
+<p class="dv-tagline">Tagline idea: "One star short of whole."</p>
+</div>
+
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Standing Up</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light"><svg class="mark-lg" viewBox="0 0 64 64"><rect x="12" y="38" width="9" height="14" rx="4.5" fill="#14213D"/><rect x="28" y="26" width="9" height="26" rx="4.5" fill="#14213D"/><rect x="44" y="14" width="9" height="38" rx="4.5" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark"><svg class="mark-lg" viewBox="0 0 64 64"><rect x="12" y="38" width="9" height="14" rx="4.5" fill="#fff"/><rect x="28" y="26" width="9" height="26" rx="4.5" fill="#fff"/><rect x="44" y="14" width="9" height="38" rx="4.5" fill="#E0A500"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">Three bars rising in height, echoing the flag's stripes and the tracker's bar-chart DNA at once — read as people standing taller together, or momentum building toward the tallest (red) bar.</p>
+<p class="dv-tagline">Tagline idea: "Rising, together, since 1801."</p>
+</div>
+
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>The Fulcrum</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light"><svg class="mark-lg" viewBox="0 0 64 64"><g transform="rotate(-4 32 30)"><rect x="9" y="27" width="46" height="6" rx="3" fill="#14213D"/><rect x="9" y="33" width="5" height="16" rx="2.5" fill="#C8102E"/><rect x="50" y="33" width="5" height="16" rx="2.5" fill="#C8102E"/></g><path d="M26,44 L38,44 L32,34 Z" fill="#14213D"/><circle cx="32" cy="29" r="3.2" fill="#E0A500"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark"><svg class="mark-lg" viewBox="0 0 64 64"><g transform="rotate(-4 32 30)"><rect x="9" y="27" width="46" height="6" rx="3" fill="#fff"/><rect x="9" y="33" width="5" height="16" rx="2.5" fill="#E0A500"/><rect x="50" y="33" width="5" height="16" rx="2.5" fill="#E0A500"/></g><path d="M26,44 L38,44 L32,34 Z" fill="#fff"/><circle cx="32" cy="29" r="3.2" fill="#C8102E"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">The flag's two stripes become a balance beam tipping slightly off-level — fairness not yet achieved — pivoting on a single gold star instead of a courtroom scale cliché.</p>
+<p class="dv-tagline">Tagline idea: "Tip the balance."</p>
+</div>
+
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Threshold</div>
+<div class="dv-card"><div class="lockup-row">
+<div class="swatch light"><svg class="mark-lg" viewBox="0 0 64 64"><path d="M14,52 L14,32 A18,18 0 0,1 50,32 L50,52" fill="none" stroke="#14213D" stroke-width="5" stroke-linecap="round"/><rect x="28" y="18" width="6" height="34" rx="3" fill="#C8102E"/><circle cx="31" cy="14" r="4" fill="#E0A500"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+<div class="swatch dark"><svg class="mark-lg" viewBox="0 0 64 64"><path d="M14,52 L14,32 A18,18 0 0,1 50,32 L50,52" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><rect x="28" y="18" width="6" height="34" rx="3" fill="#E0A500"/><circle cx="31" cy="14" r="4" fill="#fff"/></svg><div class="wordmark">Represent<span class="accent">DC</span></div></div>
+</div></div>
+<p class="dv-rationale">An open Capitol-arch doorway with a single flagpole finally passing through it — a seat at the table, literally. Most distinct from every other statehood-org logo, which all lean on the flag itself.</p>
+<p class="dv-tagline">Tagline idea: "A seat at the table."</p>
+</div>
+
+</div>
+<p class="dv-next">Try next: "combine <a href="#1b">1b</a>'s star with <a href="#1e">1e</a>'s arch" · "show <a href="#1c">1c</a> as a favicon at 16px" · "more options in this direction" · "refine <a href="#1a">1a</a> — less tilt"</p>
+</section>
+</x-dc>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

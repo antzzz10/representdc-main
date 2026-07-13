@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/colors_and_type.css"><script src="_ds/representdc-design-system-d750a15b-e517-4f7c-8d38-9339e64bd1a8/_ds_bundle.js"></script><style>
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--dc-red:#C8102E;--dc-red-dark:#9E0C24;--dc-red-tint:#FBEAEC;--navy:#14213D;--navy-700:#243657;--navy-600:#33476B;--navy-tint:#EEF1F6;--gold:#E0A500;--white:#FFFFFF;--paper:#F6F7F9;--surface:#FFFFFF;--surface-2:#F0F2F5;--line:#E3E7ED;--line-2:#D2D8E0;--ink:#161B26;--slate-800:#2B3340;--slate-700:#39424E;--slate-500:#5C6675;--slate-400:#8A93A1;--font-sans:'Public Sans',sans-serif;--font-serif:'Source Serif 4',Georgia,serif;--font-mono:'IBM Plex Mono',monospace;--r-sm:6px;--r-md:10px;--r-lg:14px;}
+doc-page:not(:defined){visibility:hidden}
+body,.doc{font-family:var(--font-sans);color:var(--slate-700);}
+.eyebrow{font-family:var(--font-sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dc-red);margin:0 0 6px}
+h1.title{font-family:var(--font-sans);font-weight:800;font-size:32px;letter-spacing:-0.02em;color:var(--ink);margin:0 0 6px;text-wrap:balance}
+.subtitle{font-size:15px;color:var(--slate-500);margin:0 0 4px;max-width:640px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--slate-400);margin:14px 0 0}
+h2.sec{font-family:var(--font-sans);font-weight:700;font-size:20px;color:var(--navy);margin:40px 0 4px;padding-top:14px;border-top:1px solid var(--line);letter-spacing:-0.01em}
+h2.sec .num{font-family:var(--font-mono);color:var(--dc-red);margin-right:8px;font-weight:600}
+h3.sub{font-size:14.5px;font-weight:700;color:var(--ink);margin:20px 0 6px}
+p{font-size:14px;line-height:1.62;margin:8px 0}
+.lead{font-size:15.5px;color:var(--slate-700);line-height:1.65}
+ul,ol{margin:6px 0;padding-left:20px}
+li{font-size:14px;line-height:1.6;margin:4px 0}
+.callout{background:var(--navy-tint);border-left:4px solid var(--navy);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:12px 16px;margin:14px 0;font-size:13.5px;color:var(--navy-700)}
+.callout.red{background:var(--dc-red-tint);border-left-color:var(--dc-red);color:#7A1020}
+.callout b{color:inherit}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--slate-500);border:1px solid var(--line-2);margin-right:6px}
+table.grid{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:13px}
+table.grid th{background:var(--navy);color:var(--white);text-align:left;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px}
+table.grid td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+table.grid tr:nth-child(even) td{background:var(--paper)}
+table.grid td.persona{font-weight:700;color:var(--navy);white-space:nowrap}
+.optioncard{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin:10px 0;background:var(--surface)}
+.optioncard.rec{border-color:var(--dc-red);background:var(--dc-red-tint)}
+.optioncard h4{margin:0 0 4px;font-size:14.5px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.optioncard h4 .tag{font-family:var(--font-mono);font-size:10px;background:var(--navy);color:#fff;padding:2px 7px;border-radius:4px;font-weight:600}
+.optioncard.rec h4 .tag{background:var(--dc-red)}
+.optioncard p{margin:6px 0 0}
+.diagram{border:1px solid var(--line-2);border-radius:var(--r-md);padding:20px;background:var(--paper);margin:14px 0}
+.d-row{display:flex;gap:14px;align-items:stretch;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.d-box{border:1.5px solid var(--navy);border-radius:var(--r-sm);background:var(--white);padding:10px 14px;font-size:12.5px;font-weight:600;color:var(--navy);text-align:center;min-width:120px;box-shadow:0 1px 3px rgba(20,33,61,.08)}
+.d-box.action{border-color:var(--dc-red);color:var(--dc-red-dark)}
+.d-box.small{font-size:11px;font-weight:500;color:var(--slate-700);border-color:var(--line-2);min-width:100px;padding:7px 10px}
+.d-arrow{align-self:center;color:var(--slate-400);font-size:16px}
+.d-arrow.down{writing-mode:vertical-lr;transform:rotate(180deg)}
+.d-label{text-align:center;font-family:var(--font-mono);font-size:10px;color:var(--slate-400);text-transform:uppercase;letter-spacing:.05em;margin:2px 0}
+.q{font-family:var(--font-serif);font-style:italic;font-size:16px;color:var(--ink);border-left:3px solid var(--gold);padding-left:14px;margin:14px 0}
+.two-col{display:flex;gap:20px}
+.two-col>div{flex:1}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:22px;position:relative}
+.checklist li:before{content:"□";position:absolute;left:0;color:var(--slate-400)}
+</style></helmet><x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" margin="0.7in" hint-size="100%,1100px"><div class="eyebrow">RepresentDC — Internal Strategy Doc</div><h1 class="title">Getting people from "informed" to "in the fight"</h1><p class="subtitle">An audit of where our calls-to-action are buried, and a proposed information architecture that separates the persuasion front-door from the action destinations — organized around four visitor mindsets.</p><p class="meta">DRAFT — July 2026 — for discussion, not yet built</p>
+
+<h2 class="sec"><span class="num">01</span>The problem, concretely</h2>
+<p class="lead">The persuasion strategy on representdc.org works — loss framing, concrete facts, values framing, then the statehood solution. But the site has no real "do something" destination. Every action we've built is real and useful; it's just buried under content that's designed to inform, not act.</p>
+<div class="callout red"><b>Talking points are 3 clicks deep.</b> Home page → click a category card to expand it (1) → read the description → click the "💬 Talking Points" button (2) → modal opens (3) → then choose an audience tab and a length. A volunteer who already knows they want to post something today has to first sit through a history lesson to find it.</div>
+<div class="callout"><b>News is trapped inside the Bill Tracker.</b> "Recent Activity" and the news feed only render on billtracker.representdc.org, above a wall of filters and 96 bills. There's no lightweight "what happened this week" page to send a casual follower to.</div>
+<div class="callout"><b>There is no "actions and events" surface at all.</b> Anyone ready to volunteer, attend something, or take an offline step has nowhere to go — this is a genuine content gap, not just an IA problem.</div>
+<div class="callout"><b>One homepage tries to serve everyone at once.</b> A returning activist and a first-time visitor scroll through the exact same "why statehood matters" narrative. The page has no memory of who's reading it.</div>
+
+<h2 class="sec"><span class="num">02</span>The governing idea</h2>
+<p class="lead">Split the site into two jobs it currently does at once:</p>
+<div class="two-col">
+<div class="optioncard"><h4><span class="tag">Job 1</span>Persuade &amp; orient</h4><p>The homepage's job is to help a stranger understand the problem fast, and figure out which of four doors fits them. It stays loss-framed, evidence-first, soft-CTA — exactly the voice already documented in STRATEGY.md.</p></div>
+<div class="optioncard"><h4><span class="tag">Job 2</span>Equip &amp; mobilize</h4><p>A separate, well-lit set of destinations does the "now go do something" job: talking points, news, events. These can be blunter and faster — no re-litigating why it matters, just tools.</p></div>
+</div>
+<p>Right now Job 2 is smuggled inside Job 1's content (a talking-points modal hidden inside a persuasion card). Pulling it out doesn't mean removing it from context — it means giving it its own front door <em>and</em> leaving a visible, low-friction pointer to it everywhere it's contextually relevant.</p>
+
+<h2 class="sec"><span class="num">03</span>Four visitor mindsets</h2>
+<p class="lead">Instead of one homepage narrative for everyone, the homepage's first job is helping visitors self-identify. Proposed personas, mapped to what they already know and what they came to do:</p>
+<table class="grid"><tr><th>Persona</th><th>Mental state</th><th>What they need</th><th>Tone</th><th>Where they should land</th></tr>
+<tr><td class="persona">1. New to D.C.</td><td>Doesn't know D.C. lacks statehood or what "home rule" even means</td><td>A basic, patient explainer: what D.C. is, what Congress can override, why it's unusual</td><td>Educational, surprising-fact-led, zero jargon</td><td>An "explainer" path — essentially today's homepage narrative (facts → values → solution), just clearly labeled as the 101</td></tr>
+<tr><td class="persona">2. Statehood-curious</td><td>Already gets the basic unfairness; unsure what's actually being done or how to help</td><td>The state of play: what's moving in Congress now, who's organizing, how to plug in at low commitment</td><td>Warm, momentum-focused ("here's what's happening, here's an easy first step")</td><td>News/updates + a lightweight "ways to help" menu</td></tr>
+<tr><td class="persona">3. Statehood-questioning</td><td>Skeptical or has specific objections; wants a fast, credible answer — not a journey</td><td>Direct myth-vs-fact rebuttals, sourced, scannable, no persuasion narrative</td><td>Calm, evidence-first, non-defensive, respects their time</td><td>A myths/FAQ page they can jump straight into, deep-linkable per myth</td></tr>
+<tr><td class="persona">4. Statehood activist</td><td>Already convinced; wants tools to argue, organize, or track legislation</td><td>Talking points, hypocrisy research, bill tracker, events, sharable assets</td><td>Efficient, minimal preamble, built for copy/paste and speed</td><td>The action hub (see §5) and bill tracker</td></tr>
+</table>
+<div class="callout">Tone note per your answer: keep the site's core voice (non-partisan, evidence-led, soft CTAs) as the constant — but let register flex per persona. The questioning-persona FAQ can be more clipped and rebuttal-style; the activist hub can drop scene-setting entirely and lead with the tool.</div>
+
+<h2 class="sec"><span class="num">04</span>Homepage: how self-identification actually works</h2>
+<p>Recommended pattern — a <b>persuasion-first hero with an early, honest fork</b>, not a quiz gate:</p>
+<div class="diagram">
+<div class="d-row"><div class="d-box">Hero: "Congress is blocking D.C. laws right now" + 0 senators / 96 bills stat</div></div>
+<div class="d-label">↓ scroll</div>
+<div class="d-row"><div class="d-box">"Where do you want to start?" — 4-card persona picker</div></div>
+<div class="d-row">
+<div class="d-box small">New to D.C. → Explainer path</div>
+<div class="d-box small">Curious → News + ways to help</div>
+<div class="d-box small">Questioning → Myths &amp; FAQ</div>
+<div class="d-box small">Activist → Action hub</div>
+</div>
+<div class="d-label">↓ for anyone who keeps scrolling instead of picking</div>
+<div class="d-row"><div class="d-box small">Full narrative continues underneath (facts → values → solution) — the existing homepage content, now framed as the "New to D.C." default path</div></div>
+</div>
+<p>Why not a hard quiz/gate: a skeptical visitor (persona 3) who is forced to click through a quiz before getting an answer will bounce. Placing the fork <em>after</em> the hook keeps the proven hero, gives self-identifying visitors a fast lane immediately, and still lets a passive scroller fall through to the full persuasion narrative by default — nobody is forced to choose.</p>
+<p>The picker itself is a strip of 4 cards (icon, one line of framing copy, one link) — not a modal, not a redirect with no context. Each card's copy is written <em>to</em> that persona ("Not sure D.C. isn't already a state? Start here.") so people recognize themselves.</p>
+
+<h2 class="sec"><span class="num">05</span>Where should "Take Action" live? — three options</h2>
+<p class="lead">You flagged this as the open question. Laying out the real tradeoff:</p>
+<div class="optioncard"><h4><span class="tag">A</span>One dedicated Action Hub page</h4><p>Single page (e.g. <span class="pill">/take-action</span>) holding all three tools: talking points browser, news feed, events/actions list — as tabs or stacked sections. Homepage and every persona path link to it once they're ready to act.</p><p><b>Pro:</b> one URL to promote everywhere (social bio, emails, footer); easy to maintain; matches how an activist actually behaves — they want the whole toolbox, not one piece at a time.<br><b>Con:</b> talking points, news, and events are pretty different tasks (copy text vs. skim headlines vs. RSVP) — mashing them into one page risks becoming a junk drawer if not organized carefully.</p></div>
+<div class="optioncard"><h4><span class="tag">B</span>No hub — actions distributed contextually</h4><p>No standalone destination. Talking points surface at the bottom of the category cards where they already live (just promoted, not hidden); news lives as its own top-level page; events get their own page. Each persona path ends in whichever action fits it.</p><p><b>Pro:</b> action stays attached to the context that motivates it (you just read about the criminal-code override → here's the talking point for it).<br><b>Con:</b> no single place to point a volunteer who wants "everything I can do" in one visit; harder to promote one link.</p></div>
+<div class="optioncard rec"><h4><span class="tag">Decided ✓</span>C — Hybrid: sitewide action affordance + a real hub</h4><p>Two things, not one: <b>(1)</b> a persistent, lightweight "Take Action" entry in the top nav on every page (not just the homepage) with a small dropdown/menu — Talking Points · Latest News · Actions &amp; Events — so it's never more than one click away from anywhere on the site, including mid-scroll on a category card. <b>(2)</b> a real hub page at that link's destination, organized as three clearly separated sections (not tabs merged into mush) so each keeps its own scan pattern: talking points as a browsable, filterable card grid; news as a reverse-chron feed; events as a simple upcoming/past list.</p><p>This gets you A's "one promotable URL" and B's "never buried" without picking one and losing the other. Category cards on the homepage/explainer path can <em>also</em> keep a contextual "Talking points for this →" link that deep-links into the hub's relevant filter — best of both without duplicating content.</p></div>
+
+<h2 class="sec"><span class="num">06</span>Action inventory: what changes for each</h2>
+<h3 class="sub">Talking points / elevator pitches</h3>
+<p><span class="pill">today</span> Buried 3 levels deep in a modal inside an expandable category card; audience toggle (allies/persuadable) and length (one-liner/pitch/full argument) are both hidden until opened.</p>
+<p><span class="pill">proposed</span> Promote to a first-class, filterable card grid on the action hub: filter chips for category (traffic, budget, healthcare…) and audience, each card shows the one-liner up front with copy/share buttons visible without a second click — no modal-behind-a-modal. Category cards on the explainer path keep a one-line contextual pointer into this same content, so the connection isn't lost.</p>
+<h3 class="sub">Latest statehood news</h3>
+<p><span class="pill">today</span> "Recent Activity" + news feed only exist inside the Bill Tracker, above the fold of a 96-bill filterable list.</p>
+<p><span class="pill">proposed</span> Cull into its own lightweight feed on the hub — just headlines, dates, one-line context, and a link out to the relevant bill or source. No filters, no categories to parse — built for a 30-second skim, not research.</p>
+<h3 class="sub">Actions &amp; events</h3>
+<p><span class="pill">today</span> Doesn't exist yet.</p>
+<p><span class="pill">proposed</span> Upcoming-events list, sourced from partner orgs rather than events we run ourselves — this makes "credit the movement" (§9) structural, not an afterthought: every listing names and links to the hosting org.</p>
+<table class="grid"><tr><th>Event</th><th>When / where</th><th>Details</th></tr>
+<tr><td class="persona">"DC Statehood Now!" board game session</td><td>Sat, July 25, 2026, 2–4pm ET — 2475 Virginia Ave NW, Washington, DC</td><td>Play a board game that walks players through the real legislative path to statehood — setbacks and progress included. RSVP required.</td></tr>
+<tr><td class="persona">"DC Statehood Now!" board game session</td><td>Sat, Aug 29, 2026, 2–4pm ET — 2475 Virginia Ave NW, Washington, DC</td><td>Second session of the same game, additional date/capacity.</td></tr>
+</table>
+<div class="callout"><b>Hosted by:</b> League of Women Voters of the District of Columbia (lwvdc.org) — credit and RSVP link go to LWVDC's own event page, not a RepresentDC-run signup. <b>Dated per guardrail §9:</b> both sessions are one-time dates; this listing needs a visible "past event, check LWVDC for new sessions" state once each date passes — don't let a stale July listing sit on the page in September.</div>
+
+<h3 class="sub">The empty state (when there's nothing scheduled)</h3>
+<p>Public statehood events aren't constant, and the pattern across partner sites (LWVDC's own calendar included) is a bare "no events found" — a dead end that undercuts the "momentum, not a pipe dream" framing from STRATEGY.md §5. Proposed alternative: never show a blank state. When no events are listed, the same slot instead surfaces one of two positive redirects:</p>
+<ul>
+<li><b>Meet the movement</b> — a stakeholder map / key-partners list (content you'll provide) introducing the orgs already doing this work, so a visitor still leaves with something concrete instead of "check back later."</li>
+<li><b>Something to do right now</b> — a direct link back to the Take Action hub (talking points, news) so the moment isn't wasted even without an event to plug into.</li>
+</ul>
+<p>Both keep the empty slot "in motion" rather than reading as abandonment — small thing, but consistent with not looking like every other statehood site's dead calendar page.</p>
+
+<h3 class="sub">The "meet the movement" stakeholder map</h3>
+<p>"Who's actually working on this?" is one of the most common questions a curious or activist visitor will have — and it's genuinely hard to answer well. There isn't one org, there's a layered coalition: a small set of core groups doing the day-to-day organizing and policy work, sitting inside a much wider coalition (100+ organizations have co-signed statehood letters to Congress at once). Trying to render all of it as one flat map would be unreadable and would misrepresent the structure.</p>
+<p>Proposed two-tier treatment:</p>
+<div class="optioncard"><h4><span class="tag">Tier 1</span>Core groups (the map itself)</h4><p>A small, labeled set — realistically 5–8 entries — each with a one-line "what they do" so a visitor understands the division of labor, not just a logo wall. Named orgs to seed this with:</p>
+<ul>
+<li><b>DC Vote</b> — voting-rights research &amp; advocacy org; source for the myths content in §7</li>
+<li><b>League of Women Voters of DC</b> — nonpartisan civic org; hosts the statehood-game events in this section</li>
+<li><b>Free DC</b> — home-rule &amp; anti-interference advocacy</li>
+<li><b>DC Democratic Party Statehood Committee</b> — party-affiliated statehood organizing (flag per guardrail §7: label this one's party affiliation plainly and explicitly, since it's a fact about the org, not a RepresentDC stance)</li>
+<li><b>Neighbors United for DC Statehood</b> — grassroots/neighborhood organizing; source for FAQ content in §7</li>
+<li><b>DC Statehood Pledge</b> — candidate accountability tool (related to RepresentDC's own candidate/pledge product — worth a direct cross-link)</li>
+<li><b>Students for DC Statehood</b> — student organizing</li>
+<li><b>New Columbia Statehood Commission</b> — official D.C. government body created to advance statehood</li>
+</ul>
+</div>
+<div class="optioncard"><h4><span class="tag">Tier 2</span>The wider coalition</h4><p><b>Together for DC</b> is the connective coalition layer — its steering committee alone lists 16 organizations (Center for Economic Democracy, DC Appleseed, DC Fiscal Policy Institute, DC Jobs With Justice, DC Justice Lab, DC Chapter NOW, Fair Budget Coalition, Miriam's Kitchen, National LGBTQ Task Force, Public Citizen, SPACEs in Action, Taskforce for Democracy, and others, alongside several Tier-1 orgs above). Rather than reproduce that whole list on our map (it will grow and go stale), Tier 2 should be a short "and a growing coalition of 100+ organizations" line that credits and links directly to Together for DC's own coalition page as the living source of truth.</p></div>
+<div class="callout">Placeholder for now per your note — the visual map itself (layout, relationship lines/grouping, iconography) is a design task once this content is confirmed. <b>Source/credit per guardrail §9:</b> Tier 1 org descriptions should link to each org's own site; Tier 2 list sourced from Together for DC's "About Us" / steering-committee page, dated to when we last checked it (org lists shift).</div>
+
+<h2 class="sec"><span class="num">07</span>Statehood-questioning path: myths &amp; FAQ</h2>
+<p>Real source material is in hand from two established movement organizations. Per the credit-and-source guardrail (§9), every myth on this page should carry a visible attribution + source link back to the originating org — we're not the source, we're relaying vetted material. Proposed structure below: one myth per row, plain-language rebuttal up front, source cited, individually deep-linkable.</p>
+<h3 class="sub">From DC Vote — "Six Popular Myths about the District of Columbia"</h3>
+<table class="grid"><tr><th>Myth</th><th>The rebuttal</th></tr>
+<tr><td class="persona">"Most D.C. residents work for the government or military"</td><td>Federal workers are a small slice of the population — D.C. is home to roughly 660,000 people of all occupations, most of whom have lived there 20+ years, across 120 distinct neighborhoods.</td></tr>
+<tr><td class="persona">"D.C. doesn't pay U.S. taxes but gets lots of federal money"</td><td>D.C. residents pay federal income tax at the highest per-capita rate in the country, plus local "statelike" taxes that Congress must approve. Eight states receive more federal funding as a share of their budget than D.C. does.</td></tr>
+<tr><td class="persona">"D.C. residents have the same rights as other Americans"</td><td>They pay federal taxes, serve in the military, and sit on federal juries — but have no voting representation in Congress, and Congress must approve every local law and budget, unlike any state.</td></tr>
+<tr><td class="persona">"Proximity to the Capitol gives D.C. residents influence"</td><td>Proximity isn't access — most members of Congress know their own home districts, not local D.C. issues.</td></tr>
+<tr><td class="persona">"D.C. is too small to have representation"</td><td>D.C. is 63 square miles with a larger population than Wyoming or Vermont — and every state gets equal Senate representation regardless of size.</td></tr>
+<tr><td class="persona">"D.C. is treated differently because it belongs to all Americans"</td><td>The National Mall/federal core is a small part of the District; the rest is 120 neighborhoods tourists never see. Eight states have a higher share of federal land ownership than D.C. does.</td></tr>
+</table>
+<div class="callout"><b>Source:</b> DC Vote, "Six Popular Myths about the District of Columbia." <b>Flag per guardrail §9:</b> the population figure (~660,000) and per-capita tax claims read as dated — confirm current figures before publishing (D.C.'s 2026 population and current per-capita tax-rate rankings) and date-stamp this section.</div>
+
+<h3 class="sub">From Neighbors United for DC Statehood (the51st.org) — FAQ selections</h3>
+<table class="grid"><tr><th>Question</th><th>The answer</th></tr>
+<tr><td class="persona">Isn't D.C. statehood unconstitutional?</td><td>No — the Constitution sets an upper size limit on the federal district (100 sq. mi.) but no lower limit, and doesn't fix its location. A shrunken federal district (Mall, Capitol, White House, military sites) could remain while the rest becomes a state.</td></tr>
+<tr><td class="persona">Isn't D.C. too small / too subsidized to be a state?</td><td>D.C. has more residents than Wyoming or Vermont and pays more federal tax than 22 states, by this source's figures. Roughly a quarter of its budget comes from federal funds — on par with or less than several states.</td></tr>
+<tr><td class="persona">Do D.C. residents actually want statehood?</td><td>86% of D.C. voters approved a 2016 statehood referendum, which also set the state's proposed name, borders, and constitution.</td></tr>
+<tr><td class="persona">Is statehood actually achievable, or just a slogan?</td><td>The U.S. has admitted a new state 37 times since the original 13 — a plain congressional majority vote plus a presidential signature, no constitutional amendment required.</td></tr>
+</table>
+<div class="callout"><b>Source:</b> Neighbors United for DC Statehood, <span class="pill">the51st.org/faqs</span>. <b>Flag per guardrail §9:</b> some cited figures there (federal-funds comparisons) trace to 2008 Census data — re-verify against current numbers before reuse, and date both the claim and the "last verified" check.</div>
+<div class="callout red"><b>Reminder per guardrail §7 (no party affiliation):</b> this source's FAQ includes a line naming a specific political figure's criminal conviction as a corruption comparison. That's off-voice for RepresentDC regardless of source — leave it out, or reframe generically (e.g. "corruption exists at every level of government, in every state") the way DC Vote's material does.</div>
+<div class="callout">Open input still needed: rough shape for "actions &amp; events" (do you have real upcoming events yet, or is this aspirational for now?).</div>
+
+<h2 class="sec"><span class="num">08</span>Proposed site map</h2>
+<div class="diagram">
+<div class="d-row"><div class="d-box">Homepage — hero + persona picker + full explainer narrative</div></div>
+<div class="d-row">
+<div class="d-box small">Explainer<br>(persona 1, default)</div>
+<div class="d-box small">News + ways to help<br>(persona 2)</div>
+<div class="d-box small">Myths &amp; FAQ<br>(persona 3)</div>
+<div class="d-box small action">Action Hub<br>(persona 4)</div>
+</div>
+<div class="d-row"><div class="d-box action" style="margin-top:4px">Take Action — nav item on every page → Talking Points · News · Events</div></div>
+<div class="d-row"><div class="d-box small">Bill Tracker (existing, unchanged surface)</div><div class="d-box small">Candidate Pledge (existing, unchanged surface)</div></div>
+</div>
+
+<h2 class="sec"><span class="num">09</span>Sitewide guardrails</h2>
+<p class="lead">Cross-cutting rules that apply to every page and persona path, not just this redesign — worth baking into how we write and build going forward:</p>
+<table class="grid"><tr><th>Guardrail</th><th>What it means in practice</th></tr>
+<tr><td class="persona">Credit the movement</td><td>Openly and frequently credit other statehood organizations, researchers, and advocates whose work we reference or build on — never present others' arguments or research as originating with RepresentDC. Applies to talking points, hypocrisy research, myths content, and news items alike.</td></tr>
+<tr><td class="persona">Source everything</td><td>Every factual claim gets a visible, clickable source — not just in the internal framing-guide doc, but surfaced to visitors (a link or footnote, not just an internal citation). This is what makes the "persuadables" data-driven approach credible instead of assertion.</td></tr>
+<tr><td class="persona">Date time-sensitive material</td><td>Anything that can go stale — bill statuses, "as of" stats, news items, event listings, even talking points tied to a specific hearing or vote — carries a visible date. A talking point copied from a 2025 hearing without a date reads as current and can misinform.</td></tr>
+<tr><td class="persona">Match tone to the page's audience</td><td>Reconfirms §3/§7: the explainer path, activist hub, and questioning-persona FAQ are allowed different registers (patient/efficient/clipped) — but all stay within the non-partisan, evidence-first voice. Check tone deliberately per page, not just per persona.</td></tr>
+<tr><td class="persona">Don't assume prior knowledge</td><td>Many visitors are from outside D.C. and won't know things D.C. residents take for granted (what home rule is, that D.C. isn't a state, that residents pay federal taxes). Never reference local context (a neighborhood, a local official, "the Council") without a one-line gloss — this is squarely the "New to D.C." persona's whole reason for existing, but it should hold on every path.</td></tr>
+<tr><td class="persona">Differentiate with surprise, not just more content</td><td>The statehood-explainer space is crowded. Look for chances to add graphics, interactive bits, and light wit instead of another wall of text — e.g. a mythbusting quiz/game for the questioning persona, a "compare D.C. to your state" calculator, or surprising trivia (historical Republican supporters of D.C. statehood, past bipartisan votes). Not required on every page, but should be a real design goal, especially on the questioning and curious paths where a plain FAQ risks blending into every other advocacy site.</td></tr>
+<tr><td class="persona">No party affiliation, ever, unless the content itself requires it</td><td>Reconfirms existing STRATEGY.md rule sitewide: never imply RepresentDC favors a party. The one carved-out exception is the candidate/statehood pledge tool, where a candidate's own party is shown as a neutral data badge because it's a fact about the candidate, not a stance we're taking.</td></tr>
+</table>
+
+<h2 class="sec"><span class="num">10</span>Next steps</h2>
+<ul class="checklist">
+<li><s>Myths/FAQ content</s> — in hand from DC Vote + Neighbors United for DC Statehood (§7)</li>
+<li><s>Take Action IA</s> — option C decided (§5): sitewide nav entry + dedicated hub</li>
+<li><s>Actions/events</s> — real content in hand: LWVDC statehood-game sessions (§6), plus a "never blank" empty state</li>
+<li><s>Stakeholder map content</s> — core-org list in hand (§6); visual map layout still to be designed</li>
+<li>Flag any other specific credit/sourcing you already owe (orgs, researchers) so it's not missed at build time</li>
+<li>Move to visual design: homepage hero + persona picker, then the action hub (talking points grid, news feed, events list)</li>
+</ul>
+</x-import>
+</x-dc>
+</body>
+</html>
