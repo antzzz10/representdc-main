@@ -3,8 +3,8 @@
 }
 
 .talking-points-toggle {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--navy);
+  color: var(--white);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -37,7 +37,7 @@
 }
 
 .talking-points-content {
-  background: white;
+  background: var(--white);
   border-radius: 12px;
   max-width: 800px;
   width: 100%;
@@ -51,17 +51,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--line);
   position: sticky;
   top: 0;
-  background: white;
+  background: var(--white);
   z-index: 10;
 }
 
 .talking-points-header h3 {
   margin: 0;
   font-size: 1.5rem;
-  color: #333;
+  color: var(--ink);
 }
 
 .talking-points-close {
@@ -69,22 +69,22 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+  color: var(--slate-500);
   padding: 0.25rem 0.5rem;
   line-height: 1;
   transition: color 0.2s ease;
 }
 
 .talking-points-close:hover {
-  color: #dc143c;
+  color: var(--dc-red);
 }
 
 .audience-tabs {
   display: flex;
   gap: 0;
   padding: 0 1.5rem;
-  background: #f5f5f5;
-  border-bottom: 2px solid #e0e0e0;
+  background: var(--paper);
+  border-bottom: 2px solid var(--line);
   position: sticky;
   top: 73px;
   z-index: 9;
@@ -98,20 +98,20 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  color: #666;
+  color: var(--slate-500);
   border-bottom: 3px solid transparent;
   transition: all 0.2s ease;
 }
 
 .audience-tab:hover {
   background: rgba(0, 0, 0, 0.03);
-  color: #333;
+  color: var(--ink);
 }
 
 .audience-tab.active {
-  color: #667eea;
-  border-bottom-color: #667eea;
-  background: white;
+  color: var(--navy);
+  border-bottom-color: var(--navy);
+  background: var(--white);
 }
 
 .talking-points-list {
@@ -119,8 +119,8 @@
 }
 
 .talking-point-item {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -137,7 +137,7 @@
 .talking-point-header h4 {
   margin: 0 0 0.25rem 0;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -145,28 +145,28 @@
 
 .char-count {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--slate-400);
   font-weight: normal;
 }
 
 .usage-hint {
   margin: 0;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--slate-500);
   font-style: italic;
 }
 
 .talking-point-text {
   margin: 0 0 1rem 0;
   line-height: 1.6;
-  color: #333;
+  color: var(--ink);
   font-size: 0.95rem;
 }
 
 .talking-point-text a,
 .hypocrisy-point a,
 .hypocrisy-examples a {
-  color: #667eea;
+  color: var(--navy);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
@@ -174,7 +174,7 @@
 .talking-point-text a:hover,
 .hypocrisy-point a:hover,
 .hypocrisy-examples a:hover {
-  color: #764ba2;
+  color: var(--navy-600);
 }
 
 .talking-point-actions {
@@ -184,9 +184,9 @@
 
 .action-button {
   padding: 0.5rem 1rem;
-  border: 1px solid #667eea;
-  background: white;
-  color: #667eea;
+  border: 1px solid var(--navy);
+  background: var(--white);
+  color: var(--navy);
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -195,14 +195,14 @@
 }
 
 .action-button:hover {
-  background: #667eea;
-  color: white;
+  background: var(--navy);
+  color: var(--white);
 }
 
 .hypocrisy-section {
-  background: #fff9e6;
-  border: 2px solid #ffd700;
-  border-radius: 8px;
+  background: var(--dc-red-tint);
+  border-left: 4px solid var(--dc-red);
+  border-radius: 0 8px 8px 0;
   padding: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -210,18 +210,18 @@
 .hypocrisy-section h4 {
   margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--ink);
 }
 
 .hypocrisy-intro {
   margin: 0 0 1rem 0;
   font-size: 0.95rem;
-  color: #666;
+  color: var(--slate-500);
   font-weight: 600;
 }
 
 .hypocrisy-item {
-  background: white;
+  background: var(--white);
   border-radius: 6px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -234,14 +234,14 @@
 .hypocrisy-point {
   margin: 0 0 0.5rem 0;
   font-weight: 600;
-  color: #333;
+  color: var(--ink);
   line-height: 1.5;
 }
 
 .hypocrisy-examples {
   margin: 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--slate-500);
   line-height: 1.4;
 }
 

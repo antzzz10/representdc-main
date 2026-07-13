@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './TalkingPoints.css'
 
-function TalkingPoints({ categoryId, talkingPoints }) {
+function TalkingPoints({ talkingPoints }) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeAudience, setActiveAudience] = useState('allies')
   const [copiedText, setCopiedText] = useState(null)
@@ -10,10 +10,21 @@ function TalkingPoints({ categoryId, talkingPoints }) {
     return null
   }
 
-  // Convert markdown links [text](url) to HTML <a> tags
+  // Convert markdown links [text](url) to React elements (no dangerouslySetInnerHTML)
   const renderMarkdownLinks = (text) => {
-    const html = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    return { __html: html }
+    const parts = text.split(/(\[[^\]]+\]\([^)]+\))/)
+    return parts.map((part, i) => {
+      const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+      if (match) {
+        const [, linkText, url] = match
+        // Only allow http/https URLs
+        if (/^https?:\/\//.test(url)) {
+          return <a key={i} href={url} target="_blank" rel="noopener noreferrer">{linkText}</a>
+        }
+        return <span key={i}>{linkText}</span>
+      }
+      return part
+    })
   }
 
   const copyToClipboard = async (text, label) => {
@@ -31,7 +42,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
     if (navigator.share) {
       navigator.share({
         text: text
-      }).catch(err => {
+      }).catch(() => {
         // If share fails, fall back to copy
         copyToClipboard(text, 'shared')
       })
@@ -86,7 +97,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>📱 One-Liner <span className="char-count">({currentPoints.oneLiner.length} chars)</span></h4>
                   <p className="usage-hint">Perfect for social media posts</p>
                 </div>
-                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.oneLiner)} />
+                <p className="talking-point-text">{renderMarkdownLinks(currentPoints.oneLiner)}</p>
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.oneLiner, 'oneLiner')}
@@ -108,7 +119,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>🗣️ Elevator Pitch</h4>
                   <p className="usage-hint">For conversations and longer posts</p>
                 </div>
-                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.elevatorPitch)} />
+                <p className="talking-point-text">{renderMarkdownLinks(currentPoints.elevatorPitch)}</p>
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.elevatorPitch, 'elevatorPitch')}
@@ -130,7 +141,7 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <h4>📄 Full Argument</h4>
                   <p className="usage-hint">Detailed version with complete context</p>
                 </div>
-                <p className="talking-point-text" dangerouslySetInnerHTML={renderMarkdownLinks(currentPoints.fullArgument)} />
+                <p className="talking-point-text">{renderMarkdownLinks(currentPoints.fullArgument)}</p>
                 <div className="talking-point-actions">
                   <button
                     onClick={() => copyToClipboard(currentPoints.fullArgument, 'fullArgument')}
@@ -147,9 +158,9 @@ function TalkingPoints({ categoryId, talkingPoints }) {
                   <p className="hypocrisy-intro">Use these to counter opposition:</p>
                   {talkingPoints.hypocrisy.map((item, index) => (
                     <div key={index} className="hypocrisy-item">
-                      <p className="hypocrisy-point" dangerouslySetInnerHTML={renderMarkdownLinks(item.point)} />
+                      <p className="hypocrisy-point">{renderMarkdownLinks(item.point)}</p>
                       {item.examples && (
-                        <p className="hypocrisy-examples"><em dangerouslySetInnerHTML={renderMarkdownLinks(item.examples)} /></p>
+                        <p className="hypocrisy-examples"><em>{renderMarkdownLinks(item.examples)}</em></p>
                       )}
                     </div>
                   ))}

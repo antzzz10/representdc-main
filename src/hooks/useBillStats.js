@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react'
  */
 export function useBillStats() {
   const [stats, setStats] = useState({
-    totalBills: 71,
-    pendingBills: 69,
-    passedBills: 2,
-    lastUpdated: '2025-11-22',
+    totalBills: 74,
+    pendingBills: 61,
+    passedBills: 13,
+    lastUpdated: '2026-01-20',
     loading: true,
     error: null
   })

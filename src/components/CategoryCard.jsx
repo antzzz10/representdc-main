@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './CategoryCard.css'
 import TalkingPoints from './TalkingPoints'
+import Icon from './Icon'
 import { talkingPoints } from '../data/talkingPoints'
 
 /**
@@ -18,7 +19,7 @@ function CategoryCard({ category }) {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="category-header-content">
-          <span className="category-icon">{category.icon}</span>
+          <span className="category-icon"><Icon name={category.icon} size={24} /></span>
           <div className="category-header-text">
             <h3>{category.title}</h3>
             <p className="category-summary">{category.summary}</p>
@@ -29,7 +30,7 @@ function CategoryCard({ category }) {
           aria-label={isExpanded ? 'Collapse' : 'Expand'}
           aria-expanded={isExpanded}
         >
-          {isExpanded ? '−' : '+'}
+          <Icon name={isExpanded ? 'minus' : 'plus'} size={18} />
         </button>
       </div>
 
@@ -54,7 +55,7 @@ function CategoryCard({ category }) {
               className="view-all-link"
               onClick={(e) => e.stopPropagation()}
             >
-              See all current {category.title.toLowerCase()} bills in tracker →
+              See all current {category.title.toLowerCase()} bills in tracker <Icon name="arrow-right" size={15} />
             </a>
           </div>
         </div>

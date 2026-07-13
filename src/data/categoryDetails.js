@@ -6,7 +6,7 @@
 export const categoryDetails = [
   {
     id: 'criminal-justice',
-    icon: '⚖️',
+    icon: 'scale',
     title: 'Criminal Justice Reform',
     summary: 'Local police accountability measures blocked or restricted',
     billTrackerCategory: 'crime',
@@ -18,7 +18,7 @@ DC's incarceration rate is the highest in the nation, driven partly by congressi
   },
   {
     id: 'healthcare',
-    icon: '🏥',
+    icon: 'heart-pulse',
     title: 'Healthcare Decisions',
     summary: 'Abortion access, death with dignity, and insurance regulations overturned',
     billTrackerCategory: 'health',
@@ -30,7 +30,7 @@ DC residents face unique healthcare restrictions that exist nowhere else in Amer
   },
   {
     id: 'voting',
-    icon: '🗳️',
+    icon: 'vote',
     title: 'Voting Rights',
     summary: 'Local voting laws and electoral reforms challenged',
     billTrackerCategory: 'elections',
@@ -42,35 +42,35 @@ Congress claims the power to decide who can vote in DC's local elections while d
   },
   {
     id: 'traffic',
-    icon: '🚦',
+    icon: 'car-front',
     title: 'Traffic Safety',
-    summary: 'Even traffic cameras and turn-on-red laws targeted by Congress',
+    summary: 'Traffic cameras and turn-on-red laws targeted by both Congress and the executive branch',
     billTrackerCategory: 'transportation',
-    description: `Congressional interference in DC's traffic laws reached absurd levels in recent years, with members of Congress micromanaging everything from speed cameras to right-turn rules. Despite DC experiencing traffic violence at rates far exceeding most jurisdictions, Congress has blocked the city's Vision Zero safety initiatives based on complaints from suburban commuters who don't live in the city.
+    description: `Congressional interference in DC's traffic laws reached absurd levels in recent years, with members of Congress micromanaging everything from speed cameras to right-turn rules. Despite DC experiencing traffic violence at rates far exceeding most jurisdictions, Congress and the executive branch are working to dismantle the city's Vision Zero safety initiatives based on complaints from suburban commuters who don't live in the city.
 
-One egregious example: In 2023-2024, House Republicans held multiple hearings focused specifically on DC's traffic cameras and right-on-red ban, with one congressman calling automated enforcement "tyranny." The 2025 appropriations bill included riders blocking funding for traffic safety cameras—despite data showing cameras reduce speeding by 70% and cut fatal crashes by 30% near schools.
+Most egregious recent actions: In September 2025, the House passed H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate all 547 of DC's automated traffic enforcement cameras. These cameras generated $267 million in revenue in FY2025—funds used for local services—and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating DC's traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.
 
-DC has one of the highest pedestrian fatality rates among major cities. Congress is blocking proven safety measures to protect drivers passing through from other states, prioritizing convenience over DC residents' lives.`
+The dual attack from both Congress and the executive branch demonstrates extraordinary federal overreach into local traffic safety policy. DC has one of the highest pedestrian fatality rates among major cities, yet studies show automated cameras reduce speeding by 70% and cut fatal crashes by 30% near schools. Congress and DOT are blocking proven safety measures to protect drivers passing through from other states, prioritizing convenience over DC residents' lives.`
   },
   {
     id: 'budget',
-    icon: '💰',
+    icon: 'banknote',
     title: 'Local Budget',
     summary: '$1+ billion cut from D.C.\'s locally-funded budget',
     billTrackerCategory: 'budget',
     description: `For decades, DC has been denied control over its own locally-raised tax dollars—the only city in America whose budget requires Congressional approval under the Home Rule Act. This fundamental restriction has led to repeated crises, shutdowns, and forced spending cuts.
 
-One egregious example: In March 2025, House Republicans passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a roughly 16 percent hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
+One egregious example: In March 2025, the House passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a roughly 16 percent hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
 
 The $1.1 billion gap requires cutting 16% of planned spending—money from DC residents and businesses, not federal aid. This generates no savings for the federal government while restricting what DC can do with its own tax dollars. To avoid mass layoffs, Mayor Bowser imposed hiring freezes, suspended raises and overtime, and targeted contracts for cuts affecting schools, public safety, and human services.
 
-The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore DC's authority, and President Trump publicly urged the House to approve it. As of fall 2025, House leaders have repeatedly declined to bring the fix to a vote. Because the city must balance its budget over four years, the withheld $1.1 billion will count as surplus and be locked into reserves if not spent, further limiting flexibility.
+The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore DC's authority, and the White House publicly urged the House to approve it. As of fall 2025, House leaders have repeatedly declined to bring the fix to a vote. Because the city must balance its budget over four years, the withheld $1.1 billion will count as surplus and be locked into reserves if not spent, further limiting flexibility.
 
 DC taxpayers pay more federal taxes per capita than any state, yet Congress treats DC's local budget as a political football, forcing spending decisions that override local priorities and democratic accountability.`
   },
   {
     id: 'marijuana',
-    icon: '🌱',
+    icon: 'leaf',
     title: 'Marijuana Policy',
     summary: 'Recreational marijuana commercialization blocked despite voter approval',
     billTrackerCategory: 'cannabis',
@@ -82,7 +82,7 @@ DC is the only jurisdiction where Congress has overridden voter-approved marijua
   },
   {
     id: 'civic-spaces',
-    icon: '🏛️',
+    icon: 'landmark',
     title: 'Civic Spaces & Local Autonomy',
     summary: 'Congress renames DC streets and plazas to override local values and decisions',
     billTrackerCategory: 'civic-spaces',
