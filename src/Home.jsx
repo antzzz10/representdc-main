@@ -41,7 +41,7 @@ function Home() {
       </section>
 
       {/* Problem Statement - Concrete Facts */}
-      <section className="facts-section" id="explainer">
+      <section className="facts-section" id="facts">
         <div className="container">
           <h2 className="section-title">The reality for 700,000 Americans</h2>
           <div className="facts-grid">
@@ -105,6 +105,58 @@ function Home() {
               <span className="plink">Open the action hub <Icon name="arrow-right" size={15} /></span>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Explainer - the "New to D.C." landing point: what home rule actually means */}
+      <section className="explainer-section" id="explainer">
+        <div className="container">
+          <h2 className="section-title">How Congress controls D.C.</h2>
+          <p className="section-intro">
+            "Home rule" sounds like self-government. Here's what it actually means—and where it stops.
+          </p>
+          <div className="explainer-steps">
+            <div className="explainer-step">
+              <span className="step-num">1</span>
+              <div>
+                <h3>1973: D.C. gets limited home rule</h3>
+                <p>
+                  Congress passed the{' '}
+                  <a href="https://dccouncil.gov/dc-home-rule/" target="_blank" rel="noopener noreferrer">
+                    Home Rule Act
+                  </a>
+                  , ratified by District voters, letting D.C. elect its own mayor and council with the
+                  authority to pass local laws and approve the District's budget.
+                </p>
+              </div>
+            </div>
+            <div className="explainer-step">
+              <span className="step-num">2</span>
+              <div>
+                <h3>Congress keeps the final say</h3>
+                <p>
+                  Every law the D.C. Council passes goes to Congress for review before it can take
+                  effect—and Congress retains authority over the District's budget. That standing
+                  authority is why {totalBills} bills to override local D.C. decisions can move through
+                  Congress today.
+                </p>
+              </div>
+            </div>
+            <div className="explainer-step">
+              <span className="step-num">3</span>
+              <div>
+                <h3>No vote, no recourse</h3>
+                <p>
+                  D.C. residents have no senators and no voting House member—so they can't vote out
+                  the members of Congress who overturn their laws.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="explainer-next">
+            Want the specifics? <Link to="/the-case">See what Congress has blocked</Link>—category by
+            category, with sources.
+          </p>
         </div>
       </section>
 
