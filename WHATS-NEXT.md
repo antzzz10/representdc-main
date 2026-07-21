@@ -47,9 +47,12 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
 - ~~Take Action Hub coming-soon page~~ ✅ done — `src/TakeAction.jsx`, previews the
   three real content ideas (Congressional outreach toolkit, state-level advocacy, "No
   donation without representation")
-- `src/StatehoodCurious.jsx` is a **stub only** — bare page-hero, no content yet. Full
-  build (hybrid case-for-statehood copy, ported news section, stakeholder org list,
-  eval pipeline) is the next chunk of Phase 4 work.
+- `src/StatehoodCurious.jsx` is an **interim coming-soon page** (previews + live links;
+  upgraded from bare stub 2026-07-14). Full build (hybrid case-for-statehood copy,
+  ported news section, stakeholder org list, eval pipeline) is the next chunk of
+  Phase 4 work. Flow fixes + approved segment mapping: see
+  `decisions/2026-07-14-persona-flow-fixes.md` and
+  `decisions/2026-07-20-segment-mapping.md`.
 - Build the **Statehood-curious** destination page: hybrid case-for-statehood copy
   (reuse already-sourced claims from Values/Solution/Myths rather than write new ones),
   the ported news section (cross-repo fetch of dc-bills-tracker's `news.json`, not a
