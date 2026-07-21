@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
@@ -42,6 +43,18 @@ function TakeAction() {
                 <p>{p.body}</p>
               </div>
             ))}
+          </div>
+          {/* Activists shouldn't wait — talking points already exist on The Case */}
+          <div className="interim-links">
+            <p>In the meantime, the talking points are already live:</p>
+            <div className="interim-row">
+              <Link className="cta-secondary" to="/the-case">
+                <span>Talking points on The Case</span> <Icon name="arrow-right" />
+              </Link>
+              <a className="cta-secondary" href="https://billtracker.representdc.org">
+                <span>Track the live bills</span> <Icon name="arrow-right" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

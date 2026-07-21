@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import Icon from './components/Icon'
 import './MythsAndFaq.css'
 
 const MYTHS = [
@@ -127,6 +128,15 @@ function MythsAndFaq() {
             <strong>A note on tone:</strong> this page deliberately leaves out one comparison from the original FAQ
             that named a specific political figure's criminal conviction—that framing is off-voice for a non-partisan
             resource regardless of source.
+          </div>
+          {/* Bridge for warming skeptics — per 2026-07-20 segment mapping */}
+          <div className="interim-links">
+            <p>Seen the claims—now see the record:</p>
+            <div className="interim-row">
+              <Link className="cta-secondary" to="/the-case">
+                <span>What Congress has actually blocked</span> <Icon name="arrow-right" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
