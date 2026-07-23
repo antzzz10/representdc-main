@@ -53,11 +53,16 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   Phase 4 work. Flow fixes + approved segment mapping: see
   `decisions/2026-07-14-persona-flow-fixes.md` and
   `decisions/2026-07-20-segment-mapping.md`.
+- ~~News piece, tried standalone first~~ ✅ done (2026-07-23) — `src/News.jsx` at
+  `/news`, live-fetches dc-bills-tracker's public `news.json` (CORS-open, no new
+  pipeline). Unlinked from nav/picker on purpose — it's a trial to evaluate before
+  deciding whether it earns a permanent spot, or whether `/statehood-curious`
+  eventually embeds/links to it instead of building its own news section. See
+  `decisions/2026-07-23-standalone-news-page.md`.
 - Build the **Statehood-curious** destination page: hybrid case-for-statehood copy
   (reuse already-sourced claims from Values/Solution/Myths rather than write new ones),
-  the ported news section (cross-repo fetch of dc-bills-tracker's `news.json`, not a
-  duplicate pipeline), and a pulled-forward static stakeholder org list (Tier 1/Tier 2
-  from the Action & Persona IA Brainstorm)
+  a stakeholder org list (Tier 1/Tier 2 from the Action & Persona IA Brainstorm), and a
+  decision on how the news piece above folds in — plus the eval pipeline below
 - Build the accuracy eval pipeline: a trusted-domain allowlist gate, then an
   LLM-assisted citation-support check for anything that passes it — reusable beyond
   this one page, flagged as this project's first real eval process
