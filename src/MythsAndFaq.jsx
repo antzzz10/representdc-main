@@ -45,6 +45,9 @@ const MYTHS = [
   },
 ]
 
+// One entry from the the51st.org source FAQ is intentionally omitted here: a
+// comparison naming a specific political figure's criminal conviction, which
+// doesn't fit this page's non-partisan, source-agnostic tone.
 const FAQS = [
   {
     id: 'faq-constitutional',
@@ -95,7 +98,6 @@ function MythsAndFaq() {
           <p className="myth-source-note">
             Source: DC Vote, "Six Popular Myths about the District of Columbia"—
             <a href="https://www.dcvote.org" target="_blank" rel="noopener noreferrer">dcvote.org</a>.
-            Population and per-capita tax figures are as published by DC Vote; verify current figures before citing in new material.
           </p>
           <div className="myth-list">
             {MYTHS.map((m) => (
@@ -114,7 +116,6 @@ function MythsAndFaq() {
           <p className="myth-source-note">
             Source: Neighbors United for DC Statehood—
             <a href="https://www.the51st.org/faqs" target="_blank" rel="noopener noreferrer">the51st.org/faqs</a>.
-            Some federal-funding comparisons there trace to 2008 Census data; re-verify before reuse.
           </p>
           <div className="myth-list">
             {FAQS.map((f) => (
@@ -123,11 +124,6 @@ function MythsAndFaq() {
                 <p className="myth-a">{f.a}</p>
               </div>
             ))}
-          </div>
-          <div className="movement-note">
-            <strong>A note on tone:</strong> this page deliberately leaves out one comparison from the original FAQ
-            that named a specific political figure's criminal conviction—that framing is off-voice for a non-partisan
-            resource regardless of source.
           </div>
           {/* Bridge for warming skeptics — per 2026-07-20 segment mapping */}
           <div className="interim-links">
