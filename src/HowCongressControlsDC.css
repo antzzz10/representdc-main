@@ -150,37 +150,6 @@
   font-weight: 600;
 }
 
-/* Aggregated sources, bottom of page */
-.sources-block {
-  max-width: 700px;
-  margin: var(--s-7) auto 0;
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
-  text-align: center;
-}
-
-.sources-block h4 {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--ls-label);
-  color: var(--slate-500);
-  margin: 0 0 var(--s-3);
-}
-
-.sources-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-1);
-  font-size: var(--fs-sm);
-  color: var(--slate-500);
-}
-
-.sources-list a {
-  color: var(--navy);
-  font-weight: 600;
-}
-
 @media (max-width: 700px) {
   .gov-chart {
     grid-template-columns: 1fr;

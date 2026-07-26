@@ -60,6 +60,12 @@ explicitly rather than letting the docs silently drift apart.
   data (fake sponsors, fake bill numbers, invented statistics) from design mocks or
   prototypes into production code — mockup filler must never look like real content.
 - Ask before adding any new statistical claim, bill status, or sponsor attribution.
+- **Aggregate sources at the bottom of a content page, not per-fact.** A citation next
+  to every individual claim reads as clutter and, worse, as an AI-authoring tell. Use
+  the shared `.sources-block`/`.sources-list` classes (`App.css`) for one consolidated
+  list at the end of the page instead. Established on `/how-congress-controls-dc`
+  (`decisions/2026-07-25-new-to-dc-dedicated-page.md`) and carried over to
+  `/myths-and-faq` (`decisions/2026-07-25-myths-faq-redesign.md`).
 
 ## Persuasion architecture (see `STRATEGY.md`)
 
