@@ -37,7 +37,7 @@ function StatehoodCurious() {
         <div className="container">
           <span className="eyebrow">Coming soon</span>
           <h1>Already know the problem?</h1>
-          <p>This page is under construction. Here's what's coming—and where to go in the meantime.</p>
+          <p>This page is under construction.</p>
         </div>
       </header>
       <section className="impact-section">
@@ -45,6 +45,7 @@ function StatehoodCurious() {
           <div className="preview-grid">
             {PREVIEWS.map((p) => (
               <div className="preview-card" key={p.title}>
+                <span className="card-badge">Coming soon</span>
                 <Icon name={p.icon} size={28} />
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>

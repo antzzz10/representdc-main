@@ -30,7 +30,7 @@ function TakeAction() {
         <div className="container">
           <span className="eyebrow">Coming soon</span>
           <h1>Take action hub</h1>
-          <p>Built for people who are already convinced and want to move fast. Here's what's coming.</p>
+          <p>Built for people who are already convinced and want to move fast.</p>
         </div>
       </header>
       <section className="impact-section">
@@ -38,6 +38,7 @@ function TakeAction() {
           <div className="preview-grid">
             {PREVIEWS.map((p) => (
               <div className="preview-card" key={p.title}>
+                <span className="card-badge">Coming soon</span>
                 <Icon name={p.icon} size={28} />
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>
