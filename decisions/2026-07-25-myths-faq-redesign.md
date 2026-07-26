@@ -75,3 +75,24 @@ use the identical pattern.
 - Verified with Playwright: 10 items render in one list/one section, AI-tell phrase
   confirmed absent, 6 fact chips present, the Myth 3 internal link navigates correctly,
   both desktop and 390px mobile renders checked.
+
+## Follow-up: myth vs. FAQ framing, and categorization
+
+Same day, same session. Asked to step back on whether myths and FAQs are meaningfully
+different content types, and to propose categorization for findability as the list
+grows.
+
+**Myth conversion — partial, not full.** Two of the four FAQs were already rhetorical
+objections in question form and converted cleanly to myth 7/8: "isn't D.C. statehood
+unconstitutional?" → *"D.C. statehood would be unconstitutional"*; "isn't D.C. too
+small or too subsidized?" → *"D.C. is too small and too subsidized to be a state."*
+The other two ("do residents want statehood," "is it achievable") were **left as
+questions** — converting them would have meant inventing a strawman claim
+("residents don't want it," "it's just a slogan") more combative than the source
+material actually supports, just to force uniformity. List is now 8 myths + 2 FAQs.
+
+**Categorization — held.** Proposed two options (by theme: money/who-lives-here/
+rights/federal-status/feasibility; by objection type: factual/fairness/legal/
+feasibility). Recommended "by theme" if/when built, but decided the 10-item flat list
+doesn't need it yet — revisit if the list heads toward 15–20+ items. Tracked as an
+open item in `WHATS-NEXT.md` rather than built now.

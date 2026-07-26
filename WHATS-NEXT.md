@@ -106,6 +106,12 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
 
 ## New since last update
 
+- **Myths & FAQ categorization:** the combined myth/FAQ list (8 myths + 2 FAQs as of
+  2026-07-25) is still a flat list — fine at this size, but revisit grouping if it
+  grows toward 15–20+ items. Two options already proposed and one recommended
+  (by theme: money/who-lives-here/rights/federal-status/feasibility) — see the
+  "Follow-up" section of `decisions/2026-07-25-myths-faq-redesign.md` before
+  re-deriving from scratch.
 - **Automated events sourcing:** need a way to automatically source and rotate through
   upcoming statehood-related events, ideally pulled from partner orgs' own listings
   rather than events RepresentDC runs itself. (The Action & Persona IA Brainstorm
