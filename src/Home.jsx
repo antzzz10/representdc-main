@@ -80,12 +80,12 @@ function Home() {
             </p>
           </div>
           <div className="persona-grid">
-            <a className="persona-card" href="#explainer">
+            <Link className="persona-card" to="/how-congress-controls-dc">
               <span className="picon"><Icon name="landmark" size={22} /></span>
               <h3>New to D.C.</h3>
               <p>Didn't know D.C. isn't a state? Start with the basics—what home rule means, and why Congress can overturn D.C.'s own laws.</p>
-              <span className="plink">Start the explainer <Icon name="arrow-down" size={15} /></span>
-            </a>
+              <span className="plink">Start the explainer <Icon name="arrow-right" size={15} /></span>
+            </Link>
             <Link className="persona-card" to="/statehood-curious">
               <span className="picon"><Icon name="rss" size={22} /></span>
               <h3>Statehood-curious</h3>

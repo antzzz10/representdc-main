@@ -5,6 +5,7 @@ import TheCase from './TheCase'
 import StatehoodCurious from './StatehoodCurious'
 import TakeAction from './TakeAction'
 import News from './News'
+import HowCongressControlsDC from './HowCongressControlsDC'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/statehood-curious" element={<StatehoodCurious />} />
       <Route path="/take-action" element={<TakeAction />} />
       <Route path="/news" element={<News />} />
+      <Route path="/how-congress-controls-dc" element={<HowCongressControlsDC />} />
     </Routes>
   )
 }
