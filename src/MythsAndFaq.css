@@ -93,40 +93,64 @@
   color: var(--navy);
 }
 
-/* Fact chip — a sourced stat paired with an individual myth/FAQ item */
-.myth-fact {
-  margin-top: var(--s-3);
-  padding: var(--s-3) var(--s-4);
+/* Myth/FAQ item body — two columns when a sourced fact is paired */
+.myth-item-body {
+  display: flex;
+  gap: var(--s-5);
+  align-items: center;
+}
+
+.myth-item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.myth-item-body.has-fact .myth-item-main {
+  flex: 1 1 auto;
+}
+
+/* Fact panel — a sourced stat in its own column, not run into the answer text */
+.myth-fact-panel {
+  flex: 0 0 168px;
   background: var(--surface-2);
   border-radius: var(--r-md);
+  padding: var(--s-3) var(--s-4);
+  text-align: center;
   display: flex;
-  align-items: center;
-  gap: var(--s-3);
+  flex-direction: column;
+  gap: 2px;
 }
 
 .myth-fact-value {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--navy);
+  line-height: 1.15;
   font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
-  white-space: nowrap;
 }
 
-.myth-fact-text {
-  font-size: var(--fs-sm);
-  color: var(--slate-700);
-  line-height: 1.5;
-}
-
-.myth-fact-text strong {
+.myth-fact-label {
+  font-size: 12px;
+  font-weight: 700;
   color: var(--ink);
+  line-height: 1.35;
 }
 
-@media (max-width: 480px) {
-  .myth-fact {
+.myth-fact-detail {
+  font-size: 11px;
+  color: var(--slate-500);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .myth-item-body {
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s-1);
+    align-items: stretch;
+  }
+
+  .myth-fact-panel {
+    flex-basis: auto;
+    text-align: left;
   }
 }

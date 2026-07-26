@@ -18,8 +18,8 @@ const ITEMS = [
     a: 'Federal workers are a small slice of the population—D.C. is home to roughly 660,000 people of all occupations, most of whom have lived there 20+ years, across 120 distinct neighborhoods.',
     fact: {
       value: '18%',
-      label: 'of employed D.C. residents work in public administration',
-      detail: 'Management, business, legal, and other occupations employ far more.',
+      label: 'work in public administration',
+      detail: 'Management, business, and legal roles employ far more.',
     },
   },
   {
@@ -31,7 +31,7 @@ const ITEMS = [
     fact: {
       value: 'Highest',
       label: 'per-capita federal tax rate in the U.S.',
-      detail: 'D.C. residents pay more per person than any state.',
+      detail: 'More than any of the 50 states.',
     },
   },
   {
@@ -52,7 +52,7 @@ const ITEMS = [
     fact: {
       value: '499',
       label: 'D.C. residents died in WWI service',
-      detail: 'Commemorated on the National Mall—for a war they had no vote to declare.',
+      detail: 'Commemorated on the National Mall.',
     },
   },
   {
@@ -82,8 +82,8 @@ const ITEMS = [
     a: 'The National Mall / federal core is a small part of the District; the rest is 120 neighborhoods tourists never see. Eight states have a higher share of federal land ownership than D.C. does.',
     fact: {
       value: '1 of 54',
-      label: "National Guard that reports to the President, not a governor",
-      detail: "D.C.'s Guard answers directly to the White House. Every state and territory's answers to its own governor.",
+      label: "National Guard that reports to the President",
+      detail: 'Every other state and territory\'s answers to its own governor instead.',
     },
   },
   {
@@ -152,8 +152,7 @@ function MythsAndFaq() {
       <header className="myth-hero">
         <div className="container">
           <span className="eyebrow">Statehood, questioned</span>
-          <h1>Straight answers to the most common doubts</h1>
-          <p>The claims skeptics raise most often, and what the record actually shows.</p>
+          <h1>Straight answers to statehood questions</h1>
         </div>
       </header>
 
@@ -166,19 +165,22 @@ function MythsAndFaq() {
                 id={item.id}
                 key={item.id}
               >
-                <p className="myth-q">
-                  <span className="qtag">{item.tag}</span>
-                  {item.q}
-                </p>
-                <p className="myth-a">{item.a}</p>
-                {item.fact && (
-                  <div className="myth-fact">
-                    <span className="myth-fact-value">{item.fact.value}</span>
-                    <span className="myth-fact-text">
-                      <strong>{item.fact.label}</strong> {item.fact.detail}
-                    </span>
+                <div className={`myth-item-body${item.fact ? ' has-fact' : ''}`}>
+                  <div className="myth-item-main">
+                    <p className="myth-q">
+                      <span className="qtag">{item.tag}</span>
+                      {item.q}
+                    </p>
+                    <p className="myth-a">{item.a}</p>
                   </div>
-                )}
+                  {item.fact && (
+                    <div className="myth-fact-panel">
+                      <span className="myth-fact-value">{item.fact.value}</span>
+                      <span className="myth-fact-label">{item.fact.label}</span>
+                      <span className="myth-fact-detail">{item.fact.detail}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
