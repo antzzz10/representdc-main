@@ -1,0 +1,188 @@
+/* Governance structure comparison — pre-1973 vs. Home Rule */
+.gov-chart {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+  margin: var(--s-6) 0 0;
+}
+
+.gov-chart-col {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-5);
+}
+
+.gov-chart-col h4 {
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--slate-500);
+  margin: 0 0 var(--s-4);
+}
+
+.gov-chart-nodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gov-node {
+  width: 100%;
+  text-align: center;
+  background: var(--navy-tint);
+  color: var(--navy);
+  border-radius: var(--r-md);
+  padding: var(--s-3) var(--s-4);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+
+.gov-node.muted {
+  background: var(--surface-2);
+  color: var(--slate-500);
+  font-weight: 600;
+}
+
+.gov-node.ceiling {
+  background: var(--dc-red-tint);
+  color: var(--dc-red-darker);
+}
+
+.gov-node-row {
+  display: flex;
+  gap: var(--s-2);
+  width: 100%;
+}
+
+.gov-node-row .gov-node {
+  flex: 1;
+}
+
+.gov-connector {
+  width: 2px;
+  height: 18px;
+  background: var(--line-2);
+}
+
+/* Bill-type "at a glance" grid */
+.bill-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--s-4);
+  margin: var(--s-6) 0;
+}
+
+.bill-type-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-5);
+  text-align: center;
+}
+
+.bill-type-card.alert {
+  background: var(--dc-red-tint);
+  border-color: var(--dc-red-tint);
+}
+
+.bill-type-days {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: var(--s-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.bill-type-card.alert .bill-type-days {
+  color: var(--dc-red);
+}
+
+.bill-type-label {
+  font-weight: 700;
+  font-size: var(--fs-base);
+  color: var(--ink);
+  margin-bottom: var(--s-1);
+}
+
+.bill-type-detail {
+  font-size: var(--fs-sm);
+  color: var(--slate-500);
+  line-height: 1.5;
+}
+
+/* Eleanor Holmes Norton callout */
+.norton-callout {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  padding: var(--s-5) var(--s-6);
+  margin: var(--s-6) 0;
+  text-align: left;
+}
+
+.norton-callout h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  margin: 0 0 var(--s-2);
+  color: var(--ink);
+}
+
+.norton-callout p {
+  color: var(--slate-500);
+  line-height: 1.7;
+  margin: 0 0 var(--s-3);
+}
+
+.norton-callout-links {
+  display: flex;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+}
+
+.norton-callout-links a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Aggregated sources, bottom of page */
+.sources-block {
+  max-width: 700px;
+  margin: var(--s-7) auto 0;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.sources-block h4 {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--slate-500);
+  margin: 0 0 var(--s-3);
+}
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  font-size: var(--fs-sm);
+  color: var(--slate-500);
+}
+
+.sources-list a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .gov-chart {
+    grid-template-columns: 1fr;
+  }
+}
