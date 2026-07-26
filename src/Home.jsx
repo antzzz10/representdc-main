@@ -20,21 +20,22 @@ function Home() {
     <div className="app">
       <Nav />
 
-      {/* Hero Section - Loss Framing with Urgency */}
+      {/* Hero Section - Orientation for four distinct entry points, not one urgency-first funnel */}
       <section className="hero" id="top">
         <div className="container">
-          <span className="hero-badge"><span className="dot"></span>Breaking</span>
+          <span className="hero-badge">D.C. statehood, explained</span>
           <h1 className="hero-title">
-            Congress is blocking D.C. laws <span className="highlight">right now</span>
+            D.C. has no vote in Congress. <span className="highlight">Here's what that means for you.</span>
           </h1>
           <p className="hero-subtitle">
-            {totalBills} bills pending in Congress to overturn local D.C. decisions—from policing to healthcare to traffic laws
+            Whatever you already know about this—track the bills in real time, see the case for
+            statehood, or jump straight to what interests you below.
           </p>
-          <a href="https://billtracker.representdc.org" className="cta-primary">
-            <span>See all {totalBills} bills</span> <Icon name="arrow-right" />
+          <a href="#picker" className="cta-primary">
+            <span>Find your starting point</span> <Icon name="arrow-down" />
           </a>
           <p className="hero-note">
-            Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            {totalBills} bills pending right now · Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             {passedBills > 0 && ` · ${passedBills} bill${passedBills === 1 ? '' : 's'} just passed the House`}
           </p>
         </div>
@@ -65,7 +66,7 @@ function Home() {
       </section>
 
       {/* Persona picker - segment-specific pathways */}
-      <section className="persona-sec">
+      <section className="persona-sec" id="picker">
         <div className="container">
           <div className="persona-head">
             <h2>Where do you want to start?</h2>
@@ -95,7 +96,7 @@ function Home() {
             <Link className="persona-card accent" to="/myths-and-faq">
               <span className="picon"><Icon name="help-circle" size={22} /></span>
               <h3>Statehood-questioning</h3>
-              <p>Have doubts or specific objections? Get direct, sourced answers—no persuasion pitch required.</p>
+              <p>Have doubts or specific objections? Get direct, sourced answers to the most common ones.</p>
               <span className="plink">Read the myths <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card accent" to="/take-action">

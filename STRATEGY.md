@@ -68,10 +68,30 @@ This site uses research-backed persuasion principles to overcome resistance to D
 
 ## Page Flow Strategy
 
+**Superseded 2026-07-26 for Section 1 only** — see the note at the end of this
+section. This document was written for a single linear funnel aimed at one
+generic skeptical reader. The persona picker added later (see
+`decisions/2026-07-12-persona-picker-and-statehood-curious.md`) gives every
+visitor four distinct entry points below the hero, so a hero written to
+urgency-hook one persona no longer fits all four. Sections 2–5 below are
+unaffected — they still describe the page as experienced by someone who keeps
+scrolling past the picker without clicking a card.
+
 ### Section 1: HOOK (Hero)
 - **Emotion**: Urgency + Injustice
 - **Message**: This is happening NOW
 - **CTA**: See the evidence (bill tracker)
+
+**Update (2026-07-26):** replaced with an orientation hero — states the core
+fact (no vote in Congress) neutrally, names the reader's likely knowledge gap
+("here's what that means for you") rather than assuming they already agree
+it's urgent, and the primary CTA now routes to the persona picker
+(`#picker`) instead of jumping straight to the external bill tracker. The
+bill count moved from the headline to a small supporting stat line. Loss
+framing and urgency are still used deliberately downstream — Facts, Trend,
+and Solution keep their original tone — this change is scoped to the hero
+only, which every visitor sees before they've had a chance to self-select.
+See `decisions/2026-07-26-hero-rewrite.md`.
 
 ### Section 2: VALIDATE (Facts)
 - **Emotion**: Outrage at unfairness
