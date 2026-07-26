@@ -23,20 +23,17 @@ function Home() {
       {/* Hero Section - Orientation for four distinct entry points, not one urgency-first funnel */}
       <section className="hero" id="top">
         <div className="container">
-          <span className="hero-badge">D.C. statehood, explained</span>
           <h1 className="hero-title">
-            D.C. has no vote in Congress. <span className="highlight">Here's what that means for you.</span>
+            D.C. has no vote in Congress.
+            <br />
+            <span className="highlight">Here's what that means for you.</span>
           </h1>
-          <p className="hero-subtitle">
-            Whatever you already know about this—track the bills in real time, see the case for
-            statehood, or jump straight to what interests you below.
-          </p>
           <a href="#picker" className="cta-primary">
             <span>Find your starting point</span> <Icon name="arrow-down" />
           </a>
           <p className="hero-note">
-            {totalBills} bills pending right now · Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-            {passedBills > 0 && ` · ${passedBills} bill${passedBills === 1 ? '' : 's'} just passed the House`}
+            {totalBills} anti-DC bills pending in Congress · Updated{' '}
+            {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </p>
         </div>
       </section>

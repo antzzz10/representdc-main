@@ -33,6 +33,25 @@ explicitly rather than letting the docs silently drift apart.
   of `color` / `reversed` / `mono`). "RepresentDC" is always one word; "DC" always carries
   a thin underline in the accent color tying it to the star.
 
+## Hero sections — max 3 information levels
+
+Established 2026-07-26 after the homepage hero accumulated five competing blocks
+(eyebrow pill, two-color headline, subheading, CTA, multi-part stat line) — too many
+distinct things asking for attention at once. Two allowed shapes, same cap:
+
+- **Sub-page hero** (`/the-case`, `/myths-and-faq`, `/how-congress-controls-dc`,
+  `/take-action`, `/statehood-curious`, `/news`, etc.): eyebrow + h1 + an optional
+  one-line subtitle. Max 3. No CTA or stats inside the hero block itself — those live in
+  a section below.
+- **Landing hero** (homepage only): h1 (may split across two lines, e.g. a color
+  change on the second clause — force the break with `<br />` rather than leaving it to
+  wrap unpredictably) + one primary CTA + one simple stat/date line. Max 3. No eyebrow
+  pill on this pattern — the CTA and stat line already fill that budget.
+
+Either way: **3 blocks, not 5.** If a new fact or label seems worth adding, cut
+something else first rather than stacking a 4th. See
+`decisions/2026-07-26-hero-simplification.md`.
+
 ## Voice & content casing
 
 - **Sentence case everywhere, including headlines and the hero** — this supersedes any
