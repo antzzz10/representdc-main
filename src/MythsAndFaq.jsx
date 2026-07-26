@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
@@ -137,14 +136,6 @@ const ITEMS = [
 ]
 
 function MythsAndFaq() {
-  const location = useLocation()
-
-  useEffect(() => {
-    if (!location.hash) return
-    const el = document.querySelector(location.hash)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }, [location])
-
   return (
     <div className="app">
       <Nav />

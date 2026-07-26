@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './App.css'
 import { useBillStats } from './hooks/useBillStats'
 import Nav from './components/Nav'
@@ -8,13 +7,6 @@ import Icon from './components/Icon'
 
 function Home() {
   const { totalBills, pendingBills, passedBills, lastUpdated } = useBillStats()
-  const location = useLocation()
-
-  useEffect(() => {
-    if (!location.hash) return
-    const el = document.querySelector(location.hash)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }, [location])
 
   return (
     <div className="app">
