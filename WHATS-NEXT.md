@@ -47,6 +47,12 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
 - ~~Take Action Hub coming-soon page~~ ✅ done — `src/TakeAction.jsx`, previews the
   three real content ideas (Congressional outreach toolkit, state-level advocacy, "No
   donation without representation")
+- ~~"New to D.C." gets a dedicated page instead of an anchor scroll~~ ✅ done
+  (2026-07-25) — `/how-congress-controls-dc`, a deeper newcomer explainer (pre-1973
+  governance history, all three congressional override mechanisms, sourced against
+  dccouncil.gov and ACLU of DC); homepage's light `#explainer` section kept as-is for
+  organic scrollers. All four picker cards now land on their own route. See
+  `decisions/2026-07-25-new-to-dc-dedicated-page.md`.
 - `src/StatehoodCurious.jsx` is an **interim coming-soon page** (previews + live links;
   upgraded from bare stub 2026-07-14). Full build (hybrid case-for-statehood copy,
   ported news section, stakeholder org list, eval pipeline) is the next chunk of
