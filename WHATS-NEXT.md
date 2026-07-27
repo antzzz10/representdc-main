@@ -118,11 +118,12 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   already sketches this — see `reference/brand/RepresentDC Action & Persona IA
   Brainstorm.dc.html` — including a proposed empty-state fallback when nothing's
   scheduled.)
-- **Interactive stakeholder map:** review the "meet the movement" stakeholder map
-  concept and, ideally, make it interactive rather than static. Content groundwork
-  already exists in the same brainstorm doc: a proposed two-tier structure (5–8 core
-  orgs with one-line descriptions, plus a link out to Together for DC's own coalition
-  page for the wider 100+ org network) — visual/interactive layout still needs design.
+- **Interactive stakeholder map:** initial content draft started 2026-07-26 — see
+  `STAKEHOLDER-MAP.md`, a running doc (not final copy) with the 8 Tier 1 orgs
+  categorized by type and mapped to visitor intent ("if you want X, connect with Y"),
+  plus the Tier 2 coalition-link approach. Still needed: per-org verification pass,
+  visual/interactive layout design, and the matching-tool UX — see that doc's "Open
+  questions" section before starting either.
 - **Visual diversification:** the site is entirely text-only today: photography, data
   visualization, illustration, or other media haven't been considered at all. Worth a
   deliberate pass once content direction is settled.
