@@ -16,17 +16,17 @@ const CATEGORIES = [
 ]
 
 const LAYERS = [
-  { key: 'inner', label: 'Inner', sub: 'all in on statehood', desc: 'Statehood is the entire reason the org exists.' },
-  { key: 'middle', label: 'Middle', sub: 'core, broader mandate', desc: 'Named, core part of a broader mission.' },
-  { key: 'outer', label: 'Outer', sub: 'supportive, not core', desc: 'On record in support, not a sustained core focus.' },
+  { key: 'inner', label: 'Core', sub: 'all in on statehood', desc: 'Statehood is the entire reason the org exists.' },
+  { key: 'middle', label: 'Local Allies', sub: 'core, broader mandate', desc: 'Named, core part of a broader mission.' },
+  { key: 'outer', label: 'National Allies', sub: 'supportive, not core', desc: 'On record in support, not a sustained core focus.' },
 ]
 
 const DATA = {
   inner: [
     {
-      id: 'new-columbia-commission', name: 'New Columbia Statehood Commission', col: 'gov',
+      id: 'new-columbia-commission', name: 'New Columbia Commission', col: 'gov',
       scope: 'local', url: 'https://statehood.dc.gov/',
-      blurb: 'New Columbia Comm.',
+      blurb: 'New Columbia Commission',
       desc: "Created in 2014 to coordinate D.C.'s statehood strategy on behalf of the District government and support the District's “shadow” congressional delegation. Led by the Mayor, the Council Chairman, and D.C.'s shadow senators.",
     },
     {
@@ -48,22 +48,22 @@ const DATA = {
       desc: "This site — an independent, volunteer-run advocacy platform. Alongside this page, RepresentDC runs a real-time Bill Tracker (billtracker.representdc.org) tracking anti-D.C. legislation, and a Statehood Candidate Questionnaire (candidates.representdc.org) tracking 2026 D.C. candidates' statehood commitments.",
     },
     {
-      id: 'statehood-pledge', name: 'Statehood Pledge', col: 'community',
+      id: 'statehood-pledge', name: 'DC Statehood Pledge', col: 'community',
       scope: 'national', url: 'https://www.dcstatehoodpledge.org/',
-      blurb: 'Statehood Pledge',
+      blurb: 'DC Statehood Pledge',
       desc: 'Tracks candidate and elected-official pledge signers nationally — U.S. Senate, state lieutenant governor, and state senate candidates across multiple states. One of three tools run by the same single volunteer, with no formal org name.',
     },
     {
-      id: 'statehood-compact', name: 'Statehood Compact', col: 'community',
+      id: 'statehood-compact', name: 'DC Statehood Compact', col: 'community',
       scope: 'national', url: 'https://www.dcstatehoodcompact.org/',
-      blurb: 'Statehood Compact',
-      desc: 'Tracks state legislatures introducing resolutions backing D.C. statehood — an interstate-compact approach. Sibling tool to Statehood Pledge and Statehood Scorecard, same volunteer operator.',
+      blurb: 'DC Statehood Compact',
+      desc: 'Tracks state legislatures introducing resolutions backing D.C. statehood — an interstate-compact approach. Sibling tool to DC Statehood Pledge and DC Statehood Scorecard, same volunteer operator.',
     },
     {
-      id: 'statehood-scorecard', name: 'Statehood Scorecard', col: 'community',
+      id: 'statehood-scorecard', name: 'DC Statehood Scorecard', col: 'community',
       scope: 'national', url: 'https://www.dcstatehoodscorecard.org/',
-      blurb: 'Statehood Scorecard',
-      desc: 'A searchable, legislator-by-legislator scorecard tracking votes and interference, filterable by name, party, jurisdiction, and rating. Sibling tool to Statehood Pledge and Statehood Compact, same volunteer operator.',
+      blurb: 'DC Statehood Scorecard',
+      desc: 'A searchable, legislator-by-legislator scorecard tracking votes and interference, filterable by name, party, jurisdiction, and rating. Sibling tool to DC Statehood Pledge and DC Statehood Compact, same volunteer operator.',
     },
     {
       id: 'dc-dems-statehood', name: 'DC Democratic Party Statehood Committee', col: 'party',
@@ -92,6 +92,12 @@ const DATA = {
   ],
   middle: [
     {
+      id: 'dc-democratic-party', name: 'DC Democratic Party', col: 'party',
+      scope: 'local', url: 'https://www.dcdemocraticparty.org/',
+      blurb: 'DC Democratic Party',
+      desc: "The D.C. Democratic Party itself — a broader mandate than its own Statehood Committee (Core layer, above), but statehood organizing has been a consistent activist priority within the party for decades.",
+    },
+    {
       id: 'free-dc', name: 'Free DC', col: 'community',
       scope: 'local', url: 'https://freedcproject.org/',
       blurb: 'Free DC',
@@ -111,6 +117,12 @@ const DATA = {
     },
   ],
   outer: [
+    {
+      id: 'dnc', name: 'DNC', col: 'party',
+      scope: 'national', url: 'https://democrats.org/',
+      blurb: 'DNC',
+      desc: "The Democratic National Committee's national platform has included support for D.C. statehood since 2016, reaffirmed at the 2024 convention — on-the-record national backing, not a sustained day-to-day focus.",
+    },
     {
       id: 'dc-appleseed', name: 'DC Appleseed', col: 'policy',
       scope: 'local', url: 'https://www.dcappleseed.org/',
@@ -144,9 +156,10 @@ const SOURCES = [
   { name: 'Neighbors United for DC Statehood', url: 'https://www.the51st.org/' },
   { name: 'Students for DC Statehood', url: 'http://studentsfordcstatehood.com/' },
   { name: 'DC Democratic Party', url: 'https://www.dcdemocraticparty.org/dcstatehood' },
-  { name: 'Statehood Pledge', url: 'https://www.dcstatehoodpledge.org/' },
-  { name: 'Statehood Compact', url: 'https://www.dcstatehoodcompact.org/' },
-  { name: 'Statehood Scorecard', url: 'https://www.dcstatehoodscorecard.org/' },
+  { name: 'DNC platform history', url: 'https://dcist.com/story/16/06/27/dems-include-support-for-statehood/' },
+  { name: 'DC Statehood Pledge', url: 'https://www.dcstatehoodpledge.org/' },
+  { name: 'DC Statehood Compact', url: 'https://www.dcstatehoodcompact.org/' },
+  { name: 'DC Statehood Scorecard', url: 'https://www.dcstatehoodscorecard.org/' },
   { name: 'DC Statehood PAC (FEC filing)', url: 'https://www.fec.gov/data/committee/C00800227/' },
   { name: 'Together for DC', url: 'https://togetherfordc.org/' },
   { name: 'League of Women Voters of DC', url: 'https://www.lwvdc.org/' },
@@ -181,36 +194,9 @@ function StatehoodPartnerMap() {
         <div className="container">
           <span className="eyebrow">Meet the movement</span>
           <h1>The Statehood Partner Map</h1>
-          <p>Who's actually working on this, what kind of work they do, and how central statehood is to their mission.</p>
+          <p>Dozens of organizations, one shared goal — see who's leading, and how to plug in.</p>
         </div>
       </header>
-
-      <section className="impact-section">
-        <div className="container spm-intro">
-          <p className="section-intro spm-lead">
-            D.C. statehood isn't the work of one campaign or one office — it's a genuinely
-            broad effort. An official D.C. government commission, national civil-rights
-            organizations, grassroots neighborhood groups, student chapters, a political
-            party committee, volunteer-run tracking tools, and a dedicated PAC are all
-            pulling in the same direction, alongside a coalition of 100+ additional
-            organizations. This page maps who's who.
-          </p>
-          <div className="spm-howto">
-            <div className="spm-howto-item">
-              <h3>Layer</h3>
-              <p>How central statehood is to an org's mission — <strong>Inner</strong> (their
-                whole reason for existing), <strong>Middle</strong> (a named, core priority
-                within a broader mission), or <strong>Outer</strong> (on record in support,
-                without being a sustained focus).</p>
-            </div>
-            <div className="spm-howto-item">
-              <h3>Type</h3>
-              <p>What kind of work they do — research, organizing, funding, coalition-building,
-                and so on. The table below shows both at once.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="impact-section spm-matrix-section">
         <div className="container">
@@ -259,9 +245,9 @@ function StatehoodPartnerMap() {
             </div>
           </div>
           <p className="spm-matrix-note">
-            Empty cells are informative, not missing data — e.g. no org is both
-            Party-affiliated and Outer-layer. Click any chip to jump to its full entry
-            below.
+            Empty cells are informative, not missing data — e.g. no
+            Official-government-type org is a National Ally rather than Core. Click any
+            chip to jump to its full entry below.
           </p>
         </div>
       </section>
@@ -272,7 +258,7 @@ function StatehoodPartnerMap() {
           {LAYERS.map((l) => (
             <div className="spm-layer-block" key={l.key}>
               <h3 className={`spm-layer-heading spm-layer-${l.key}`}>
-                <span className="spm-layer-dot"></span>{l.label} layer
+                <span className="spm-layer-dot"></span>{l.label}
               </h3>
               <p className="spm-layer-desc">{l.desc}</p>
               <div className="spm-card-grid">
@@ -280,15 +266,15 @@ function StatehoodPartnerMap() {
                   <div className="spm-org-card" id={org.id} key={org.id}>
                     <div className="spm-org-card-head">
                       <h4>{org.name}</h4>
-                      <a href={org.url} target="_blank" rel="noopener noreferrer" aria-label={`${org.name} website`}>
-                        <Icon name="external-link" size={15} />
-                      </a>
                     </div>
                     <div className="spm-org-tags">
                       <span className="spm-tag">{CATEGORIES.find((c) => c.key === org.col)?.label}</span>
                       <span className="spm-tag spm-tag-scope">{org.scope === 'national' ? 'National' : 'D.C.-local'}</span>
                     </div>
                     <p>{org.desc}</p>
+                    <a className="spm-org-link" href={org.url} target="_blank" rel="noopener noreferrer">
+                      <span>Visit site</span> <Icon name="external-link" size={13} />
+                    </a>
                   </div>
                 ))}
               </div>
