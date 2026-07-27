@@ -111,8 +111,14 @@ that list.
   Statehood Commission, DC Vote, Neighbors United, Students for DC Statehood, DC
   Democratic Party Statehood Committee, Free DC.
 - **DC Appleseed's layer** — flagged above as possibly middle, not outer. Your call.
-- **Visual map design** — layout, relationship lines, iconography for the concentric
-  structure. First pass being drafted now (see artifact).
+- **Visual map design** — first pass built 2026-07-26 as a Claude Artifact (not
+  committed to this repo — private, published from this conversation): concentric SVG
+  diagram, hub = "D.C. statehood," rings by layer, node color/opacity by layer depth,
+  dashed vs. solid node border for national vs. D.C.-local scope, hover/tap reveals
+  full description, accessible stacked-table fallback below the diagram, light/dark
+  both styled. Still v0.1 — no relationship lines between orgs yet (e.g., LWV DC
+  sitting on Together for DC's steering committee isn't shown as a connection), and
+  layout/spacing will keep changing as this doc does.
 - **Matching-tool UX** — how a visitor expresses "what they want" and how that maps to
   the "best for" column above.
 - **Statehood Candidate Questionnaire's visual treatment** — needs to read as "our own
@@ -134,3 +140,7 @@ that list.
   Coordinating Council, and NAACP (outer) — all verified. Flagged DC Appleseed as a
   possible middle-layer miscategorization pending your call. Confirmed no other org
   shares the DC Dem Party's parent/child sub-committee structure.
+- **2026-07-26 (first visual pass)** — Built a v0.1 concentric-circle diagram as a
+  Claude Artifact (private, not in this repo) to pressure-test the layer model
+  visually. No org relationships/connections shown yet — next visual iteration should
+  add those (e.g. shared steering-committee membership).
