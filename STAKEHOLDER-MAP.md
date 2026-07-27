@@ -17,9 +17,11 @@ yet linked from nav or any other page — reachable by direct URL only.
   Questionnaire** — D.C.-focused (2026 candidates specifically), and must not be
   confused with the external Statehood Pledge above. Worth a separate check on whether
   that site's own UI needs a wording fix too (not done in this pass). **Update
-  2026-07-27:** now included as a normal Inner-layer entry on the shipped page (DC
-  Community Advocacy column) rather than a separate "not a peer org" callout — per
-  explicit direction, since it's a real part of the RepresentDC ecosystem.
+  2026-07-27:** the Questionnaire does not get its own row on the shipped page — it's
+  a feature of RepresentDC, not a separate entity. The map instead has one
+  **RepresentDC** entry (DC Community Advocacy, Inner layer) whose description
+  mentions the Questionnaire and the Bill Tracker as two of the things RepresentDC
+  runs.
 
 ## End vision
 
@@ -44,27 +46,42 @@ the unnamed 100+ coalition as a loose outer haze beyond all three.
 Boundaries are genuinely fuzzy in places — flagged per entry below rather than papered
 over.
 
+**2026-07-27 restructure (this replaces the columns as first documented above):**
+the old "Tracking tools" name was rejected as unclear, and RepresentDC's own presence
+belonged in the same family — resolved differently than the first attempt:
+
+- **DC Community Advocacy** — renamed from "Grassroots & community." Now also holds
+  **RepresentDC itself** and the **Statehood Pledge / Statehood Compact / Statehood
+  Scorecard** trio (moved out of a separately-invented "National Advocacy" column from
+  the first pass — that was the wrong home for them).
+- **National Advocacy** — renamed from "Civic & rights advocacy" (League of Women
+  Voters DC, ACLU DC, NAACP). Note this reuses a name that briefly meant something
+  else in the very first restructure attempt; if referencing an old screenshot or
+  export, check the date.
+- **DC Policy** — new category, merging the old "Policy & legal research" and
+  "Fiscal/budget research" columns (DC Vote, DC Appleseed, DCFPI).
+- **Statehood Candidate Questionnaire removed as its own row** — folded into the new
+  RepresentDC entry instead (see the naming section above).
+- The live page also **transposed the matrix**: Type is the row axis, Layer is the
+  column axis (this table stays organized by Layer for readability, since re-deriving
+  a Type-primary table in Markdown isn't worth the churn — the underlying data is
+  identical either way).
+
 ### Inner layer
 
-| Org | Type | Scope | Verified? | What they do (draft) | Best for — "if you want to..." |
-|---|---|---|---|---|---|
-| **New Columbia Statehood Commission** | Official government body | D.C. | Confirmed 2026-07-27 — `statehood.dc.gov` | Created 2014 to coordinate D.C.'s statehood strategy for the District government and support the "shadow" congressional delegation. Led by the Mayor, Council Chairman, and D.C.'s shadow senators. | ...see what D.C.'s own government is doing on this. |
-| **DC Vote** | Policy research & advocacy | D.C. | Confirmed 2026-07-27 — `dcvote.org` | Founded 1998. Citizen engagement and advocacy for full democracy: budget/legislative autonomy and equal representation in Congress. Member of the National Coalition for Statehood. | ...see the evidence and the policy case. |
-| **Neighbors United for DC Statehood** | Grassroots organizing | D.C. | Confirmed 2026-07-27 — `the51st.org` | Grassroots, neighborhood-by-neighborhood statehood organizing — living-room talks, civic-group outreach, direct congressional lobbying. | ...volunteer or organize locally. |
-| **Students for DC Statehood** | Student/youth organizing | National — 8 university chapters incl. D.C. | Confirmed 2026-07-27 — `studentsfordcstatehood.com` | National student org, 8 active chapters (Georgetown, American, Trinity Washington, and others), mobilizing 100,000+ D.C. college students. | ...get involved as a student. |
-| **DC Democratic Party Statehood Committee** | Party-affiliated organizing | D.C. | Confirmed 2026-07-27 — `dcdemocraticparty.org/dcstatehood` | Officially affiliated committee of the D.C. Democratic Party dedicated to full democracy and self-determination for D.C. | ...organize for statehood within Democratic party politics. |
-| **Statehood Candidate Questionnaire** | *RepresentDC's own tool* — DC Community Advocacy | D.C. | N/A (ours) | Tracks where 2026 D.C. candidates stand on statehood commitments. | ...hold 2026 D.C. candidates accountable. |
-| **Statehood Pledge** | Independent volunteer-run tool — National Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodpledge.org` | Tracks candidate/official pledge signers nationally — U.S. Senate, state lieutenant governor, state senate, across multiple states. One of three tools, same single volunteer, no formal org name. | ...see pledge signers nationally. |
-| **Statehood Compact** | Independent volunteer-run tool — National Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodcompact.org` | Tracks state legislatures introducing resolutions backing D.C. statehood (interstate-compact approach). Sibling of Pledge/Scorecard. | ...see which states are backing statehood. |
-| **Statehood Scorecard** | Independent volunteer-run tool — National Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodscorecard.org` | Searchable legislator-by-legislator voting/interference tracker, filterable by name/party/jurisdiction/rating. Sibling of Pledge/Compact. | ...look up a legislator's record. |
-| **DC Statehood PAC** | Funding / PAC | National (FEC-registered) | Confirmed 2026-07-26 — FEC ID C00800227, `dcstatehoodpac.com` | Hybrid PAC ("Carey committee"); mission is full voting representation via statehood. Raised ~$56K in the 2021–2022 cycle. | ...fund candidates/campaigns advancing statehood. |
-| **Together for DC** | Coalition / partnership org | National | Confirmed 2026-07-26 — `togetherfordc.org` | Launched June 2026. "National solidarity infrastructure" recruiting out-of-state/national allies to pressure Congress. Steering committee includes League of Women Voters DC (see Middle Layer), DCNOW, Public Citizen, Taskforce for Democracy. Also the natural link target for the "100+ orgs" line below. | ...bring in outside/national pressure, not just local organizing. |
-
-**2026-07-27 restructure:** the old "Tracking tools" column name was rejected as
-unclear, and RepresentDC's own tool belonged in the same family — split into two
-columns instead: **DC Community Advocacy** (RepresentDC's Questionnaire) and
-**National Advocacy** (Pledge/Compact/Scorecard, un-collapsed back into three separate
-entries now that this is a public page, not a space-constrained working draft).
+| Org | Category | Scope | Verified? | What they do (draft) |
+|---|---|---|---|---|
+| **New Columbia Statehood Commission** | Official government | D.C. | Confirmed 2026-07-27 — `statehood.dc.gov` | Created 2014 to coordinate D.C.'s statehood strategy for the District government and support the "shadow" congressional delegation. Led by the Mayor, Council Chairman, and D.C.'s shadow senators. |
+| **DC Vote** | DC Policy | D.C. | Confirmed 2026-07-27 — `dcvote.org` | Founded 1998. Citizen engagement and advocacy for full democracy: budget/legislative autonomy and equal representation in Congress. Member of the National Coalition for Statehood. |
+| **Neighbors United for DC Statehood** | DC Community Advocacy | D.C. | Confirmed 2026-07-27 — `the51st.org` | Grassroots, neighborhood-by-neighborhood statehood organizing — living-room talks, civic-group outreach, direct congressional lobbying. |
+| **RepresentDC** | DC Community Advocacy | D.C. | N/A (ours) | This site — independent, volunteer-run. Also runs the Bill Tracker (billtracker.representdc.org) and the Statehood Candidate Questionnaire (candidates.representdc.org). |
+| **Statehood Pledge** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodpledge.org` | Tracks candidate/official pledge signers nationally — U.S. Senate, state lieutenant governor, state senate, across multiple states. One of three tools, same single volunteer, no formal org name. |
+| **Statehood Compact** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodcompact.org` | Tracks state legislatures introducing resolutions backing D.C. statehood (interstate-compact approach). Sibling of Pledge/Scorecard. |
+| **Statehood Scorecard** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodscorecard.org` | Searchable legislator-by-legislator voting/interference tracker, filterable by name/party/jurisdiction/rating. Sibling of Pledge/Compact. |
+| **DC Democratic Party Statehood Committee** | Party-affiliated | D.C. | Confirmed 2026-07-27 — `dcdemocraticparty.org/dcstatehood` | Officially affiliated committee of the D.C. Democratic Party dedicated to full democracy and self-determination for D.C. |
+| **Students for DC Statehood** | Student organizing | National — 8 university chapters incl. D.C. | Confirmed 2026-07-27 — `studentsfordcstatehood.com` | National student org, 8 active chapters (Georgetown, American, Trinity Washington, and others), mobilizing 100,000+ D.C. college students. |
+| **DC Statehood PAC** | Funding / PAC | National (FEC-registered) | Confirmed 2026-07-26 — FEC ID C00800227, `dcstatehoodpac.com` | Hybrid PAC ("Carey committee"); mission is full voting representation via statehood. Raised ~$56K in the 2021–2022 cycle. |
+| **Together for DC** | Coalition / partnership | National | Confirmed 2026-07-26 — `togetherfordc.org` | Launched June 2026. "National solidarity infrastructure" recruiting out-of-state/national allies to pressure Congress. Steering committee includes League of Women Voters DC (see Middle Layer), DCNOW, Public Citizen, Taskforce for Democracy. Also the natural link target for the "100+ orgs" line below. |
 
 **Guardrail (from the original brainstorm doc, §7):** the DC Democratic Party
 Statehood Committee's party affiliation must be labeled plainly and explicitly on the
@@ -80,11 +97,11 @@ run through a separate branded unit. Revisit only if that changes.
 
 ### Middle layer
 
-| Org | Type | Scope | Verified? | What they do (draft) | Best for — "if you want to..." |
-|---|---|---|---|---|---|
-| **League of Women Voters of DC** | Nonpartisan civic engagement | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. | ...get involved through a nonpartisan civic organization. |
-| **Free DC** | Grassroots / home-rule defense | D.C. | Confirmed 2026-07-27 — `freedcproject.org` | Founded 1997, grassroots nonpartisan 501(c)(3) protecting home rule: full local budget control, locally elected/appointed judges, full voting representation. | ...push back on a specific congressional interference bill right now. |
-| **ACLU of DC** | Civil liberties advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. | ...work with a civil-liberties org that treats statehood as a top, dedicated priority. |
+| Org | Category | Scope | Verified? | What they do (draft) |
+|---|---|---|---|---|
+| **Free DC** | DC Community Advocacy | D.C. | Confirmed 2026-07-27 — `freedcproject.org` | Founded 1997, grassroots nonpartisan 501(c)(3) protecting home rule: full local budget control, locally elected/appointed judges, full voting representation. |
+| **League of Women Voters of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. |
+| **ACLU of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. |
 
 **Fuzzy boundary flags:**
 - **Free DC** — is home-rule defense genuinely *broader* than statehood (middle), or
@@ -97,12 +114,12 @@ run through a separate branded unit. Revisit only if that changes.
 
 ### Outer layer
 
-| Org | Type | Scope | Verified? | What they do (draft) | Best for — "if you want to..." |
-|---|---|---|---|---|---|
-| **DC Fiscal Policy Institute (DCFPI)** | Budget/tax policy research | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. | ...see the fiscal/budget case for statehood specifically. |
-| **DC Appleseed** | Public-interest law & DC governance | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"). **Flag:** deeper statehood involvement than a typical outer-layer entry — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Possibly belongs in Middle Layer instead; kept in Outer per original placement pending your call. | ...see the legal/voting-rights strategy angle. |
-| **Anacostia Coordinating Council** | Community / neighborhood association | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. | ...connect statehood to East-of-the-River community organizing specifically. |
-| **NAACP (DC Branch)** | Civil rights advocacy | National org, D.C. branch | Confirmed 2026-07-26 | National NAACP has reaffirmed statehood support via resolutions since 1978 (multiple times through 2016); DC Branch president has signed on to public letters. Statehood is one plank on a very broad national civil-rights platform. | ...connect statehood to a national civil-rights framing. |
+| Org | Category | Scope | Verified? | What they do (draft) |
+|---|---|---|---|---|
+| **DC Appleseed** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"). **Flag:** deeper statehood involvement than a typical outer-layer entry — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Possibly belongs in Middle Layer instead; kept in Outer per original placement pending your call. |
+| **DC Fiscal Policy Institute (DCFPI)** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. |
+| **Anacostia Coordinating Council** | DC Community Advocacy | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. |
+| **NAACP (DC Branch)** | National Advocacy | National org, D.C. branch | Confirmed 2026-07-26 | National NAACP has reaffirmed statehood support via resolutions since 1978 (multiple times through 2016); DC Branch president has signed on to public letters. Statehood is one plank on a very broad national civil-rights platform. |
 
 Plus the unnamed long tail: **"and a growing coalition of 100+ organizations"** — a
 single credit line linking directly to Together for DC's own coalition page
@@ -163,3 +180,14 @@ that list.
   matrix (real cards, full descriptions, external links) per the "give each org more
   room" feedback — the compact matrix chip alone couldn't carry that. Not yet linked
   from nav or any other page.
+- **2026-07-27 (correction pass)** — First categorization attempt got the new
+  columns wrong. Corrected: DC Community Advocacy = renamed Grassroots & community,
+  now also holding RepresentDC and the Pledge/Compact/Scorecard trio (not National
+  Advocacy, which was the wrong home for them). National Advocacy = renamed Civic &
+  rights advocacy (LWV DC/ACLU DC/NAACP), not the tools. Merged Policy & legal
+  research + Fiscal/budget research into a new DC Policy category. Removed the
+  standalone Statehood Candidate Questionnaire row — folded into the new RepresentDC
+  entry. Fixed "Students for DC Statehood" chip label (had dropped the "DC"). Live
+  page transposed to Type-rows/Layer-columns. Found and fixed a new mobile bug from
+  the transpose (fixed-width row-header column crushing the 3 data columns
+  unreadably narrow on a phone).
