@@ -37,11 +37,17 @@ secondary "Type" tag in each table) or where they operate (the secondary "Scope"
 Maps naturally to a concentric-circle visual: inner ring, middle ring, outer ring, with
 the unnamed 100+ coalition as a loose outer haze beyond all three.
 
-- **Inner layer** — statehood is the *entire* reason the org/tool/effort exists.
-- **Middle layer** — statehood is a *named, core* part of the mission, but the org has
-  a broader mandate beyond it.
-- **Outer layer** — the org supports statehood (on record, sometimes with real
-  advocacy history), but it isn't a sustained core focus of their day-to-day work.
+- **Core** (formerly "Inner layer") — statehood is the *entire* reason the
+  org/tool/effort exists.
+- **Local Allies** (formerly "Middle layer") — statehood is a *named, core* part of
+  the mission, but the org has a broader mandate beyond it.
+- **National Allies** (formerly "Outer layer") — the org supports statehood (on
+  record, sometimes with real advocacy history), but it isn't a sustained core focus
+  of their day-to-day work.
+
+Renamed 2026-07-27. Tables below keep the old `### Inner/Middle/Outer layer` headers
+as internal section anchors — only the reader-facing label changed, not the
+underlying grouping.
 
 Boundaries are genuinely fuzzy in places — flagged per entry below rather than papered
 over.
@@ -71,17 +77,17 @@ belonged in the same family — resolved differently than the first attempt:
 
 | Org | Category | Scope | Verified? | What they do (draft) |
 |---|---|---|---|---|
-| **New Columbia Statehood Commission** | Official government | D.C. | Confirmed 2026-07-27 — `statehood.dc.gov` | Created 2014 to coordinate D.C.'s statehood strategy for the District government and support the "shadow" congressional delegation. Led by the Mayor, Council Chairman, and D.C.'s shadow senators. |
+| **New Columbia Commission** | Official government | D.C. | Confirmed 2026-07-27 — `statehood.dc.gov` | Created 2014 to coordinate D.C.'s statehood strategy for the District government and support the "shadow" congressional delegation. Led by the Mayor, Council Chairman, and D.C.'s shadow senators. |
 | **DC Vote** | DC Policy | D.C. | Confirmed 2026-07-27 — `dcvote.org` | Founded 1998. Citizen engagement and advocacy for full democracy: budget/legislative autonomy and equal representation in Congress. Member of the National Coalition for Statehood. |
 | **Neighbors United for DC Statehood** | DC Community Advocacy | D.C. | Confirmed 2026-07-27 — `the51st.org` | Grassroots, neighborhood-by-neighborhood statehood organizing — living-room talks, civic-group outreach, direct congressional lobbying. |
 | **RepresentDC** | DC Community Advocacy | D.C. | N/A (ours) | This site — independent, volunteer-run. Also runs the Bill Tracker (billtracker.representdc.org) and the Statehood Candidate Questionnaire (candidates.representdc.org). |
-| **Statehood Pledge** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodpledge.org` | Tracks candidate/official pledge signers nationally — U.S. Senate, state lieutenant governor, state senate, across multiple states. One of three tools, same single volunteer, no formal org name. |
-| **Statehood Compact** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodcompact.org` | Tracks state legislatures introducing resolutions backing D.C. statehood (interstate-compact approach). Sibling of Pledge/Scorecard. |
-| **Statehood Scorecard** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodscorecard.org` | Searchable legislator-by-legislator voting/interference tracker, filterable by name/party/jurisdiction/rating. Sibling of Pledge/Compact. |
+| **DC Statehood Pledge** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodpledge.org` | Tracks candidate/official pledge signers nationally — U.S. Senate, state lieutenant governor, state senate, across multiple states. One of three tools, same single volunteer, no formal org name. |
+| **DC Statehood Compact** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodcompact.org` | Tracks state legislatures introducing resolutions backing D.C. statehood (interstate-compact approach). Sibling of Pledge/Scorecard. |
+| **DC Statehood Scorecard** | DC Community Advocacy | National | Confirmed 2026-07-26 — `dcstatehoodscorecard.org` | Searchable legislator-by-legislator voting/interference tracker, filterable by name/party/jurisdiction/rating. Sibling of Pledge/Compact. |
 | **DC Democratic Party Statehood Committee** | Party-affiliated | D.C. | Confirmed 2026-07-27 — `dcdemocraticparty.org/dcstatehood` | Officially affiliated committee of the D.C. Democratic Party dedicated to full democracy and self-determination for D.C. |
 | **Students for DC Statehood** | Student organizing | National — 8 university chapters incl. D.C. | Confirmed 2026-07-27 — `studentsfordcstatehood.com` | National student org, 8 active chapters (Georgetown, American, Trinity Washington, and others), mobilizing 100,000+ D.C. college students. |
 | **DC Statehood PAC** | Funding / PAC | National (FEC-registered) | Confirmed 2026-07-26 — FEC ID C00800227, `dcstatehoodpac.com` | Hybrid PAC ("Carey committee"); mission is full voting representation via statehood. Raised ~$56K in the 2021–2022 cycle. |
-| **Together for DC** | Coalition / partnership | National | Confirmed 2026-07-26 — `togetherfordc.org` | Launched June 2026. "National solidarity infrastructure" recruiting out-of-state/national allies to pressure Congress. Steering committee includes League of Women Voters DC (see Middle Layer), DCNOW, Public Citizen, Taskforce for Democracy. Also the natural link target for the "100+ orgs" line below. |
+| **Together for DC** | Coalition / partnership | National | Confirmed 2026-07-26 — `togetherfordc.org` | Launched June 2026. "National solidarity infrastructure" recruiting out-of-state/national allies to pressure Congress. Steering committee includes League of Women Voters DC (see Local Allies), DCNOW, Public Citizen, Taskforce for Democracy. Also the natural link target for the "100+ orgs" line below. |
 
 **Guardrail (from the original brainstorm doc, §7):** the DC Democratic Party
 Statehood Committee's party affiliation must be labeled plainly and explicitly on the
@@ -99,6 +105,7 @@ run through a separate branded unit. Revisit only if that changes.
 
 | Org | Category | Scope | Verified? | What they do (draft) |
 |---|---|---|---|---|
+| **DC Democratic Party** | Party-affiliated | D.C. | Confirmed 2026-07-27 — `dcdemocraticparty.org` | The party itself — broader mandate than its own Statehood Committee (Core layer, above), but statehood organizing has been a consistent activist priority within it for decades. Added 2026-07-27 to make the Committee → Party → DNC progression explicit across all three layers. |
 | **Free DC** | DC Community Advocacy | D.C. | Confirmed 2026-07-27 — `freedcproject.org` | Founded 1997, grassroots nonpartisan 501(c)(3) protecting home rule: full local budget control, locally elected/appointed judges, full voting representation. |
 | **League of Women Voters of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. |
 | **ACLU of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. |
@@ -116,6 +123,7 @@ run through a separate branded unit. Revisit only if that changes.
 
 | Org | Category | Scope | Verified? | What they do (draft) |
 |---|---|---|---|---|
+| **DNC** | Party-affiliated | National | Confirmed 2026-07-27 — national platform has backed D.C. statehood since 2016, reaffirmed at the 2024 convention (dcist.com) | The Democratic National Committee's national platform has included D.C. statehood support since 2016 — on-the-record national backing, not a sustained day-to-day focus. Completes the Committee (Core) → DC Democratic Party (Local Allies) → DNC (National Allies) progression. |
 | **DC Appleseed** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"). **Flag:** deeper statehood involvement than a typical outer-layer entry — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Possibly belongs in Middle Layer instead; kept in Outer per original placement pending your call. |
 | **DC Fiscal Policy Institute (DCFPI)** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. |
 | **Anacostia Coordinating Council** | DC Community Advocacy | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. |
@@ -191,3 +199,14 @@ that list.
   page transposed to Type-rows/Layer-columns. Found and fixed a new mobile bug from
   the transpose (fixed-width row-header column crushing the 3 data columns
   unreadably narrow on a phone).
+- **2026-07-27 (naming, party family, tighter intro)** — Renamed layers to Core /
+  Local Allies / National Allies. Name corrections: "New Columbia Statehood
+  Commission" → "New Columbia Commission"; "Statehood Pledge/Compact/Scorecard" →
+  "DC Statehood Pledge/Compact/Scorecard" (matches their actual self-branding, found
+  during the original verification pass but not carried through to the page). Added
+  DC Democratic Party (Local Allies) and DNC (National Allies) to Party-affiliated,
+  completing a three-layer progression alongside the existing Statehood Committee
+  (Core) — verified DNC's platform position before adding. Cut the entire intro
+  section (lead paragraph + Layer/Type explainer box) per "keep it tight" feedback;
+  folded one line into the hero subtitle instead. Every directory card now has an
+  explicit "Visit site" text link, not just a small icon.
