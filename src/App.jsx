@@ -6,6 +6,7 @@ import StatehoodCurious from './StatehoodCurious'
 import TakeAction from './TakeAction'
 import News from './News'
 import HowCongressControlsDC from './HowCongressControlsDC'
+import StatehoodPartnerMap from './StatehoodPartnerMap'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/take-action" element={<TakeAction />} />
         <Route path="/news" element={<News />} />
         <Route path="/how-congress-controls-dc" element={<HowCongressControlsDC />} />
+        <Route path="/statehood-partner-map" element={<StatehoodPartnerMap />} />
       </Routes>
     </>
   )
