@@ -118,12 +118,20 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   already sketches this — see `reference/brand/RepresentDC Action & Persona IA
   Brainstorm.dc.html` — including a proposed empty-state fallback when nothing's
   scheduled.)
-- **Interactive stakeholder map:** initial content draft started 2026-07-26 — see
-  `STAKEHOLDER-MAP.md`, a running doc (not final copy) with the 8 Tier 1 orgs
-  categorized by type and mapped to visitor intent ("if you want X, connect with Y"),
-  plus the Tier 2 coalition-link approach. Still needed: per-org verification pass,
-  visual/interactive layout design, and the matching-tool UX — see that doc's "Open
-  questions" section before starting either.
+- **Statehood Partner Map:** shipped 2026-07-27 as `/statehood-partner-map`
+  (`src/StatehoodPartnerMap.jsx`) — 18 orgs, all verified, Layer × Type matrix plus a
+  full expanded directory. Not yet linked from nav or any other page. Still needed:
+  IA placement decision, the "if you want X, connect with Y" matching-tool UX, and
+  possibly relationship lines between orgs on the matrix — see `STAKEHOLDER-MAP.md`'s
+  "Open questions" section (that doc stays the source-of-truth reference; edit there
+  first, then port to the page).
+- **Talking point generator:** scoped 2026-07-26 — a `/talking-points` route where four
+  structured questions (topic · audience · time · medium) return tailored, sourced points
+  drawn from the existing vetted claim library. Architecture, input set, learning loop,
+  and sequencing are decided (`decisions/2026-07-26-talking-point-generator-scope.md`);
+  full detail and remaining open questions in `TALKING-POINT-GENERATOR-PRD.md`.
+  **Sequenced after `/statehood-curious`** — the Phase 4 eval pipeline is a prerequisite,
+  since this feature is where unsourced generated claims would do the most damage.
 - **Visual diversification:** the site is entirely text-only today: photography, data
   visualization, illustration, or other media haven't been considered at all. Worth a
   deliberate pass once content direction is settled.
