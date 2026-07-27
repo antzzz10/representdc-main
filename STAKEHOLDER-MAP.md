@@ -111,14 +111,15 @@ that list.
   Statehood Commission, DC Vote, Neighbors United, Students for DC Statehood, DC
   Democratic Party Statehood Committee, Free DC.
 - **DC Appleseed's layer** — flagged above as possibly middle, not outer. Your call.
-- **Visual map design** — first pass built 2026-07-26 as a Claude Artifact (not
-  committed to this repo — private, published from this conversation): concentric SVG
-  diagram, hub = "D.C. statehood," rings by layer, node color/opacity by layer depth,
-  dashed vs. solid node border for national vs. D.C.-local scope, hover/tap reveals
-  full description, accessible stacked-table fallback below the diagram, light/dark
-  both styled. Still v0.1 — no relationship lines between orgs yet (e.g., LWV DC
-  sitting on Together for DC's steering committee isn't shown as a connection), and
-  layout/spacing will keep changing as this doc does.
+- **Visual map design** — v0.1 (concentric-circle diagram) tried and rejected on
+  review: color/depth differences were too subtle to read at a glance, and Type
+  wasn't visible without hovering every node — "no benefit to the concentric circles,
+  we lose the categorization." Replaced same-day with v0.2, a literal Layer × Type
+  matrix table (Claude Artifact, private, not committed to this repo): rows = layer,
+  columns = type, click a chip for full detail, accessible list still below. Still no
+  relationship lines between orgs (e.g. LWV DC sitting on Together for DC's steering
+  committee isn't shown as a connection) — candidate for a v0.3 if that's worth
+  showing.
 - **Matching-tool UX** — how a visitor expresses "what they want" and how that maps to
   the "best for" column above.
 - **Statehood Candidate Questionnaire's visual treatment** — needs to read as "our own
@@ -141,6 +142,11 @@ that list.
   possible middle-layer miscategorization pending your call. Confirmed no other org
   shares the DC Dem Party's parent/child sub-committee structure.
 - **2026-07-26 (first visual pass)** — Built a v0.1 concentric-circle diagram as a
-  Claude Artifact (private, not in this repo) to pressure-test the layer model
-  visually. No org relationships/connections shown yet — next visual iteration should
-  add those (e.g. shared steering-committee membership).
+  Claude Artifact to pressure-test the layer model visually.
+- **2026-07-26 (visual v0.2)** — v0.1 rejected on review: too visually similar across
+  orgs, Type not legible without hovering. Rebuilt as a Layer × Type matrix table.
+  Surfaced a real finding in the process: Official government, Party-affiliated,
+  Student, Tools, Funding, and Coalition org *types* are all exclusively Inner-layer —
+  "purpose-built for statehood" correlates with org type, not just self-report. Fixed
+  a mobile layout bug along the way (table's min-width was pushing the whole page
+  wider than the viewport instead of scrolling within its own container).
