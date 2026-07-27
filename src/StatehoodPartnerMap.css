@@ -146,6 +146,8 @@ table.spm-matrix td.spm-cell {
 }
 
 .spm-org-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -169,11 +171,15 @@ table.spm-matrix td.spm-cell {
   display: inline-flex;
   align-items: center;
   gap: var(--s-1);
-  margin-top: var(--s-3);
   font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--navy);
   text-decoration: none;
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-3);
+  /* Pinned to the card bottom regardless of description length, so
+     "Visit site" lines up across cards in the same grid row. */
+  margin-top: auto;
 }
 .spm-org-link:hover { color: var(--dc-red); }
 
@@ -183,6 +189,19 @@ table.spm-matrix td.spm-cell {
   gap: var(--s-2);
   margin-bottom: var(--s-3);
 }
+
+/* Layer tag — colored to match the matrix chips, distinct from the
+   neutral category/scope tags below. */
+.spm-tag-layer {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.spm-tag-layer.spm-layer-inner { background: var(--navy); }
+.spm-tag-layer.spm-layer-middle { background: var(--navy-600); }
+.spm-tag-layer.spm-layer-outer { background: var(--spm-outer); }
 
 .spm-tag {
   font-size: 11px;

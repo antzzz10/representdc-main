@@ -37,13 +37,18 @@ secondary "Type" tag in each table) or where they operate (the secondary "Scope"
 Maps naturally to a concentric-circle visual: inner ring, middle ring, outer ring, with
 the unnamed 100+ coalition as a loose outer haze beyond all three.
 
-- **Core** (formerly "Inner layer") — statehood is the *entire* reason the
-  org/tool/effort exists.
-- **Local Allies** (formerly "Middle layer") — statehood is a *named, core* part of
-  the mission, but the org has a broader mandate beyond it.
-- **National Allies** (formerly "Outer layer") — the org supports statehood (on
-  record, sometimes with real advocacy history), but it isn't a sustained core focus
-  of their day-to-day work.
+- **Core** (formerly "Inner layer") — "100% statehood." Statehood is the *entire*
+  reason the org/tool/effort exists.
+- **Local Allies** (formerly "Middle layer") — "Broader mandate that includes
+  statehood." Statehood is a *named, core* part of the mission, but the org has a
+  broader mandate beyond it.
+- **National Allies** (formerly "Outer layer") — "Supporting statehood through a DC
+  chapter and national resolutions." The org's statehood support flows through a
+  national parent org's DC chapter or an on-record national resolution/platform
+  plank, not a sustained day-to-day D.C.-specific program.
+
+Taglines rewritten 2026-07-27 to be more supportive/descriptive (previously unstated,
+label-only); the live page's `LAYERS.sub`/`.desc` fields carry this text verbatim.
 
 Renamed 2026-07-27. Tables below keep the old `### Inner/Middle/Outer layer` headers
 as internal section anchors — only the reader-facing label changed, not the
@@ -107,27 +112,30 @@ run through a separate branded unit. Revisit only if that changes.
 |---|---|---|---|---|
 | **DC Democratic Party** | Party-affiliated | D.C. | Confirmed 2026-07-27 — `dcdemocraticparty.org` | The party itself — broader mandate than its own Statehood Committee (Core layer, above), but statehood organizing has been a consistent activist priority within it for decades. Added 2026-07-27 to make the Committee → Party → DNC progression explicit across all three layers. |
 | **Free DC** | DC Community Advocacy | D.C. | Confirmed 2026-07-27 — `freedcproject.org` | Founded 1997, grassroots nonpartisan 501(c)(3) protecting home rule: full local budget control, locally elected/appointed judges, full voting representation. |
-| **League of Women Voters of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. |
-| **ACLU of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. |
+| **DC Appleseed** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"), with a deep and sustained statehood track record — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Moved to Local Allies 2026-07-27 — the prior "possibly Middle, not Outer" flag is resolved. |
+| **DC Fiscal Policy Institute (DCFPI)** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. Moved to Local Allies 2026-07-27. |
+| **Anacostia Coordinating Council** | DC Community Advocacy | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. Moved to Local Allies 2026-07-27. |
 
 **Fuzzy boundary flags:**
 - **Free DC** — is home-rule defense genuinely *broader* than statehood (middle), or
   just the same fight from a defensive angle (arguably inner)? No clean line; kept in
   middle per the original placement, revisit if it matters for the visual.
-- **ACLU DC** — one of four issue areas, but backed by a dedicated campaign and staff
-  role — deeper commitment than a typical middle-layer entry. Still middle (statehood
-  isn't ACLU-DC's *entire* mission), but flagging that it sits close to the inner
-  boundary.
 
 ### Outer layer
 
 | Org | Category | Scope | Verified? | What they do (draft) |
 |---|---|---|---|---|
 | **DNC** | Party-affiliated | National | Confirmed 2026-07-27 — national platform has backed D.C. statehood since 2016, reaffirmed at the 2024 convention (dcist.com) | The Democratic National Committee's national platform has included D.C. statehood support since 2016 — on-the-record national backing, not a sustained day-to-day focus. Completes the Committee (Core) → DC Democratic Party (Local Allies) → DNC (National Allies) progression. |
-| **DC Appleseed** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"). **Flag:** deeper statehood involvement than a typical outer-layer entry — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Possibly belongs in Middle Layer instead; kept in Outer per original placement pending your call. |
-| **DC Fiscal Policy Institute (DCFPI)** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. |
-| **Anacostia Coordinating Council** | DC Community Advocacy | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. |
+| **League of Women Voters of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. Moved to National Allies 2026-07-27 to match the layer's "national org, DC chapter" tagline. |
+| **ACLU of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. Moved to National Allies 2026-07-27 — same reasoning as LWV DC below; the prior "flagging that it sits close to the inner boundary" note is superseded by this move. |
 | **NAACP (DC Branch)** | National Advocacy | National org, D.C. branch | Confirmed 2026-07-26 | National NAACP has reaffirmed statehood support via resolutions since 1978 (multiple times through 2016); DC Branch president has signed on to public letters. Statehood is one plank on a very broad national civil-rights platform. |
+
+**Fuzzy boundary flags:**
+- **ACLU DC** — one of four issue areas, but backed by a dedicated campaign and staff
+  role — deeper commitment than a typical National-Allies entry. Kept here anyway:
+  the layer's defining trait is now "flows through a national chapter/resolution,"
+  not "shallow commitment," and ACLU DC's support is structurally a DC-chapter
+  program of a national org, same as LWV DC.
 
 Plus the unnamed long tail: **"and a growing coalition of 100+ organizations"** — a
 single credit line linking directly to Together for DC's own coalition page
@@ -141,7 +149,6 @@ that list.
 
 ## Open questions for the next iteration
 
-- **DC Appleseed's layer** — flagged above as possibly middle, not outer. Your call.
 - **Nav / IA placement** — the shipped page isn't linked from anywhere yet. Candidates:
   add to main nav, link from `/statehood-curious`'s "Meet the movement" preview card
   (would partially retire that card's coming-soon status — pursuing that was explicitly
@@ -210,3 +217,15 @@ that list.
   section (lead paragraph + Layer/Type explainer box) per "keep it tight" feedback;
   folded one line into the hero subtitle instead. Every directory card now has an
   explicit "Visit site" text link, not just a small icon.
+- **2026-07-27 (layer rebalance, tag styling)** — Moved DC Appleseed, DCFPI, and
+  Anacostia Coordinating Council from National Allies to Local Allies — resolves the
+  open "DC Appleseed's layer" question. Moved League of Women Voters DC and ACLU DC
+  from Local Allies to National Allies, making that layer coherent as "national org +
+  DC chapter / national resolution" (joining NAACP DC Branch and DNC). Wrote
+  supportive/descriptive taglines for all three layers (see "Layer model" above) to
+  replace the previously label-only names. Fixed "DC Statehood PAC" blurb (was
+  missing "DC"). Directory cards: added a third, color-coded layer tag distinct from
+  the category tag; bottom-aligned the "Visit site" link via flexbox so it lines up
+  across cards of varying description length in the same grid row; renamed the scope
+  tag's "D.C.-local" text to "Local" (cleaner, matches the matrix's own "Local"
+  label).

@@ -16,9 +16,9 @@ const CATEGORIES = [
 ]
 
 const LAYERS = [
-  { key: 'inner', label: 'Core', sub: 'all in on statehood', desc: 'Statehood is the entire reason the org exists.' },
-  { key: 'middle', label: 'Local Allies', sub: 'core, broader mandate', desc: 'Named, core part of a broader mission.' },
-  { key: 'outer', label: 'National Allies', sub: 'supportive, not core', desc: 'On record in support, not a sustained core focus.' },
+  { key: 'inner', label: 'Core', sub: '100% statehood', desc: '100% statehood.' },
+  { key: 'middle', label: 'Local Allies', sub: 'Broader mandate that includes statehood', desc: 'Broader mandate that includes statehood.' },
+  { key: 'outer', label: 'National Allies', sub: 'Supporting statehood through a DC chapter and national resolutions', desc: 'Supporting statehood through a DC chapter and national resolutions.' },
 ]
 
 const DATA = {
@@ -80,7 +80,7 @@ const DATA = {
     {
       id: 'statehood-pac', name: 'DC Statehood PAC', col: 'funding',
       scope: 'national', url: 'https://www.dcstatehoodpac.com/',
-      blurb: 'Statehood PAC',
+      blurb: 'DC Statehood PAC',
       desc: "An FEC-registered hybrid PAC (“Carey committee”) whose mission is full voting representation for D.C. via statehood. Raised roughly $56,000 in the 2021–2022 election cycle.",
     },
     {
@@ -104,30 +104,10 @@ const DATA = {
       desc: 'Founded in 1997, a grassroots, nonpartisan 501(c)(3) protecting D.C. home rule — full local budget control with no congressional review, locally elected or appointed judges, and full voting representation. Fuzzy inner/middle boundary: home-rule defense and statehood advocacy overlap heavily.',
     },
     {
-      id: 'lwv-dc', name: 'League of Women Voters of DC', col: 'national',
-      scope: 'local', url: 'https://www.lwvdc.org/',
-      blurb: 'LWV DC',
-      desc: 'The D.C. chapter of the national nonpartisan League of Women Voters — voter education and civic engagement, with statehood as one of its standing positions, including hosted events. Also on the Together for DC steering committee above.',
-    },
-    {
-      id: 'aclu-dc', name: 'ACLU of DC', col: 'national',
-      scope: 'local', url: 'https://www.acludc.org/',
-      blurb: 'ACLU DC',
-      desc: 'Statehood is one of ACLU-DC’s four major issue areas, backed by a dedicated “DC Statehood Now” campaign and staff position, run in partnership with ACLU affiliates nationwide.',
-    },
-  ],
-  outer: [
-    {
-      id: 'dnc', name: 'DNC', col: 'party',
-      scope: 'national', url: 'https://democrats.org/',
-      blurb: 'DNC',
-      desc: "The Democratic National Committee's national platform has included support for D.C. statehood since 2016, reaffirmed at the 2024 convention — on-the-record national backing, not a sustained day-to-day focus.",
-    },
-    {
       id: 'dc-appleseed', name: 'DC Appleseed', col: 'policy',
       scope: 'local', url: 'https://www.dcappleseed.org/',
       blurb: 'DC Appleseed',
-      desc: 'A public-interest law and governance organization — the primary legal architect behind D.C.’s voting-rights litigation strategy, including a 2018 federal lawsuit. 30+ years of sustained statehood/voting-rights advocacy; possibly closer to Middle layer than Outer.',
+      desc: 'A public-interest law and governance organization — the primary legal architect behind D.C.’s voting-rights litigation strategy, including a 2018 federal lawsuit. 30+ years of sustained statehood/voting-rights advocacy.',
     },
     {
       id: 'dcfpi', name: 'DC Fiscal Policy Institute', col: 'policy',
@@ -140,6 +120,26 @@ const DATA = {
       scope: 'local', url: 'https://www.anacostiacc.org/',
       blurb: 'Anacostia Coord. Council',
       desc: 'Since 1983, a volunteer consortium of 80+ partner organizations revitalizing Anacostia and the wider East-of-the-River community; ran an “East of the River Youth Voices for Statehood” student project.',
+    },
+  ],
+  outer: [
+    {
+      id: 'dnc', name: 'DNC', col: 'party',
+      scope: 'national', url: 'https://democrats.org/',
+      blurb: 'DNC',
+      desc: "The Democratic National Committee's national platform has included support for D.C. statehood since 2016, reaffirmed at the 2024 convention — on-the-record national backing, not a sustained day-to-day focus.",
+    },
+    {
+      id: 'lwv-dc', name: 'League of Women Voters of DC', col: 'national',
+      scope: 'local', url: 'https://www.lwvdc.org/',
+      blurb: 'LWV DC',
+      desc: 'The D.C. chapter of the national nonpartisan League of Women Voters — voter education and civic engagement, with statehood as one of its standing positions, including hosted events. Also on the Together for DC steering committee above.',
+    },
+    {
+      id: 'aclu-dc', name: 'ACLU of DC', col: 'national',
+      scope: 'local', url: 'https://www.acludc.org/',
+      blurb: 'ACLU DC',
+      desc: 'Statehood is one of ACLU-DC’s four major issue areas, backed by a dedicated “DC Statehood Now” campaign and staff position, run in partnership with ACLU affiliates nationwide.',
     },
     {
       id: 'naacp-dc', name: 'NAACP (DC Branch)', col: 'national',
@@ -268,8 +268,9 @@ function StatehoodPartnerMap() {
                       <h4>{org.name}</h4>
                     </div>
                     <div className="spm-org-tags">
+                      <span className={`spm-tag-layer spm-layer-${l.key}`}>{l.label}</span>
                       <span className="spm-tag">{CATEGORIES.find((c) => c.key === org.col)?.label}</span>
-                      <span className="spm-tag spm-tag-scope">{org.scope === 'national' ? 'National' : 'D.C.-local'}</span>
+                      <span className="spm-tag spm-tag-scope">{org.scope === 'national' ? 'National' : 'Local'}</span>
                     </div>
                     <p>{org.desc}</p>
                     <a className="spm-org-link" href={org.url} target="_blank" rel="noopener noreferrer">
