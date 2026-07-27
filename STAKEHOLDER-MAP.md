@@ -17,8 +17,9 @@ They are not the same thing — see the naming note below.
 - **Statehood Pledge** (`dcstatehoodpledge.org`) is a real, external, volunteer-run
   project — **national in scope**, tracking pledge signers among candidates and
   elected officials across multiple states (U.S. Senate, state lieutenant governor,
-  state senate, etc.), not just D.C. It's one of three sibling tools (see the new
-  Advocacy tool-oriented orgs category below).
+  state senate, etc.), not just D.C. It's one of three tools run by the same single
+  independent volunteer, with no formal org name — see the combined Tier 1 entry
+  below.
 - **RepresentDC's own tool** (`candidates.representdc.org`, the repo internally named
   `dc-statehood-pledge`) should be referred to as the **Statehood Candidate
   Questionnaire** — D.C.-focused (2026 candidates specifically), and must not be
@@ -54,18 +55,15 @@ actually *is* (for the visual map), each tagged with a plain-language "best for"
 | **League of Women Voters of DC** | Nonpartisan civic engagement | Confirmed active (also on Together for DC's steering committee — see below) | Local chapter of the national nonpartisan League of Women Voters — voter education and civic engagement, has taken positions on and hosted events around statehood. | ...get involved through a nonpartisan civic organization. | Broader mission than statehood alone. |
 | **DC Democratic Party Statehood Committee** | Party-affiliated organizing | Not yet | A committee within the D.C. Democratic Party focused specifically on statehood organizing. | ...organize for statehood within Democratic party politics. | **Guardrail (brainstorm doc §7):** label this org's party affiliation plainly and explicitly — it's a fact about the org, not a RepresentDC stance. |
 | **Students for DC Statehood** | Student / youth organizing | Not yet | Student-led statehood organizing. | ...get involved as a student. | |
-| **Statehood Pledge** | Advocacy tool-oriented org (volunteer-run) | Confirmed 2026-07-26 — `dcstatehoodpledge.org` | National tracker of statehood pledge signers among candidates/officials across multiple states. **Not the same as RepresentDC's own tool** — see naming note above. | ...see which candidates nationally have pledged support. | Sibling of Compact and Scorecard below — possibly one informal volunteer effort across all three, parent-org name unconfirmed. |
-| **Statehood Compact** | Advocacy tool-oriented org (volunteer-run) | Confirmed 2026-07-26 — `dcstatehoodcompact.org` | Tracks state legislatures introducing resolutions supporting D.C. statehood (interstate-compact approach). | ...see which states are formally backing statehood. | Sibling of Pledge/Scorecard. |
-| **Statehood Scorecard** | Advocacy tool-oriented org (volunteer-run) | Confirmed 2026-07-26 — `dcstatehoodscorecard.org` | Searchable scorecard tracking legislative actions/interference, filterable by name/party/jurisdiction/rating. | ...look up how a specific legislator has voted. | Sibling of Pledge/Compact. |
+| **Independent statehood tracking tools** *(Statehood Pledge, Statehood Compact, Statehood Scorecard)* | Independent volunteer-run tools | Confirmed 2026-07-26 — run by a single independent volunteer; no formal org name exists, so this entry is labeled functionally rather than with an invented name | Three tools, one operator: **Pledge** (`dcstatehoodpledge.org`) tracks candidate/official pledge signers nationally; **Compact** (`dcstatehoodcompact.org`) tracks state legislatures backing statehood via interstate-compact resolutions; **Scorecard** (`dcstatehoodscorecard.org`) is a searchable legislator-by-legislator voting/interference tracker. **Not the same as RepresentDC's own tool** — see naming note above. | ...see pledge signers nationally → Pledge. ...see which states are backing statehood → Compact. ...look up a specific legislator's record → Scorecard. | Collapsed from three separate Tier 1 entries into one 2026-07-26 — same operator, no org name to differentiate them by. Kept anonymous per standing call: describe as an independent volunteer effort, don't name the person on the map. |
 | **DC Statehood PAC** | Funding / PAC | Confirmed 2026-07-26 — FEC ID C00800227, `dcstatehoodpac.com` | FEC-registered hybrid PAC ("Carey committee"); mission is full voting representation via statehood. Raised ~$56K in the 2021–2022 cycle. | ...fund candidates/campaigns advancing statehood. | First entry in a category of its own — funding is a genuinely different kind of "connect with" than organizing or research. |
 | **Together for DC** | Coalition / partnership org | Confirmed 2026-07-26 — `togetherfordc.org` | Launched June 2026. Explicitly a "national solidarity infrastructure" — recruits out-of-state and national allies to apply pressure D.C. residents alone can't. Steering committee includes League of Women Voters DC (above), DCNOW, Public Citizen, Taskforce for Democracy. | ...bring in outside/national pressure, not just local organizing. | Resolves the open question from the last draft — this is a real, distinct, recently-launched initiative, not just an abstract wrapper label. Also the natural link target for the Tier 2 "100+ orgs" line below, since it already tracks the wider coalition itself. |
 
-**Scope note:** Tier 1 is now at 11 external orgs (plus RepresentDC's own Statehood
-Candidate Questionnaire, tracked separately). The original brainstorm scoped Tier 1 at
-"realistically 5–8 entries" for a readable map — worth deciding whether all 11 stay in
-Tier 1, or whether some (the Pledge/Compact/Scorecard trio, in particular, since
-they're closely related to each other) collapse into a single Tier 1 node with three
-sub-links, rather than three separate nodes.
+**Scope note:** Tier 1 is now at 9 external entries (plus RepresentDC's own Statehood
+Candidate Questionnaire, tracked separately) — down from 11 after collapsing
+Pledge/Compact/Scorecard into one node. Closer to the original brainstorm's "5–8
+entries" target for a readable map, though still slightly over; worth another look once
+the other categories firm up.
 
 ## Tier 2 — the wider coalition
 
@@ -82,30 +80,30 @@ checked it.
 ## Open questions for the next iteration
 
 - **Per-org verification pass** — the 7 entries still marked "Not yet" need the same
-  check the Pledge/Compact/Scorecard/PAC/Together for DC entries just got: current
-  URL, mission-statement accuracy, still-active status.
-- **Tier 1 scope** — 11 orgs may be too many for one readable map (see scope note
-  above); decide whether the tool-family trio collapses into one node.
+  check the tools/PAC/Together for DC entries just got: current URL,
+  mission-statement accuracy, still-active status.
 - **Visual map design** — layout, relationship lines/grouping, iconography. Not
-  attempted here.
+  attempted here. For the tools node specifically: how do three sub-tools read as one
+  map entry without looking like a single flat link?
 - **Matching-tool UX** — how a visitor expresses "what they want" and how that maps to
   the "best for" column above.
 - **Statehood Candidate Questionnaire's visual treatment** — needs to read as "our own
-  tool," not a twelfth peer org, on whatever the final map layout turns out to be.
-- **Statehood Pledge/Compact/Scorecard parent org** — confirmed these are three
-  sibling volunteer-run tools, but haven't confirmed whether there's a single named
-  parent entity behind all three or three independently-run efforts that just link to
-  each other.
+  tool," not a tenth peer entry, on whatever the final map layout turns out to be.
 
 ## Changelog
 
 - **2026-07-26** — Initial draft: 8 Tier 1 orgs pulled from the Action & Persona IA
   Brainstorm doc, categorized by type.
-- **2026-07-26 (same day, correction pass)** — Fixed a naming conflation: "DC Statehood
+- **2026-07-26 (correction pass)** — Fixed a naming conflation: "DC Statehood
   Pledge" was wrongly treated as RepresentDC's own tool; it's actually a separate
   national external org. Renamed RepresentDC's own tool to Statehood Candidate
   Questionnaire. Added three new categories with verified entries: Advocacy
   tool-oriented orgs (Statehood Pledge, Statehood Compact, Statehood Scorecard),
   Funding/PACs (DC Statehood PAC), and Coalition/partnership org (Together for DC,
-  resolving the open question of where it belongs). Tier 1 now at 11 external orgs;
-  flagged as possibly too many for the original "readable map" goal.
+  resolving the open question of where it belongs). Tier 1 hit 11 external orgs;
+  flagged as possibly too many.
+- **2026-07-26 (same day, structure pass)** — Confirmed Pledge/Compact/Scorecard are
+  all run by one person with no formal org name. Collapsed the three separate entries
+  into one Tier 1 node, labeled functionally ("Independent statehood tracking tools")
+  rather than inventing a name. Kept the volunteer anonymous on the map per standing
+  call. Tier 1 down to 9 external entries.
