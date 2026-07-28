@@ -10,15 +10,14 @@ const CATEGORIES = [
   { key: 'community', label: 'DC Community Advocacy' },
   { key: 'national', label: 'National Advocacy' },
   { key: 'party', label: 'Party-affiliated' },
-  { key: 'student', label: 'Student organizing' },
   { key: 'funding', label: 'Funding / PAC' },
-  { key: 'coalition', label: 'Coalition / partnership' },
+  { key: 'coalition', label: 'DC Community Coalition' },
 ]
 
 const LAYERS = [
   { key: 'inner', label: 'Core', sub: '100% statehood', desc: '100% statehood.' },
   { key: 'middle', label: 'Local Allies', sub: 'Broader mandate that includes statehood', desc: 'Broader mandate that includes statehood.' },
-  { key: 'outer', label: 'National Allies', sub: 'Supporting statehood through a DC chapter and national resolutions', desc: 'Supporting statehood through a DC chapter and national resolutions.' },
+  { key: 'outer', label: 'National Allies', sub: 'Support through national platforms and resolutions', desc: 'Support through national platforms and resolutions.' },
 ]
 
 const DATA = {
@@ -72,7 +71,7 @@ const DATA = {
       desc: "An officially affiliated committee of the D.C. Democratic Party dedicated to securing full democracy and self-determination for D.C. Its party affiliation is stated plainly here as a fact about the org, not a RepresentDC stance — the party itself has a broader platform; this committee doesn't.",
     },
     {
-      id: 'students-for-statehood', name: 'Students for DC Statehood', col: 'student',
+      id: 'students-for-statehood', name: 'Students for DC Statehood', col: 'community',
       scope: 'national', url: 'http://studentsfordcstatehood.com/',
       blurb: 'Students for DC Statehood',
       desc: 'A national student organization with eight active university chapters in D.C. (including Georgetown, American University, and Trinity Washington), mobilizing the 100,000+ college students who call the city home to canvass, contact legislators, and track statehood developments.',
@@ -121,6 +120,18 @@ const DATA = {
       blurb: 'Anacostia Coord. Council',
       desc: 'Since 1983, a volunteer consortium of 80+ partner organizations revitalizing Anacostia and the wider East-of-the-River community; ran an “East of the River Youth Voices for Statehood” student project.',
     },
+    {
+      id: 'lwv-dc', name: 'LWV DC', col: 'national',
+      scope: 'local', url: 'https://www.lwvdc.org/',
+      blurb: 'LWV DC',
+      desc: 'The D.C. chapter of the national nonpartisan League of Women Voters — voter education and civic engagement, with statehood as one of its standing positions, including hosted events. Also on the Together for DC steering committee above. Listed by name on D.C.’s own statehood-supporters page.',
+    },
+    {
+      id: 'aclu-dc', name: 'ACLU DC', col: 'national',
+      scope: 'local', url: 'https://www.acludc.org/',
+      blurb: 'ACLU DC',
+      desc: 'Statehood is one of ACLU-DC’s four major issue areas, backed by a dedicated “DC Statehood Now” campaign and staff position, run in partnership with ACLU affiliates nationwide. Listed by name on D.C.’s own statehood-supporters page.',
+    },
   ],
   outer: [
     {
@@ -130,22 +141,22 @@ const DATA = {
       desc: "The Democratic National Committee's national platform has included support for D.C. statehood since 2016, reaffirmed at the 2024 convention — on-the-record national backing, not a sustained day-to-day focus.",
     },
     {
-      id: 'lwv-dc', name: 'League of Women Voters of DC', col: 'national',
-      scope: 'local', url: 'https://www.lwvdc.org/',
-      blurb: 'LWV DC',
-      desc: 'The D.C. chapter of the national nonpartisan League of Women Voters — voter education and civic engagement, with statehood as one of its standing positions, including hosted events. Also on the Together for DC steering committee above.',
+      id: 'lwv', name: 'LWV', col: 'national',
+      scope: 'national', url: 'https://www.lwv.org/',
+      blurb: 'LWV',
+      desc: 'The national League of Women Voters (LWVUS) has publicly urged Congress to pass D.C. statehood, including a statement submitted to the U.S. Senate and a statement commending the House’s passage of D.C. statehood legislation — framed as a full-representation and civil-rights issue.',
     },
     {
-      id: 'aclu-dc', name: 'ACLU of DC', col: 'national',
-      scope: 'local', url: 'https://www.acludc.org/',
-      blurb: 'ACLU DC',
-      desc: 'Statehood is one of ACLU-DC’s four major issue areas, backed by a dedicated “DC Statehood Now” campaign and staff position, run in partnership with ACLU affiliates nationwide.',
+      id: 'aclu', name: 'ACLU', col: 'national',
+      scope: 'national', url: 'https://www.aclu.org/',
+      blurb: 'ACLU',
+      desc: 'The national ACLU officially scored Congress’s June 2020 vote on H.R. 51, the Washington, D.C. Admission Act, in its congressional scorecard, urging a “yes” vote as a matter of “liberty, justice, and democracy.”',
     },
     {
-      id: 'naacp-dc', name: 'NAACP (DC Branch)', col: 'national',
+      id: 'naacp', name: 'NAACP', col: 'national',
       scope: 'national', url: 'https://naacp.org/',
-      blurb: 'NAACP (DC)',
-      desc: 'The national NAACP has reaffirmed support for D.C. statehood by resolution repeatedly since 1978; the D.C. Branch has signed on to public letters backing statehood as part of the NAACP’s broader civil-rights platform.',
+      blurb: 'NAACP',
+      desc: 'The national NAACP has backed D.C. statehood by resolution since 1978, most recently reaffirmed in 2025, calling it “the only means to ensure full and equal representation in Congress” for D.C. residents.',
     },
   ],
 }
@@ -163,7 +174,10 @@ const SOURCES = [
   { name: 'DC Statehood PAC (FEC filing)', url: 'https://www.fec.gov/data/committee/C00800227/' },
   { name: 'Together for DC', url: 'https://togetherfordc.org/' },
   { name: 'League of Women Voters of DC', url: 'https://www.lwvdc.org/' },
+  { name: 'League of Women Voters (national)', url: 'https://www.lwv.org/elections/lwvus-urges-congress-support-dc-statehood' },
   { name: 'ACLU of DC', url: 'https://www.acludc.org/press-releases/aclu-endorses-statehood-district-columbia/' },
+  { name: 'ACLU (national)', url: 'https://www.aclu.org/press-releases/aclu-urges-house-representatives-vote-yes-dc-statehood' },
+  { name: 'DC statehood supporters list (DC gov)', url: 'https://statehood.dc.gov/page/dc-statehood-supporters' },
   { name: 'Free DC', url: 'https://freedcproject.org/history' },
   { name: 'DC Appleseed', url: 'https://www.dcappleseed.org/mission' },
   { name: 'DC Fiscal Policy Institute', url: 'https://www.dcfpi.org/' },
@@ -229,7 +243,7 @@ function StatehoodPartnerMap() {
                                 <a
                                   key={org.id}
                                   href={`#${org.id}`}
-                                  className={`spm-chip spm-layer-${l.key} spm-scope-${org.scope}`}
+                                  className={`spm-chip spm-layer-${l.key}`}
                                 >
                                   {org.blurb}
                                 </a>

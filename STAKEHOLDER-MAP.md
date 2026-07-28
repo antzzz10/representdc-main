@@ -42,10 +42,13 @@ the unnamed 100+ coalition as a loose outer haze beyond all three.
 - **Local Allies** (formerly "Middle layer") — "Broader mandate that includes
   statehood." Statehood is a *named, core* part of the mission, but the org has a
   broader mandate beyond it.
-- **National Allies** (formerly "Outer layer") — "Supporting statehood through a DC
-  chapter and national resolutions." The org's statehood support flows through a
-  national parent org's DC chapter or an on-record national resolution/platform
-  plank, not a sustained day-to-day D.C.-specific program.
+- **National Allies** (formerly "Outer layer") — "Support through national platforms
+  and resolutions." The org's own statehood support is a national on-record
+  resolution or platform plank — not a sustained day-to-day program. **Reworded
+  2026-07-27 (second pass):** previously said "through a DC chapter and national
+  resolutions," but that's no longer accurate now that DC chapters (LWV DC, ACLU DC)
+  have their own Local Allies entries separate from their national parent orgs — see
+  the National Advocacy split below.
 
 Taglines rewritten 2026-07-27 to be more supportive/descriptive (previously unstated,
 label-only); the live page's `LAYERS.sub`/`.desc` fields carry this text verbatim.
@@ -77,6 +80,13 @@ belonged in the same family — resolved differently than the first attempt:
   column axis (this table stays organized by Layer for readability, since re-deriving
   a Type-primary table in Markdown isn't worth the churn — the underlying data is
   identical either way).
+
+**2026-07-27 category cleanup (second pass):**
+- **Student organizing removed as its own category** — folded into DC Community
+  Advocacy. Students for DC Statehood is its only member, so a dedicated category
+  wasn't earning its keep.
+- **Coalition / partnership renamed to DC Community Coalition** — same membership
+  (Together for DC), clearer label.
 
 ### Inner layer
 
@@ -115,6 +125,8 @@ run through a separate branded unit. Revisit only if that changes.
 | **DC Appleseed** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcappleseed.org` | Core mission is broad DC governance/public-interest law ("make DC a better place to live and work"), with a deep and sustained statehood track record — 30+ years of advocacy, described as the "primary legal architect" of DC's voting-rights legal strategy, filed a federal lawsuit over congressional voting rights in 2018. Moved to Local Allies 2026-07-27 — the prior "possibly Middle, not Outer" flag is resolved. |
 | **DC Fiscal Policy Institute (DCFPI)** | DC Policy | D.C. | Confirmed 2026-07-26 — `dcfpi.org` | Core mission is budget/tax research for low- and moderate-income D.C. residents. Published "The High Cost of Denying Statehood to the District of Columbia" (March 2021) connecting statehood to fiscal outcomes — a specific research output, not a sustained standalone program. Moved to Local Allies 2026-07-27. |
 | **Anacostia Coordinating Council** | DC Community Advocacy | D.C. (Wards 7–8) | Confirmed 2026-07-26 — active since 1983, 80+ partner orgs | Core mission is East-of-the-River community revitalization. Ran an "East of the River Youth Voices for Statehood" poetry/essay project — a specific program, not an ongoing statehood focus. Moved to Local Allies 2026-07-27. |
+| **LWV DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee; listed by name (as "League of Women Voters of the District of Columbia") on `statehood.dc.gov`'s own supporters page | Voter education and civic engagement; has taken positions on and hosted events around statehood. Moved back to Local Allies 2026-07-27 (second pass) — split from the national LWV org below, since the DC chapter has its own on-record statehood involvement distinct from LWVUS's. |
+| **ACLU DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org`; listed by name (as "ACLU-DC") on `statehood.dc.gov`'s own supporters page | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. Moved back to Local Allies 2026-07-27 (second pass) — split from the national ACLU org below, same reasoning as LWV DC. |
 
 **Fuzzy boundary flags:**
 - **Free DC** — is home-rule defense genuinely *broader* than statehood (middle), or
@@ -126,16 +138,9 @@ run through a separate branded unit. Revisit only if that changes.
 | Org | Category | Scope | Verified? | What they do (draft) |
 |---|---|---|---|---|
 | **DNC** | Party-affiliated | National | Confirmed 2026-07-27 — national platform has backed D.C. statehood since 2016, reaffirmed at the 2024 convention (dcist.com) | The Democratic National Committee's national platform has included D.C. statehood support since 2016 — on-the-record national backing, not a sustained day-to-day focus. Completes the Committee (Core) → DC Democratic Party (Local Allies) → DNC (National Allies) progression. |
-| **League of Women Voters of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed active — also on Together for DC's steering committee | Voter education and civic engagement; has taken positions on and hosted events around statehood. Moved to National Allies 2026-07-27 to match the layer's "national org, DC chapter" tagline. |
-| **ACLU of DC** | National Advocacy | D.C. (chapter of national org) | Confirmed 2026-07-26 — `acludc.org` | D.C. Statehood is one of ACLU-DC's four major issue areas (alongside criminal legal system reform, First Amendment, freedom from discrimination). Runs an active "DC Statehood Now" campaign with a dedicated staff position. Moved to National Allies 2026-07-27 — same reasoning as LWV DC below; the prior "flagging that it sits close to the inner boundary" note is superseded by this move. |
-| **NAACP (DC Branch)** | National Advocacy | National org, D.C. branch | Confirmed 2026-07-26 | National NAACP has reaffirmed statehood support via resolutions since 1978 (multiple times through 2016); DC Branch president has signed on to public letters. Statehood is one plank on a very broad national civil-rights platform. |
-
-**Fuzzy boundary flags:**
-- **ACLU DC** — one of four issue areas, but backed by a dedicated campaign and staff
-  role — deeper commitment than a typical National-Allies entry. Kept here anyway:
-  the layer's defining trait is now "flows through a national chapter/resolution,"
-  not "shallow commitment," and ACLU DC's support is structurally a DC-chapter
-  program of a national org, same as LWV DC.
+| **LWV** | National Advocacy | National | Confirmed 2026-07-27 — `lwv.org` (statement to the U.S. Senate; statement commending House passage of D.C. statehood legislation) | The national League of Women Voters (LWVUS), distinct from LWV DC above, has publicly urged Congress to pass D.C. statehood — framed as a full-representation and civil-rights issue. |
+| **ACLU** | National Advocacy | National | Confirmed 2026-07-27 — `aclu.org`, officially scored Congress's June 2020 H.R. 51 vote in its congressional scorecard | The national ACLU, distinct from ACLU DC above, urged a "yes" vote on the Washington, D.C. Admission Act as a matter of "liberty, justice, and democracy." |
+| **NAACP** | National Advocacy | National | Confirmed 2026-07-27 — `naacp.org`, resolutions since 1978, most recently reaffirmed 2025 | The national NAACP has backed D.C. statehood by resolution since 1978, calling it "the only means to ensure full and equal representation in Congress." **No DC-Branch entry**: checked `naacpdc.org`'s "Who We Are" and "Political Action" pages plus `statehood.dc.gov`'s supporters list (which credits LWV-DC and ACLU-DC by name but only national NAACP) — found no DC-Branch-specific statehood statement, so unlike LWV/ACLU this one stays a single national-only entry rather than splitting. |
 
 Plus the unnamed long tail: **"and a growing coalition of 100+ organizations"** — a
 single credit line linking directly to Together for DC's own coalition page
@@ -229,3 +234,18 @@ that list.
   across cards of varying description length in the same grid row; renamed the scope
   tag's "D.C.-local" text to "Local" (cleaner, matches the matrix's own "Local"
   label).
+- **2026-07-27 (LWV/ACLU/NAACP split, category cleanup, matrix decluttered)** — Split
+  LWV and ACLU each into a DC-chapter entry (Local Allies, e.g. "LWV DC") and a
+  national-org entry (National Allies, e.g. "LWV") — verified both levels have
+  independent on-record statehood involvement: the DC chapters are listed by name on
+  `statehood.dc.gov`'s own supporters page, and the national orgs each have their own
+  documented statehood advocacy (LWVUS statements to Congress; ACLU's official
+  scoring of the June 2020 H.R. 51 vote). **NAACP did not get the same split** — after
+  checking `naacpdc.org` and the DC statehood-supporters page, found no DC-Branch-
+  specific statehood statement (only the national NAACP's resolutions, dating to
+  1978 and reaffirmed 2025), so NAACP stays a single National Allies entry. Folded
+  Student organizing into DC Community Advocacy (its only member was Students for DC
+  Statehood — not enough to justify its own category). Renamed Coalition / partnership
+  to DC Community Coalition. Removed the matrix chips' dashed-border treatment (it
+  silently encoded org scope with no legend or explanation); scope is still shown as
+  plain text on each directory card, so nothing was lost, just decluttered.

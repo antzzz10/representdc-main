@@ -101,7 +101,6 @@ table.spm-matrix td.spm-cell {
   text-decoration: none;
   transition: filter var(--dur) var(--ease);
 }
-.spm-chip.spm-scope-national { border: 1.5px dashed rgba(255,255,255,0.55); }
 .spm-chip.spm-layer-inner { background: var(--navy); }
 .spm-chip.spm-layer-middle { background: var(--navy-600); }
 .spm-chip.spm-layer-outer { background: var(--spm-outer); }
