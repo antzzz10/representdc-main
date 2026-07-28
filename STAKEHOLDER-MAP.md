@@ -186,3 +186,18 @@ Context that doesn't fit as a code comment but matters for the next correction r
   direct question about where corrections should live going forward, to remove the
   two-copies sync risk that had shown up as small drifts across earlier rounds (e.g.
   a source-list entry or blurb fix landing in one file but not the other).
+- **2026-07-27 (copy pass: tone, capacity references, stale data)** — Reviewed all 22
+  descriptions for editorializing and diminishing language. Removed every reference
+  to org operating capacity/informality: "volunteer-run" (RepresentDC), "same single
+  volunteer" / "same volunteer operator" (Pledge/Compact/Scorecard), "volunteer"
+  qualifier on Anacostia Coordinating Council's consortium, and the "D.C. residents
+  alone can't" framing on Together for DC (reworded to describe the coalition's
+  purpose without implying D.C. residents are insufficient on their own). Removed
+  internal meta-commentary that had leaked into public card copy: the Statehood
+  Committee's "not a RepresentDC stance" disclaimer, Free DC's "fuzzy inner/middle
+  boundary" categorization note, DNC's "not a sustained day-to-day focus" aside, and
+  LWV DC/ACLU DC's "listed by name on D.C.'s own statehood-supporters page" citation
+  fragments (that verification detail lives in this doc's "Notable judgment calls"
+  section instead — a card should describe the org, not our sourcing process).
+  Removed DC Statehood PAC's 2021–2022 fundraising figure since we don't have a more
+  recent number and stale specifics read worse than no specifics.
