@@ -201,3 +201,17 @@ Context that doesn't fit as a code comment but matters for the next correction r
   section instead — a card should describe the org, not our sourcing process).
   Removed DC Statehood PAC's 2021–2022 fundraising figure since we don't have a more
   recent number and stale specifics read worse than no specifics.
+- **2026-07-28 (Official government split into three entries)** — The single "New
+  Columbia Commission" entry conflated three separate government bodies. Split into:
+  **Office of the Senior Advisor** (mayoral office; its Office of Federal and
+  Regional Affairs coordinates the statehood push — `osa.dc.gov`), **DC Shadow
+  Delegation** (two shadow Senators + one shadow Representative, elected by D.C.
+  voters since 1990 to lobby Congress — `statehood.dc.gov/page/dc-governance`), and
+  **New Columbia Statehood Commission** (created 2014; Mayor, Council Chairman, and
+  the two shadow Senators — `statehood.dc.gov/page/new-columbia-statehood-commission`).
+  Also **corrected the Commission's name** back to "New Columbia Statehood
+  Commission" — the 2026-07-27 naming pass had trimmed it to "New Columbia
+  Commission," but `statehood.dc.gov`'s own page confirms "Statehood" is part of the
+  official name. Descriptions note the Commission/Delegation overlap (both shadow
+  Senators sit on the Commission) without re-litigating it at length, per the prior
+  round's "no meta-commentary" cleanup.

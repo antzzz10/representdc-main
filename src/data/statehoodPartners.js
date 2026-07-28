@@ -32,10 +32,22 @@ export const LAYERS = [
 export const DATA = {
   inner: [
     {
-      id: 'new-columbia-commission', name: 'New Columbia Commission', col: 'gov',
-      scope: 'local', url: 'https://statehood.dc.gov/',
-      blurb: 'New Columbia Commission',
-      desc: "Created in 2014 to coordinate D.C.'s statehood strategy on behalf of the District government and support the District's “shadow” congressional delegation. Led by the Mayor, the Council Chairman, and D.C.'s shadow senators.",
+      id: 'office-senior-advisor', name: 'Office of the Senior Advisor', col: 'gov',
+      scope: 'local', url: 'https://osa.dc.gov/page/pathway-dc-statehood',
+      blurb: 'Office of the Senior Advisor',
+      desc: "A mayoral office advising on policy, federal, and regional affairs. Its Office of Federal and Regional Affairs coordinates the District government's statehood push alongside the DC Shadow Delegation and New Columbia Statehood Commission below.",
+    },
+    {
+      id: 'dc-shadow-delegation', name: 'DC Shadow Delegation', col: 'gov',
+      scope: 'local', url: 'https://statehood.dc.gov/page/dc-governance',
+      blurb: 'DC Shadow Delegation',
+      desc: "Two shadow Senators and one shadow Representative, elected by D.C. voters since 1990 to lobby Congress for statehood and defend home rule. Unpaid, non-voting positions with no formal congressional standing. Its shadow Senators also sit on the New Columbia Statehood Commission below.",
+    },
+    {
+      id: 'new-columbia-statehood-commission', name: 'New Columbia Statehood Commission', col: 'gov',
+      scope: 'local', url: 'https://statehood.dc.gov/page/new-columbia-statehood-commission',
+      blurb: 'New Columbia Statehood Commission',
+      desc: "Created in 2014 to coordinate D.C.'s statehood initiatives. Members: the Mayor, the Council Chairman, and D.C.'s two shadow Senators — a separate body from the Shadow Delegation above, though membership overlaps.",
     },
     {
       id: 'dc-vote', name: 'DC Vote', col: 'policy',
@@ -172,6 +184,9 @@ export const DATA = {
 
 export const SOURCES = [
   { name: 'DC Council, statehood.dc.gov', url: 'https://statehood.dc.gov/' },
+  { name: 'Office of the Senior Advisor — Pathway to DC Statehood', url: 'https://osa.dc.gov/page/pathway-dc-statehood' },
+  { name: 'DC Shadow Delegation (DC Governance)', url: 'https://statehood.dc.gov/page/dc-governance' },
+  { name: 'New Columbia Statehood Commission', url: 'https://statehood.dc.gov/page/new-columbia-statehood-commission' },
   { name: 'DC Vote', url: 'https://www.dcvote.org/mission/' },
   { name: 'Neighbors United for DC Statehood', url: 'https://www.the51st.org/' },
   { name: 'Students for DC Statehood', url: 'http://studentsfordcstatehood.com/' },
