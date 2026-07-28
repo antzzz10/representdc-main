@@ -142,6 +142,12 @@ export const DATA = {
       desc: 'Since 1983, a consortium of 80+ partner organizations revitalizing Anacostia and the wider East-of-the-River community; ran an “East of the River Youth Voices for Statehood” student project.',
     },
     {
+      id: 'fair-budget-coalition', name: 'Fair Budget Coalition', col: 'coalition',
+      scope: 'local', url: 'https://fairbudget.org/',
+      blurb: 'Fair Budget Coalition',
+      desc: 'A coalition of D.C. organizations advocating for a budget that supports racial justice and low-income communities, citing D.C.’s autonomy and statehood as deeply intertwined with achieving an equitable budget.',
+    },
+    {
       id: 'lwv-dc', name: 'LWV DC', col: 'national',
       scope: 'local', url: 'https://www.lwvdc.org/',
       blurb: 'LWV DC',
@@ -197,6 +203,8 @@ export const SOURCES = [
   { name: 'DC Statehood Scorecard', url: 'https://www.dcstatehoodscorecard.org/' },
   { name: 'DC Statehood PAC (FEC filing)', url: 'https://www.fec.gov/data/committee/C00800227/' },
   { name: 'Together for DC', url: 'https://togetherfordc.org/' },
+  { name: 'Fair Budget Coalition', url: 'https://fairbudget.org/' },
+  { name: 'Fair Budget Coalition (statehood statement)', url: 'https://x.com/FairBudgetDC/status/1964026321421369593' },
   { name: 'League of Women Voters of DC', url: 'https://www.lwvdc.org/' },
   { name: 'League of Women Voters (national)', url: 'https://www.lwv.org/elections/lwvus-urges-congress-support-dc-statehood' },
   { name: 'ACLU of DC', url: 'https://www.acludc.org/press-releases/aclu-endorses-statehood-district-columbia/' },

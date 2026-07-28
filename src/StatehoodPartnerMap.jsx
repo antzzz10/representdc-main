@@ -78,11 +78,6 @@ function StatehoodPartnerMap() {
               </table>
             </div>
           </div>
-          <p className="spm-matrix-note">
-            Empty cells are informative, not missing data — e.g. no
-            Official-government-type org is a National Ally rather than Core. Click any
-            chip to jump to its full entry below.
-          </p>
         </div>
       </section>
 

@@ -215,3 +215,14 @@ Context that doesn't fit as a code comment but matters for the next correction r
   official name. Descriptions note the Commission/Delegation overlap (both shadow
   Senators sit on the Commission) without re-litigating it at length, per the prior
   round's "no meta-commentary" cleanup.
+- **2026-07-28 (Fair Budget Coalition added; matrix note removed; chip hover
+  affordance added)** — Added **Fair Budget Coalition** (`fairbudget.org`) to DC
+  Community Coalition / Local Allies — verified via their own account: "Autonomy and
+  statehood are deeply intertwined with our ability to have a just, equitable
+  #DCbudget." Their core mission (racial-justice budget advocacy) is broader than
+  statehood, so Local Allies rather than Core. Removed the `.spm-matrix-note`
+  paragraph below the matrix ("Empty cells are informative... Click any chip to jump
+  to its full entry below") — unclear value, and the "click any chip" half is now
+  redundant with a new hover/focus affordance: chips round from a rectangle (7px) into
+  a full pill (999px) and lift slightly on hover/focus-visible, signaling
+  clickability visually instead of spelling it out in text.
