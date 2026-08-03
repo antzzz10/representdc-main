@@ -226,3 +226,31 @@ Context that doesn't fit as a code comment but matters for the next correction r
   redundant with a new hover/focus affordance: chips round from a rectangle (7px) into
   a full pill (999px) and lift slightly on hover/focus-visible, signaling
   clickability visually instead of spelling it out in text.
+- **2026-08-03 (PAC/Pledge copy precision; source-link audit)** — **DC Statehood PAC**:
+  replaced a paraphrased mission ("full voting representation for D.C. via statehood")
+  with the PAC's own verified words, quoted directly from `dcstatehoodpac.com`: "We
+  support candidates and elected officials who support DC Statehood, and we oppose
+  those who don't." More direct, and no longer a RepresentDC paraphrase of their
+  position. **DC Statehood Pledge**: broadened the office list — the old copy named
+  only U.S. Senate, state lieutenant governor, and state senate, which read as
+  exhaustive but wasn't; the site actually covers the presidency, Congress, governors,
+  state legislatures, and local offices (treasurers, comptrollers, school boards,
+  city councils). Confirmed the site doesn't claim to perform outreach (just tracks/
+  lists signers), so the broadened copy stays to "tracks," not "performs outreach to,"
+  despite that phrasing being floated — an unverified action verb didn't belong even
+  though the broader office list was correct.
+  **Source-link audit (all 25 orgs + all `SOURCES` entries):** every org's `url`
+  ("Visit site") field already pointed to the org's own domain — no fixes needed
+  there. Found two `SOURCES` entries citing a third party instead of the org itself:
+  DC Statehood PAC's only listed source was its FEC filing (`fec.gov`), not
+  `dcstatehoodpac.com` — added the org's own site as the primary citation, kept the
+  FEC filing as a secondary citation specifically for the "FEC-registered" claim.
+  Same pattern for DNC: only source was a 2016 DCist news article — added
+  `democrats.org`'s own 2024 platform page as the primary citation, kept the DCist
+  article as a secondary citation specifically for the 2016-addition history claim.
+  Fair Budget Coalition's statehood-statement source (`x.com/FairBudgetDC/...`) was
+  flagged but kept as-is: checked `fairbudget.org/about` for an on-site alternative
+  and found none — the X post is still the org's own verified account, just not their
+  own domain, and no better primary source exists. All 37 unique URLs on the page
+  spot-checked for HTTP 200 (one 403 on `lwv.org` is curl being bot-blocked, not a
+  dead link — confirmed reachable via browser/search earlier in the project).
