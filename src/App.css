@@ -168,6 +168,25 @@
   box-shadow: var(--shadow-xs);
 }
 
+a.preview-card-live {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+a.preview-card-live:hover,
+a.preview-card-live:focus-visible {
+  border-color: var(--navy);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-badge-live {
+  background: var(--navy);
+  color: var(--white);
+}
+
 .preview-card svg {
   color: var(--navy);
   margin-bottom: var(--s-3);

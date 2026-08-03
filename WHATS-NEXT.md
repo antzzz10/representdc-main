@@ -46,7 +46,10 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   in the original design either)
 - ~~Take Action Hub coming-soon page~~ ✅ done — `src/TakeAction.jsx`, previews the
   three real content ideas (Congressional outreach toolkit, state-level advocacy, "No
-  donation without representation")
+  donation without representation"). **Superseded 2026-07-28:** `/take-action` is being
+  repurposed for the org matcher + events list PRD (see "New since last update" below)
+  — these three original ideas move to backlog, unscheduled, in Phase 7 below rather
+  than being lost.
 - ~~"New to D.C." gets a dedicated page instead of an anchor scroll~~ ✅ done
   (2026-07-25) — `/how-congress-controls-dc`, a deeper newcomer explainer (pre-1973
   governance history, all three congressional override mechanisms, sourced against
@@ -94,10 +97,13 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   audience-separation decision, since that decision could change what this site even
   needs to look like
 
-**Phase 7 — Take Action Hub, full build** *(after Phase 4's coming-soon placeholder proves the demand)*
-- Real content already sketched above (Congressional outreach toolkit, state-level
-  advocacy, "No donation without representation"), plus whatever the Phase 4
-  coming-soon page's engagement suggests is worth prioritizing first
+**Phase 7 — backlog: Congressional outreach toolkit, state-level advocacy, "No
+donation without representation"**
+- The three ideas originally sketched for `/take-action`'s eventual full build, moved
+  to backlog 2026-07-28 when that route got repurposed for the org matcher + events
+  list (see "New since last update" above and `TAKE-ACTION-MATCHER-PRD.md`).
+  Unscheduled, not rejected — revisit once the matcher ships and proves out (or
+  doesn't) what visitors actually want from this page.
 
 **Held indefinitely**
 - Myth-busting games — needs a redesign before it's worth reconsidering at all
@@ -119,12 +125,25 @@ design (see `decisions/2026-07-12-persona-picker-and-statehood-curious.md`):
   Brainstorm.dc.html` — including a proposed empty-state fallback when nothing's
   scheduled.)
 - **Statehood Partner Map:** shipped 2026-07-27 as `/statehood-partner-map`
-  (`src/StatehoodPartnerMap.jsx`) — 18 orgs, all verified, Layer × Type matrix plus a
-  full expanded directory. Not yet linked from nav or any other page. Still needed:
-  IA placement decision, the "if you want X, connect with Y" matching-tool UX, and
-  possibly relationship lines between orgs on the matrix — see `STAKEHOLDER-MAP.md`'s
-  "Open questions" section (that doc stays the source-of-truth reference; edit there
-  first, then port to the page).
+  (`src/StatehoodPartnerMap.jsx`), 25 orgs as of 2026-07-28, all verified. Data now
+  lives in `src/data/statehoodPartners.js` (single source of truth — see that file's
+  header comment); `STAKEHOLDER-MAP.md` holds decision history only. **Linked from
+  the site for the first time 2026-08-03** — `/statehood-curious`'s "Meet the
+  movement" preview card now links here instead of showing "Coming soon." Still not
+  in main nav. The "if you want X, connect with Y" matching-tool UX is now a scoped
+  PRD — see the Take Action Hub matcher entry below — and possibly relationship
+  lines between orgs on the matrix is still open, tracked in `STAKEHOLDER-MAP.md`'s
+  "Open questions" section.
+- **Take Action Hub — org matcher + events list:** scoped 2026-07-28 — repurposes
+  `/take-action` (currently a placeholder previewing different, unbuilt content — see
+  the Phase 4 checklist above) into a real two-question intake that matches a visitor
+  to Partner Map orgs, plus an events list sourced from partner orgs' own structured
+  data exports (feed-based, verified viable on Free DC's Squarespace export — never
+  scraped). Scope, IA placement, and events-sourcing approach are decided
+  (`decisions/2026-07-28-take-action-matcher-scope.md`); full detail and five smaller
+  open questions in `TAKE-ACTION-MATCHER-PRD.md`. Core prerequisite: an org-by-org
+  audit of "how to plug in" (volunteer/mailing-list/events/donate/advocacy/staff-only)
+  that doesn't exist in the data yet — scoped as part of this build, not deferred.
 - **Talking point generator:** scoped 2026-07-26 — a `/talking-points` route where four
   structured questions (topic · audience · time · medium) return tailored, sourced points
   drawn from the existing vetted claim library. Architecture, input set, learning loop,

@@ -91,10 +91,6 @@ Context that doesn't fit as a code comment but matters for the next correction r
 
 ## Open questions for the next iteration
 
-- **Nav / IA placement** — the shipped page isn't linked from anywhere yet. Candidates:
-  add to main nav, link from `/statehood-curious`'s "Meet the movement" preview card
-  (would partially retire that card's coming-soon status — pursuing that was explicitly
-  deferred as its own bigger decision on 2026-07-26), or leave direct-URL-only for now.
 - **Matching-tool UX** — how a visitor expresses "what they want" and how that maps to
   each org. Not built yet — the shipped page is the map, not yet the matcher.
 - **Relationship lines between orgs** — e.g. LWV DC sitting on Together for DC's
@@ -254,3 +250,11 @@ Context that doesn't fit as a code comment but matters for the next correction r
   own domain, and no better primary source exists. All 37 unique URLs on the page
   spot-checked for HTTP 200 (one 403 on `lwv.org` is curl being bot-blocked, not a
   dead link — confirmed reachable via browser/search earlier in the project).
+- **2026-08-03 (nav/IA placement resolved)** — Linked the page for the first time.
+  `/statehood-curious`'s "Meet the movement" preview card now links to
+  `/statehood-partner-map` instead of showing a "Coming soon" badge — swapped to a
+  distinct navy "Explore" badge and a hover/focus lift (border + shadow) so it reads
+  as live, not another placeholder. The other two preview cards on that page are
+  untouched and still "Coming soon." Resolves the "Nav / IA placement" open question;
+  main-nav placement and the `/statehood-curious` full build remain separate,
+  still-open questions.

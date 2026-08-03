@@ -21,6 +21,7 @@ const PREVIEWS = [
     icon: 'users',
     title: 'Meet the movement',
     body: 'The organizations doing statehood work right now, and where to plug in with each one.',
+    to: '/statehood-partner-map',
   },
   {
     icon: 'book-open',
@@ -43,14 +44,26 @@ function StatehoodCurious() {
       <section className="impact-section">
         <div className="container">
           <div className="preview-grid">
-            {PREVIEWS.map((p) => (
-              <div className="preview-card" key={p.title}>
-                <span className="card-badge">Coming soon</span>
-                <Icon name={p.icon} size={28} />
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
-              </div>
-            ))}
+            {PREVIEWS.map((p) => {
+              if (p.to) {
+                return (
+                  <Link className="preview-card preview-card-live" to={p.to} key={p.title}>
+                    <span className="card-badge card-badge-live">Explore</span>
+                    <Icon name={p.icon} size={28} />
+                    <h3>{p.title}</h3>
+                    <p>{p.body}</p>
+                  </Link>
+                )
+              }
+              return (
+                <div className="preview-card" key={p.title}>
+                  <span className="card-badge">Coming soon</span>
+                  <Icon name={p.icon} size={28} />
+                  <h3>{p.title}</h3>
+                  <p>{p.body}</p>
+                </div>
+              )
+            })}
           </div>
           <div className="interim-links">
             <p>In the meantime, start here:</p>
