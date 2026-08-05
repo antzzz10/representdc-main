@@ -258,3 +258,22 @@ Context that doesn't fit as a code comment but matters for the next correction r
   untouched and still "Coming soon." Resolves the "Nav / IA placement" open question;
   main-nav placement and the `/statehood-curious` full build remain separate,
   still-open questions.
+- **2026-08-04 (four elected/government offices added)** — Added **DC Mayor**,
+  **DC Council**, **DC Delegate to Congress**, and **DC Attorney General** to
+  Official government / Local Allies — the general-purpose offices sit at Local
+  Allies (broader mandate than statehood alone) while the purpose-built statehood
+  bodies (Office of the Senior Advisor, Shadow Delegation, Commission) stay at Core,
+  consistent with the existing layer model. Each verified against its own official
+  site or a direct government press release: the Mayor's homepage runs a live count
+  of D.C. residents without a congressional vote and links to the statehood
+  campaign; the Council voted unanimously in 2016 to put statehood to a referendum
+  (86% approval); the Delegate has introduced the Washington, D.C. Admission Act
+  (H.R. 51) in every recent Congress, most recently with 220 House cosponsors; the
+  Attorney General's office has sued the federal government multiple times over
+  Home Rule Act autonomy, and a prior AG filed a court brief specifically arguing
+  D.C. residents are harmed by the lack of congressional representation. **DC
+  Delegate to Congress's description explicitly distinguishes it from the DC Shadow
+  Delegation entry above** — the Delegate is a real, elected, official (if limited)
+  member of the U.S. House; the Shadow Delegation has no official standing at all.
+  That distinction matters enough on this page to spell out, given both entries sit
+  in the same category.

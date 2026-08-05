@@ -112,6 +112,30 @@ export const DATA = {
   ],
   middle: [
     {
+      id: 'dc-mayor', name: 'DC Mayor', col: 'gov',
+      scope: 'local', url: 'https://mayor.dc.gov/',
+      blurb: 'DC Mayor',
+      desc: "The District's chief executive, and a member of the New Columbia Statehood Commission above. The Mayor's official site features a running count of D.C. residents without a congressional vote, linking directly to the District's statehood campaign.",
+    },
+    {
+      id: 'dc-council', name: 'DC Council', col: 'gov',
+      scope: 'local', url: 'https://dccouncil.gov/',
+      blurb: 'DC Council',
+      desc: 'The District\'s legislative body. Voted unanimously in 2016 to place a statehood referendum before D.C. voters, who approved it with 86% support — the referendum whose proposed constitution and boundaries the New Columbia Statehood Commission above coordinates.',
+    },
+    {
+      id: 'dc-delegate', name: 'DC Delegate to Congress', col: 'gov',
+      scope: 'local', url: 'https://norton.house.gov/',
+      blurb: 'DC Delegate to Congress',
+      desc: "D.C.'s one official, elected voice in Congress — distinct from the unofficial Shadow Delegation above. Can introduce legislation and vote in committee, though not on the House floor. Has introduced the Washington, D.C. Admission Act (H.R. 51) in every recent Congress, most recently with a record 220 House cosponsors.",
+    },
+    {
+      id: 'dc-attorney-general', name: 'DC Attorney General', col: 'gov',
+      scope: 'local', url: 'https://oag.dc.gov/',
+      blurb: 'DC Attorney General',
+      desc: "The District's chief legal officer, an elected office since 2014. Has sued the federal government multiple times to defend D.C.'s Home Rule Act autonomy against federal overreach, and a prior Attorney General filed a court brief arguing D.C. residents are directly harmed by the lack of congressional representation.",
+    },
+    {
       id: 'dc-democratic-party', name: 'DC Democratic Party', col: 'party',
       scope: 'local', url: 'https://www.dcdemocraticparty.org/',
       blurb: 'DC Democratic Party',
@@ -189,8 +213,15 @@ export const DATA = {
 }
 
 export const SOURCES = [
-  { name: 'DC Council, statehood.dc.gov', url: 'https://statehood.dc.gov/' },
+  { name: 'DC Government, statehood.dc.gov', url: 'https://statehood.dc.gov/' },
   { name: 'Office of the Senior Advisor — Pathway to DC Statehood', url: 'https://osa.dc.gov/page/pathway-dc-statehood' },
+  { name: 'DC Mayor', url: 'https://mayor.dc.gov/' },
+  { name: 'DC Council', url: 'https://dccouncil.gov/' },
+  { name: 'DC Council 2016 statehood referendum vote', url: 'https://statehood.dc.gov/release/unanimous-dc-council-vote-marks-historic-day-fight-statehood' },
+  { name: 'DC Delegate to Congress', url: 'https://norton.house.gov/' },
+  { name: 'DC Delegate — DC statehood bill introduction', url: 'https://norton.house.gov/media/press-releases/norton-van-hollen-announce-introduction-dc-statehood-bill' },
+  { name: 'DC Attorney General', url: 'https://oag.dc.gov/' },
+  { name: 'DC Attorney General — court brief on lack of congressional representation', url: 'https://oag.dc.gov/release/ag-racine-files-court-brief-arguing-dc-residents' },
   { name: 'DC Shadow Delegation (DC Governance)', url: 'https://statehood.dc.gov/page/dc-governance' },
   { name: 'New Columbia Statehood Commission', url: 'https://statehood.dc.gov/page/new-columbia-statehood-commission' },
   { name: 'DC Vote', url: 'https://www.dcvote.org/mission/' },
