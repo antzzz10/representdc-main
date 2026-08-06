@@ -63,7 +63,7 @@ function StatehoodPartnerMap() {
                                 <a
                                   key={org.id}
                                   href={`#${org.id}`}
-                                  className={`spm-chip spm-layer-${l.key}`}
+                                  className={`spm-chip spm-layer-${l.key}${org.self ? ' spm-chip-self' : ''}`}
                                 >
                                   {org.blurb}
                                 </a>
@@ -92,7 +92,7 @@ function StatehoodPartnerMap() {
               <p className="spm-layer-desc">{l.desc}</p>
               <div className="spm-card-grid">
                 {DATA[l.key].map((org) => (
-                  <div className="spm-org-card" id={org.id} key={org.id}>
+                  <div className={`spm-org-card${org.self ? ' spm-org-card-self' : ''}`} id={org.id} key={org.id}>
                     <div className="spm-org-card-head">
                       <h4>{org.name}</h4>
                     </div>

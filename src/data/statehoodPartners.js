@@ -11,6 +11,8 @@
 //   scope ('local' or 'national' — shown as a plain-text tag), url (linked from
 //   "Visit site"), blurb (short label shown in the matrix chip), desc (card body
 //   text — verify factual claims against a primary source before editing).
+//   self: true (optional) marks RepresentDC's own entry — adds the red "this is us"
+//   outline to its chip and card. Only one org should ever carry this.
 // SOURCES: the aggregated source list at the bottom of the page.
 
 export const CATEGORIES = [
@@ -56,16 +58,16 @@ export const DATA = {
       desc: 'Founded in 1998, a citizen engagement and advocacy organization focused on full democracy for D.C. — budget and legislative autonomy free of congressional interference, and equal representation in the House and Senate. A member of the National Coalition for Statehood.',
     },
     {
+      id: 'representdc', name: 'RepresentDC', col: 'community',
+      scope: 'local', url: 'https://www.representdc.org', self: true,
+      blurb: 'RepresentDC',
+      desc: "This site — an independent advocacy platform. Alongside this page, RepresentDC runs a real-time Bill Tracker (billtracker.representdc.org) tracking anti-D.C. legislation, and a Statehood Candidate Questionnaire (candidates.representdc.org) tracking 2026 D.C. candidates' statehood commitments.",
+    },
+    {
       id: 'neighbors-united', name: 'Neighbors United for DC Statehood', col: 'community',
       scope: 'local', url: 'https://www.the51st.org/',
       blurb: 'Neighbors United',
       desc: 'A grassroots network organizing D.C. residents for statehood neighborhood by neighborhood — hosting community conversations, partnering with civic groups, and lobbying members of Congress directly.',
-    },
-    {
-      id: 'representdc', name: 'RepresentDC', col: 'community',
-      scope: 'local', url: 'https://www.representdc.org',
-      blurb: 'RepresentDC',
-      desc: "This site — an independent advocacy platform. Alongside this page, RepresentDC runs a real-time Bill Tracker (billtracker.representdc.org) tracking anti-D.C. legislation, and a Statehood Candidate Questionnaire (candidates.representdc.org) tracking 2026 D.C. candidates' statehood commitments.",
     },
     {
       id: 'statehood-pledge', name: 'DC Statehood Pledge', col: 'community',
@@ -127,7 +129,7 @@ export const DATA = {
       id: 'dc-delegate', name: 'DC Delegate to Congress', col: 'gov',
       scope: 'local', url: 'https://norton.house.gov/',
       blurb: 'DC Delegate to Congress',
-      desc: "D.C.'s one official, elected voice in Congress — distinct from the unofficial Shadow Delegation above. Can introduce legislation and vote in committee, though not on the House floor. Has introduced the Washington, D.C. Admission Act (H.R. 51) in every recent Congress, most recently with a record 220 House cosponsors.",
+      desc: "D.C.'s one official, elected voice in Congress — distinct from the unofficial Shadow Delegation above. Can introduce legislation and vote in committee, though not on the House floor. Has introduced the Washington, D.C. Admission Act (H.R. 51) in every recent Congress, currently with well over 100 House cosponsors.",
     },
     {
       id: 'dc-attorney-general', name: 'DC Attorney General', col: 'gov',
@@ -186,6 +188,18 @@ export const DATA = {
   ],
   outer: [
     {
+      id: 'senate-bill-sponsors', name: 'Senate Statehood Bill Sponsors', col: 'gov',
+      scope: 'national', url: 'https://www.congress.gov/bill/119th-congress/senate-bill/51/cosponsors',
+      blurb: 'Senate Bill Sponsors',
+      desc: 'S. 51, the Washington, D.C. Admission Act, introduced in the Senate for the 119th Congress with several dozen original cosponsors — real, voting senators from other states putting their name behind D.C. statehood.',
+    },
+    {
+      id: 'house-bill-sponsors', name: 'House Statehood Bill Sponsors', col: 'gov',
+      scope: 'national', url: 'https://www.congress.gov/bill/119th-congress/house-bill/51/cosponsors',
+      blurb: 'House Bill Sponsors',
+      desc: "H.R. 51, the Washington, D.C. Admission Act, introduced in the House for the 119th Congress with well over 100 cosponsors — introduced by D.C.'s Delegate to Congress (Local Allies above) in every recent Congress.",
+    },
+    {
       id: 'dnc', name: 'DNC', col: 'party',
       scope: 'national', url: 'https://democrats.org/',
       blurb: 'DNC',
@@ -222,6 +236,8 @@ export const SOURCES = [
   { name: 'DC Delegate — DC statehood bill introduction', url: 'https://norton.house.gov/media/press-releases/norton-van-hollen-announce-introduction-dc-statehood-bill' },
   { name: 'DC Attorney General', url: 'https://oag.dc.gov/' },
   { name: 'DC Attorney General — court brief on lack of congressional representation', url: 'https://oag.dc.gov/release/ag-racine-files-court-brief-arguing-dc-residents' },
+  { name: 'S. 51 (119th Congress) cosponsors', url: 'https://www.congress.gov/bill/119th-congress/senate-bill/51/cosponsors' },
+  { name: 'H.R. 51 (119th Congress) cosponsors', url: 'https://www.congress.gov/bill/119th-congress/house-bill/51/cosponsors' },
   { name: 'DC Shadow Delegation (DC Governance)', url: 'https://statehood.dc.gov/page/dc-governance' },
   { name: 'New Columbia Statehood Commission', url: 'https://statehood.dc.gov/page/new-columbia-statehood-commission' },
   { name: 'DC Vote', url: 'https://www.dcvote.org/mission/' },

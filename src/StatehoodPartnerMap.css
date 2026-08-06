@@ -115,6 +115,17 @@ table.spm-matrix td.spm-cell {
   border-radius: 999px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* RepresentDC's own entry — a red outline marks "this is us," distinct from the
+   layer-color coding every other chip/card uses. Inset shadow so it doesn't affect
+   sizing in the tight chip stack. */
+.spm-chip-self {
+  box-shadow: inset 0 0 0 2px var(--dc-red);
+}
+.spm-chip-self:hover,
+.spm-chip-self:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--dc-red), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 .spm-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
 /* ---- Directory ---- */
@@ -157,6 +168,11 @@ table.spm-matrix td.spm-cell {
   padding: var(--s-5);
   box-shadow: var(--shadow-xs);
   scroll-margin-top: 90px;
+}
+
+/* RepresentDC's own entry — see .spm-chip-self above for the matching chip treatment. */
+.spm-org-card-self {
+  border: 2px solid var(--dc-red);
 }
 
 .spm-org-card-head {

@@ -277,3 +277,23 @@ Context that doesn't fit as a code comment but matters for the next correction r
   member of the U.S. House; the Shadow Delegation has no official standing at all.
   That distinction matters enough on this page to spell out, given both entries sit
   in the same category.
+- **2026-08-06 (RepresentDC self-highlight; Senate/House bill sponsors added)** —
+  **RepresentDC** moved to the top of DC Community Advocacy (its category, not the
+  whole Core layer — asked and confirmed) and marked with a red outline on both its
+  matrix chip and directory card, via a new `self: true` data field, to visually
+  flag "this is us" distinct from every other org's layer-color coding. **Added
+  Senate Statehood Bill Sponsors and House Statehood Bill Sponsors** to Official
+  government / National Allies, representing S. 51 and H.R. 51 (119th Congress).
+  Asked and confirmed: kept these institutional-only, no individual legislators
+  named (Sen. Chris Van Hollen leads S. 51, Del. Norton leads H.R. 51 — both
+  verified — but named sponsors would age out each new Congress the same way a
+  hardcoded cosponsor count would). Cosponsor counts are described qualitatively
+  ("several dozen," "well over 100") rather than as an exact number, since
+  Congress.gov and GovTrack both block automated fetches and search-engine
+  snippets gave conflicting live counts (205 vs. 193 for H.R. 51) — an exact
+  figure risked being wrong the day it shipped. **Also corrected the existing DC
+  Delegate to Congress card**, which had claimed "a record 220 House cosponsors" —
+  that figure couldn't be re-verified and may have been carried over from a prior
+  Congress; softened to "well over 100," which is safely true under every count
+  found. House Bill Sponsors' description cross-references the Delegate entry
+  rather than repeating the cosponsor fact from scratch.
