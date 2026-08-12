@@ -279,9 +279,9 @@ export const SOURCES = [
     href: SRC.dcboe,
     display: 'electionresults.dcboe.org',
   },
+  {
+    label: 'Neighbors United for DC Statehood, "FAQs"',
+    href: 'https://www.the51st.org/faqs',
+    display: 'the51st.org/faqs',
+  },
 ]
-
-export const QUESTION_SET_SOURCE = {
-  href: 'https://www.the51st.org/faqs',
-  display: 'the51st.org/faqs',
-}

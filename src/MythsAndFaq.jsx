@@ -3,7 +3,7 @@ import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
-import { ITEMS, SOURCES, QUESTION_SET_SOURCE } from './data/mythsAndFaq'
+import { ITEMS, SOURCES } from './data/mythsAndFaq'
 import './MythsAndFaq.css'
 
 function MythsAndFaq() {
@@ -67,13 +67,6 @@ function MythsAndFaq() {
                   </a>
                 </span>
               ))}
-              <span className="sources-note">
-                Question set adapted from Neighbors United for DC Statehood's FAQ—
-                <a href={QUESTION_SET_SOURCE.href} target="_blank" rel="noopener noreferrer">
-                  {QUESTION_SET_SOURCE.display}
-                </a>
-                . Figures above are cited to primary sources rather than to that summary.
-              </span>
             </div>
           </div>
         </div>
