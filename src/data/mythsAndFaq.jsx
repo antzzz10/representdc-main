@@ -29,6 +29,8 @@ const SRC = {
   dcConstitution: 'https://statehood.dc.gov/publication/constitution-state-washington-dc',
   shadowDelegation: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-123',
   newStatesClause: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1',
+  wwi: 'https://home.nps.gov/places/000/district-of-columbia-war-memorial.htm',
+  fy25Budget: 'https://www.everycrsreport.com/reports/R48609.html',
 }
 
 export const ITEMS = [
@@ -36,152 +38,6 @@ export const ITEMS = [
     id: 'myth-1',
     type: 'myth',
     tag: 'Myth 1',
-    q: '"Most D.C. residents work for the government or military."',
-    a: (
-      <>
-        Federal employment is one slice of a working city of roughly{' '}
-        <Cite href={SRC.census}>694,000 residents</Cite>. The District's largest single
-        industry isn't government at all—it's{' '}
-        <Cite href={SRC.dataUsa}>professional, scientific, and technical services</Cite>.
-      </>
-    ),
-    fact: {
-      value: '18%',
-      label: 'work in public administration',
-      detail: 'Management, business, and legal roles employ far more.',
-    },
-  },
-  {
-    id: 'myth-2',
-    type: 'myth',
-    tag: 'Myth 2',
-    q: '"D.C. doesn\'t pay U.S. taxes but gets lots of federal money."',
-    a: (
-      <>
-        The IRS collected more federal tax per person in D.C. than in any state in fiscal 2025.
-        Residents also pay local taxes—on a budget{' '}
-        <Cite href={SRC.budgetReview}>Congress must clear</Cite> before the District is allowed
-        to spend its own money.
-      </>
-    ),
-    fact: {
-      value: '$60,067',
-      label: 'in federal tax collected per D.C. resident',
-      detail: 'Highest in the nation—2.4× second-place Massachusetts (FY2025).',
-    },
-  },
-  {
-    id: 'myth-3',
-    type: 'myth',
-    tag: 'Myth 3',
-    q: '"D.C. residents have the same rights as other Americans."',
-    a: (
-      <>
-        They pay federal taxes, serve in the military, and sit on federal juries—but their sole
-        member of the House <Cite href={SRC.delegates}>cannot vote on final passage</Cite> of a
-        bill, they have no senators, and{' '}
-        <Link to="/how-congress-controls-dc">
-          Congress must approve every local law and budget
-        </Link>
-        , unlike any state.
-      </>
-    ),
-    fact: {
-      value: '499',
-      label: 'D.C. residents died in WWI service',
-      detail: 'Commemorated on the National Mall.',
-    },
-  },
-  {
-    id: 'myth-4',
-    type: 'myth',
-    tag: 'Myth 4',
-    q: '"Proximity to the Capitol gives D.C. residents influence."',
-    a: (
-      <>
-        Proximity isn't accountability. Not one voting member of Congress is elected by D.C.
-        residents, so not one answers to them at the ballot box—while Congress retains{' '}
-        <Cite href={SRC.lawReview}>a veto over the laws they do pass</Cite> locally.
-      </>
-    ),
-  },
-  {
-    id: 'myth-5',
-    type: 'myth',
-    tag: 'Myth 5',
-    q: '"D.C. is too small to have representation."',
-    a: (
-      <>
-        D.C.'s <Cite href={SRC.censusArea}>61 square miles</Cite> of land hold{' '}
-        <Cite href={SRC.census}>more people than Wyoming or Vermont</Cite>—and every state gets
-        two senators regardless of size.
-      </>
-    ),
-    fact: {
-      value: '129,831',
-      label: 'children live in D.C.',
-      detail: 'Up from 126,742 just two years earlier (2022).',
-    },
-  },
-  {
-    id: 'myth-6',
-    type: 'myth',
-    tag: 'Myth 6',
-    q: '"D.C. is treated differently because it belongs to all Americans."',
-    a: (
-      <>
-        The monumental core is a fraction of the District. The rest is where nearly{' '}
-        <Cite href={SRC.census}>694,000 people</Cite> live, across{' '}
-        <Cite href={SRC.wards}>eight wards</Cite>—and congressional control extends over all of
-        it, not just the federal buildings.
-      </>
-    ),
-    fact: {
-      value: '1 of 54',
-      label: 'National Guard that reports to the President',
-      detail: "Every other state and territory's answers to its own governor instead.",
-    },
-  },
-  {
-    id: 'myth-7',
-    type: 'myth',
-    tag: 'Myth 7',
-    q: '"D.C. statehood would be unconstitutional."',
-    a: (
-      <>
-        The Constitution caps the federal district at{' '}
-        <Cite href={SRC.districtClause}>"ten Miles square"</Cite> but sets no minimum size and
-        doesn't fix its borders. The nonpartisan Congressional Research Service reads the text
-        the same way—the Framers "chose to set a maximum size for the Federal District, but no
-        other size-related restrictions." Whether Congress can admit the rest as a state by
-        ordinary legislation is{' '}
-        <Cite href={SRC.constitutionality}>genuinely contested among scholars</Cite>, with little
-        case law either way. What it isn't is settled against statehood.
-      </>
-    ),
-  },
-  {
-    id: 'myth-8',
-    type: 'myth',
-    tag: 'Myth 8',
-    q: '"D.C. is too small and too subsidized to be a state."',
-    a: (
-      <>
-        D.C. has <Cite href={SRC.census}>more residents than Wyoming or Vermont</Cite> and, in
-        fiscal 2025, generated{' '}
-        <Cite href={SRC.irs}>more federal tax revenue than 20 states did</Cite>.
-      </>
-    ),
-    fact: {
-      value: '250',
-      label: 'public schools operate in D.C.',
-      detail: 'One traditional district plus 66 charter LEAs (SY 2025–26).',
-    },
-  },
-  {
-    id: 'myth-9',
-    type: 'myth',
-    tag: 'Myth 9',
     q: '"D.C. isn\'t anywhere close to becoming a state."',
     a: (
       <>
@@ -201,9 +57,9 @@ export const ITEMS = [
     },
   },
   {
-    id: 'myth-10',
+    id: 'myth-2',
     type: 'myth',
-    tag: 'Myth 10',
+    tag: 'Myth 2',
     q: '"Statehood for D.C. is far-fetched."',
     a: (
       <>
@@ -214,6 +70,154 @@ export const ITEMS = [
         would admit the land outside a shrunken federal district on that same footing.
       </>
     ),
+  },
+  {
+    id: 'myth-3',
+    type: 'myth',
+    tag: 'Myth 3',
+    q: '"Most D.C. residents work for the government or military."',
+    a: (
+      <>
+        Federal employment is one slice of a working city of roughly{' '}
+        <Cite href={SRC.census}>694,000 residents</Cite>. The District's largest single
+        industry isn't government at all—it's{' '}
+        <Cite href={SRC.dataUsa}>professional, scientific, and technical services</Cite>.
+      </>
+    ),
+    fact: {
+      value: '18%',
+      label: 'work in public administration',
+      detail: 'Management, business, and legal roles employ far more.',
+    },
+  },
+  {
+    id: 'myth-4',
+    type: 'myth',
+    tag: 'Myth 4',
+    q: '"D.C. doesn\'t pay U.S. taxes but gets lots of federal money."',
+    a: (
+      <>
+        The IRS collected more federal tax per person in D.C. than in any state in fiscal 2025.
+        Residents also pay local taxes—on a budget{' '}
+        <Cite href={SRC.budgetReview}>Congress must clear</Cite> before the District is allowed
+        to spend its own money.
+      </>
+    ),
+    fact: {
+      value: '$60,067',
+      label: 'in federal tax collected per D.C. resident',
+      detail: 'Highest in the nation—2.4× second-place Massachusetts (FY2025).',
+    },
+  },
+  {
+    id: 'myth-5',
+    type: 'myth',
+    tag: 'Myth 5',
+    q: '"D.C. residents have the same rights as other Americans."',
+    a: (
+      <>
+        They pay federal taxes, serve in the military—
+        <Cite href={SRC.wwi}>499 died in the First World War alone</Cite>—and sit on federal
+        juries. But their sole member of the House{' '}
+        <Cite href={SRC.delegates}>cannot vote on final passage</Cite> of a bill, they have no
+        senators, and{' '}
+        <Link to="/how-congress-controls-dc">
+          Congress must approve every local law and budget
+        </Link>
+        , unlike any state.
+      </>
+    ),
+    fact: {
+      value: '$351M',
+      label: 'of its own tax dollars D.C. was ordered not to spend',
+      detail: "FY2025. The Senate's fix passed unanimously; the House never took it up.",
+    },
+  },
+  {
+    id: 'myth-6',
+    type: 'myth',
+    tag: 'Myth 6',
+    q: '"Proximity to the Capitol gives D.C. residents influence."',
+    a: (
+      <>
+        Proximity isn't accountability. Not one voting member of Congress is elected by D.C.
+        residents, so not one answers to them at the ballot box—while Congress retains{' '}
+        <Cite href={SRC.lawReview}>a veto over the laws they do pass</Cite> locally.
+      </>
+    ),
+  },
+  {
+    id: 'myth-7',
+    type: 'myth',
+    tag: 'Myth 7',
+    q: '"D.C. is too small to have representation."',
+    a: (
+      <>
+        D.C.'s <Cite href={SRC.censusArea}>61 square miles</Cite> of land hold{' '}
+        <Cite href={SRC.census}>more people than Wyoming or Vermont</Cite>—and every state gets
+        two senators regardless of size.
+      </>
+    ),
+    fact: {
+      value: '129,831',
+      label: 'children live in D.C.',
+      detail: 'Up from 126,742 just two years earlier (2022).',
+    },
+  },
+  {
+    id: 'myth-8',
+    type: 'myth',
+    tag: 'Myth 8',
+    q: '"D.C. is treated differently because it belongs to all Americans."',
+    a: (
+      <>
+        The monumental core is a fraction of the District. The rest is where nearly{' '}
+        <Cite href={SRC.census}>694,000 people</Cite> live, across{' '}
+        <Cite href={SRC.wards}>eight wards</Cite>—and congressional control extends over all of
+        it, not just the federal buildings.
+      </>
+    ),
+    fact: {
+      value: '1 of 54',
+      label: 'National Guard that reports to the President',
+      detail: "Every other state and territory's answers to its own governor instead.",
+    },
+  },
+  {
+    id: 'myth-9',
+    type: 'myth',
+    tag: 'Myth 9',
+    q: '"D.C. statehood would be unconstitutional."',
+    a: (
+      <>
+        The Constitution caps the federal district at{' '}
+        <Cite href={SRC.districtClause}>"ten Miles square"</Cite> but sets no minimum size and
+        doesn't fix its borders. The nonpartisan Congressional Research Service reads the text
+        the same way—the Framers "chose to set a maximum size for the Federal District, but no
+        other size-related restrictions." Whether Congress can admit the rest as a state by
+        ordinary legislation is{' '}
+        <Cite href={SRC.constitutionality}>genuinely contested among scholars</Cite>, with little
+        case law either way. What it isn't is settled against statehood.
+      </>
+    ),
+  },
+  {
+    id: 'myth-10',
+    type: 'myth',
+    tag: 'Myth 10',
+    q: '"D.C. is too small and too subsidized to be a state."',
+    a: (
+      <>
+        D.C. has <Cite href={SRC.census}>more residents than Wyoming or Vermont</Cite> and, in
+        fiscal 2025, generated{' '}
+        <Cite href={SRC.irs}>more federal tax revenue than 20 states did</Cite>.
+      </>
+    ),
+    fact: {
+      value: '250',
+      label: 'public schools operate in D.C.',
+      detail: 'One traditional district plus 66 charter LEAs (SY 2025–26).',
+    },
   },
 ]
 
@@ -240,8 +244,14 @@ export const SOURCES = [
   },
   {
     label: 'National Park Service, "District of Columbia War Memorial"',
-    href: 'https://home.nps.gov/places/000/district-of-columbia-war-memorial.htm',
+    href: SRC.wwi,
     display: 'nps.gov',
+  },
+  {
+    label:
+      'Congressional Research Service R48609, "District of Columbia FY2025 Budget Status: In Brief"',
+    href: SRC.fy25Budget,
+    display: 'everycrsreport.com',
   },
   {
     label: 'DC Action, "DC KIDS COUNT: Demographics"',
