@@ -4,29 +4,27 @@ import Footer from './components/Footer'
 import Icon from './components/Icon'
 import './App.css'
 
-/**
- * Interim page — full build is scoped in WHATS-NEXT.md Phase 4: hybrid
- * case-for-statehood copy, a ported news section (cross-repo fetch of
- * dc-bills-tracker's news.json), a pulled-forward stakeholder org list, and
- * the accuracy eval pipeline. Until then: previews of what's coming plus
- * links to content that already exists, so this click is never a dead end.
- */
-const PREVIEWS = [
+// Hub for readers who already accept that D.C. lacks representation and want
+// to know where things stand. Every card links to a page that exists; if one
+// ever points somewhere unbuilt, cut the card rather than badging it.
+const DESTINATIONS = [
   {
     icon: 'rss',
     title: 'Statehood in the news',
-    body: "The latest statehood-related coverage from vetted sources—powered by the same news pipeline as the bill tracker.",
+    body: 'Recent coverage of D.C. statehood and home rule, updated daily.',
+    to: '/news',
   },
   {
     icon: 'users',
     title: 'Meet the movement',
-    body: 'The organizations doing statehood work right now, and where to plug in with each one.',
+    body: 'The organizations working on statehood, and how to get involved with each.',
     to: '/statehood-partner-map',
   },
   {
     icon: 'book-open',
-    title: 'The case, in brief',
-    body: 'A tight, sourced walkthrough of why statehood—linking into the deeper case when you want more.',
+    title: 'The case for statehood',
+    body: 'What Congress has blocked, and what statehood would change.',
+    to: '/the-case',
   },
 ]
 
@@ -36,45 +34,20 @@ function StatehoodCurious() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Coming soon</span>
+          <span className="eyebrow">Statehood curious</span>
           <h1>Already know the problem?</h1>
-          <p>This page is under construction.</p>
         </div>
       </header>
       <section className="impact-section">
         <div className="container">
           <div className="preview-grid">
-            {PREVIEWS.map((p) => {
-              if (p.to) {
-                return (
-                  <Link className="preview-card preview-card-live" to={p.to} key={p.title}>
-                    <span className="card-badge card-badge-live">Explore</span>
-                    <Icon name={p.icon} size={28} />
-                    <h3>{p.title}</h3>
-                    <p>{p.body}</p>
-                  </Link>
-                )
-              }
-              return (
-                <div className="preview-card" key={p.title}>
-                  <span className="card-badge">Coming soon</span>
-                  <Icon name={p.icon} size={28} />
-                  <h3>{p.title}</h3>
-                  <p>{p.body}</p>
-                </div>
-              )
-            })}
-          </div>
-          <div className="interim-links">
-            <p>In the meantime, start here:</p>
-            <div className="interim-row">
-              <a className="cta-secondary" href="https://billtracker.representdc.org">
-                <span>Track the live bills</span> <Icon name="arrow-right" />
-              </a>
-              <Link className="cta-secondary" to="/the-case">
-                <span>Read the full case</span> <Icon name="arrow-right" />
+            {DESTINATIONS.map((d) => (
+              <Link className="preview-card preview-card-live" to={d.to} key={d.title}>
+                <Icon name={d.icon} size={28} />
+                <h3>{d.title}</h3>
+                <p>{d.body}</p>
               </Link>
-            </div>
+            ))}
           </div>
         </div>
       </section>

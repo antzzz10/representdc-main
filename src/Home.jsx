@@ -79,8 +79,8 @@ function Home() {
             <Link className="persona-card" to="/statehood-curious">
               <span className="picon"><Icon name="rss" size={22} /></span>
               <h3>Statehood-curious</h3>
-              <p>Already know the problem? See what's happening right now and the easiest ways to plug in.</p>
-              <span className="plink">See what's new <Icon name="arrow-right" size={15} /></span>
+              <p>Already know the problem? See the latest coverage and who's organizing for statehood.</p>
+              <span className="plink">See what's happening <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card accent" to="/myths">
               <span className="picon"><Icon name="help-circle" size={22} /></span>

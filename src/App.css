@@ -182,11 +182,6 @@ a.preview-card-live:focus-visible {
   transform: translateY(-2px);
 }
 
-.card-badge-live {
-  background: var(--navy);
-  color: var(--white);
-}
-
 .preview-card svg {
   color: var(--navy);
   margin-bottom: var(--s-3);
