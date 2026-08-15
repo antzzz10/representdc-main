@@ -3,10 +3,10 @@ import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
-import { ITEMS, SOURCES } from './data/mythsAndFaq'
-import './MythsAndFaq.css'
+import { ITEMS, SOURCES } from './data/myths'
+import './Myths.css'
 
-function MythsAndFaq() {
+function Myths() {
   return (
     <div className="app">
       <Nav />
@@ -22,11 +22,7 @@ function MythsAndFaq() {
         <div className="container">
           <div className="myth-list">
             {ITEMS.map((item) => (
-              <div
-                className={item.type === 'myth' ? 'myth-item' : 'faq-item'}
-                id={item.id}
-                key={item.id}
-              >
+              <div className="myth-item" id={item.id} key={item.id}>
                 <div className={`myth-item-body${item.fact ? ' has-fact' : ''}`}>
                   <div className="myth-item-main">
                     <p className="myth-q">
@@ -76,4 +72,4 @@ function MythsAndFaq() {
   )
 }
 
-export default MythsAndFaq
+export default Myths

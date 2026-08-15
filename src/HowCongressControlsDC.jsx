@@ -171,7 +171,7 @@ function HowCongressControlsDC() {
               <Link className="cta-secondary" to="/the-case">
                 <span>See what's already been blocked</span> <Icon name="arrow-right" />
               </Link>
-              <Link className="cta-secondary" to="/myths-and-faq">
+              <Link className="cta-secondary" to="/myths">
                 <span>Read the common objections</span> <Icon name="arrow-right" />
               </Link>
             </div>

@@ -82,7 +82,7 @@ function Home() {
               <p>Already know the problem? See what's happening right now and the easiest ways to plug in.</p>
               <span className="plink">See what's new <Icon name="arrow-right" size={15} /></span>
             </Link>
-            <Link className="persona-card accent" to="/myths-and-faq">
+            <Link className="persona-card accent" to="/myths">
               <span className="picon"><Icon name="help-circle" size={22} /></span>
               <h3>Statehood-questioning</h3>
               <p>Have doubts or specific objections? Get direct, sourced answers to the most common ones.</p>

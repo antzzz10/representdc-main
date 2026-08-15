@@ -35,12 +35,8 @@ function News() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Trial page — not yet linked from navigation</span>
           <h1>Statehood in the news</h1>
-          <p>
-            The same vetted news pipeline that powers the bill tracker, pulled onto its own page
-            to see whether a dedicated feed like this is worth building out further.
-          </p>
+          <p>Coverage from D.C. newsrooms and statehood organizations, updated daily.</p>
         </div>
       </header>
       <section className="impact-section">

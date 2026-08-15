@@ -13,7 +13,7 @@ function Nav() {
         <div className="nav-links">
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/the-case">The Case</Link>
-          <Link className="nav-link" to="/myths-and-faq">Myths &amp; FAQ</Link>
+          <Link className="nav-link" to="/myths">Myths</Link>
           <a className="nav-link" href="https://billtracker.representdc.org">Bill tracker</a>
           <a
             className="nav-link"

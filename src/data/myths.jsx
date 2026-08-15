@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import Cite from '../components/Cite'
 
-// Content for /myths-and-faq. The question set is adapted from the51st.org's
-// FAQ, but every figure below is cited to a primary source (Census, IRS, NPS,
+// Content for /myths. The question set is adapted from the51st.org's FAQ,
+// but every figure below is cited to a primary source (Census, IRS, NPS,
 // D.C. Code, CRS) rather than to an advocacy group's summary of it. If a claim
 // can't be tied to a live, direct URL from a neutral source, it doesn't belong
 // on this page.
 //
-// One entry from the the51st.org source FAQ is intentionally omitted here: a
+// One entry from that source list is intentionally omitted here: a
 // comparison naming a specific political figure's criminal conviction, which
 // doesn't fit this page's non-partisan, source-agnostic tone.
 
@@ -36,7 +36,6 @@ const SRC = {
 export const ITEMS = [
   {
     id: 'myth-1',
-    type: 'myth',
     tag: 'Myth 1',
     q: '"D.C. isn\'t anywhere close to becoming a state."',
     a: (
@@ -58,7 +57,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-2',
-    type: 'myth',
     tag: 'Myth 2',
     q: '"Statehood for D.C. is far-fetched."',
     a: (
@@ -73,7 +71,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-3',
-    type: 'myth',
     tag: 'Myth 3',
     q: '"Most D.C. residents work for the government or military."',
     a: (
@@ -92,7 +89,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-4',
-    type: 'myth',
     tag: 'Myth 4',
     q: '"D.C. doesn\'t pay U.S. taxes but gets lots of federal money."',
     a: (
@@ -111,7 +107,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-5',
-    type: 'myth',
     tag: 'Myth 5',
     q: '"D.C. residents have the same rights as other Americans."',
     a: (
@@ -135,7 +130,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-6',
-    type: 'myth',
     tag: 'Myth 6',
     q: '"Proximity to the Capitol gives D.C. residents influence."',
     a: (
@@ -148,7 +142,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-7',
-    type: 'myth',
     tag: 'Myth 7',
     q: '"D.C. is too small to have representation."',
     a: (
@@ -166,7 +159,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-8',
-    type: 'myth',
     tag: 'Myth 8',
     q: '"D.C. is treated differently because it belongs to all Americans."',
     a: (
@@ -185,7 +177,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-9',
-    type: 'myth',
     tag: 'Myth 9',
     q: '"D.C. statehood would be unconstitutional."',
     a: (
@@ -203,7 +194,6 @@ export const ITEMS = [
   },
   {
     id: 'myth-10',
-    type: 'myth',
     tag: 'Myth 10',
     q: '"D.C. is too small and too subsidized to be a state."',
     a: (

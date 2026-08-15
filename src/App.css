@@ -246,10 +246,12 @@ a.preview-card-live:focus-visible {
   margin-bottom: var(--s-6);
 }
 
+/* Summary sits below the headlines in the reading order that matters — it is
+   context, not the main event, so it stays smaller than the article titles. */
 .news-summary p {
-  font-size: var(--fs-lg);
-  color: var(--ink);
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  color: var(--slate-700);
+  line-height: 1.65;
   margin: 0 0 var(--s-3);
 }
 
@@ -297,8 +299,9 @@ a.preview-card-live:focus-visible {
 }
 
 .news-item-title {
-  font-size: var(--fs-lg);
+  font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.35;
   color: var(--ink);
   text-decoration: none;
   display: inline-flex;

@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Home'
-import MythsAndFaq from './MythsAndFaq'
+import Myths from './Myths'
 import TheCase from './TheCase'
 import StatehoodCurious from './StatehoodCurious'
 import TakeAction from './TakeAction'
@@ -15,7 +15,9 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/myths-and-faq" element={<MythsAndFaq />} />
+        <Route path="/myths" element={<Myths />} />
+        {/* Old path kept as a redirect — it has been live and shared. */}
+        <Route path="/myths-and-faq" element={<Navigate to="/myths" replace />} />
         <Route path="/the-case" element={<TheCase />} />
         <Route path="/statehood-curious" element={<StatehoodCurious />} />
         <Route path="/take-action" element={<TakeAction />} />
