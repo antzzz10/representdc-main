@@ -24,6 +24,11 @@ const SRC = {
   lawReview: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02',
   wards: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-1011.01',
   dcboe: 'https://electionresults.dcboe.org/election_results/2016-General-Election',
+  tennesseePlan:
+    'https://news.ballotpedia.org/2025/04/24/on-this-day-in-1956-alaska-voters-passed-the-tennessee-plan-to-gain-statehood-how-is-that-plan-being-used-today/',
+  dcConstitution: 'https://statehood.dc.gov/publication/constitution-state-washington-dc',
+  shadowDelegation: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-123',
+  newStatesClause: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1',
 }
 
 export const ITEMS = [
@@ -174,28 +179,39 @@ export const ITEMS = [
     },
   },
   {
-    id: 'faq-want',
-    type: 'faq',
-    tag: 'FAQ',
-    q: 'Do D.C. residents actually want statehood?',
+    id: 'myth-9',
+    type: 'myth',
+    tag: 'Myth 9',
+    q: '"D.C. isn\'t anywhere close to becoming a state."',
     a: (
       <>
-        In November 2016, about 86% of the votes cast on D.C.'s{' '}
-        <Cite href={SRC.dcboe}>statehood referendum</Cite> were in favor. The measure also set
-        the proposed state's name, borders, and constitution.
+        D.C. has already worked through the{' '}
+        <Cite href={SRC.tennesseePlan}>Tennessee Plan</Cite>—the route eight states used to join
+        the Union. It has <Cite href={SRC.dcConstitution}>ratified a state constitution</Cite>,
+        drawn the proposed borders, approved statehood in a{' '}
+        <Cite href={SRC.dcboe}>2016 referendum</Cite> by about 86% of the votes cast, and{' '}
+        <Cite href={SRC.shadowDelegation}>elected a shadow congressional delegation</Cite> since
+        1990. What's left is the vote in Congress.
       </>
     ),
+    fact: {
+      value: '8',
+      label: 'states joined via the Tennessee Plan',
+      detail: 'Tennessee, Michigan, Iowa, California, Oregon, Kansas, Minnesota, Alaska.',
+    },
   },
   {
-    id: 'faq-achievable',
-    type: 'faq',
-    tag: 'FAQ',
-    q: 'Is statehood actually achievable, or just a slogan?',
+    id: 'myth-10',
+    type: 'myth',
+    tag: 'Myth 10',
+    q: '"Statehood for D.C. is far-fetched."',
     a: (
       <>
-        The U.S. has <Link to="/the-case">admitted a new state 37 times</Link> since the original
-        13. Every one of them was admitted by an ordinary act of Congress signed by the
-        President—not by constitutional amendment.
+        <Link to="/the-case">Thirty-seven states have joined</Link> since the original 13, most
+        admitted from territory by{' '}
+        <Cite href={SRC.newStatesClause}>an ordinary act of Congress</Cite> and a presidential
+        signature—no constitutional amendment has ever been required. The bills before Congress
+        would admit the land outside a shrunken federal district on that same footing.
       </>
     ),
   },
@@ -278,6 +294,26 @@ export const SOURCES = [
     label: 'D.C. Board of Elections, certified results, 2016 General Election',
     href: SRC.dcboe,
     display: 'electionresults.dcboe.org',
+  },
+  {
+    label: 'D.C. Statehood, "Constitution of the State of Washington, DC"',
+    href: SRC.dcConstitution,
+    display: 'statehood.dc.gov',
+  },
+  {
+    label: 'D.C. Code § 1–123, election of Senators and Representative for the new state',
+    href: SRC.shadowDelegation,
+    display: 'code.dccouncil.gov',
+  },
+  {
+    label: 'Constitution Annotated, Art. IV, § 3, cl. 1 (New States Clause), via Cornell LII',
+    href: SRC.newStatesClause,
+    display: 'law.cornell.edu',
+  },
+  {
+    label: 'Ballotpedia News, "Alaska voters passed the Tennessee Plan to gain statehood"',
+    href: SRC.tennesseePlan,
+    display: 'ballotpedia.org',
   },
   {
     label: 'Neighbors United for DC Statehood, "FAQs"',

@@ -48,10 +48,9 @@ function MythsAndFaq() {
           </div>
 
           <div className="interim-links">
-            <p>Seen the claims—now see the record:</p>
             <div className="interim-row">
-              <Link className="cta-secondary" to="/the-case">
-                <span>What Congress has actually blocked</span> <Icon name="arrow-right" />
+              <Link className="cta-secondary" to="/news">
+                <span>See the latest in D.C. statehood news</span> <Icon name="arrow-right" />
               </Link>
             </div>
           </div>
