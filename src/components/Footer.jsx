@@ -26,17 +26,19 @@ function Footer() {
                 to track anti-DC legislation and advocate for full democracy for D.C. residents.
                 Not affiliated with any organization.
               </p>
-              <Link className="footer-feedback-link" to="/about">
-                Who's behind this site <Icon name="arrow-right" size={15} />
-              </Link>
-              <a
-                className="footer-feedback-link"
-                href="https://docs.google.com/forms/d/e/1FAIpQLScoQfgfU-vHBN0EXqGp51Vv79oT2iS-1_uPTzoPtpmFlQ58kQ/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Send feedback <Icon name="external-link" size={15} />
-              </a>
+              <div className="footer-meta-links">
+                <Link className="footer-feedback-link" to="/about">
+                  Who's behind this site <Icon name="arrow-right" size={15} />
+                </Link>
+                <a
+                  className="footer-feedback-link"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScoQfgfU-vHBN0EXqGp51Vv79oT2iS-1_uPTzoPtpmFlQ58kQ/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Send feedback <Icon name="external-link" size={15} />
+                </a>
+              </div>
             </div>
           </div>
 

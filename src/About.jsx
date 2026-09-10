@@ -8,8 +8,8 @@ import './About.css'
 const TEAM = [
   {
     name: 'Andria Thomas',
-    role: 'Chief Builder',
-    bio: `Andria is a DC resident and product executive with 15+ years building consumer and B2B software platforms, most recently as Chief Product Officer at FinLocker and before that leading CreditWise at Capital One. She's spent the past several years in DC's statehood movement as an elected DC Democratic State Committee member and Statehood Committee co-chair, and ran citywide for U.S. Shadow Senator in 2018. She designed and built RepresentDC.org, including the bill and candidate trackers, and maintains it as a volunteer alongside her day-to-day work.`,
+    role: 'Founder & Chief Builder',
+    bio: `Andria is a proud DC resident, product leader, business strategist, and impatient activist. She first organized for Statehood at her dining room table, then with her own local community organization in partnership with the broad range of motivated and deeply experienced advocacy groups working hard to make DC statehood a reality. Andria ran for DC Shadow Senator in 2018 and won the most votes of any challenger in a year when every incumbent won; however she was also elected to the DC Democratic Party that year and appointed co-chair of their Statehood Committee. Andria co-led the Statehood Committee until stepping down from the DC Democratic Party in September 2026. She designed and built RepresentDC.org, including the bill and candidate trackers, and maintains it as a volunteer alongside her day-to-day work.`,
     photoAlt: 'Photo of Andria Thomas',
   },
 ]
