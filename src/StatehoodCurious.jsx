@@ -26,6 +26,12 @@ const DESTINATIONS = [
     body: 'What Congress has blocked, and what statehood would change.',
     to: '/the-case',
   },
+  {
+    icon: 'library',
+    title: 'Reading',
+    body: 'Long-form history, analysis, and guest essays, fully sourced and credited.',
+    to: '/reading',
+  },
 ]
 
 function StatehoodCurious() {

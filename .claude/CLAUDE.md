@@ -16,6 +16,10 @@ representdc-main/
 ├── src/
 │   ├── App.jsx          # Main landing page component
 │   ├── App.css          # All styling
+│   ├── About.jsx        # /about — team roster, precursor to guest bylines
+│   ├── Reading.jsx       # /reading — long-form article hub
+│   ├── reading/          # One JSX file per article (e.g. RepublicansSupportedAutonomy.jsx)
+│   ├── data/reading.js   # READING registry feeding the /reading hub cards
 │   └── main.jsx         # React entry point
 ├── public/
 │   ├── CNAME            # Custom domain: www.representdc.org
@@ -63,6 +67,25 @@ npm run deploy       # Build and deploy to GitHub Pages (www.representdc.org)
 - **71 bills** pending in Congress (54 bills + 17 riders)
 - **2 bills** just passed the House (H.R. 5214, H.R. 5107)
 - **700,000** D.C. residents without representation
+
+## Reading section (added 2026-09-09)
+
+`/reading` — long-form articles, distinct from the site's own sourced facts (Myths, fact
+cards). Structure: one JSX file per article under `src/reading/`, registered in
+`src/data/reading.js` (`READING`) so the `/reading` hub can list them without holding
+full article bodies. Linked from Nav and from a card on `/statehood-curious`.
+
+Guest pieces (like the first one, by Miriam Edelman / WashingtonDCNow) are held to a
+different citation bar than site-authored content: full attribution (byline,
+publication, date, link to the original) and no AI-generated summary — not per-claim
+primary-source re-sourcing of the guest author's own argument. See
+`decisions/2026-09-09-reading-section.md` for the full rationale and a fidelity caveat
+on the first article (lightly copy-edited from the original, not a byte-for-byte
+transcript — flagged there for verification).
+
+Byline treatment is a plain "By [Name]" line, not the `About` page's team-card format.
+Naming is "Reading" rather than "Articles" so it can later fold into a broader
+"Resources" section without a rename collision.
 
 ## Design System
 

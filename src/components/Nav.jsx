@@ -14,6 +14,7 @@ function Nav() {
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/the-case">The Case</Link>
           <Link className="nav-link" to="/myths">Myths</Link>
+          <Link className="nav-link" to="/reading">Reading</Link>
           <a className="nav-link" href="https://billtracker.representdc.org">Bill tracker</a>
           <a
             className="nav-link"
