@@ -20,11 +20,7 @@ function Reading() {
       <header className="page-hero">
         <div className="container">
           <span className="eyebrow">Reading</span>
-          <h1>Long-form writing on D.C. statehood</h1>
-          <p>
-            History, analysis, and guest essays — credited in full to the people who
-            wrote them, with full sourcing for every claim.
-          </p>
+          <h1>Deeper insights on the DC Statehood movement</h1>
         </div>
       </header>
       <section className="impact-section">

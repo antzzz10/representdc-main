@@ -37,6 +37,15 @@ existing; narrating it reads as defensive. Keep that reasoning in code comments 
 `decisions/` note. Same rule bars capacity language, named current officeholders, and
 hardcoded fast-moving numbers in org/partner descriptions.
 
+**No duplicative hero subheadings (established 2026-09-11, `/reading` hero rewrite).** A
+page-hero's `<h1>` and its `<p>` must each carry distinct information — a subheading that
+restates the headline in different words is padding, not content, and reads as an AI tell.
+If the subheading has nothing to add, cut it entirely rather than write a redundant one —
+`StatehoodCurious.jsx`'s headline-only hero is the pattern for that case. This overlaps
+with "No self-descriptive copy" above: a subheading that narrates the page's own
+process/rigor ("credited in full," "full sourcing for every claim") is self-descriptive
+copy *and* usually duplicates what the content itself already demonstrates.
+
 **Git:** commit directly to `main` — parallel Claude sessions share this one checkout, so
 `git checkout -b` silently moves the other session onto your branch. Stage named paths
 only; another session's in-progress edits are often sitting dirty in the tree.
