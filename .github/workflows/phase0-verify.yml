@@ -1,0 +1,73 @@
+name: Phase 0 verification
+
+# One-off check before the news pipeline is built (NEWS-AND-ANALYSIS-PRD.md, phase 0).
+# It proves two things that cannot be checked from a laptop:
+#   1. the ANTHROPIC_API_KEY stored as a repo secret actually works;
+#   2. issue assignment, @mention, and a follow-up comment reach Andria's email and phone.
+# Manual trigger only. Delete this workflow once both are confirmed.
+
+on:
+  workflow_dispatch:
+
+# Declaring permissions sets every other scope to none. Issues are all this needs;
+# it writes no branches. The repo default is read-only, so this run also confirms that
+# an explicit block still raises the token's access.
+permissions:
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the Anthropic API with the stored secret
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY is missing or empty in repo secrets"
+            exit 1
+          fi
+          code=$(curl -sS -o response.json -w '%{http_code}' https://api.anthropic.com/v1/messages \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H 'anthropic-version: 2023-06-01' \
+            -H 'content-type: application/json' \
+            -d '{"model":"claude-haiku-4-5-20251001","max_tokens":8,"messages":[{"role":"user","content":"Reply with the single word: ok"}]}')
+          # The response body never contains the key, so it is safe to print.
+          if [ "$code" != "200" ]; then
+            echo "::error::API call failed with HTTP $code"
+            cat response.json
+            exit 1
+          fi
+          node -e "const r=require('./response.json'); console.log('HTTP 200 | model:', r.model, '| reply:', r.content[0].text.trim(), '| usage:', JSON.stringify(r.usage))"
+
+      - name: Open a review-style issue and comment on it
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          cat > body.md <<MD
+          @antzzz10 — notification test for the news summary review alerts
+          (\`NEWS-AND-ANALYSIS-PRD.md\` section F). No news was published; nothing on the
+          site changed.
+
+          The API key stored in repo secrets works: the run above got a reply from
+          claude-haiku-4-5.
+
+          **What to check:**
+
+          1. Did this issue reach your ProtonMail inbox?
+          2. Did your phone get a push for it (assignment + mention)?
+          3. A follow-up comment lands in a moment — did that reach both as well?
+             That is how a run's outcome would reach you once live.
+          4. Reply to the comment's email with the word \`/withhold\`. Nothing acts on
+             it yet; it is only checking that an email reply posts here as a comment,
+             which is how you would pull a bad summary from your phone.
+
+          Run log: $RUN_URL
+          MD
+          url=$(gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Phase 0 verification — notification test" \
+            --assignee antzzz10 \
+            --body-file body.md)
+          echo "Opened $url"
+          gh issue comment "$url" --body "@antzzz10 Follow-up comment — this is the shape a twice-daily summary post would take. Reply to this email with \`/withhold\` to test the reply path, then tell Claude what arrived where."
