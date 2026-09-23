@@ -5,8 +5,29 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 
+// Matches the bill tracker's freshness line ("September 21, 2026 at 2:59 PM ET"): the
+// most recent daily Congress.gov sweep, in Eastern Time for a DC audience. The value is
+// validated as a true ISO instant in useBillStats, which is what makes pinning a
+// timezone safe here.
+const formatCheckedInstant = (isoInstant) =>
+  `${new Date(isoInstant).toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  })} ET`
+
 function Home() {
-  const { totalBills, pendingBills, passedBills, lastUpdated } = useBillStats()
+  const { totalBills, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
+
+  // The hook falls back to hardcoded counts, which are a snapshot from January 2026 and
+  // drift further every week. Publishing them unlabelled would state a stale number as
+  // current, so the note is withheld until real stats arrive; the page reads fine
+  // without it. The paragraph itself stays mounted holding a blank line, so the hero
+  // doesn't jump when the fetch resolves.
+  const showBillCount = !loading && !error
 
   return (
     <div className="app">
@@ -24,8 +45,14 @@ function Home() {
             <span>Find your starting point</span> <Icon name="arrow-down" />
           </a>
           <p className="hero-note">
-            {totalBills} anti-DC bills pending in Congress · Updated{' '}
-            {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            {showBillCount ? (
+              <>
+                {totalBills} anti-DC bills and riders introduced in this Congress
+                {lastChecked && <> · Last checked {formatCheckedInstant(lastChecked)}</>}
+              </>
+            ) : (
+              '\u00A0'
+            )}
           </p>
         </div>
       </section>
