@@ -1,0 +1,102 @@
+name: Fetch DC News
+
+# Publishes www.representdc.org/api/news.json — one file, twice a day. It never rebuilds
+# or redeploys the site, because releases are manual and unreleased commits on main must
+# not ship on a schedule.
+#
+# This runs unattended. It therefore notifies ONLY on exceptions, and only once per
+# incident: a healthy run says nothing, and an ongoing problem does not email twice a day.
+# A summary publishes only when the judge passes it (scripts/fetch-news.mjs); anything
+# else publishes the headlines alone, which is a normal outcome and not an incident.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
+    # queued at minute 0.
+    - cron: '17 6,18 * * *'
+
+concurrency:
+  group: news-publish
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+    outputs:
+      outcome: ${{ steps.run.outputs.outcome }}
+      summary_decision: ${{ steps.run.outputs.summary_decision }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+
+      - name: Fetch, gate, judge, publish and verify
+        id: run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEWS_SUMMARY_ENABLED: ${{ vars.NEWS_SUMMARY_ENABLED }}
+        run: node scripts/fetch-news.mjs
+
+      # The durable diagnostic record, replacing the news-data branch log. 90 days is
+      # enough to investigate a failure; nothing downstream depends on it.
+      - name: Keep the run record
+        if: always() && hashFiles('run-record.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-record-${{ github.run_id }}-${{ github.run_attempt }}
+          path: run-record.json
+          retention-days: 90
+
+      - name: Open or close an incident
+        id: incident
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OUTCOME: ${{ steps.run.outputs.outcome }}
+          DECISION: ${{ steps.run.outputs.summary_decision }}
+        run: bash .github/scripts/news-incident.sh
+
+      # Email is the alert; the issue above is only the state that keeps this from firing
+      # twice for the same episode (decisions/2026-09-15-alert-channels.md). Same sender
+      # and secrets as dc-bills-tracker's monitor, so there is one pattern to maintain.
+      - name: Email on an incident or a recovery
+        id: email
+        if: always() && steps.incident.outputs.notify != 'none' && steps.incident.outputs.notify != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: ${{ steps.incident.outputs.subject }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: RepresentDC News <noreply@representdc.org>
+          body: ${{ steps.incident.outputs.body }}
+          ignore_cert: false
+
+      # Only now is the alert considered delivered. The incident script keys its dedupe on
+      # this label, not on the issue existing — otherwise one SMTP failure would silence
+      # that incident permanently (both Codex reviews, blocker). Needs `always()`: the
+      # `run` step fails on exactly the runs that matter most here (a real incident), and
+      # without it GitHub Actions' implicit default condition (require every prior step to
+      # have succeeded) skips this step on precisely those runs — so the label never gets
+      # applied, and dedupe silently breaks for the failure case it exists to cover (Codex
+      # review, pre-push). Also gated on the email step's own outcome, not just `notify`,
+      # so a failed send still doesn't get mislabeled as delivered.
+      - name: Mark the alert as sent
+        if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue edit "${{ steps.incident.outputs.issue_number }}" --repo "$GITHUB_REPOSITORY" --add-label alert-sent

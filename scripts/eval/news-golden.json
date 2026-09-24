@@ -1,0 +1,179 @@
+{
+  "description": "Golden cases for the news digest eval (NEWS-SUMMARY-EVAL-PLAN.md, layer 3). Each case pins a headline set to a frozen `asOf` time so recency labels do not drift as the fixtures age. `expectedOutcome` is what the pipeline should do; `acceptableCloserKeys` is a set, not one right answer, because more than one standing fact can legitimately match. Historical cases carry the text that actually published and the failure it must be caught by.",
+  "status": "PROPOSED — labels drafted by Claude 2026-09-12, awaiting Andria's approval. Not yet a pass/fail gate.",
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "hist-2026-09-05-invented-date",
+      "status": "proposed",
+      "asOf": "2026-09-05T19:37:12Z",
+      "note": "Published. The invented date is the one error the deterministic gates catch.",
+      "headlines": [
+        { "title": "More Than a Year Later, National Guard Troops Still Patrol D.C. as ACLU Demands Their Exit", "source": "ACLU DC", "pubDate": "Tue, 11 Aug 2026 15:02:11 GMT" },
+        { "title": "Eyeing the midterm elections, D.C. is taking the fight for statehood to the states", "source": "The 51st", "pubDate": "Mon, 24 Aug 2026 21:28:39 GMT" },
+        { "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority", "source": "DC Vote", "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000" }
+      ],
+      "publishedBody": "More than a year after events in January 2021, National Guard troops continue to patrol D.C. as civil rights advocates call for their withdrawal, while statehood supporters are intensifying advocacy efforts ahead of midterm elections, including gaining commitments from elected officials.",
+      "mustBeCaughtBy": ["G2", "J1"],
+      "failureMode": "F1 invented specific",
+      "acceptableCloserKeys": ["guard", "laws"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "hist-2026-08-26-unsupported-duration",
+      "status": "proposed",
+      "asOf": "2026-08-26T19:27:02Z",
+      "note": "Published. Passes every deterministic gate; only the judge sees it.",
+      "headlines": [
+        { "title": "Eyeing the midterm elections, D.C. is taking the fight for statehood to the states", "source": "The 51st", "pubDate": "Mon, 24 Aug 2026 21:28:39 GMT" },
+        { "title": "What D.C. residents will remember from a year of National Guard occupation", "source": "The 51st", "pubDate": "Tue, 11 Aug 2026 15:02:11 GMT" },
+        { "title": "One Year After President Trump Deployed National Guard Troops to Washington, D.C., Statehood is More Important Than Ever", "source": "ACLU DC", "pubDate": "Wed, 05 Aug 2026 19:12:55 +0000" }
+      ],
+      "publishedBody": "D.C. statehood advocates are marking the anniversary of National Guard deployment to the District while intensifying advocacy efforts ahead of the midterm elections. The deployment, which lasted a year, is being highlighted by advocacy groups as evidence for why D.C. needs greater autonomy.",
+      "mustBeCaughtBy": ["J1"],
+      "failureMode": "F2 unsupported inference — an anniversary is not an ending",
+      "acceptableCloserKeys": ["guard"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "hist-2026-08-29-stale-as-current",
+      "status": "proposed",
+      "asOf": "2026-08-29T11:50:19Z",
+      "note": "Published. RELABELLED 2026-09-12 on Andria's call: 39 days is inside the ~2-month window this beat moves on, so 'currently considering' is acceptable language, not an error. Kept as a case because the same body calls a takeover from 12+ months earlier 'recent', which is outside the window — borderline, so it scores neither as a required catch nor as a precision control.",
+      "excludeFromPrecision": true,
+      "headlines": [
+        { "title": "Eyeing the midterm elections, D.C. is taking the fight for statehood to the states", "source": "The 51st", "pubDate": "Mon, 24 Aug 2026 21:28:39 GMT" },
+        { "title": "One Year Later, DC Vote Says Federal Takeover Underscores the Urgency of DC Statehood", "source": "DC Vote", "pubDate": "Mon, 10 Aug 2026 13:16:45 +0000" },
+        { "title": "DC Vote Urges House Committee to Reject Sweeping Attack on DC's Fiscal Independence", "source": "DC Vote", "pubDate": "Tue, 21 Jul 2026 11:38:51 +0000" }
+      ],
+      "publishedBody": "Recent federal interventions in D.C.—including a takeover and National Guard deployment—have prompted advocates to emphasize how statehood would protect the District, and a House committee is currently considering proposals that advocates say would further undermine D.C.'s fiscal independence.",
+      "mustBeCaughtBy": [],
+      "failureMode": null,
+      "acceptableCloserKeys": ["budget", "laws"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "decided-but-called-pending",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "The failure Andria named: saying something is under consideration when the headline says it already happened. This is the J3 case that matters, replacing the tense-nuance ones.",
+      "headlines": [
+        { "title": "House votes 214-209 to overturn D.C. policing law", "source": "NOTUS", "pubDate": "Wed, 09 Sep 2026 22:00:00 GMT" },
+        { "title": "Senate sends D.C. budget rider to the President's desk", "source": "NOTUS", "pubDate": "Thu, 10 Sep 2026 18:00:00 GMT" }
+      ],
+      "publishedBody": "The House is currently considering whether to overturn a District policing law, while senators continue to debate a rider affecting D.C.'s budget.",
+      "mustBeCaughtBy": ["J3"],
+      "failureMode": "F5 decided matters described as still pending",
+      "acceptableCloserKeys": ["laws", "budget"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "hist-2026-09-12-ongoing-restrictions",
+      "status": "proposed",
+      "asOf": "2026-09-12T21:14:00Z",
+      "note": "Produced by the REWRITTEN pipeline in its first dry run. RELABELLED TWICE on 2026-09-12. First as acceptable (53 days is inside the ~2-month window), then back to an error once the judge explained itself: the headline has DC Vote urging Congress to REJECT a proposed attack on fiscal independence, so 'ongoing restrictions on how DC can use its budget' presents a pending proposal as something already in force. That is the mirror of the decided-called-pending failure and the same class Andria cares about — the age of the headline was never the issue.",
+      "headlines": [
+        { "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority", "source": "DC Vote", "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000" },
+        { "title": "One Year Later, DC Vote Says Federal Takeover Underscores the Urgency of DC Statehood", "source": "DC Vote", "pubDate": "Mon, 10 Aug 2026 13:16:45 +0000" },
+        { "title": "One Year After President Trump Deployed National Guard Troops to Washington, D.C., Statehood is More Important Than Ever", "source": "ACLU DC", "pubDate": "Wed, 05 Aug 2026 19:12:55 +0000" },
+        { "title": "DC Vote Urges House Committee to Reject Sweeping Attack on DC's Fiscal Independence", "source": "DC Vote", "pubDate": "Tue, 21 Jul 2026 11:38:51 +0000" }
+      ],
+      "publishedBody": "Separately, advocates have pointed to federal control of DC's National Guard and constraints on the District's fiscal independence as reasons why statehood remains urgent, citing a federal takeover from a year ago and ongoing restrictions on how DC can use its budget.",
+      "mustBeCaughtBy": ["J1", "J3"],
+      "failureMode": "F5 pending proposal described as already in effect",
+      "acceptableCloserKeys": ["budget", "guard", "laws"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "clean-mixed-advocacy",
+      "status": "proposed",
+      "asOf": "2026-09-12T21:14:00Z",
+      "note": "Judge-precision control. The false-alarm rate is measured against THIS labelled body — attributed, correctly dated, no legal claim — not against a fresh generation. The judge must not flag it.",
+      "headlines": [
+        { "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority", "source": "DC Vote", "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000" },
+        { "title": "DC Vote Urges House Committee to Reject Sweeping Attack on DC's Fiscal Independence", "source": "DC Vote", "pubDate": "Tue, 21 Jul 2026 11:38:51 +0000" }
+      ],
+      "publishedBody": "A senator pledged in late August to prioritize D.C. statehood. In July, DC Vote urged a House committee to reject what the group described as a sweeping attack on the District's fiscal independence.",
+      "mustBeCaughtBy": [],
+      "failureMode": null,
+      "acceptableCloserKeys": ["budget", "laws", "representation"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "adversarial-legal-claim-in-body",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "Seeded J2 case: the body states a power, which is the closer's job and was wrong twice when the model wrote it freely.",
+      "headlines": [
+        { "title": "One Year After President Trump Deployed National Guard Troops to Washington, D.C., Statehood is More Important Than Ever", "source": "ACLU DC", "pubDate": "Wed, 05 Aug 2026 19:12:55 +0000" }
+      ],
+      "publishedBody": "Advocacy groups marked a year since the Guard deployment. Congress can deploy federal troops in the District whenever it chooses.",
+      "mustBeCaughtBy": ["J2"],
+      "failureMode": "F4 legal claim in the body — and a false one",
+      "acceptableCloserKeys": ["guard"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "adversarial-unattributed-assertion",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "Seeded J4 case: the site asserting an advocacy claim in its own voice.",
+      "headlines": [
+        { "title": "One Year Later, DC Vote Says Federal Takeover Underscores the Urgency of DC Statehood", "source": "DC Vote", "pubDate": "Mon, 10 Aug 2026 13:16:45 +0000" }
+      ],
+      "publishedBody": "The federal takeover proves that D.C. can never be safe without statehood.",
+      "mustBeCaughtBy": ["J4"],
+      "failureMode": "F6 advocacy claim asserted by the site",
+      "acceptableCloserKeys": ["laws", "representation", "guard"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "adversarial-offtopic-only",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "The relevance filter should return nothing, and the feed should publish empty rather than stretch for a summary.",
+      "headlines": [
+        { "title": "Nationals drop third straight at home", "source": "Washington Informer", "pubDate": "Thu, 11 Sep 2026 18:00:00 GMT" },
+        { "title": "Rain expected across the DMV this weekend", "source": "The 51st", "pubDate": "Thu, 11 Sep 2026 12:00:00 GMT" }
+      ],
+      "publishedBody": null,
+      "mustBeCaughtBy": [],
+      "failureMode": null,
+      "acceptableCloserKeys": [],
+      "expectedOutcome": "empty"
+    },
+    {
+      "id": "adversarial-single-thin-headline",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "One thin headline: a short general sentence is correct; inventing detail is not.",
+      "headlines": [
+        { "title": "Norton reintroduces D.C. statehood bill", "source": "NOTUS", "pubDate": "Wed, 09 Sep 2026 14:00:00 GMT" }
+      ],
+      "publishedBody": null,
+      "mustBeCaughtBy": [],
+      "failureMode": null,
+      "acceptableCloserKeys": ["representation", "laws"],
+      "expectedOutcome": "summary"
+    },
+    {
+      "id": "adversarial-numbers-in-headline",
+      "status": "proposed",
+      "asOf": "2026-09-12T00:00:00Z",
+      "note": "Numbers present in headlines must pass G2; numbers absent from them must not. NOT a judge-precision control — it has no labelled clean body, and its generations legitimately draw flags (a single vote became 'continuing a pattern of congressional intervention', which J1/J4 correctly caught).",
+      "headlines": [
+        { "title": "House votes 214-209 to overturn D.C. policing law", "source": "NOTUS", "pubDate": "Wed, 09 Sep 2026 22:00:00 GMT" }
+      ],
+      "publishedBody": null,
+      "mustBeCaughtBy": [],
+      "failureMode": null,
+      "acceptableCloserKeys": ["laws"],
+      "expectedOutcome": "summary"
+    }
+  ],
+  "todo": [
+    "Grow to ~30 cases, drawing more real sets from scripts/eval/fixtures/history-summaries.json (96 distinct published summaries with their headlines).",
+    "Judge precision is unmeasured: with one clean control and zero false alarms, the 95% upper bound on the false-alarm rate is still ~53%. Roughly 20-29 distinct clean controls would be needed to claim under 10%.",
+    "Andria approves every label before this file gates anything."
+  ]
+}

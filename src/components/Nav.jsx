@@ -14,7 +14,11 @@ function Nav() {
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/the-case">The Case</Link>
           <Link className="nav-link" to="/myths">Myths</Link>
-          <Link className="nav-link" to="/reading">Reading</Link>
+          {/* Two labels: phones have room for one short word next to the brand and CTA. */}
+          <Link className="nav-link nav-link--news" to="/news">
+            <span className="nav-label-full">News &amp; analysis</span>
+            <span className="nav-label-short">News</span>
+          </Link>
           <a className="nav-link" href="https://billtracker.representdc.org">Bill tracker</a>
           <a
             className="nav-link"

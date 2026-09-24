@@ -58,12 +58,27 @@
   box-shadow: var(--shadow-md);
 }
 
+.nav-label-short {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav-links {
     gap: var(--s-4);
   }
 
-  .nav-link:not(:first-child) {
+  /* Phones keep the brand, Home, News and the CTA. News earns its place here because
+     it is the one page this nav exists to surface; everything else stays desktop-only
+     until there is a real mobile menu. */
+  .nav-link:not(:first-child):not(.nav-link--news) {
     display: none;
+  }
+
+  .nav-label-full {
+    display: none;
+  }
+
+  .nav-label-short {
+    display: inline;
   }
 }

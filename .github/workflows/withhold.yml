@@ -1,0 +1,128 @@
+name: Withhold news summary
+
+# Takes the summary off www.representdc.org/news, keeping the headlines.
+#
+# Two ways in, because the point is that Andria can do this from her phone:
+#   1. reply "/withhold" to a review issue's notification email (or comment it here);
+#   2. Actions tab → Run workflow, as the backup when email replies misbehave.
+#
+# Only the repository owner can trigger the comment path. This repo is public, so anyone
+# can comment; author_association is what separates her from everyone else.
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why the summary is being withheld (optional)'
+        type: string
+        required: false
+
+# Deliberately NOT the fetch workflow's group. GitHub keeps at most one *pending* run per
+# group, so a scheduled fetch queueing behind a queued withholding would cancel it — the
+# owner's one emergency action, dropped silently and never reported.
+#
+# Running without that shared lock is safe: publishFeed() re-reads the branch and
+# re-applies on every attempt, so concurrent writers cannot overwrite each other, and
+# withheldAt makes a withholding beat any run that started before it.
+concurrency:
+  group: news-withhold
+  cancel-in-progress: false
+
+jobs:
+  withhold:
+    # startsWith, not contains: "please don't /withhold this" must not pull a summary.
+    #
+    # Per-run review issues are gone, so the trigger now binds to the standing control
+    # issue (labelled `news-control`) and to incident issues. Discussing the command
+    # anywhere else stays inert.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.comment.author_association == 'OWNER' &&
+       startsWith(github.event.comment.body, '/withhold') &&
+       (contains(github.event.issue.labels.*.name, 'news-control') ||
+        contains(github.event.issue.labels.*.name, 'news-incident')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+
+      - name: Remove the summary and confirm it is gone from the live page
+        id: withhold
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REASON: ${{ github.event.inputs.reason || github.event.comment.body || 'withheld by the site owner' }}
+        run: node scripts/news/withhold.mjs "$REASON"
+
+      # Reporting back matters as much as the removal: a silent failure here would leave
+      # her believing a bad summary was pulled when it is still on the page.
+      - name: Report back on the issue
+        if: always() && github.event_name == 'issue_comment'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          status=$(node -e "try{console.log(require('./withhold-result.json').status)}catch{console.log('failed')}")
+          case "$status" in
+            removed)
+              body="✅ Summary removed — confirmed gone from [the live page](https://www.representdc.org/news). Headlines are untouched. This issue is labelled \`summary-error\` so the wording becomes a test case." ;;
+            already-clear)
+              body="ℹ️ There was no summary to remove — the live page already shows none. Nothing changed." ;;
+            pushed-not-live)
+              body="⚠️ The change pushed, but the live page still showed a summary when the run gave up waiting. Please set \`NEWS_SUMMARY_ENABLED\` to \`false\` (Settings → Secrets and variables → Actions → Variables), then tell Claude. [Run log]($RUN_URL)" ;;
+            *)
+              body="🚨 Withholding failed before it could change anything. The summary is still on the page. Set \`NEWS_SUMMARY_ENABLED\` to \`false\` (Settings → Secrets and variables → Actions → Variables), then tell Claude. [Run log]($RUN_URL)" ;;
+          esac
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "$body"
+          # Label only an actual removal. Labelling "already clear" or a failure marked
+          # non-errors as errors and polluted the trail of genuinely bad summaries.
+          if [ "$status" = "removed" ]; then
+            gh label create summary-error --repo "$GITHUB_REPOSITORY" --color D93F0B \
+              --description "A published summary was wrong; becomes a golden eval case" --force || true
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label summary-error || true
+          fi
+
+      # An unconfirmed removal is an email incident by decision, and it is the one case
+      # where believing it worked is worse than not trying: a manual dispatch previously
+      # reported nowhere at all, and an issue comment is not something she will see if she
+      # ran this from the Actions tab and walked away.
+      - name: Email if the removal could not be confirmed
+        if: steps.withhold.outcome == 'failure'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: '🚨 RepresentDC news: summary NOT removed'
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: RepresentDC News <noreply@representdc.org>
+          body: |
+            The withhold run did not confirm that the summary is gone from the live page.
+            Assume it is still up.
+
+            Next step: Settings → Secrets and variables → Actions → Variables → set
+            NEWS_SUMMARY_ENABLED to false. That stops the next run generating one.
+
+            Run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Page: https://www.representdc.org/news
+          ignore_cert: false
+
+      - name: Fail the run if the summary is still live
+        if: always() && steps.withhold.outcome == 'failure'
+        run: |
+          echo "::error::Withholding did not confirm removal — see the email and issue comment."
+          exit 1

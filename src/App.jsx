@@ -4,11 +4,10 @@ import Myths from './Myths'
 import TheCase from './TheCase'
 import StatehoodCurious from './StatehoodCurious'
 import TakeAction from './TakeAction'
-import News from './News'
+import NewsAndAnalysis from './NewsAndAnalysis'
 import HowCongressControlsDC from './HowCongressControlsDC'
 import StatehoodPartnerMap from './StatehoodPartnerMap'
 import About from './About'
-import Reading from './Reading'
 import Article from './reading/Article'
 import ScrollToTop from './components/ScrollToTop'
 
@@ -24,11 +23,13 @@ function App() {
         <Route path="/the-case" element={<TheCase />} />
         <Route path="/statehood-curious" element={<StatehoodCurious />} />
         <Route path="/take-action" element={<TakeAction />} />
-        <Route path="/news" element={<News />} />
+        <Route path="/news" element={<NewsAndAnalysis />} />
         <Route path="/how-congress-controls-dc" element={<HowCongressControlsDC />} />
         <Route path="/statehood-partner-map" element={<StatehoodPartnerMap />} />
         <Route path="/about" element={<About />} />
-        <Route path="/reading" element={<Reading />} />
+        {/* The Reading hub folded into /news as "Analysis & essays" (2026-09-12).
+            Article URLs are unchanged — only the hub moved. */}
+        <Route path="/reading" element={<Navigate to="/news" replace />} />
         <Route path="/reading/:slug" element={<Article />} />
       </Routes>
     </>

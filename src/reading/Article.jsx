@@ -59,7 +59,9 @@ function Article() {
   const body = piece && BODIES[`./${slug}.md`]
 
   if (!piece || !body) {
-    return <Navigate to="/reading" replace />
+    // Straight to /news: the Reading hub folded into it, and /reading is now itself a
+    // redirect, so pointing there would bounce an unknown slug twice.
+    return <Navigate to="/news" replace />
   }
 
   const headings = extractHeadings(body)
@@ -69,7 +71,7 @@ function Article() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Reading</span>
+          <span className="eyebrow">Analysis</span>
           <h1>{piece.title}</h1>
         </div>
       </header>
