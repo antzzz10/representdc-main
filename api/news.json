@@ -1,0 +1,34 @@
+{
+  "runId": "36076400750-1",
+  "lastUpdated": "2026-09-25T00:12:06.504Z",
+  "summary": "A senator recently committed to making D.C. statehood a top priority, while statehood advocates marked the anniversary of a federal deployment of National Guard troops to Washington, D.C., arguing the incident underscores why statehood is urgently needed. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "summarySource": {
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
+  "articles": [
+    {
+      "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
+      "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
+      "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "One Year Later, DC Vote Says Federal Takeover Underscores the Urgency of DC Statehood",
+      "link": "https://www.dcvote.org/one-year-later-dc-vote-says-federal-takeover-underscores-the-urgency-of-dc-statehood/",
+      "pubDate": "Mon, 10 Aug 2026 13:16:45 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "One Year After President Trump Deployed National Guard Troops to Washington, D.C., Statehood is More Important Than Ever",
+      "link": "https://www.acludc.org/news/one-year-after-president-trump-deployed-national-guard-troops-to-washington-d-c-statehood-is-more-important-than-ever-3/",
+      "pubDate": "Wed, 05 Aug 2026 19:12:55 +0000",
+      "source": "ACLU DC"
+    }
+  ]
+}
