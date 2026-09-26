@@ -1,7 +1,7 @@
 {
-  "runId": "36192746222-1",
-  "lastUpdated": "2026-09-25T21:40:05.038Z",
-  "summary": "A senator has committed to prioritizing D.C. statehood, while advocacy groups have marked the anniversary of a federal deployment to the District by arguing that statehood remains urgent. Separately, landlords are pressing the D.C. Council on local eviction policy. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "36239168453-1",
+  "lastUpdated": "2026-09-26T11:33:22.101Z",
+  "summary": "A senator has committed to making DC statehood a top priority, while advocacy groups mark the anniversary of a federal deployment of National Guard troops to the District and a federal takeover, both of which they say underscore the need for statehood. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -12,12 +12,6 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
-    {
-      "title": "D.C. Landlords Push the Council to Allow Speedier Evictions",
-      "link": "https://www.washingtonsun.com/metro/dc-council-evictions-landlords",
-      "pubDate": "Fri, 25 Sep 2026 09:26:00 GMT",
-      "source": "NOTUS"
-    },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
       "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
