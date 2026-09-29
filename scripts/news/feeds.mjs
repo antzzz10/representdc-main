@@ -21,9 +21,23 @@ export const FEEDS = [
   // News outlets — recent coverage only.
   { url: 'https://51st.news/rss/', source: 'The 51st' },
   { url: 'https://washingtoninformer.com/feed/', source: 'Washington Informer' },
-  // NOTUS is a general national-politics feed, not DC-specific — confirmed valid RSS 2.0
-  // (2026-07-12). Relies on the relevance filter more than the DC-focused feeds above.
-  { url: 'https://www.notus.org/index.rss', source: 'NOTUS' },
+  { url: 'https://washingtoncitypaper.com/feed', source: 'Washington City Paper' },
+  // NOTUS renamed itself twice in 2026: a planned rebrand to "The Star" was blocked by a
+  // trademark suit from a separate, unrelated revived Washington Star newspaper (added
+  // below), so NOTUS became The Washington Sun instead. notus.org now 301s here; this
+  // points at the canonical URL directly rather than riding that redirect chain.
+  // General national-politics feed, not DC-specific — confirmed valid RSS 2.0
+  // (2026-09-29, carried over from the same confirmation on notus.org, 2026-07-12).
+  // Relies on the relevance filter more than the DC-focused feeds above.
+  { url: 'https://www.washingtonsun.com/index.rss', source: 'The Washington Sun' },
+  // The revived (2026) Washington Star — a separate outlet from the Sun above, see the
+  // note there. Confirmed valid RSS 2.0 (2026-09-29), runs on Substack.
+  { url: 'https://www.twstar.com/feed', source: 'The Washington Star' },
+  // Congress-specific, not DC-specific — relevant because most DC-statehood action
+  // happens as congressional action on DC (riders, oversight, home-rule bills).
+  { url: 'https://thehill.com/homenews/house/feed/', source: 'The Hill (House)' },
+  { url: 'https://thehill.com/homenews/senate/feed/', source: 'The Hill (Senate)' },
+  { url: 'https://www.rollcall.com/rss/tag/rss-feed/all-news', source: 'Roll Call' },
   // Advocacy org blogs — publish infrequently, so allow a wider window.
   { url: 'https://acludc.org/feed/', source: 'ACLU DC', maxAgeDays: 60 },
   { url: 'https://www.dcvote.org/feed/', source: 'DC Vote', maxAgeDays: 60 },
@@ -34,6 +48,20 @@ export const FEEDS = [
   // Rep. Norton's office: NOT added. Every RSS path guessed either 403'd or 404'd, and
   // the one that returned a feed was a stale 2021-2022 artifact. Sen. Jain's site has no
   // feed at all. Both need a confirmed URL before they can be sources.
+  //
+  // Checked 2026-09-29, NOT added:
+  // - Politico: every feed path (politico.com/rss/*) returns a Cloudflare bot challenge
+  //   (403 "Just a moment..."), same failure mode as League of Women Voters DC above.
+  // - City Cast DC: podcast-first network, no RSS feed for written articles at any
+  //   standard path (checked /feed, /rss, /news/feed, /news/rss — all 404).
+  // - House Oversight Committee (oversight.house.gov/feed/): resolves and parses as
+  //   valid RSS, but every item's pubDate is from December 2020 — an abandoned endpoint
+  //   left live by a since-migrated site, not a dead URL. Would silently contribute zero
+  //   fresh items forever rather than erroring, so worth remembering not to re-add
+  //   without re-checking actual item dates, not just HTTP status.
+  // - DC Council's "News RSS" (dccouncil.gov/dc-council-rss-feeds/): links to a
+  //   GovDelivery email-subscription signup page, not an actual RSS/Atom feed.
+  // - DCist: permanently shut down by WAMU, February 2024.
 ];
 
 function extractCDATA(text) {

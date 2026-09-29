@@ -11,6 +11,11 @@ name: Fetch DC News
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
+        type: boolean
+        default: false
   schedule:
     # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
     # queued at minute 0.
@@ -45,6 +50,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEWS_SUMMARY_ENABLED: ${{ vars.NEWS_SUMMARY_ENABLED }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: node scripts/fetch-news.mjs
 
       # The durable diagnostic record, replacing the news-data branch log. 90 days is
