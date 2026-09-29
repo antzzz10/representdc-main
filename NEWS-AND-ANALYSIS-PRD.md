@@ -467,3 +467,50 @@ account. The disagreement costs nothing either way, because every run already ve
 live URL serves its own `runId` before reporting `published` — if Codex turns out to be
 right in some configuration, the run reports `pushed-not-live` and emails, rather than
 failing silently.
+
+## Amendment — 2026-09-29: source expansion, dry-run preview, and a credibility question
+
+Live since 2026-09-25 (first real run 2026-09-25T00:12Z). Confirmed healthy: 8/8
+scheduled runs succeeded through 2026-09-28, `lastUpdated` current, no incidents, no
+emails sent.
+
+**Sources expanded** in `scripts/news/feeds.mjs`: NOTUS renamed itself twice this year
+(a planned rebrand to "The Star" was blocked by a trademark suit from a separate,
+unrelated revived Washington Star newspaper, so it became The Washington Sun instead) —
+updated to point at the Sun directly, and added the actual Washington Star as a distinct
+new source. Also added The Hill's House and Senate feeds, Roll Call, and Washington City
+Paper — all confirmed live before adding. Checked and rejected (documented inline in
+`feeds.mjs`): Politico (Cloudflare-blocked), City Cast DC (no RSS for written content),
+House Oversight Committee's feed (resolves but every item is from December 2020 —
+abandoned, not broken), DC Council's "News RSS" (an email signup, not a feed), DCist
+(shut down Feb 2024).
+
+**`dry_run` added to `fetch-news.yml`'s manual trigger** — runs the full pipeline and
+logs the result without publishing, using the script's existing (previously local-only)
+`DRY_RUN` mode. Already safe: `news-incident.sh` already treats `dry-run` as healthy,
+non-alerting.
+
+**Finding: candidate pool roughly doubled (61 → 130) and the output didn't change.**
+Same 3 articles, same summary, both before and after the source expansion. Not a bug —
+ACLU DC and DC Vote (60-day freshness window) are still inside that window, and the
+relevance filter correctly found nothing newer among 124 fresh items from the other 8
+sources. DC-statehood-specific news is evidently sparser than general DC/Congress news.
+
+**Next, not yet scoped:**
+
+1. **Credibility signal for "genuinely no new relevant news."** A reader landing on
+   `/news` and seeing an August dateline, with no indication the pipeline checked again
+   an hour ago, reads as a broken or abandoned site — even though this is the pipeline
+   working exactly as designed (refusing to force a match rather than publish something
+   irrelevant). Needs a UI treatment that distinguishes "this is stale because nothing
+   ran" (an actual incident — already alerted) from "this is current because nothing
+   new qualified" (healthy, expected, correctly represented). Some version of "checked
+   as of [time]" separate from the article's own dateline is the likely shape, but the
+   design isn't scoped.
+2. **Track % of days with no qualifying fresh news**, independent of (1) above — useful
+   operationally regardless of how the reader-facing signal ends up looking: it's a
+   direct measure of how often the source list actually has something to say, tells us
+   whether source expansion is moving the number, and would surface a source going
+   quiet in a way individual run logs don't surface on their own. Not built — the run
+   record (90-day artifact) has the raw data (`summaryDecision`, `articles.length`) per
+   run; this would need aggregating across runs, which nothing does today.
