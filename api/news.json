@@ -1,7 +1,7 @@
 {
-  "runId": "36869026631-1",
-  "lastUpdated": "2026-10-01T13:29:39.446Z",
-  "summary": "A senator has committed to prioritizing D.C. statehood, while advocacy groups mark anniversaries of federal interventions in the District—a federal takeover and a National Guard deployment—as evidence of why statehood is urgently needed. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "36936993396-1",
+  "lastUpdated": "2026-10-01T22:46:15.993Z",
+  "summary": "DoorDash has apologized for supporting a GOP bill targeting D.C., while the ACLU raises concerns about National Guard troops in the District. A senator has committed to making D.C. statehood a top priority, and advocacy groups have marked the anniversary of a federal deployment of National Guard troops to D.C., arguing it underscores the need for statehood. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -12,6 +12,18 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "DoorDash Apologizes for Siding With GOP Bill Targeting D.C.",
+      "link": "https://www.washingtonsun.com/metro/doordash-apology-gop-bill-dc",
+      "pubDate": "Thu, 01 Oct 2026 14:31:37 GMT",
+      "source": "The Washington Sun"
+    },
+    {
+      "title": "Why we shouldn’t have National Guard Troops in D.C.",
+      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
+      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "source": "ACLU DC"
+    },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
       "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
