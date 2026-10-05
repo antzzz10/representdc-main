@@ -1,7 +1,7 @@
 {
-  "runId": "37236783306-1",
-  "lastUpdated": "2026-10-04T21:36:57.753Z",
-  "summary": "An ACLU DC opinion piece recently raised concerns about National Guard deployment in the District, while statehood advocates continue to emphasize the urgency of the cause, with a senator recently committing to prioritize D.C. statehood. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "37328457807-1",
+  "lastUpdated": "2026-10-05T14:54:28.452Z",
+  "summary": "The ACLU recently argued against National Guard troop deployment in the District, while statehood advocates marked the anniversary of a federal takeover and highlighted a senator's commitment to prioritizing statehood legislation. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -17,6 +17,12 @@
       "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
       "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
       "source": "ACLU DC"
+    },
+    {
+      "title": "DC Vote is Hiring!",
+      "link": "https://www.dcvote.org/dc-vote-is-hiring/",
+      "pubDate": "Tue, 29 Sep 2026 16:07:26 +0000",
+      "source": "DC Vote"
     },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
