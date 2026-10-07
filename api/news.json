@@ -1,10 +1,10 @@
 {
-  "runId": "37629616449-1",
-  "lastUpdated": "2026-10-07T13:35:37.067Z",
-  "summary": "Advocacy groups including the ACLU are raising concerns about National Guard deployment in the District, while statehood supporters including Senator Slotkin have pledged to prioritize the issue. DC Vote marked the anniversary of a federal takeover, characterizing it as evidence for why statehood remains urgent. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "37700691100-1",
+  "lastUpdated": "2026-10-07T23:10:45.474Z",
+  "summary": "DC Vote has highlighted recent attacks on the District's local authority and is framing the fight for statehood as urgent, with a senator committing to make it a top priority and the group pointing to a federal takeover from a year prior as evidence of why statehood matters. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "laws",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -13,16 +13,16 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
+      "title": "Nine Attacks on DC&#8217;s Local Authority, and How We Responded",
+      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
+      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
+      "source": "DC Vote"
+    },
+    {
       "title": "Where the Fight Stands &#8211; Amy Vruno, DC Vote Executive Director",
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
