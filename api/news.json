@@ -1,10 +1,10 @@
 {
-  "runId": "37786179929-1",
-  "lastUpdated": "2026-10-08T13:40:36.186Z",
-  "summary": "DC Vote is documenting recent attacks on the District's local authority and describing the current state of statehood advocacy efforts, while the ACLU raises concerns about National Guard presence in the District. A senator has committed to prioritizing DC statehood, and advocates have marked the anniversary of a federal takeover as evidence of the urgency of statehood. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "37859388698-1",
+  "lastUpdated": "2026-10-08T23:26:52.828Z",
+  "summary": "DC Vote has documented recent attacks on the District's local authority and highlighted responses to them. A senator has committed to prioritizing DC statehood, while advocates have marked the anniversary of a federal takeover as evidence for why statehood is urgent. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "laws",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -17,18 +17,6 @@
       "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
       "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands &#8211; Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
