@@ -1,10 +1,10 @@
 {
-  "runId": "37859388698-1",
-  "lastUpdated": "2026-10-08T23:26:52.828Z",
-  "summary": "DC Vote has documented recent attacks on the District's local authority and highlighted responses to them. A senator has committed to prioritizing DC statehood, while advocates have marked the anniversary of a federal takeover as evidence for why statehood is urgent. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
+  "runId": "37936801173-1",
+  "lastUpdated": "2026-10-09T13:26:30.244Z",
+  "summary": "DC statehood advocates are highlighting recent challenges to the District's local authority while pointing to supportive statements from federal lawmakers. The ACLU has raised concerns about the National Guard's presence in D.C., and DC Vote has documented multiple attacks on local governance while tracking the current state of advocacy efforts. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
-    "closerKey": "laws",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -19,15 +19,21 @@
       "source": "DC Vote"
     },
     {
-      "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
-      "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
-      "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000",
+      "title": "Where the Fight Stands &#8211; Amy Vruno, DC Vote Executive Director",
+      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
+      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
     },
     {
-      "title": "One Year Later, DC Vote Says Federal Takeover Underscores the Urgency of DC Statehood",
-      "link": "https://www.dcvote.org/one-year-later-dc-vote-says-federal-takeover-underscores-the-urgency-of-dc-statehood/",
-      "pubDate": "Mon, 10 Aug 2026 13:16:45 +0000",
+      "title": "Why we shouldn’t have National Guard Troops in D.C.",
+      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
+      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "source": "ACLU DC"
+    },
+    {
+      "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
+      "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
+      "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000",
       "source": "DC Vote"
     }
   ]
