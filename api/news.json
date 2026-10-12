@@ -1,10 +1,10 @@
 {
-  "runId": "38179056149-1",
-  "lastUpdated": "2026-10-11T22:06:39.445Z",
-  "summary": "The District's elections board has requested that the National Guard stay away from ballot drop boxes, reflecting ongoing concerns about federal military presence in D.C. and local control of elections. Advocates have documented recent attacks on D.C.'s local authority and argue against National Guard involvement in District affairs, while statehood supporters continue pressing the case for change in Congress. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "38272021244-1",
+  "lastUpdated": "2026-10-12T15:41:27.575Z",
+  "summary": "DC Vote has documented nine recent attacks on the District's local authority and outlined responses to them, while a senator has committed to prioritizing DC statehood legislation. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "laws",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -12,12 +12,6 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
-    {
-      "title": "D.C. Elections Board Asks National Guard to Stay Away From Ballot Drop Boxes",
-      "link": "https://www.washingtonsun.com/metro/national-guard-dc-ballot-boxes",
-      "pubDate": "Fri, 09 Oct 2026 18:39:30 GMT",
-      "source": "The Washington Sun"
-    },
     {
       "title": "Nine Attacks on DC&#8217;s Local Authority, and How We Responded",
       "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
@@ -29,12 +23,6 @@
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     },
     {
       "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
