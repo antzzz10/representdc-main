@@ -16,17 +16,24 @@ on:
         description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
         type: boolean
         default: false
+      test_email:
+        description: 'Send one test alert email and do nothing else (no fetch, no publish, no incident)'
+        type: boolean
+        default: false
   schedule:
     # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
     # queued at minute 0.
     - cron: '17 6,18 * * *'
 
 concurrency:
-  group: news-publish
+  # A test email gets its own group: GitHub keeps one pending run per group and replaces
+  # it, so a test queued behind a publish would silently cancel a waiting fetch (Codex).
+  group: ${{ github.event.inputs.test_email == 'true' && 'news-test-email' || 'news-publish' }}
   cancel-in-progress: false
 
 jobs:
   fetch:
+    if: github.event.inputs.test_email != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -110,3 +117,31 @@ jobs:
           # Through env, never interpolated into the script: the value is step output.
           ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
         run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
+
+  # Proves the alert path end to end on demand. Alerts are exception-only, so without this
+  # the first proof that email works would be a real incident. Same action, sender and
+  # secrets as the incident email above, so a pass here means that path works too.
+  test-email:
+    if: github.event.inputs.test_email == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Send a test alert
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🧪 RepresentDC news: test alert"
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: RepresentDC News <noreply@representdc.org>
+          body: |
+            This is a test of the news pipeline's alert email, started by hand.
+            If you are reading it, failure and recovery alerts can reach you.
+            Nothing is wrong, and nothing was fetched or published.
+
+            Run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ignore_cert: false

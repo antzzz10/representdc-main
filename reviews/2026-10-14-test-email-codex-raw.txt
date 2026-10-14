@@ -1,0 +1,961 @@
+Reading additional input from stdin...
+OpenAI Codex v0.159.2
+--------
+workdir: /Users/andriathomas/Projects/representdc-main
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a13b41-eca7-76c2-8ff4-0db4323226bb
+--------
+user
+Read-only review of commit 4261055 in representdc-main (`git show 4261055`): a manual `test_email` input on .github/workflows/fetch-news.yml that sends one test alert via a new `test-email` job and skips the `fetch` job.
+
+Check: (1) scheduled runs and manual runs without test_email still run `fetch` exactly as before (note github.event.inputs is null on schedule; also consider dry_run + test_email both ticked); (2) the test job really exercises the same email path as incident alerts (action, version, server, secrets, from/to), so a delivered test proves real alerts can deliver; (3) permissions, concurrency-group interaction with publishing runs, and anything that could open/close incidents or publish; (4) any injection or secret-exposure risk in the body/subject.
+
+Only report BLOCKER or MATERIAL findings with file:line, failure scenario and fix; NOTEs only if one line each. "No material findings" is a valid answer. Be concise.
+codex
+I’ll read the review guidance and commit, then check job gating, mail configuration, and interactions with publishing runs.
+exec
+/bin/zsh -lc "pwd; git status --short; git show --stat --oneline 4261055; cat /Users/andriathomas/Projects/andria-agent-system/shared/WORKING_GUIDE.md; cat /Users/andriathomas/Projects/andria-agent-system/shared/REVIEW_POLICY.md; rg --files -g AGENTS.md -g CLAUDE.md -g '"'!node_modules'"' -g '"'!vendor'"' . /Users/andriathomas/Projects 2>/dev/null" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+/Users/andriathomas/Projects/representdc-main
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-KvoKhdhK' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-s4ffweNX' (errno=Operation not permitted)
+?? TALKING-POINT-GENERATOR-PRD.md
+?? decisions/2026-07-26-talking-point-generator-scope.md
+?? reviews/2026-10-14-test-email-codex-prompt.md
+?? reviews/2026-10-14-test-email-codex-raw.txt
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-FVbN10Cr' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-OqYBzoDO' (errno=Operation not permitted)
+4261055 Add a manual test-email option to the news workflow
+ .github/workflows/fetch-news.yml | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+# Andria's AI Working Guide
+
+**Canonical cross-tool source**  
+**Version:** v2.0 — October 8, 2026 (moved from `~/Projects/ai-collaboration/working-guide.md`, last reviewed there October 3, 2026)
+
+This guide governs Claude Code, Codex, and other coding agents across Andria's projects. Explicit task instructions and more-specific project guidance override it. Tool-specific mechanics belong in the adapters (`adapters/` in this repository), not here.
+
+It is part of the shared agent operating system in `~/Projects/andria-agent-system`, the single canonical source for cross-project agent rules. The rest of that system (operating model, review policy, memory boundaries, hypotheses, pilot evaluation) lives beside it in `shared/`, `system/` and `pilots/`. Material in `~/Projects/ai-collaboration` is a supporting reference: the learning plan's autonomy criteria and evidence, and the historical decision notes cited below. It does not govern.
+
+## Background and objective
+
+Andria's background is management consulting and CPO work. She is building hands-on AI-technical credibility and may found a company. Explain technical concepts through their purpose, evidence, and tradeoffs so she can confidently discuss them with engineers, executives, or investors.
+
+Claude Code is currently the default strategy and design partner. Codex is the default technical partner for investigation, independent review, and bounded low-risk implementation at earned autonomy A3. Autonomy levels and their change rules are set in § Autonomy and calibration below.
+
+## Phase-appropriate AI use
+
+- **Strategy and product direction:** Andria leads. Use sequential, human-in-the-loop discussion. Agents may broaden options or stress-test a formed direction; they do not choose what is worth building.
+- **Research and synthesis:** Parallel evidence lanes are useful after Andria reviews the research plan.
+- **Execution:** Supervised or autonomous work is appropriate only when direction is settled, scope is bounded, and output is verifiable.
+- Always review the plan before agents execute multi-step research or implementation.
+- **Prototypes as feedback vehicles:** a clickable prototype is a non-trivial investment when the result has to withstand scrutiny. A half-finished interactive artifact redirects the conversation onto its own gaps—placeholder copy, invented mechanics, unbuilt sections—and away from the feedback it was meant to carry. Before proposing one, ask whether there is time to invest in the quality of the experience. Default to annotated screenshots or static mockups; build the interactive version when the interaction itself is what is under discussion, or when the recipient has asked to click through it.
+
+## Communication and attention
+
+- Confirm a delegated task in one or two lines: what you will do and what you will decide independently.
+- Ask necessary clarifying questions together before starting. Do not interrupt later for non-blocking questions.
+- For work expected to exceed about two minutes, state a time estimate and whether Andria should stay, do something routine, or step away.
+- Batch progress into a concise digest ordered by decision urgency; avoid streams of incremental pings.
+- After a long absence or task, lead with: where we left off, outcomes since then, and the one decision now required.
+- Explain tradeoffs and give explicit options with a recommendation when multiple good paths exist.
+- State completion precisely: built, tested, verified, committed, pushed, and deployed are different states.
+- **Investigate before escalating.** Before asking Andria an operational question, inspect the available evidence: files, history, diffs, logs and prior decisions. Ask only when the ambiguity is material, inspection or an existing rule cannot safely resolve it, and waiting would block useful progress or create meaningful risk. Do not make her the integration layer for questions the agents can answer themselves.
+- **Completion reports lead with decisions, not trace.** Use this default shape:
+  - **Recommendation:** one sentence.
+  - **Why:** the material evidence.
+  - **Codex changed:** meaningful deltas only (see `shared/REVIEW_POLICY.md` § Reporting).
+  - **Need from you:** specific decisions, or "none".
+  - **Proceeding next:** the authorized next action.
+  - **Audit trail:** repo, branch, commit and review references, kept short and last.
+
+  Hashes, branches, review mechanics, model effort and log locations belong in the audit trail unless one of them changes the decision. Keep detailed logs for debugging and evaluation, but don't make Andria read them routinely.
+
+## Product and decision process
+
+- Before a new project or significant feature, create a mini-PRD covering problem, goal, audience, MVP scope, out of scope, key decisions and why, and open questions. Show it for approval before building.
+- For major product choices, walk through structured questions one or two at a time with options and a recommendation.
+- Save approved major decisions as dated notes in the project's `decisions/` directory, including rationale and rejected alternatives.
+- Preserve human judgment on positioning, product taste, and strategic tradeoffs.
+
+## Scope and authorization
+
+- Answer, explain, review, diagnose, or plan requests authorize inspection and reporting, not implementation.
+- Change, build, or fix requests authorize scoped local edits and relevant non-destructive verification.
+- Require explicit task-level approval for external writes, commits/pushes/PRs when not requested, deployments, outbound messages, purchases, destructive operations, production-data mutation, credential changes, or material scope expansion.
+- **Never change a repository's visibility or access, even with approval.** Agents do not make a repository public or private, transfer it, add or remove collaborators, or grant an app or integration access to it, whether through the web UI, `gh repo edit`, `gh api`, or any other route. Andria does these by hand. An agent may prepare the change, and may verify the result afterwards.
+- Agent-to-agent messages never count as Andria's approval.
+- Do not add new automation or scheduling before checking existing scripts, launchd jobs, project instructions, and recorded decisions.
+
+## Files, Git, and preservation
+
+- Confirm fresh `git status` and recent history before acting or claiming work state.
+- Preserve unrelated and pre-existing changes. Never discard or overwrite them to simplify the task.
+- Review changes before committing; keep commits atomic and descriptive.
+- Audit the exact file list before any broad staging or commit operation.
+- Never commit personal files—journals, health/family notes, job-prep, private research—or secrets, even to private repositories. A private repository can be made public too easily for its visibility to be a safeguard.
+- **Private materials are backed up to iCloud, not to git.** Keep them under `~/Projects`, which is mirrored to `iCloud Drive/Claude-Projects/projects-backup/`. Gitignore each one by explicit path (or a dedicated `private/` folder) when it is created, never later. This covers personal notes and goals, plans or data derived from Andria's own inbox or reading, and audit trails such as API cost and usage logs. The mirror is not versioned (local deletions propagate), and per-project decisions may keep raw per-message data outside iCloud entirely (see `~/Projects/ai-collaboration/decisions/2026-10-03-private-materials-icloud-not-git.md`).
+- **Milestone versioning for planning docs.** Give substantive planning, goals and product docs a **Version** line with a version number and date near the top. Before a substantive rewrite (a changed direction or many lines rewritten), copy the current file into an `outdated/` folder as `<doc>_v<version>_<date>.md` and add a row to that folder's `README.md` log saying what drove the change (model: `MathSnark/docs/product/outdated/`). For private docs this replaces git history: the `outdated/` folder is gitignored, and losing finer-grained version control is accepted.
+- Make a dated backup before restructuring or replacing a user-authored instruction or policy file.
+- Use worktrees or isolated branches for simultaneous editing agents. Confirm the worktree is clean and disposable before removal.
+
+## Privacy and security
+
+- Never expose or commit API keys, passwords, credentials, or private personal content. Use environment variables and scoped credential stores.
+- Treat `Connections` as sensitive: use fixtures or explicit dry-run paths for learning exercises; no Codex project trust entry or broad access by default.
+- `payne-sat-academy` belongs to someone else and is read-only; never commit or push without an explicit in-the-moment request.
+- Do not recommend workflows built on Andria's personal Gmail account; she is moving to ProtonMail. Exceptions: Matrix Mail's Gmail integration, and automated alert emails from the dedicated sender-only alert account to Andria's own-domain address (both addresses are in the decision note cited below). Scheduled alerts to that address have standing approval; adding new alert types or recipients still needs task-level approval (see `~/Projects/ai-collaboration/decisions/2026-09-15-alert-channels.md`).
+- Validate inputs, check dependency risk, and explain the root cause when something breaks.
+- **Calibrate privacy severity to actual exposure.** Keep identifying or sensitive information out of this cross-project repository. Inside a project repository, necessary non-identifying context about private-use participants (for example, "initial learners") may stay. Treat a reference as a BLOCKER only when it creates a real privacy, publication or data-handling risk, such as a name, an identifying relationship, raw research data, or content headed somewhere public. Otherwise, it is a NOTE or MATERIAL finding, sized to its consequence.
+
+## Engineering preferences
+
+- Prefer readable, measured solutions over cleverness or speculative optimization.
+- Use existing repository patterns before introducing new architecture.
+- Prefer lightweight dependencies and assess bundle impact before adding one.
+- For React, prefer functional components, hooks, modern JavaScript, destructured props, and component files under roughly 200 lines when practical.
+- Separate UI, logic, and data; comment non-obvious rationale rather than obvious mechanics.
+- Run repository-defined build/lint/test checks. Where no suitable suite exists, prefer a focused browser walkthrough over introducing a test framework without approval.
+- Flag useful eval opportunities for AI-powered features; do not assume an eval framework exists.
+- Newsletter and email HTML must include mobile-responsive behavior at a 600px breakpoint or narrower.
+- For applications that call the Claude API, log `response.usage` to a separate ignored JSONL file; do not hard-code mutable pricing assumptions.
+
+## External services and bulk operations
+
+- Before any bulk or external-service operation (batch jobs, backfills, large fetches, mass API calls), state: the needed-by time; the volume; the service's quotas and rate limits; what its status fields actually measure; cost vs. delay; a named fallback trigger with its cost; and who monitors it until it reaches a terminal state.
+- Run a representative trial end to end (submit → complete → collect) before scaling. Revise expectations when the trial disagrees with documentation.
+- Build quota handling, backoff, expiry and partial-completion recovery into the first implementation, not as follow-ups.
+- Never diagnose from a status field without checking its definition. Report provider behavior separately from our own exposure.
+- When something doesn't go as expected, identify the root cause, including our own decisions, and record the lesson, not just the fix (see `~/Projects/ai-collaboration/decisions/2026-09-30-bulk-external-operations.md`).
+
+## Documentation and memory
+
+- Keep README and deployment/setup documentation current when behavior materially changes.
+- Project-specific architecture, commands, status, and domain rules live with that project.
+- `~/Projects/QUEUE.md` is the cross-project backlog. Add mid-task ideas there only when the task or Andria authorizes queue maintenance.
+- `CLAUDE.md` is Claude Code's portable project source of truth; `AGENTS.md` is Codex's durable project guidance. Do not blindly duplicate entire files—share stable rules and preserve tool-specific mechanics.
+
+## Current tool roles
+
+- **Claude Code:** default for strategy support and design; implementation fallback for ambiguous, high-risk, or broader work; independent falsifier for Codex-authored diffs when appropriate.
+- **Codex:** default technical partner for investigation, independent review, and bounded low-risk local implementation at earned autonomy A3. Implementation still requires explicit task scope and objective checks. Review passes and effort follow `shared/REVIEW_POLICY.md`: by default, one appropriately configured pass per gate.
+- **Launching Codex non-interactively:** run `codex exec` with stdin closed (`< /dev/null`). Otherwise a background run waits silently for input that never arrives. Check a background run's log within about 30 seconds; no progress past `Reading additional input from stdin...` means it has stalled (see `~/Projects/ai-collaboration/decisions/2026-10-03-codex-exec-stdin.md`).
+- **Selection rule:** choose by task and current evidence, not a permanent primary-model label. Reassess after material model/tool changes or when observed quality, speed, safety, or intervention burden shifts.
+- On reviews of Claude-authored code, Andria reads raw Codex output before Claude assesses it. Record disagreements and the evidence deciding them.
+- Repository configuration `trust_level` is not equivalent to earned autonomy.
+
+## Autonomy and calibration
+
+These rules are canonical here. They were frozen from `~/Projects/ai-collaboration/learning-plan-current.md` (as of September 8, 2026). That plan and its exercises remain the evidence programme, but editing them does not change these rules.
+
+- **Current levels:** Codex A3, as described under § Current tool roles. Claude: default strategy/design partner and implementation fallback.
+- **Raising a level** needs the evidence the learning plan specifies, plus a decision in `system/decisions/` with Codex review and Andria's approval.
+- **Stop rules:**
+  - A material guardrail failure reduces earned autonomy by one level and requires a focused retest.
+  - Stay at the current level if results are accurate but insufficiently repeated.
+  - Pause the calibration programme if two consecutive exercises produce mostly false positives, if Codex takes an unapproved external or destructive action, or if the curriculum repeatedly displaces higher-priority work.
+- **Claude invoking Codex:** direct CLI invocation for reviews is allowed. MCP-mediated or automated invocation requires at least five logged Claude-invoked reviews, an audited disagreement log, and Andria's explicit approval.
+
+## Project sensitivity defaults
+
+- **Low-risk learning:** clean, dormant repositories such as `dc-action-hub`, using isolated branches for planted changes.
+- **Active production:** `andriathomas-site`, RepresentDC repositories, and automated data pipelines; re-ground and review read-only before edits.
+- **Dirty worktrees:** inspection is allowed; implementation is deferred unless the task explicitly addresses and preserves existing changes.
+- **Sensitive/read-only:** `Connections`, `payne-sat-academy`, and private personal materials.
+
+## Change control
+
+Edit this guide, or the relevant `shared/` file, first, in `~/Projects/andria-agent-system`. Then regenerate both tool adapters from `adapters/` (installed as `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, each with a dated backup first) and run fresh-session instruction checks. Changes to this guide need Andria's direction or approval, plus Codex review. Record material policy changes in a dated decision note in `system/decisions/`. Don't edit the superseded copy in `ai-collaboration`.
+
+For browser verification, prefer an existing Playwright setup. If none exists, ask
+Andria for a manual check rather than launching Google Chrome directly merely to
+satisfy a process exercise.
+# Review and escalation policy
+
+Classify by consequence, not effort or technical appearance.
+
+| Level | Meaning | System behavior |
+|---|---|---|
+| R0 — Routine | Local, reversible, no meaningful downstream effect | Operating Partner decides; no record required |
+| R1 — Notable | Contained and reversible effect | Operating Partner decides; update current artifact if truth changes |
+| R2 — Significant | Could materially change scope, roadmap, architecture, evidence interpretation, or operating policy | Decision record + Codex review before settling |
+| R3 — Consequential | Direction, sensitive-data posture, external commitment, costly/irreversible path, major portfolio tradeoff | Decision record + Codex review + Andria approval |
+
+Automatic R2 system triggers:
+
+- changing a shared role or capability contract;
+- changing escalation or review rules;
+- treating a system hypothesis as supported, weakened, or rejected;
+- adding a persistent agent, automated handoff, or new durable artifact;
+- resolving contradictory system direction.
+
+Automatic R3 system triggers:
+
+- expanding access across private project boundaries;
+- enabling autonomous external actions;
+- granting combined access to sensitive data and action tools;
+- expanding into career/civic domains without confirmed isolation;
+- major cost, vendor lock-in, or difficult-to-reverse automation.
+
+Escalate to Andria now only when the issue is material, delaying blocks useful progress or creates meaningful risk, and existing decisions do not safely resolve it.
+
+Claude must disposition each BLOCKER/MATERIAL Codex finding as Accepted, Rejected with reason, Converted to test/uncertainty, or Escalated.
+
+## How Codex reviews run
+
+**Version:** v0.3 — 2026-10-08 (provisional pass rule adopted by Andria's direction; see `system/decisions/2026-10-08-canonical-source-and-review-burden.md`)
+
+- **One pass per gate by default.** Use one appropriately configured Codex review per R2 gate. Run a second pass only:
+  - after a BLOCKER or MATERIAL correction, as a focused re-check of the changed parts;
+  - when the first review was technically incomplete (it stalled, lost access to sources, or skipped a required scope);
+  - for an R3 decision where independent confirmation is justified.
+
+  Do not routinely run both medium- and high-effort reviews of the same unchanged artifact.
+- **Effort.** Choose the effort level by artifact. Use `high` for R2/R3 plans, decisions and audits. In the bootstrap, high raised one novel MATERIAL finding and upgraded one NOTE to MATERIAL, so high is the provisional choice; the data doesn't show that high dominates. Keep the `medium` default (`ai-collaboration/decisions/2026-09-03-codex-medium-reasoning-default.md`) for routine code review unless the change is R2+. Record the choice in the review file.
+- **Invocation.** Claude invokes the Codex CLI directly (`codex exec -s read-only`, stdin closed or supplied from a prompt file). Plugin-mediated or automated invocation stays off until the gate in `WORKING_GUIDE.md` § Autonomy and calibration is met.
+- **Raw output.** Save raw Codex output verbatim next to the reconciliation (`system/reviews/` here; the project's reviews folder for project work). It is audit trail, not something Andria reads by default.
+- **Raw-first for code.** On reviews of Claude-authored code, Andria reads the raw output before Claude's assessment (working guide). For plans and documents, Claude reconciles first. Where a project rule is stricter (for example, MathSnark's `decisions/2026-09-24-review-depth-before-outside-users.md` on change-set reviews), the project rule wins for that project.
+- **Measure the burden.** Log each pass in the pilot's review-burden table (`pilots/mathsnark/EVALUATION_PLAN.md`).
+
+## Reporting reviews to Andria
+
+Do not list every review comment. Report only:
+
+- the number of BLOCKER and MATERIAL findings;
+- what changed because of them;
+- any finding rejected, and why;
+- any unresolved disagreement that needs her judgment.
+
+"No material findings" is a complete, valid result. The full disposition table stays in the decision record or review file (audit trail).
+
+## Severity calibration
+
+BLOCKER means proceeding would cause real harm or an irreversible problem: a genuine privacy, publication, data-handling, correctness or safety risk, or loss of user work. Size privacy findings by actual exposure and consequence (working guide § Privacy and security). Non-identifying context about private-use participants inside the owning project repository is not a BLOCKER.
+./CLAUDE.md
+/Users/andriathomas/Projects/dc-statehood-strategy/AGENTS.md
+/Users/andriathomas/Projects/andria-agent-system/CLAUDE.md
+/Users/andriathomas/Projects/andria-agent-system/AGENTS.md
+/Users/andriathomas/Projects/representdc-main/CLAUDE.md
+/Users/andriathomas/Projects/dc-dems-handover/CLAUDE.md
+/Users/andriathomas/Projects/MathSnark/CLAUDE.md
+/Users/andriathomas/Projects/andria-agent-system/adapters/CLAUDE.md
+/Users/andriathomas/Projects/andria-agent-system/adapters/AGENTS.md
+/Users/andriathomas/Projects/MathSnark/AGENTS.md
+/Users/andriathomas/Projects/Connections/CLAUDE.md
+/Users/andriathomas/Projects/ai-collaboration/tool-adapters/CLAUDE.md
+/Users/andriathomas/Projects/ai-collaboration/tool-adapters/AGENTS.md
+/Users/andriathomas/Projects/dc-statehood-pledge/CLAUDE.md
+/Users/andriathomas/Projects/benevolent-bandwidth/CLAUDE.md
+/Users/andriathomas/Projects/statehood-pledge-noah/CLAUDE.md
+/Users/andriathomas/Projects/payne-sat-academy/CLAUDE.md
+/Users/andriathomas/Projects/dc-bills-tracker/CLAUDE.md
+/Users/andriathomas/Projects/andriathomas-site/CLAUDE.md
+/Users/andriathomas/Projects/matrix-mail/CLAUDE.md
+/Users/andriathomas/Projects/ai-learning/CLAUDE.md
+/Users/andriathomas/Projects/dc-bills-tracker-decisions/CLAUDE.md
+
+exec
+/bin/zsh -lc 'git log -5 --oneline; git show 4261055 -- .github/workflows/fetch-news.yml; git show 4261055:.github/workflows/fetch-news.yml | nl -ba; cat CLAUDE.md; for p in /Users/AGENTS.md /Users/andriathomas/AGENTS.md /Users/andriathomas/Projects/AGENTS.md; do if [ -f "$p" ]; then cat "$p"; fi; done; rg -n '"'concurrency:|group:|send-mail|incident|fetch-news' .github/workflows" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-GlOTb1oG' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-ZI16L3nU' (errno=Operation not permitted)
+4261055 Add a manual test-email option to the news workflow
+6c8d9cc Harden news incident alerts and show when /news was last checked
+c402f9e Decode HTML entities in news headlines
+eee9fea Document source expansion and two open next steps
+a5349e2 Expand news sources: NOTUS rename, congress-specific feeds, dry-run preview
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-kjqxNHwP' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-ut8pYUDg' (errno=Operation not permitted)
+commit 426105538bcfa4610568668c632f0fd36630a2c9
+Author: antzzz10 <andria.thomas@gmail.com>
+Date:   Wed Oct 14 12:31:14 2026 -0400
+
+    Add a manual test-email option to the news workflow
+    
+    Alerts are exception-only, so until now the first proof that email
+    delivery works would have been a real incident. Ticking test_email on a
+    manual run sends one alert-style email through the same action, sender
+    and secrets as incident alerts, and skips the fetch job entirely.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+diff --git a/.github/workflows/fetch-news.yml b/.github/workflows/fetch-news.yml
+index 8aa96b8..1e3ee2e 100644
+--- a/.github/workflows/fetch-news.yml
++++ b/.github/workflows/fetch-news.yml
+@@ -16,6 +16,10 @@ on:
+         description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
+         type: boolean
+         default: false
++      test_email:
++        description: 'Send one test alert email and do nothing else (no fetch, no publish, no incident)'
++        type: boolean
++        default: false
+   schedule:
+     # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
+     # queued at minute 0.
+@@ -27,6 +31,7 @@ concurrency:
+ 
+ jobs:
+   fetch:
++    if: github.event.inputs.test_email != 'true'
+     runs-on: ubuntu-latest
+     timeout-minutes: 20
+     permissions:
+@@ -110,3 +115,31 @@ jobs:
+           # Through env, never interpolated into the script: the value is step output.
+           ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
+         run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
++
++  # Proves the alert path end to end on demand. Alerts are exception-only, so without this
++  # the first proof that email works would be a real incident. Same action, sender and
++  # secrets as the incident email above, so a pass here means that path works too.
++  test-email:
++    if: github.event.inputs.test_email == 'true'
++    runs-on: ubuntu-latest
++    timeout-minutes: 5
++    permissions: {}
++    steps:
++      - name: Send a test alert
++        uses: dawidd6/action-send-mail@v3
++        with:
++          server_address: smtp.gmail.com
++          server_port: 465
++          secure: true
++          username: ${{ secrets.EMAIL_USERNAME }}
++          password: ${{ secrets.EMAIL_PASSWORD }}
++          subject: "🧪 RepresentDC news: test alert"
++          to: ${{ secrets.NOTIFICATION_EMAIL }}
++          from: RepresentDC News <noreply@representdc.org>
++          body: |
++            This is a test of the news pipeline's alert email, started by hand.
++            If you are reading it, failure and recovery alerts can reach you.
++            Nothing is wrong, and nothing was fetched or published.
++
++            Run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
++          ignore_cert: false
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-h8Y1ywDG' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-k1REBu1l' (errno=Operation not permitted)
+     1	name: Fetch DC News
+     2	
+     3	# Publishes www.representdc.org/api/news.json — one file, twice a day. It never rebuilds
+     4	# or redeploys the site, because releases are manual and unreleased commits on main must
+     5	# not ship on a schedule.
+     6	#
+     7	# This runs unattended. It therefore notifies ONLY on exceptions, and only once per
+     8	# incident: a healthy run says nothing, and an ongoing problem does not email twice a day.
+     9	# A summary publishes only when the judge passes it (scripts/fetch-news.mjs); anything
+    10	# else publishes the headlines alone, which is a normal outcome and not an incident.
+    11	
+    12	on:
+    13	  workflow_dispatch:
+    14	    inputs:
+    15	      dry_run:
+    16	        description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
+    17	        type: boolean
+    18	        default: false
+    19	      test_email:
+    20	        description: 'Send one test alert email and do nothing else (no fetch, no publish, no incident)'
+    21	        type: boolean
+    22	        default: false
+    23	  schedule:
+    24	    # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
+    25	    # queued at minute 0.
+    26	    - cron: '17 6,18 * * *'
+    27	
+    28	concurrency:
+    29	  group: news-publish
+    30	  cancel-in-progress: false
+    31	
+    32	jobs:
+    33	  fetch:
+    34	    if: github.event.inputs.test_email != 'true'
+    35	    runs-on: ubuntu-latest
+    36	    timeout-minutes: 20
+    37	    permissions:
+    38	      contents: write
+    39	      issues: write
+    40	    outputs:
+    41	      outcome: ${{ steps.run.outputs.outcome }}
+    42	      summary_decision: ${{ steps.run.outputs.summary_decision }}
+    43	    steps:
+    44	      - uses: actions/checkout@v4
+    45	
+    46	      - uses: actions/setup-node@v4
+    47	        with:
+    48	          node-version: '22'
+    49	
+    50	      - run: npm ci
+    51	
+    52	      - name: Fetch, gate, judge, publish and verify
+    53	        id: run
+    54	        env:
+    55	          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    56	          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    57	          NEWS_SUMMARY_ENABLED: ${{ vars.NEWS_SUMMARY_ENABLED }}
+    58	          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+    59	        run: node scripts/fetch-news.mjs
+    60	
+    61	      # The durable diagnostic record, replacing the news-data branch log. 90 days is
+    62	      # enough to investigate a failure; nothing downstream depends on it.
+    63	      - name: Keep the run record
+    64	        if: always() && hashFiles('run-record.json') != ''
+    65	        uses: actions/upload-artifact@v4
+    66	        with:
+    67	          name: run-record-${{ github.run_id }}-${{ github.run_attempt }}
+    68	          path: run-record.json
+    69	          retention-days: 90
+    70	
+    71	      - name: Open or close an incident
+    72	        id: incident
+    73	        if: always()
+    74	        env:
+    75	          GH_TOKEN: ${{ github.token }}
+    76	          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    77	          OUTCOME: ${{ steps.run.outputs.outcome }}
+    78	          DECISION: ${{ steps.run.outputs.summary_decision }}
+    79	          REASON: ${{ steps.run.outputs.reason }}
+    80	          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+    81	        run: bash .github/scripts/news-incident.sh
+    82	
+    83	      # Email is the alert; the issue above is only the state that keeps this from firing
+    84	      # twice for the same episode (decisions/2026-09-15-alert-channels.md). Same sender
+    85	      # and secrets as dc-bills-tracker's monitor, so there is one pattern to maintain.
+    86	      - name: Email on an incident or a recovery
+    87	        id: email
+    88	        if: always() && steps.incident.outputs.notify != 'none' && steps.incident.outputs.notify != ''
+    89	        uses: dawidd6/action-send-mail@v3
+    90	        with:
+    91	          server_address: smtp.gmail.com
+    92	          server_port: 465
+    93	          secure: true
+    94	          username: ${{ secrets.EMAIL_USERNAME }}
+    95	          password: ${{ secrets.EMAIL_PASSWORD }}
+    96	          subject: ${{ steps.incident.outputs.subject }}
+    97	          to: ${{ secrets.NOTIFICATION_EMAIL }}
+    98	          from: RepresentDC News <noreply@representdc.org>
+    99	          body: ${{ steps.incident.outputs.body }}
+   100	          ignore_cert: false
+   101	
+   102	      # Only now is the alert considered delivered. The incident script keys its dedupe on
+   103	      # this label, not on the issue existing — otherwise one SMTP failure would silence
+   104	      # that incident permanently (both Codex reviews, blocker). Needs `always()`: the
+   105	      # `run` step fails on exactly the runs that matter most here (a real incident), and
+   106	      # without it GitHub Actions' implicit default condition (require every prior step to
+   107	      # have succeeded) skips this step on precisely those runs — so the label never gets
+   108	      # applied, and dedupe silently breaks for the failure case it exists to cover (Codex
+   109	      # review, pre-push). Also gated on the email step's own outcome, not just `notify`,
+   110	      # so a failed send still doesn't get mislabeled as delivered.
+   111	      - name: Mark the alert as sent
+   112	        if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
+   113	        env:
+   114	          GH_TOKEN: ${{ github.token }}
+   115	          # Through env, never interpolated into the script: the value is step output.
+   116	          ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
+   117	        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
+   118	
+   119	  # Proves the alert path end to end on demand. Alerts are exception-only, so without this
+   120	  # the first proof that email works would be a real incident. Same action, sender and
+   121	  # secrets as the incident email above, so a pass here means that path works too.
+   122	  test-email:
+   123	    if: github.event.inputs.test_email == 'true'
+   124	    runs-on: ubuntu-latest
+   125	    timeout-minutes: 5
+   126	    permissions: {}
+   127	    steps:
+   128	      - name: Send a test alert
+   129	        uses: dawidd6/action-send-mail@v3
+   130	        with:
+   131	          server_address: smtp.gmail.com
+   132	          server_port: 465
+   133	          secure: true
+   134	          username: ${{ secrets.EMAIL_USERNAME }}
+   135	          password: ${{ secrets.EMAIL_PASSWORD }}
+   136	          subject: "🧪 RepresentDC news: test alert"
+   137	          to: ${{ secrets.NOTIFICATION_EMAIL }}
+   138	          from: RepresentDC News <noreply@representdc.org>
+   139	          body: |
+   140	            This is a test of the news pipeline's alert email, started by hand.
+   141	            If you are reading it, failure and recovery alerts can reach you.
+   142	            Nothing is wrong, and nothing was fetched or published.
+   143	
+   144	            Run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+   145	          ignore_cert: false
+# RepresentDC — Landing Page
+
+This repo is the main site of **representdc.org**, a three-app DC statehood advocacy platform (all built with Claude Code, hosted on GitHub Pages with CNAME subdomains).
+
+| App | Directory | URL | Purpose |
+|-----|-----------|-----|---------|
+| **Landing Page** | `representdc-main/` (this repo) | www.representdc.org | Advocacy site with loss-framing messaging, live bill stats, CTAs to the other tools |
+| Bill Tracker | `../dc-bills-tracker/` | billtracker.representdc.org | 71+ anti-DC bills, automated Congress.gov monitoring |
+| Candidate Tracker | `../dc-statehood-pledge/` | candidates.representdc.org | 2026 candidate questionnaire responses |
+
+**Stack:** React 19, Vite 7, ESLint 9, gh-pages.
+**Cross-site links:** all three sites link to each other in navigation/footers — keep links intact when editing nav.
+
+**Commands:**
+```bash
+npm run dev      # Start dev server
+npm run build    # Build for production
+npm run deploy   # Deploy to GitHub Pages
+```
+
+**Shared data files:** `~/Projects/dc-advocacy-files/` (iCloud-synced, not in any repo) — `dc-candidates-2026.json` is the master candidate database.
+
+## Content standards
+
+**Citations (established 2026-08-12, `/myths-and-faq` audit).** Every source link — inline
+and in a page's Sources list — must point at the specific page holding the supporting
+figure, never an organization's homepage. If a stated fact can't be tied to a live,
+current URL from an objective source, remove the fact rather than hedge it. Prefer primary
+sources (IRS Data Book, Census tables, `code.dccouncil.gov`, NPS, OSSE, CRS via
+everycrsreport.com) over advocacy restatements — swapping one in often corrects the claim.
+Verify links with a browser User-Agent before shipping; several legitimate sources 403
+bare `curl` while serving browsers fine.
+
+**No self-descriptive copy.** Never write reader-facing text in which the site explains its
+own editorial choices, sourcing method, or reasoning. A citation list demonstrates rigor by
+existing; narrating it reads as defensive. Keep that reasoning in code comments or a
+`decisions/` note. Same rule bars capacity language, named current officeholders, and
+hardcoded fast-moving numbers in org/partner descriptions.
+
+**No duplicative hero subheadings (established 2026-09-11, `/reading` hero rewrite).** A
+page-hero's `<h1>` and its `<p>` must each carry distinct information — a subheading that
+restates the headline in different words is padding, not content, and reads as an AI tell.
+If the subheading has nothing to add, cut it entirely rather than write a redundant one —
+`StatehoodCurious.jsx`'s headline-only hero is the pattern for that case. This overlaps
+with "No self-descriptive copy" above: a subheading that narrates the page's own
+process/rigor ("credited in full," "full sourcing for every claim") is self-descriptive
+copy *and* usually duplicates what the content itself already demonstrates.
+
+**Git:** commit directly to `main` — parallel Claude sessions share this one checkout, so
+`git checkout -b` silently moves the other session onto your branch. Stage named paths
+only; another session's in-progress edits are often sitting dirty in the tree.
+.github/workflows/fetch-news.yml:8:# incident: a healthy run says nothing, and an ongoing problem does not email twice a day.
+.github/workflows/fetch-news.yml:9:# A summary publishes only when the judge passes it (scripts/fetch-news.mjs); anything
+.github/workflows/fetch-news.yml:10:# else publishes the headlines alone, which is a normal outcome and not an incident.
+.github/workflows/fetch-news.yml:20:        description: 'Send one test alert email and do nothing else (no fetch, no publish, no incident)'
+.github/workflows/fetch-news.yml:28:concurrency:
+.github/workflows/fetch-news.yml:29:  group: news-publish
+.github/workflows/fetch-news.yml:59:        run: node scripts/fetch-news.mjs
+.github/workflows/fetch-news.yml:71:      - name: Open or close an incident
+.github/workflows/fetch-news.yml:72:        id: incident
+.github/workflows/fetch-news.yml:81:        run: bash .github/scripts/news-incident.sh
+.github/workflows/fetch-news.yml:86:      - name: Email on an incident or a recovery
+.github/workflows/fetch-news.yml:88:        if: always() && steps.incident.outputs.notify != 'none' && steps.incident.outputs.notify != ''
+.github/workflows/fetch-news.yml:89:        uses: dawidd6/action-send-mail@v3
+.github/workflows/fetch-news.yml:96:          subject: ${{ steps.incident.outputs.subject }}
+.github/workflows/fetch-news.yml:99:          body: ${{ steps.incident.outputs.body }}
+.github/workflows/fetch-news.yml:102:      # Only now is the alert considered delivered. The incident script keys its dedupe on
+.github/workflows/fetch-news.yml:104:      # that incident permanently (both Codex reviews, blocker). Needs `always()`: the
+.github/workflows/fetch-news.yml:105:      # `run` step fails on exactly the runs that matter most here (a real incident), and
+.github/workflows/fetch-news.yml:112:        if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
+.github/workflows/fetch-news.yml:116:          ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
+.github/workflows/fetch-news.yml:120:  # the first proof that email works would be a real incident. Same action, sender and
+.github/workflows/fetch-news.yml:121:  # secrets as the incident email above, so a pass here means that path works too.
+.github/workflows/fetch-news.yml:129:        uses: dawidd6/action-send-mail@v3
+.github/workflows/withhold.yml:29:concurrency:
+.github/workflows/withhold.yml:30:  group: news-withhold
+.github/workflows/withhold.yml:38:    # issue (labelled `news-control`) and to incident issues. Discussing the command
+.github/workflows/withhold.yml:45:        contains(github.event.issue.labels.*.name, 'news-incident')))
+.github/workflows/withhold.yml:97:      # An unconfirmed removal is an email incident by decision, and it is the one case
+.github/workflows/withhold.yml:103:        uses: dawidd6/action-send-mail@v3
+
+web search: 
+web search: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
+exec
+/bin/zsh -lc 'git show 4261055:.github/scripts/news-incident.sh; git show 4261055:.github/workflows/withhold.yml; git status --short' in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-4F3uZVnX' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-CUYuyDAM' (errno=Operation not permitted)
+#!/usr/bin/env bash
+# Decides whether this run is an incident, and emits what the workflow should email.
+#
+# Design rules, each one earned from a review finding:
+#
+# 1. EMAIL is the alert; a GitHub issue is only the state that prevents a repeat
+#    (decisions/2026-09-15-alert-channels.md).
+# 2. Suppression requires proof the email was SENT, not merely that an issue exists. The
+#    workflow labels the issue `alert-sent` after the mail step succeeds. Keying dedupe on
+#    the issue alone meant one SMTP failure silenced that incident permanently — and with
+#    the mail secrets not yet in this repo, the first failure was the expected case.
+# 3. `gh` must never kill this script before the outputs are written. A GitHub hiccup that
+#    suppressed the email would be the worst possible failure: broken, and silent.
+# 4. When a lookup fails we do not know whether an alert is pending, so we alert. Noise is
+#    recoverable; silence is not.
+# 5. Classification reads the DECISION, not just the outcome. `generation-failure` and
+#    `judge-api-failure` publish headlines and look like an ordinary withheld summary, so
+#    treating every `summary-withheld` as healthy would let a permanently broken judge
+#    strip summaries forever with green runs and no alert. But only once the headlines
+#    actually published: a generation failure followed by a failed push is an outage, and
+#    calling it "degraded, headlines still publishing" would be false (Codex, 2026-10-14).
+# 6. A preview (DRY_RUN) never opens or closes anything. It publishes nothing, so it
+#    proves nothing about recovery — on 2026-10-14 a passing preview closed a live outage
+#    while the feed was still stale.
+# 7. REASON is untrusted text (it can carry raw API error bodies), so the body heredoc gets
+#    a random delimiter, and issue_number is emitted only if it is purely numeric.
+#
+# Called by fetch-news.yml with OUTCOME, DECISION, REASON, DRY_RUN, RUN_URL, GH_TOKEN.
+set -uo pipefail   # deliberately NOT -e: see rule 3.
+
+LABEL="news-incident"
+SENT_LABEL="alert-sent"
+REPO="${GITHUB_REPOSITORY}"
+OUTCOME="${OUTCOME:-}"
+DECISION="${DECISION:-}"
+# One line, bounded: it lands in an email, an issue body and an output heredoc.
+REASON="$(printf '%s' "${REASON:-}" | tr '\r\n' '  ' | cut -c1-400)"
+PAGE="https://www.representdc.org/news"
+
+notify="none"
+subject=""
+body=""
+issue_number=""
+
+# Rule 3: whatever happens below, the workflow gets its outputs.
+write_outputs() {
+  local delim
+  delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+  while [[ "$body" == *"$delim"* ]]; do
+    delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+  done
+  [[ "$issue_number" =~ ^[0-9]+$ ]] || issue_number=""
+  {
+    echo "notify=$notify"
+    echo "issue_number=$issue_number"
+    echo "subject=$subject"
+    echo "body<<$delim"
+    echo "$body"
+    echo "$delim"
+  } >> "$GITHUB_OUTPUT"
+}
+trap write_outputs EXIT
+
+# Rule 6.
+if [ -n "${DRY_RUN:-}" ]; then
+  echo "Preview run ($OUTCOME); incidents left untouched."
+  exit 0
+fi
+
+# Operational failures hide behind an ordinary-looking outcome (rule 5) — but only an
+# outcome where the headlines really did publish.
+OPERATIONAL=0
+if [ "$OUTCOME" = "summary-withheld" ]; then
+  case "$DECISION" in
+    generation-failure|judge-api-failure) OPERATIONAL=1 ;;
+  esac
+fi
+
+# A judge flag or a gate withholding is the design working, not a fault.
+if [ "$OPERATIONAL" = "1" ]; then
+  KEY="degraded"
+  TITLE="News pipeline: summaries are failing"
+  BODY="Summaries are not being produced (reason: ${DECISION}). The page is publishing
+headlines with no summary, which is safe — but it will keep doing that until this is fixed.
+
+Run log: $RUN_URL"
+else
+  case "$OUTCOME" in
+    published|published-empty|summary-withheld|summary-disabled|dry-run)
+      KEY="" ;;
+    pushed-not-live)
+      KEY="not-live"
+      TITLE="News pipeline: published but not live"
+      BODY="The news feed was pushed, but $PAGE never served this run.
+The page may be showing older news.
+
+Run log: $RUN_URL" ;;
+    not-published)
+      KEY="not-published"
+      TITLE="News pipeline: nothing published"
+      # Indented four spaces so the issue renders the raw error as code, not Markdown.
+      BODY="A run ended without publishing. Reason:
+
+    ${REASON:-${DECISION:-unknown}}
+
+The page still shows the last feed that published, and any summary older than 72 hours
+hides itself.
+
+Run log: $RUN_URL" ;;
+    *)
+      KEY="failed"
+      TITLE="News pipeline: run failed"
+      BODY="The run failed before recording an outcome. The page is unchanged unless the
+failure came after publishing — the run log says which.
+
+Run log: $RUN_URL" ;;
+  esac
+fi
+
+ALL_TITLES=(
+  "News pipeline: summaries are failing"
+  "News pipeline: published but not live"
+  "News pipeline: nothing published"
+  "News pipeline: run failed"
+)
+
+# Prints the issue number, or "?" when the lookup itself failed (rule 4).
+find_open_issue() {
+  local out
+  if ! out=$(gh issue list --repo "$REPO" --state open --label "$LABEL" --search "$1 in:title" \
+      --json number,title,labels 2>/dev/null); then
+    echo "?"
+    return
+  fi
+  echo "$out" | jq -r --arg t "$1" 'map(select(.title == $t)) | .[0].number // empty'
+}
+
+has_sent_label() {
+  local out
+  out=$(gh issue view "$1" --repo "$REPO" --json labels 2>/dev/null) || { echo "?"; return; }
+  echo "$out" | jq -r --arg l "$SENT_LABEL" 'if (.labels | map(.name) | index($l)) then "yes" else "no" end'
+}
+
+gh label create "$LABEL" --repo "$REPO" --color B60205 \
+  --description "An unattended news-pipeline problem needing attention" --force >/dev/null 2>&1
+gh label create "$SENT_LABEL" --repo "$REPO" --color CCCCCC \
+  --description "The alert email for this incident was sent" --force >/dev/null 2>&1
+
+if [ -z "$KEY" ]; then
+  # Healthy. Close anything open and say so once — recovery is worth one email, because it
+  # tells her she can stop thinking about it.
+  for open_title in "${ALL_TITLES[@]}"; do
+    number=$(find_open_issue "$open_title")
+    [ -z "$number" ] && continue
+    [ "$number" = "?" ] && continue
+    gh issue comment "$number" --repo "$REPO" --body "✅ Recovered — a later run published successfully. Closing." >/dev/null 2>&1
+    gh issue close "$number" --repo "$REPO" >/dev/null 2>&1
+    notify="recovered"
+    issue_number="$number"
+    subject="✅ RepresentDC news: recovered"
+    body="The news pipeline is working again, so the earlier problem has cleared.
+Nothing to do.
+
+$PAGE"
+  done
+  [ "$notify" = "none" ] && echo "Healthy ($OUTCOME / ${DECISION:-none}); nothing to report."
+  exit 0
+fi
+
+existing=$(find_open_issue "$TITLE")
+
+if [ "$existing" = "?" ]; then
+  # Rule 4: the lookup failed, so we cannot know whether she has been told. Tell her.
+  notify="open"
+  subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+  body="$BODY
+
+(GitHub issue lookup failed during this run, so this email may repeat one you have
+already had.)"
+  echo "Lookup failed; alerting rather than risking silence."
+  exit 0
+fi
+
+if [ -n "$existing" ]; then
+  issue_number="$existing"
+  sent=$(has_sent_label "$existing")
+  if [ "$sent" = "yes" ]; then
+    echo "Incident '$KEY' already open as #$existing and already emailed — staying quiet."
+    exit 0
+  fi
+  # Open but never successfully emailed (rule 2): try again.
+  notify="open"
+  subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+  body="$BODY
+
+Nothing is urgent — the site keeps working and stale summaries hide themselves after
+72 hours. You will not get another email about this until it recovers."
+  echo "Incident '$KEY' open as #$existing but not yet emailed — retrying the email."
+  exit 0
+fi
+
+created=$(gh issue create --repo "$REPO" --title "$TITLE" --label "$LABEL" --assignee antzzz10 \
+  --body "@antzzz10
+
+$BODY
+
+This issue stays open until a run succeeds, and closes itself then. Comment \`/withhold\`
+here to pull a live summary.
+
+To stop summaries entirely while this is unresolved: Settings → Secrets and variables →
+Actions → Variables → set \`NEWS_SUMMARY_ENABLED\` to \`false\`." 2>/dev/null)
+
+# Even if issue creation failed, the email still goes out (rule 3).
+issue_number=$(echo "$created" | grep -oE '[0-9]+$' || true)
+notify="open"
+subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+body="$BODY
+
+Nothing is urgent — the site keeps working and stale summaries hide themselves after
+72 hours. You will not get another email about this until it recovers.
+
+${created:+Track it here: $created}"
+echo "Opened incident '$KEY'${issue_number:+ as #$issue_number}."
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-MPbxN291' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-R4cKr9Ad' (errno=Operation not permitted)
+name: Withhold news summary
+
+# Takes the summary off www.representdc.org/news, keeping the headlines.
+#
+# Two ways in, because the point is that Andria can do this from her phone:
+#   1. reply "/withhold" to a review issue's notification email (or comment it here);
+#   2. Actions tab → Run workflow, as the backup when email replies misbehave.
+#
+# Only the repository owner can trigger the comment path. This repo is public, so anyone
+# can comment; author_association is what separates her from everyone else.
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why the summary is being withheld (optional)'
+        type: string
+        required: false
+
+# Deliberately NOT the fetch workflow's group. GitHub keeps at most one *pending* run per
+# group, so a scheduled fetch queueing behind a queued withholding would cancel it — the
+# owner's one emergency action, dropped silently and never reported.
+#
+# Running without that shared lock is safe: publishFeed() re-reads the branch and
+# re-applies on every attempt, so concurrent writers cannot overwrite each other, and
+# withheldAt makes a withholding beat any run that started before it.
+concurrency:
+  group: news-withhold
+  cancel-in-progress: false
+
+jobs:
+  withhold:
+    # startsWith, not contains: "please don't /withhold this" must not pull a summary.
+    #
+    # Per-run review issues are gone, so the trigger now binds to the standing control
+    # issue (labelled `news-control`) and to incident issues. Discussing the command
+    # anywhere else stays inert.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.comment.author_association == 'OWNER' &&
+       startsWith(github.event.comment.body, '/withhold') &&
+       (contains(github.event.issue.labels.*.name, 'news-control') ||
+        contains(github.event.issue.labels.*.name, 'news-incident')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+
+      - name: Remove the summary and confirm it is gone from the live page
+        id: withhold
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REASON: ${{ github.event.inputs.reason || github.event.comment.body || 'withheld by the site owner' }}
+        run: node scripts/news/withhold.mjs "$REASON"
+
+      # Reporting back matters as much as the removal: a silent failure here would leave
+      # her believing a bad summary was pulled when it is still on the page.
+      - name: Report back on the issue
+        if: always() && github.event_name == 'issue_comment'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          status=$(node -e "try{console.log(require('./withhold-result.json').status)}catch{console.log('failed')}")
+          case "$status" in
+            removed)
+              body="✅ Summary removed — confirmed gone from [the live page](https://www.representdc.org/news). Headlines are untouched. This issue is labelled \`summary-error\` so the wording becomes a test case." ;;
+            already-clear)
+              body="ℹ️ There was no summary to remove — the live page already shows none. Nothing changed." ;;
+            pushed-not-live)
+              body="⚠️ The change pushed, but the live page still showed a summary when the run gave up waiting. Please set \`NEWS_SUMMARY_ENABLED\` to \`false\` (Settings → Secrets and variables → Actions → Variables), then tell Claude. [Run log]($RUN_URL)" ;;
+            *)
+              body="🚨 Withholding failed before it could change anything. The summary is still on the page. Set \`NEWS_SUMMARY_ENABLED\` to \`false\` (Settings → Secrets and variables → Actions → Variables), then tell Claude. [Run log]($RUN_URL)" ;;
+          esac
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "$body"
+          # Label only an actual removal. Labelling "already clear" or a failure marked
+          # non-errors as errors and polluted the trail of genuinely bad summaries.
+          if [ "$status" = "removed" ]; then
+            gh label create summary-error --repo "$GITHUB_REPOSITORY" --color D93F0B \
+              --description "A published summary was wrong; becomes a golden eval case" --force || true
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label summary-error || true
+          fi
+
+      # An unconfirmed removal is an email incident by decision, and it is the one case
+      # where believing it worked is worse than not trying: a manual dispatch previously
+      # reported nowhere at all, and an issue comment is not something she will see if she
+      # ran this from the Actions tab and walked away.
+      - name: Email if the removal could not be confirmed
+        if: steps.withhold.outcome == 'failure'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: '🚨 RepresentDC news: summary NOT removed'
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: RepresentDC News <noreply@representdc.org>
+          body: |
+            The withhold run did not confirm that the summary is gone from the live page.
+            Assume it is still up.
+
+            Next step: Settings → Secrets and variables → Actions → Variables → set
+            NEWS_SUMMARY_ENABLED to false. That stops the next run generating one.
+
+            Run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Page: https://www.representdc.org/news
+          ignore_cert: false
+
+      - name: Fail the run if the summary is still live
+        if: always() && steps.withhold.outcome == 'failure'
+        run: |
+          echo "::error::Withholding did not confirm removal — see the email and issue comment."
+          exit 1
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-g3EFeXBJ' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-PhF9yF4c' (errno=Operation not permitted)
+?? TALKING-POINT-GENERATOR-PRD.md
+?? decisions/2026-07-26-talking-point-generator-scope.md
+?? reviews/2026-10-14-test-email-codex-prompt.md
+?? reviews/2026-10-14-test-email-codex-raw.txt
+
+codex
+- **MATERIAL — [.github/workflows/fetch-news.yml:29](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:29):** Test-email runs share `news-publish`. If a publishing run is active and another fetch is pending, dispatching a test cancels the pending fetch, skipping its publication and incident checks despite `cancel-in-progress: false`. GitHub [replaces pending runs in the same group](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency). **Fix:** use a separate group for tests: `${{ github.event.inputs.test_email == 'true' && 'news-test-email' || 'news-publish' }}`.
+
+NOTE: Other checks pass: schedule/null and normal manual inputs preserve fetch; both boxes ticked selects only test-email; mail transport matches incident alerts; the test has no publish/incident steps or new injection/secret-exposure risk.
+tokens used
+40,941
+- **MATERIAL — [.github/workflows/fetch-news.yml:29](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:29):** Test-email runs share `news-publish`. If a publishing run is active and another fetch is pending, dispatching a test cancels the pending fetch, skipping its publication and incident checks despite `cancel-in-progress: false`. GitHub [replaces pending runs in the same group](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency). **Fix:** use a separate group for tests: `${{ github.event.inputs.test_email == 'true' && 'news-test-email' || 'news-publish' }}`.
+
+NOTE: Other checks pass: schedule/null and normal manual inputs preserve fetch; both boxes ticked selects only test-email; mail transport matches incident alerts; the test has no publish/incident steps or new injection/secret-exposure risk.
