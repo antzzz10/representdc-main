@@ -1,0 +1,1792 @@
+Reading additional input from stdin...
+OpenAI Codex v0.159.2
+--------
+workdir: /Users/andriathomas/Projects/representdc-main
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a13aef-74bd-7872-a376-f46f1558706e
+--------
+user
+Focused re-check (read-only) of uncommitted changes in representdc-main that respond to your earlier review (reviews/2026-10-14-news-outage-codex-raw.txt — read its final answer). Run `git diff` to see them. Changes: news-incident.sh (DRY_RUN early exit, REASON sanitised to one bounded line and indented as code, random heredoc delimiter, numeric issue_number, degraded classification only on summary-withheld), fetch-news.yml (REASON/DRY_RUN env, ISSUE_NUMBER via env), feeds.mjs (own-property entity lookup, surrogates rejected, &amp; decoded in links), NewsAndAnalysis.jsx + src/utils/formatCheckedInstant.js (last-checked line, newest-coverage note >7d, summary hidden when newest article >14d).
+
+Only report BLOCKER or MATERIAL problems in these changes, or a finding from your first review that was not actually fixed. File:line, failure scenario, fix. "No material findings" is a valid answer. Be concise.
+codex
+I’ll read the prior review’s final answer, check the current diff, and re-check only the listed fixes for material problems.
+exec
+/bin/zsh -lc "pwd; git status --short; rg --files -g AGENTS.md -g CLAUDE.md -g '2026-10-14-news-outage-codex-raw.txt'" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+/Users/andriathomas/Projects/representdc-main
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-gBIFuK6e' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-wTj27SMI' (errno=Operation not permitted)
+ M .github/scripts/news-incident.sh
+ M .github/workflows/fetch-news.yml
+ M scripts/eval/news.test.mjs
+ M scripts/news/feeds.mjs
+ M src/Home.jsx
+ M src/NewsAndAnalysis.jsx
+?? TALKING-POINT-GENERATOR-PRD.md
+?? decisions/2026-07-26-talking-point-generator-scope.md
+?? reviews/
+?? src/utils/
+reviews/2026-10-14-news-outage-codex-raw.txt
+CLAUDE.md
+
+exec
+/bin/zsh -lc 'cat /Users/andriathomas/Projects/andria-agent-system/shared/WORKING_GUIDE.md /Users/andriathomas/Projects/andria-agent-system/shared/REVIEW_POLICY.md' in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+# Andria's AI Working Guide
+
+**Canonical cross-tool source**  
+**Version:** v2.0 — October 8, 2026 (moved from `~/Projects/ai-collaboration/working-guide.md`, last reviewed there October 3, 2026)
+
+This guide governs Claude Code, Codex, and other coding agents across Andria's projects. Explicit task instructions and more-specific project guidance override it. Tool-specific mechanics belong in the adapters (`adapters/` in this repository), not here.
+
+It is part of the shared agent operating system in `~/Projects/andria-agent-system`, the single canonical source for cross-project agent rules. The rest of that system (operating model, review policy, memory boundaries, hypotheses, pilot evaluation) lives beside it in `shared/`, `system/` and `pilots/`. Material in `~/Projects/ai-collaboration` is a supporting reference: the learning plan's autonomy criteria and evidence, and the historical decision notes cited below. It does not govern.
+
+## Background and objective
+
+Andria's background is management consulting and CPO work. She is building hands-on AI-technical credibility and may found a company. Explain technical concepts through their purpose, evidence, and tradeoffs so she can confidently discuss them with engineers, executives, or investors.
+
+Claude Code is currently the default strategy and design partner. Codex is the default technical partner for investigation, independent review, and bounded low-risk implementation at earned autonomy A3. Autonomy levels and their change rules are set in § Autonomy and calibration below.
+
+## Phase-appropriate AI use
+
+- **Strategy and product direction:** Andria leads. Use sequential, human-in-the-loop discussion. Agents may broaden options or stress-test a formed direction; they do not choose what is worth building.
+- **Research and synthesis:** Parallel evidence lanes are useful after Andria reviews the research plan.
+- **Execution:** Supervised or autonomous work is appropriate only when direction is settled, scope is bounded, and output is verifiable.
+- Always review the plan before agents execute multi-step research or implementation.
+- **Prototypes as feedback vehicles:** a clickable prototype is a non-trivial investment when the result has to withstand scrutiny. A half-finished interactive artifact redirects the conversation onto its own gaps—placeholder copy, invented mechanics, unbuilt sections—and away from the feedback it was meant to carry. Before proposing one, ask whether there is time to invest in the quality of the experience. Default to annotated screenshots or static mockups; build the interactive version when the interaction itself is what is under discussion, or when the recipient has asked to click through it.
+
+## Communication and attention
+
+- Confirm a delegated task in one or two lines: what you will do and what you will decide independently.
+- Ask necessary clarifying questions together before starting. Do not interrupt later for non-blocking questions.
+- For work expected to exceed about two minutes, state a time estimate and whether Andria should stay, do something routine, or step away.
+- Batch progress into a concise digest ordered by decision urgency; avoid streams of incremental pings.
+- After a long absence or task, lead with: where we left off, outcomes since then, and the one decision now required.
+- Explain tradeoffs and give explicit options with a recommendation when multiple good paths exist.
+- State completion precisely: built, tested, verified, committed, pushed, and deployed are different states.
+- **Investigate before escalating.** Before asking Andria an operational question, inspect the available evidence: files, history, diffs, logs and prior decisions. Ask only when the ambiguity is material, inspection or an existing rule cannot safely resolve it, and waiting would block useful progress or create meaningful risk. Do not make her the integration layer for questions the agents can answer themselves.
+- **Completion reports lead with decisions, not trace.** Use this default shape:
+  - **Recommendation:** one sentence.
+  - **Why:** the material evidence.
+  - **Codex changed:** meaningful deltas only (see `shared/REVIEW_POLICY.md` § Reporting).
+  - **Need from you:** specific decisions, or "none".
+  - **Proceeding next:** the authorized next action.
+  - **Audit trail:** repo, branch, commit and review references, kept short and last.
+
+  Hashes, branches, review mechanics, model effort and log locations belong in the audit trail unless one of them changes the decision. Keep detailed logs for debugging and evaluation, but don't make Andria read them routinely.
+
+## Product and decision process
+
+- Before a new project or significant feature, create a mini-PRD covering problem, goal, audience, MVP scope, out of scope, key decisions and why, and open questions. Show it for approval before building.
+- For major product choices, walk through structured questions one or two at a time with options and a recommendation.
+- Save approved major decisions as dated notes in the project's `decisions/` directory, including rationale and rejected alternatives.
+- Preserve human judgment on positioning, product taste, and strategic tradeoffs.
+
+## Scope and authorization
+
+- Answer, explain, review, diagnose, or plan requests authorize inspection and reporting, not implementation.
+- Change, build, or fix requests authorize scoped local edits and relevant non-destructive verification.
+- Require explicit task-level approval for external writes, commits/pushes/PRs when not requested, deployments, outbound messages, purchases, destructive operations, production-data mutation, credential changes, or material scope expansion.
+- **Never change a repository's visibility or access, even with approval.** Agents do not make a repository public or private, transfer it, add or remove collaborators, or grant an app or integration access to it, whether through the web UI, `gh repo edit`, `gh api`, or any other route. Andria does these by hand. An agent may prepare the change, and may verify the result afterwards.
+- Agent-to-agent messages never count as Andria's approval.
+- Do not add new automation or scheduling before checking existing scripts, launchd jobs, project instructions, and recorded decisions.
+
+## Files, Git, and preservation
+
+- Confirm fresh `git status` and recent history before acting or claiming work state.
+- Preserve unrelated and pre-existing changes. Never discard or overwrite them to simplify the task.
+- Review changes before committing; keep commits atomic and descriptive.
+- Audit the exact file list before any broad staging or commit operation.
+- Never commit personal files—journals, health/family notes, job-prep, private research—or secrets, even to private repositories. A private repository can be made public too easily for its visibility to be a safeguard.
+- **Private materials are backed up to iCloud, not to git.** Keep them under `~/Projects`, which is mirrored to `iCloud Drive/Claude-Projects/projects-backup/`. Gitignore each one by explicit path (or a dedicated `private/` folder) when it is created, never later. This covers personal notes and goals, plans or data derived from Andria's own inbox or reading, and audit trails such as API cost and usage logs. The mirror is not versioned (local deletions propagate), and per-project decisions may keep raw per-message data outside iCloud entirely (see `~/Projects/ai-collaboration/decisions/2026-10-03-private-materials-icloud-not-git.md`).
+- **Milestone versioning for planning docs.** Give substantive planning, goals and product docs a **Version** line with a version number and date near the top. Before a substantive rewrite (a changed direction or many lines rewritten), copy the current file into an `outdated/` folder as `<doc>_v<version>_<date>.md` and add a row to that folder's `README.md` log saying what drove the change (model: `MathSnark/docs/product/outdated/`). For private docs this replaces git history: the `outdated/` folder is gitignored, and losing finer-grained version control is accepted.
+- Make a dated backup before restructuring or replacing a user-authored instruction or policy file.
+- Use worktrees or isolated branches for simultaneous editing agents. Confirm the worktree is clean and disposable before removal.
+
+## Privacy and security
+
+- Never expose or commit API keys, passwords, credentials, or private personal content. Use environment variables and scoped credential stores.
+- Treat `Connections` as sensitive: use fixtures or explicit dry-run paths for learning exercises; no Codex project trust entry or broad access by default.
+- `payne-sat-academy` belongs to someone else and is read-only; never commit or push without an explicit in-the-moment request.
+- Do not recommend workflows built on Andria's personal Gmail account; she is moving to ProtonMail. Exceptions: Matrix Mail's Gmail integration, and automated alert emails from the dedicated sender-only alert account to Andria's own-domain address (both addresses are in the decision note cited below). Scheduled alerts to that address have standing approval; adding new alert types or recipients still needs task-level approval (see `~/Projects/ai-collaboration/decisions/2026-09-15-alert-channels.md`).
+- Validate inputs, check dependency risk, and explain the root cause when something breaks.
+- **Calibrate privacy severity to actual exposure.** Keep identifying or sensitive information out of this cross-project repository. Inside a project repository, necessary non-identifying context about private-use participants (for example, "initial learners") may stay. Treat a reference as a BLOCKER only when it creates a real privacy, publication or data-handling risk, such as a name, an identifying relationship, raw research data, or content headed somewhere public. Otherwise, it is a NOTE or MATERIAL finding, sized to its consequence.
+
+## Engineering preferences
+
+- Prefer readable, measured solutions over cleverness or speculative optimization.
+- Use existing repository patterns before introducing new architecture.
+- Prefer lightweight dependencies and assess bundle impact before adding one.
+- For React, prefer functional components, hooks, modern JavaScript, destructured props, and component files under roughly 200 lines when practical.
+- Separate UI, logic, and data; comment non-obvious rationale rather than obvious mechanics.
+- Run repository-defined build/lint/test checks. Where no suitable suite exists, prefer a focused browser walkthrough over introducing a test framework without approval.
+- Flag useful eval opportunities for AI-powered features; do not assume an eval framework exists.
+- Newsletter and email HTML must include mobile-responsive behavior at a 600px breakpoint or narrower.
+- For applications that call the Claude API, log `response.usage` to a separate ignored JSONL file; do not hard-code mutable pricing assumptions.
+
+## External services and bulk operations
+
+- Before any bulk or external-service operation (batch jobs, backfills, large fetches, mass API calls), state: the needed-by time; the volume; the service's quotas and rate limits; what its status fields actually measure; cost vs. delay; a named fallback trigger with its cost; and who monitors it until it reaches a terminal state.
+- Run a representative trial end to end (submit → complete → collect) before scaling. Revise expectations when the trial disagrees with documentation.
+- Build quota handling, backoff, expiry and partial-completion recovery into the first implementation, not as follow-ups.
+- Never diagnose from a status field without checking its definition. Report provider behavior separately from our own exposure.
+- When something doesn't go as expected, identify the root cause, including our own decisions, and record the lesson, not just the fix (see `~/Projects/ai-collaboration/decisions/2026-09-30-bulk-external-operations.md`).
+
+## Documentation and memory
+
+- Keep README and deployment/setup documentation current when behavior materially changes.
+- Project-specific architecture, commands, status, and domain rules live with that project.
+- `~/Projects/QUEUE.md` is the cross-project backlog. Add mid-task ideas there only when the task or Andria authorizes queue maintenance.
+- `CLAUDE.md` is Claude Code's portable project source of truth; `AGENTS.md` is Codex's durable project guidance. Do not blindly duplicate entire files—share stable rules and preserve tool-specific mechanics.
+
+## Current tool roles
+
+- **Claude Code:** default for strategy support and design; implementation fallback for ambiguous, high-risk, or broader work; independent falsifier for Codex-authored diffs when appropriate.
+- **Codex:** default technical partner for investigation, independent review, and bounded low-risk local implementation at earned autonomy A3. Implementation still requires explicit task scope and objective checks. Review passes and effort follow `shared/REVIEW_POLICY.md`: by default, one appropriately configured pass per gate.
+- **Launching Codex non-interactively:** run `codex exec` with stdin closed (`< /dev/null`). Otherwise a background run waits silently for input that never arrives. Check a background run's log within about 30 seconds; no progress past `Reading additional input from stdin...` means it has stalled (see `~/Projects/ai-collaboration/decisions/2026-10-03-codex-exec-stdin.md`).
+- **Selection rule:** choose by task and current evidence, not a permanent primary-model label. Reassess after material model/tool changes or when observed quality, speed, safety, or intervention burden shifts.
+- On reviews of Claude-authored code, Andria reads raw Codex output before Claude assesses it. Record disagreements and the evidence deciding them.
+- Repository configuration `trust_level` is not equivalent to earned autonomy.
+
+## Autonomy and calibration
+
+These rules are canonical here. They were frozen from `~/Projects/ai-collaboration/learning-plan-current.md` (as of September 8, 2026). That plan and its exercises remain the evidence programme, but editing them does not change these rules.
+
+- **Current levels:** Codex A3, as described under § Current tool roles. Claude: default strategy/design partner and implementation fallback.
+- **Raising a level** needs the evidence the learning plan specifies, plus a decision in `system/decisions/` with Codex review and Andria's approval.
+- **Stop rules:**
+  - A material guardrail failure reduces earned autonomy by one level and requires a focused retest.
+  - Stay at the current level if results are accurate but insufficiently repeated.
+  - Pause the calibration programme if two consecutive exercises produce mostly false positives, if Codex takes an unapproved external or destructive action, or if the curriculum repeatedly displaces higher-priority work.
+- **Claude invoking Codex:** direct CLI invocation for reviews is allowed. MCP-mediated or automated invocation requires at least five logged Claude-invoked reviews, an audited disagreement log, and Andria's explicit approval.
+
+## Project sensitivity defaults
+
+- **Low-risk learning:** clean, dormant repositories such as `dc-action-hub`, using isolated branches for planted changes.
+- **Active production:** `andriathomas-site`, RepresentDC repositories, and automated data pipelines; re-ground and review read-only before edits.
+- **Dirty worktrees:** inspection is allowed; implementation is deferred unless the task explicitly addresses and preserves existing changes.
+- **Sensitive/read-only:** `Connections`, `payne-sat-academy`, and private personal materials.
+
+## Change control
+
+Edit this guide, or the relevant `shared/` file, first, in `~/Projects/andria-agent-system`. Then regenerate both tool adapters from `adapters/` (installed as `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, each with a dated backup first) and run fresh-session instruction checks. Changes to this guide need Andria's direction or approval, plus Codex review. Record material policy changes in a dated decision note in `system/decisions/`. Don't edit the superseded copy in `ai-collaboration`.
+
+For browser verification, prefer an existing Playwright setup. If none exists, ask
+Andria for a manual check rather than launching Google Chrome directly merely to
+satisfy a process exercise.
+# Review and escalation policy
+
+Classify by consequence, not effort or technical appearance.
+
+| Level | Meaning | System behavior |
+|---|---|---|
+| R0 — Routine | Local, reversible, no meaningful downstream effect | Operating Partner decides; no record required |
+| R1 — Notable | Contained and reversible effect | Operating Partner decides; update current artifact if truth changes |
+| R2 — Significant | Could materially change scope, roadmap, architecture, evidence interpretation, or operating policy | Decision record + Codex review before settling |
+| R3 — Consequential | Direction, sensitive-data posture, external commitment, costly/irreversible path, major portfolio tradeoff | Decision record + Codex review + Andria approval |
+
+Automatic R2 system triggers:
+
+- changing a shared role or capability contract;
+- changing escalation or review rules;
+- treating a system hypothesis as supported, weakened, or rejected;
+- adding a persistent agent, automated handoff, or new durable artifact;
+- resolving contradictory system direction.
+
+Automatic R3 system triggers:
+
+- expanding access across private project boundaries;
+- enabling autonomous external actions;
+- granting combined access to sensitive data and action tools;
+- expanding into career/civic domains without confirmed isolation;
+- major cost, vendor lock-in, or difficult-to-reverse automation.
+
+Escalate to Andria now only when the issue is material, delaying blocks useful progress or creates meaningful risk, and existing decisions do not safely resolve it.
+
+Claude must disposition each BLOCKER/MATERIAL Codex finding as Accepted, Rejected with reason, Converted to test/uncertainty, or Escalated.
+
+## How Codex reviews run
+
+**Version:** v0.3 — 2026-10-08 (provisional pass rule adopted by Andria's direction; see `system/decisions/2026-10-08-canonical-source-and-review-burden.md`)
+
+- **One pass per gate by default.** Use one appropriately configured Codex review per R2 gate. Run a second pass only:
+  - after a BLOCKER or MATERIAL correction, as a focused re-check of the changed parts;
+  - when the first review was technically incomplete (it stalled, lost access to sources, or skipped a required scope);
+  - for an R3 decision where independent confirmation is justified.
+
+  Do not routinely run both medium- and high-effort reviews of the same unchanged artifact.
+- **Effort.** Choose the effort level by artifact. Use `high` for R2/R3 plans, decisions and audits. In the bootstrap, high raised one novel MATERIAL finding and upgraded one NOTE to MATERIAL, so high is the provisional choice; the data doesn't show that high dominates. Keep the `medium` default (`ai-collaboration/decisions/2026-09-03-codex-medium-reasoning-default.md`) for routine code review unless the change is R2+. Record the choice in the review file.
+- **Invocation.** Claude invokes the Codex CLI directly (`codex exec -s read-only`, stdin closed or supplied from a prompt file). Plugin-mediated or automated invocation stays off until the gate in `WORKING_GUIDE.md` § Autonomy and calibration is met.
+- **Raw output.** Save raw Codex output verbatim next to the reconciliation (`system/reviews/` here; the project's reviews folder for project work). It is audit trail, not something Andria reads by default.
+- **Raw-first for code.** On reviews of Claude-authored code, Andria reads the raw output before Claude's assessment (working guide). For plans and documents, Claude reconciles first. Where a project rule is stricter (for example, MathSnark's `decisions/2026-09-24-review-depth-before-outside-users.md` on change-set reviews), the project rule wins for that project.
+- **Measure the burden.** Log each pass in the pilot's review-burden table (`pilots/mathsnark/EVALUATION_PLAN.md`).
+
+## Reporting reviews to Andria
+
+Do not list every review comment. Report only:
+
+- the number of BLOCKER and MATERIAL findings;
+- what changed because of them;
+- any finding rejected, and why;
+- any unresolved disagreement that needs her judgment.
+
+"No material findings" is a complete, valid result. The full disposition table stays in the decision record or review file (audit trail).
+
+## Severity calibration
+
+BLOCKER means proceeding would cause real harm or an irreversible problem: a genuine privacy, publication, data-handling, correctness or safety risk, or loss of user work. Size privacy findings by actual exposure and consequence (working guide § Privacy and security). Non-identifying context about private-use participants inside the owning project repository is not a BLOCKER.
+
+exec
+/bin/zsh -lc 'for p in /Users/AGENTS.md /Users/andriathomas/AGENTS.md /Users/andriathomas/Projects/AGENTS.md; do if [ -f "$p" ]; then cat "$p"; fi; done; cat CLAUDE.md; tail -n 110 reviews/2026-10-14-news-outage-codex-raw.txt; git log -3 --oneline; git diff -- .github/scripts/news-incident.sh .github/workflows/fetch-news.yml scripts/news/feeds.mjs src/NewsAndAnalysis.jsx src/Home.jsx scripts/eval/news.test.mjs; cat src/utils/formatCheckedInstant.js' in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+# RepresentDC — Landing Page
+
+This repo is the main site of **representdc.org**, a three-app DC statehood advocacy platform (all built with Claude Code, hosted on GitHub Pages with CNAME subdomains).
+
+| App | Directory | URL | Purpose |
+|-----|-----------|-----|---------|
+| **Landing Page** | `representdc-main/` (this repo) | www.representdc.org | Advocacy site with loss-framing messaging, live bill stats, CTAs to the other tools |
+| Bill Tracker | `../dc-bills-tracker/` | billtracker.representdc.org | 71+ anti-DC bills, automated Congress.gov monitoring |
+| Candidate Tracker | `../dc-statehood-pledge/` | candidates.representdc.org | 2026 candidate questionnaire responses |
+
+**Stack:** React 19, Vite 7, ESLint 9, gh-pages.
+**Cross-site links:** all three sites link to each other in navigation/footers — keep links intact when editing nav.
+
+**Commands:**
+```bash
+npm run dev      # Start dev server
+npm run build    # Build for production
+npm run deploy   # Deploy to GitHub Pages
+```
+
+**Shared data files:** `~/Projects/dc-advocacy-files/` (iCloud-synced, not in any repo) — `dc-candidates-2026.json` is the master candidate database.
+
+## Content standards
+
+**Citations (established 2026-08-12, `/myths-and-faq` audit).** Every source link — inline
+and in a page's Sources list — must point at the specific page holding the supporting
+figure, never an organization's homepage. If a stated fact can't be tied to a live,
+current URL from an objective source, remove the fact rather than hedge it. Prefer primary
+sources (IRS Data Book, Census tables, `code.dccouncil.gov`, NPS, OSSE, CRS via
+everycrsreport.com) over advocacy restatements — swapping one in often corrects the claim.
+Verify links with a browser User-Agent before shipping; several legitimate sources 403
+bare `curl` while serving browsers fine.
+
+**No self-descriptive copy.** Never write reader-facing text in which the site explains its
+own editorial choices, sourcing method, or reasoning. A citation list demonstrates rigor by
+existing; narrating it reads as defensive. Keep that reasoning in code comments or a
+`decisions/` note. Same rule bars capacity language, named current officeholders, and
+hardcoded fast-moving numbers in org/partner descriptions.
+
+**No duplicative hero subheadings (established 2026-09-11, `/reading` hero rewrite).** A
+page-hero's `<h1>` and its `<p>` must each carry distinct information — a subheading that
+restates the headline in different words is padding, not content, and reads as an AI tell.
+If the subheading has nothing to add, cut it entirely rather than write a redundant one —
+`StatehoodCurious.jsx`'s headline-only hero is the pattern for that case. This overlaps
+with "No self-descriptive copy" above: a subheading that narrates the page's own
+process/rigor ("credited in full," "full sourcing for every claim") is self-descriptive
+copy *and* usually duplicates what the content itself already demonstrates.
+
+**Git:** commit directly to `main` — parallel Claude sessions share this one checkout, so
+`git checkout -b` silently moves the other session onto your branch. Stage named paths
+only; another session's in-progress edits are often sitting dirty in the tree.
+ *
+ * Note that the request will only be retried when `maxRetries` has not been exhausted.
+ */
+export class RetryableError extends AnthropicError {
+    constructor(message, { cause } = {}) {
+        super(message ?? 'Retryable error.');
+        // in some environments the 'cause' property is already declared
+        // @ts-ignore
+        if (cause !== undefined)
+            this.cause = cause;
+    }
+}
+export class BadRequestError extends APIError {
+}
+export class AuthenticationError extends APIError {
+}
+export class PermissionDeniedError extends APIError {
+}
+export class NotFoundError extends APIError {
+}
+export class ConflictError extends APIError {
+}
+export class UnprocessableEntityError extends APIError {
+}
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-QXnnAR6D' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-29uKtNxj' (errno=Operation not permitted)
+?? TALKING-POINT-GENERATOR-PRD.md
+?? decisions/2026-07-26-talking-point-generator-scope.md
+?? reviews/
+
+exec
+/bin/zsh -lc "bash -c 'gh() { case \""'$1 $2" in "issue list") return 1 ;; esac; return 0; }; export GITHUB_REPOSITORY=fixture/repo RUN_URL=https://example.invalid/run OUTCOME=not-published; export DECISION=$'"'\"'\"'API error\\nEOF_NEWS_BODY\\nissue_number=123\\nnotify=none\\nbody<<EOF_NEWS_BODY\\nchanged content'\"'\"'; eval \""'$(sed '"'\"'\"'s/} >> \""'$GITHUB_OUTPUT"/}/'"'\"'\"' .github/scripts/news-incident.sh)\"'" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+Lookup failed; alerting rather than risking silence.
+notify=open
+issue_number=
+subject=⚠️ RepresentDC news: nothing published
+body<<EOF_NEWS_BODY
+A run ended without publishing (reason: API error
+EOF_NEWS_BODY
+issue_number=123
+notify=none
+body<<EOF_NEWS_BODY
+changed content).
+The page still shows the last feed that published, and any summary older than 72 hours
+hides itself.
+
+Run log: https://example.invalid/run
+
+(GitHub issue lookup failed during this run, so this email may repeat one you have
+already had.)
+EOF_NEWS_BODY
+
+codex
+Recommend **(a)**. Both incident proposals are right, but **(b) needs output hardening before shipping**.
+
+1. **Committed code — no material findings.**
+
+   - **NOTE — [feeds.mjs:84](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:84):** Decoding cascades: `&amp;#49;` becomes `1`, and `&#38;#x31;` also becomes `1`, while `&#x26;#49;` stops at `&#49;`. A headline discussing literal entity syntax changes meaning. Fix: distinguish XML escaping from HTML text encoding, preserve CDATA boundaries, and decode once per actual encoding layer; add literal-entity regressions.
+   - **NOTE — [feeds.mjs:87](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:87):** Unknown `&constructor;` becomes `function Object() { [native code] }` through inherited-property lookup; `&#55296;` produces a lone surrogate. Fix: use an own-property lookup and reject surrogate code points.
+   - **NOTE, pre-existing — [feeds.mjs:130](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:130):** `https://example.org/?a=1&amp;b=2` remains escaped, potentially requesting the wrong query parameter. Decode XML entities once in URLs, then validate HTTPS; do not reuse cascading headline decoding.
+
+   Titles/source names are decoded before relevance, summary generation, G2 and the judge, so they share the same text. This also removes spurious grounding numbers such as `8217`. Dates need no HTML decoding. React renders titles, sources and summaries as escaped text; decoded `<script>` text does **not** execute.
+
+2. **Incident proposals.**
+
+   - **MATERIAL — [news-incident.sh:67](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:67):** A successful preview closes incidents through the recovery loop despite leaving production untouched. **Accept (a):** exit after installing the output trap, before classification or any `gh` calls. This also prevents a preview’s generation/judge failure from opening a degraded incident.
+   - **BLOCKER for an unhardened (b) — [news-incident.sh:42](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:42), [fetch-news.yml:108](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:108):** Error text containing a standalone `EOF_NEWS_BODY` can terminate the body and inject outputs such as `notify` or `issue_number`. The latter is subsequently interpolated directly into shell source, creating command-execution risk. **Accept (b)** with `REASON` passed through workflow `env`, fallback `${REASON:-${DECISION:-unknown}}`, a random collision-checked body delimiter, and numeric validation plus environment-variable passing for `issue_number`. Quoted Bash expansion and quoted `gh --body` arguments do not themselves execute error text; the email is plain text. Render the issue’s diagnostic as quoted/code text to avoid misleading Markdown or mentions.
+   - **MATERIAL — [news-incident.sh:58](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:58):** `generation-failure`/`judge-api-failure` override publication outcomes. If generation fails and the subsequent push also fails, the alert falsely says headlines are publishing. Fix: prioritize `not-published`, `pushed-not-live` and missing outcomes; classify summary degradation only after verified publication.
+   - **NOTE — [fetch-news.yml:72](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:72):** Failed previews emit `not-published`, so an `OUTCOME=dry-run` guard still opens production incidents for those previews. If all previews should be neutral, pass the dispatch mode independently and guard on it.
+
+3. **Design decision.**
+
+   - **MATERIAL — [NewsAndAnalysis.jsx:84](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:84):** A newly generated summary of five-week-old articles passes the 72-hour test. Add (a)’s article-age cutoff **alongside** the existing cutoff. However, one fresh article defeats the “newest >14 days” protection while older claims remain in the digest. The [summary prompt:115](/Users/andriathomas/Projects/representdc-main/scripts/news/summarize.mjs:115) and [judge:23](/Users/andriathomas/Projects/representdc-main/scripts/news/judge.mjs:23) explicitly permit “recent” for roughly two months. Fix that remaining case by requiring explicit dates for older claims in both prompts and evals.
+   - **NOTE — [fetch-news.mjs:241](/Users/andriathomas/Projects/representdc-main/scripts/fetch-news.mjs:241):** `lastUpdated` means a successful feed/filter/gate result prepared for publication, including empty, disabled and withheld summaries; it does not record failed attempts or guarantee every source worked. **“Last successful check”** is more precise. [withhold.mjs:62](/Users/andriathomas/Projects/representdc-main/scripts/news/withhold.mjs:62) preserves it, so withholding does not falsely refresh the check time.
+   - **NOTE — [NewsAndAnalysis.jsx:117](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:117):** Metadata currently disappears for empty feeds; display the check line independently of article count. Use an explicit `America/New_York` date/time, reject missing/invalid/future check timestamps, derive newest coverage from valid article dates, and clamp the tolerated near-future article dates to “Today.” Existing clock ticks support the new cutoffs.
+
+   **(b)** changes relevance standards precisely when validation is unavailable, especially for broad congressional feeds; defer it until a narrow fallback has measured precision. **(c)** leaves misleading freshness unchanged.
+
+Read-only review; 19 pure news tests passed. Concurrency tests require writes and were not run.
+tokens used
+72,970
+Recommend **(a)**. Both incident proposals are right, but **(b) needs output hardening before shipping**.
+
+1. **Committed code — no material findings.**
+
+   - **NOTE — [feeds.mjs:84](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:84):** Decoding cascades: `&amp;#49;` becomes `1`, and `&#38;#x31;` also becomes `1`, while `&#x26;#49;` stops at `&#49;`. A headline discussing literal entity syntax changes meaning. Fix: distinguish XML escaping from HTML text encoding, preserve CDATA boundaries, and decode once per actual encoding layer; add literal-entity regressions.
+   - **NOTE — [feeds.mjs:87](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:87):** Unknown `&constructor;` becomes `function Object() { [native code] }` through inherited-property lookup; `&#55296;` produces a lone surrogate. Fix: use an own-property lookup and reject surrogate code points.
+   - **NOTE, pre-existing — [feeds.mjs:130](/Users/andriathomas/Projects/representdc-main/scripts/news/feeds.mjs:130):** `https://example.org/?a=1&amp;b=2` remains escaped, potentially requesting the wrong query parameter. Decode XML entities once in URLs, then validate HTTPS; do not reuse cascading headline decoding.
+
+   Titles/source names are decoded before relevance, summary generation, G2 and the judge, so they share the same text. This also removes spurious grounding numbers such as `8217`. Dates need no HTML decoding. React renders titles, sources and summaries as escaped text; decoded `<script>` text does **not** execute.
+
+2. **Incident proposals.**
+
+   - **MATERIAL — [news-incident.sh:67](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:67):** A successful preview closes incidents through the recovery loop despite leaving production untouched. **Accept (a):** exit after installing the output trap, before classification or any `gh` calls. This also prevents a preview’s generation/judge failure from opening a degraded incident.
+   - **BLOCKER for an unhardened (b) — [news-incident.sh:42](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:42), [fetch-news.yml:108](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:108):** Error text containing a standalone `EOF_NEWS_BODY` can terminate the body and inject outputs such as `notify` or `issue_number`. The latter is subsequently interpolated directly into shell source, creating command-execution risk. **Accept (b)** with `REASON` passed through workflow `env`, fallback `${REASON:-${DECISION:-unknown}}`, a random collision-checked body delimiter, and numeric validation plus environment-variable passing for `issue_number`. Quoted Bash expansion and quoted `gh --body` arguments do not themselves execute error text; the email is plain text. Render the issue’s diagnostic as quoted/code text to avoid misleading Markdown or mentions.
+   - **MATERIAL — [news-incident.sh:58](/Users/andriathomas/Projects/representdc-main/.github/scripts/news-incident.sh:58):** `generation-failure`/`judge-api-failure` override publication outcomes. If generation fails and the subsequent push also fails, the alert falsely says headlines are publishing. Fix: prioritize `not-published`, `pushed-not-live` and missing outcomes; classify summary degradation only after verified publication.
+   - **NOTE — [fetch-news.yml:72](/Users/andriathomas/Projects/representdc-main/.github/workflows/fetch-news.yml:72):** Failed previews emit `not-published`, so an `OUTCOME=dry-run` guard still opens production incidents for those previews. If all previews should be neutral, pass the dispatch mode independently and guard on it.
+
+3. **Design decision.**
+
+   - **MATERIAL — [NewsAndAnalysis.jsx:84](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:84):** A newly generated summary of five-week-old articles passes the 72-hour test. Add (a)’s article-age cutoff **alongside** the existing cutoff. However, one fresh article defeats the “newest >14 days” protection while older claims remain in the digest. The [summary prompt:115](/Users/andriathomas/Projects/representdc-main/scripts/news/summarize.mjs:115) and [judge:23](/Users/andriathomas/Projects/representdc-main/scripts/news/judge.mjs:23) explicitly permit “recent” for roughly two months. Fix that remaining case by requiring explicit dates for older claims in both prompts and evals.
+   - **NOTE — [fetch-news.mjs:241](/Users/andriathomas/Projects/representdc-main/scripts/fetch-news.mjs:241):** `lastUpdated` means a successful feed/filter/gate result prepared for publication, including empty, disabled and withheld summaries; it does not record failed attempts or guarantee every source worked. **“Last successful check”** is more precise. [withhold.mjs:62](/Users/andriathomas/Projects/representdc-main/scripts/news/withhold.mjs:62) preserves it, so withholding does not falsely refresh the check time.
+   - **NOTE — [NewsAndAnalysis.jsx:117](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:117):** Metadata currently disappears for empty feeds; display the check line independently of article count. Use an explicit `America/New_York` date/time, reject missing/invalid/future check timestamps, derive newest coverage from valid article dates, and clamp the tolerated near-future article dates to “Today.” Existing clock ticks support the new cutoffs.
+
+   **(b)** changes relevance standards precisely when validation is unavailable, especially for broad congressional feeds; defer it until a narrow fallback has measured precision. **(c)** leaves misleading freshness unchanged.
+
+Read-only review; 19 pure news tests passed. Concurrency tests require writes and were not run.
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-CZ2A5Auv' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-rL0C76rL' (errno=Operation not permitted)
+c402f9e Decode HTML entities in news headlines
+eee9fea Document source expansion and two open next steps
+a5349e2 Expand news sources: NOTUS rename, congress-specific feeds, dry-run preview
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-zVHQykXX' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-E47D0xd6' (errno=Operation not permitted)
+diff --git a/.github/scripts/news-incident.sh b/.github/scripts/news-incident.sh
+index e4e0870..bc5b3a0 100755
+--- a/.github/scripts/news-incident.sh
++++ b/.github/scripts/news-incident.sh
+@@ -16,9 +16,16 @@
+ # 5. Classification reads the DECISION, not just the outcome. `generation-failure` and
+ #    `judge-api-failure` publish headlines and look like an ordinary withheld summary, so
+ #    treating every `summary-withheld` as healthy would let a permanently broken judge
+-#    strip summaries forever with green runs and no alert.
++#    strip summaries forever with green runs and no alert. But only once the headlines
++#    actually published: a generation failure followed by a failed push is an outage, and
++#    calling it "degraded, headlines still publishing" would be false (Codex, 2026-10-14).
++# 6. A preview (DRY_RUN) never opens or closes anything. It publishes nothing, so it
++#    proves nothing about recovery — on 2026-10-14 a passing preview closed a live outage
++#    while the feed was still stale.
++# 7. REASON is untrusted text (it can carry raw API error bodies), so the body heredoc gets
++#    a random delimiter, and issue_number is emitted only if it is purely numeric.
+ #
+-# Called by fetch-news.yml with OUTCOME, DECISION, RUN_URL, GH_TOKEN.
++# Called by fetch-news.yml with OUTCOME, DECISION, REASON, DRY_RUN, RUN_URL, GH_TOKEN.
+ set -uo pipefail   # deliberately NOT -e: see rule 3.
+ 
+ LABEL="news-incident"
+@@ -26,6 +33,8 @@ SENT_LABEL="alert-sent"
+ REPO="${GITHUB_REPOSITORY}"
+ OUTCOME="${OUTCOME:-}"
+ DECISION="${DECISION:-}"
++# One line, bounded: it lands in an email, an issue body and an output heredoc.
++REASON="$(printf '%s' "${REASON:-}" | tr '\r\n' '  ' | cut -c1-400)"
+ PAGE="https://www.representdc.org/news"
+ 
+ notify="none"
+@@ -35,24 +44,37 @@ issue_number=""
+ 
+ # Rule 3: whatever happens below, the workflow gets its outputs.
+ write_outputs() {
++  local delim
++  delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
++  while [[ "$body" == *"$delim"* ]]; do
++    delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
++  done
++  [[ "$issue_number" =~ ^[0-9]+$ ]] || issue_number=""
+   {
+     echo "notify=$notify"
+     echo "issue_number=$issue_number"
+     echo "subject=$subject"
+-    echo "body<<EOF_NEWS_BODY"
++    echo "body<<$delim"
+     echo "$body"
+-    echo "EOF_NEWS_BODY"
++    echo "$delim"
+   } >> "$GITHUB_OUTPUT"
+ }
+ trap write_outputs EXIT
+ 
+-# Operational failures hide behind an ordinary-looking outcome (rule 5).
+-case "$DECISION" in
+-  generation-failure|judge-api-failure)
+-    OPERATIONAL=1 ;;
+-  *)
+-    OPERATIONAL=0 ;;
+-esac
++# Rule 6.
++if [ -n "${DRY_RUN:-}" ]; then
++  echo "Preview run ($OUTCOME); incidents left untouched."
++  exit 0
++fi
++
++# Operational failures hide behind an ordinary-looking outcome (rule 5) — but only an
++# outcome where the headlines really did publish.
++OPERATIONAL=0
++if [ "$OUTCOME" = "summary-withheld" ]; then
++  case "$DECISION" in
++    generation-failure|judge-api-failure) OPERATIONAL=1 ;;
++  esac
++fi
+ 
+ # A judge flag or a gate withholding is the design working, not a fault.
+ if [ "$OPERATIONAL" = "1" ]; then
+@@ -76,7 +98,11 @@ Run log: $RUN_URL" ;;
+     not-published)
+       KEY="not-published"
+       TITLE="News pipeline: nothing published"
+-      BODY="A run ended without publishing (reason: ${DECISION:-unknown}).
++      # Indented four spaces so the issue renders the raw error as code, not Markdown.
++      BODY="A run ended without publishing. Reason:
++
++    ${REASON:-${DECISION:-unknown}}
++
+ The page still shows the last feed that published, and any summary older than 72 hours
+ hides itself.
+ 
+diff --git a/.github/workflows/fetch-news.yml b/.github/workflows/fetch-news.yml
+index a324260..8aa96b8 100644
+--- a/.github/workflows/fetch-news.yml
++++ b/.github/workflows/fetch-news.yml
+@@ -71,6 +71,8 @@ jobs:
+           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+           OUTCOME: ${{ steps.run.outputs.outcome }}
+           DECISION: ${{ steps.run.outputs.summary_decision }}
++          REASON: ${{ steps.run.outputs.reason }}
++          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+         run: bash .github/scripts/news-incident.sh
+ 
+       # Email is the alert; the issue above is only the state that keeps this from firing
+@@ -105,4 +107,6 @@ jobs:
+         if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
+         env:
+           GH_TOKEN: ${{ github.token }}
+-        run: gh issue edit "${{ steps.incident.outputs.issue_number }}" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
++          # Through env, never interpolated into the script: the value is step output.
++          ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
++        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
+diff --git a/scripts/eval/news.test.mjs b/scripts/eval/news.test.mjs
+index b21b2bc..11637f7 100644
+--- a/scripts/eval/news.test.mjs
++++ b/scripts/eval/news.test.mjs
+@@ -47,6 +47,10 @@ test('feed parsing: HTML entities in titles are decoded', () => {
+   assert.equal(decodeEntities('Q&amp;A &amp;#8217; &#x2019; &rsquo;'), 'Q&A \u2019 \u2019 \u2019');
+   // Unknown or out-of-range entities stay as written rather than becoming garbage.
+   assert.equal(decodeEntities('&bogus; &#0; &#99999999;'), '&bogus; &#0; &#99999999;');
++  // Inherited object keys and lone surrogates (Codex review, 2026-10-14).
++  assert.equal(decodeEntities('&constructor; &#55296;'), '&constructor; &#55296;');
++  const linked = parseItems('<rss><item><title>T</title><link>https://ex.org/?a=1&amp;b=2</link></item></rss>');
++  assert.equal(linked[0].link, 'https://ex.org/?a=1&b=2');
+ });
+ 
+ test('feed detection: Atom entries parse, including href links', () => {
+diff --git a/scripts/news/feeds.mjs b/scripts/news/feeds.mjs
+index 35fde85..ee94280 100644
+--- a/scripts/news/feeds.mjs
++++ b/scripts/news/feeds.mjs
+@@ -84,11 +84,14 @@ export function decodeEntities(text) {
+     .replace(/&amp;/g, '&')
+     .replace(/&#(\d+);/g, (m, n) => safeCodePoint(Number(n)) ?? m)
+     .replace(/&#x([0-9a-f]+);/gi, (m, n) => safeCodePoint(parseInt(n, 16)) ?? m)
+-    .replace(/&([a-z]+);/gi, (m, name) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
++    .replace(/&([a-z]+);/gi, (m, name) =>
++      Object.hasOwn(NAMED_ENTITIES, name.toLowerCase()) ? NAMED_ENTITIES[name.toLowerCase()] : m,
++    );
+ }
+ 
+ function safeCodePoint(n) {
+-  return Number.isInteger(n) && n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : null;
++  const valid = Number.isInteger(n) && n > 0 && n <= 0x10ffff && !(n >= 0xd800 && n <= 0xdfff);
++  return valid ? String.fromCodePoint(n) : null;
+ }
+ 
+ function getTag(xml, tag) {
+@@ -127,7 +130,9 @@ export function parseItems(xml) {
+     const linkMatch =
+       raw.match(/<link>(https?:\/\/[^<\s]+)<\/link>/i) ||
+       raw.match(/<link[^>]*href="(https?:\/\/[^"]+)"/i);
+-    const link = linkMatch ? linkMatch[1] : getTag(raw, 'guid');
++    // XML-escaped query strings ("?a=1&amp;b=2") would otherwise request the wrong URL.
++    // Only &amp;: a URL is not prose, so the headline decoder does not apply.
++    const link = (linkMatch ? linkMatch[1] : getTag(raw, 'guid')).replace(/&amp;/g, '&');
+     const pubDate = getTag(raw, 'pubDate') || getTag(raw, 'published') || getTag(raw, 'updated');
+     const sourceMatch = raw.match(/<source[^>]*>([^<]+)<\/source>/i);
+     const source = sourceMatch ? decodeEntities(extractCDATA(sourceMatch[1]).trim()) : '';
+diff --git a/src/Home.jsx b/src/Home.jsx
+index be4e035..7801978 100644
+--- a/src/Home.jsx
++++ b/src/Home.jsx
+@@ -4,20 +4,7 @@ import { useBillStats } from './hooks/useBillStats'
+ import Nav from './components/Nav'
+ import Footer from './components/Footer'
+ import Icon from './components/Icon'
+-
+-// Matches the bill tracker's freshness line ("September 21, 2026 at 2:59 PM ET"): the
+-// most recent daily Congress.gov sweep, in Eastern Time for a DC audience. The value is
+-// validated as a true ISO instant in useBillStats, which is what makes pinning a
+-// timezone safe here.
+-const formatCheckedInstant = (isoInstant) =>
+-  `${new Date(isoInstant).toLocaleString('en-US', {
+-    timeZone: 'America/New_York',
+-    month: 'long',
+-    day: 'numeric',
+-    year: 'numeric',
+-    hour: 'numeric',
+-    minute: '2-digit',
+-  })} ET`
++import { formatCheckedInstant } from './utils/formatCheckedInstant'
+ 
+ function Home() {
+   const { totalBills, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
+diff --git a/src/NewsAndAnalysis.jsx b/src/NewsAndAnalysis.jsx
+index abf78c4..3295a93 100644
+--- a/src/NewsAndAnalysis.jsx
++++ b/src/NewsAndAnalysis.jsx
+@@ -4,6 +4,7 @@ import Nav from './components/Nav'
+ import Footer from './components/Footer'
+ import Icon from './components/Icon'
+ import { READING, readingRoute } from './data/reading'
++import { formatCheckedInstant } from './utils/formatCheckedInstant'
+ import './App.css'
+ import './Reading.css'
+ 
+@@ -15,6 +16,20 @@ const NEWS_URL = '/api/news.json'
+ // age honestly on their own; a stale digest does not.
+ const SUMMARY_MAX_AGE_MS = 72 * 60 * 60 * 1000
+ 
++const DAY_MS = 24 * 60 * 60 * 1000
++
++// The 72-hour cutoff is keyed on when the summary was written, and the pipeline rewrites
++// it every run — so on a quiet stretch a "fresh" summary described five-week-old news as
++// recent (2026-10, Codex review). This second cutoff keys on the coverage itself.
++const SUMMARY_MAX_COVERAGE_AGE_MS = 14 * DAY_MS
++
++// Past this, the check line also names the newest story, so an old dateline under a
++// recent check reads as a quiet stretch rather than a stalled page.
++const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
++
++// A feed stamp further in the future than clock skew explains is not trustworthy.
++const CLOCK_SKEW_MS = 15 * 60 * 1000
++
+ function formatRelativeDate(pubDate) {
+   const date = new Date(pubDate)
+   if (isNaN(date)) return ''
+@@ -38,6 +53,31 @@ function isFresh(lastUpdated) {
+   return Number.isFinite(ts) && Date.now() - ts < SUMMARY_MAX_AGE_MS
+ }
+ 
++// lastUpdated advances only when a run gets as far as publishing (withholding preserves
++// it), so during an outage it ages honestly rather than claiming a check that failed.
++function validCheckedInstant(lastUpdated) {
++  const ts = new Date(lastUpdated).getTime()
++  return Number.isFinite(ts) && ts <= Date.now() + CLOCK_SKEW_MS ? lastUpdated : null
++}
++
++// Near-future dates (a source's clock skew) clamp to now rather than read as "newer than now".
++function newestCoverage(articles = []) {
++  const times = articles.map((a) => new Date(a.pubDate).getTime()).filter(Number.isFinite)
++  if (!times.length) return { newest: null, age: null }
++  const now = Date.now()
++  const newest = Math.min(Math.max(...times), now)
++  return { newest, age: now - newest }
++}
++
++function formatCoverageDate(ts) {
++  return new Date(ts).toLocaleDateString('en-US', {
++    timeZone: 'America/New_York',
++    month: 'long',
++    day: 'numeric',
++    year: 'numeric',
++  })
++}
++
+ function NewsAndAnalysis() {
+   const [data, setData] = useState(null)
+   const [error, setError] = useState(false)
+@@ -81,7 +121,13 @@ function NewsAndAnalysis() {
+     }
+   }, [])
+ 
+-  const showSummary = data?.summary && isFresh(data.lastUpdated)
++  const checkedAt = validCheckedInstant(data?.lastUpdated)
++  const { newest, age: coverageAge } = newestCoverage(data?.articles)
++  const showSummary =
++    data?.summary &&
++    isFresh(data.lastUpdated) &&
++    coverageAge !== null &&
++    coverageAge < SUMMARY_MAX_COVERAGE_AGE_MS
+ 
+   return (
+     <div className="app">
+@@ -114,11 +160,17 @@ function NewsAndAnalysis() {
+             </div>
+           )}
+ 
++          {checkedAt && (
++            <p className="news-status news-status--meta">
++              Last checked {formatCheckedInstant(checkedAt)}
++              {coverageAge !== null && coverageAge >= NEWEST_COVERAGE_NOTE_AFTER_MS && (
++                <> · Newest coverage: {formatCoverageDate(newest)}</>
++              )}
++            </p>
++          )}
++
+           {data && data.articles?.length > 0 && (
+             <>
+-              <p className="news-status news-status--meta">
+-                Updated {formatRelativeDate(data.lastUpdated)}
+-              </p>
+               <ul className="news-list">
+                 {data.articles.map((article) => (
+                   <li className="news-item" key={article.link}>
+// Matches the bill tracker's freshness line ("September 21, 2026 at 2:59 PM ET"): Eastern
+// Time for a DC audience. Callers must pass a validated ISO instant — that is what makes
+// pinning a timezone safe. Shared by the homepage (bill sweep) and /news (feed check).
+export const formatCheckedInstant = (isoInstant) =>
+  `${new Date(isoInstant).toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  })} ET`
+
+exec
+/bin/zsh -lc "nl -ba .github/scripts/news-incident.sh; nl -ba .github/workflows/fetch-news.yml; nl -ba scripts/news/summarize.mjs | sed -n '85,155p'; nl -ba scripts/news/judge.mjs | sed -n '1,80p'; nl -ba src/NewsAndAnalysis.jsx | sed -n '1,155p'; cat package.json; rg -n 'reason|GITHUB_OUTPUT|summary-withheld|dry.run|pubDate|future' .github/scripts/run-news.sh scripts/fetch-news.mjs scripts/news/feeds.mjs scripts/eval/news.test.mjs" in /Users/andriathomas/Projects/representdc-main
+ exited 2 in 0ms:
+     1	#!/usr/bin/env bash
+     2	# Decides whether this run is an incident, and emits what the workflow should email.
+     3	#
+     4	# Design rules, each one earned from a review finding:
+     5	#
+     6	# 1. EMAIL is the alert; a GitHub issue is only the state that prevents a repeat
+     7	#    (decisions/2026-09-15-alert-channels.md).
+     8	# 2. Suppression requires proof the email was SENT, not merely that an issue exists. The
+     9	#    workflow labels the issue `alert-sent` after the mail step succeeds. Keying dedupe on
+    10	#    the issue alone meant one SMTP failure silenced that incident permanently — and with
+    11	#    the mail secrets not yet in this repo, the first failure was the expected case.
+    12	# 3. `gh` must never kill this script before the outputs are written. A GitHub hiccup that
+    13	#    suppressed the email would be the worst possible failure: broken, and silent.
+    14	# 4. When a lookup fails we do not know whether an alert is pending, so we alert. Noise is
+    15	#    recoverable; silence is not.
+    16	# 5. Classification reads the DECISION, not just the outcome. `generation-failure` and
+    17	#    `judge-api-failure` publish headlines and look like an ordinary withheld summary, so
+    18	#    treating every `summary-withheld` as healthy would let a permanently broken judge
+    19	#    strip summaries forever with green runs and no alert. But only once the headlines
+    20	#    actually published: a generation failure followed by a failed push is an outage, and
+    21	#    calling it "degraded, headlines still publishing" would be false (Codex, 2026-10-14).
+    22	# 6. A preview (DRY_RUN) never opens or closes anything. It publishes nothing, so it
+    23	#    proves nothing about recovery — on 2026-10-14 a passing preview closed a live outage
+    24	#    while the feed was still stale.
+    25	# 7. REASON is untrusted text (it can carry raw API error bodies), so the body heredoc gets
+    26	#    a random delimiter, and issue_number is emitted only if it is purely numeric.
+    27	#
+    28	# Called by fetch-news.yml with OUTCOME, DECISION, REASON, DRY_RUN, RUN_URL, GH_TOKEN.
+    29	set -uo pipefail   # deliberately NOT -e: see rule 3.
+    30	
+    31	LABEL="news-incident"
+    32	SENT_LABEL="alert-sent"
+    33	REPO="${GITHUB_REPOSITORY}"
+    34	OUTCOME="${OUTCOME:-}"
+    35	DECISION="${DECISION:-}"
+    36	# One line, bounded: it lands in an email, an issue body and an output heredoc.
+    37	REASON="$(printf '%s' "${REASON:-}" | tr '\r\n' '  ' | cut -c1-400)"
+    38	PAGE="https://www.representdc.org/news"
+    39	
+    40	notify="none"
+    41	subject=""
+    42	body=""
+    43	issue_number=""
+    44	
+    45	# Rule 3: whatever happens below, the workflow gets its outputs.
+    46	write_outputs() {
+    47	  local delim
+    48	  delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+    49	  while [[ "$body" == *"$delim"* ]]; do
+    50	    delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+    51	  done
+    52	  [[ "$issue_number" =~ ^[0-9]+$ ]] || issue_number=""
+    53	  {
+    54	    echo "notify=$notify"
+    55	    echo "issue_number=$issue_number"
+    56	    echo "subject=$subject"
+    57	    echo "body<<$delim"
+    58	    echo "$body"
+    59	    echo "$delim"
+    60	  } >> "$GITHUB_OUTPUT"
+    61	}
+    62	trap write_outputs EXIT
+    63	
+    64	# Rule 6.
+    65	if [ -n "${DRY_RUN:-}" ]; then
+    66	  echo "Preview run ($OUTCOME); incidents left untouched."
+    67	  exit 0
+    68	fi
+    69	
+    70	# Operational failures hide behind an ordinary-looking outcome (rule 5) — but only an
+    71	# outcome where the headlines really did publish.
+    72	OPERATIONAL=0
+    73	if [ "$OUTCOME" = "summary-withheld" ]; then
+    74	  case "$DECISION" in
+    75	    generation-failure|judge-api-failure) OPERATIONAL=1 ;;
+    76	  esac
+    77	fi
+    78	
+    79	# A judge flag or a gate withholding is the design working, not a fault.
+    80	if [ "$OPERATIONAL" = "1" ]; then
+    81	  KEY="degraded"
+    82	  TITLE="News pipeline: summaries are failing"
+    83	  BODY="Summaries are not being produced (reason: ${DECISION}). The page is publishing
+    84	headlines with no summary, which is safe — but it will keep doing that until this is fixed.
+    85	
+    86	Run log: $RUN_URL"
+    87	else
+    88	  case "$OUTCOME" in
+    89	    published|published-empty|summary-withheld|summary-disabled|dry-run)
+    90	      KEY="" ;;
+    91	    pushed-not-live)
+    92	      KEY="not-live"
+    93	      TITLE="News pipeline: published but not live"
+    94	      BODY="The news feed was pushed, but $PAGE never served this run.
+    95	The page may be showing older news.
+    96	
+    97	Run log: $RUN_URL" ;;
+    98	    not-published)
+    99	      KEY="not-published"
+   100	      TITLE="News pipeline: nothing published"
+   101	      # Indented four spaces so the issue renders the raw error as code, not Markdown.
+   102	      BODY="A run ended without publishing. Reason:
+   103	
+   104	    ${REASON:-${DECISION:-unknown}}
+   105	
+   106	The page still shows the last feed that published, and any summary older than 72 hours
+   107	hides itself.
+   108	
+   109	Run log: $RUN_URL" ;;
+   110	    *)
+   111	      KEY="failed"
+   112	      TITLE="News pipeline: run failed"
+   113	      BODY="The run failed before recording an outcome. The page is unchanged unless the
+   114	failure came after publishing — the run log says which.
+   115	
+   116	Run log: $RUN_URL" ;;
+   117	  esac
+   118	fi
+   119	
+   120	ALL_TITLES=(
+   121	  "News pipeline: summaries are failing"
+   122	  "News pipeline: published but not live"
+   123	  "News pipeline: nothing published"
+   124	  "News pipeline: run failed"
+   125	)
+   126	
+   127	# Prints the issue number, or "?" when the lookup itself failed (rule 4).
+   128	find_open_issue() {
+   129	  local out
+   130	  if ! out=$(gh issue list --repo "$REPO" --state open --label "$LABEL" --search "$1 in:title" \
+   131	      --json number,title,labels 2>/dev/null); then
+   132	    echo "?"
+   133	    return
+   134	  fi
+   135	  echo "$out" | jq -r --arg t "$1" 'map(select(.title == $t)) | .[0].number // empty'
+   136	}
+   137	
+   138	has_sent_label() {
+   139	  local out
+   140	  out=$(gh issue view "$1" --repo "$REPO" --json labels 2>/dev/null) || { echo "?"; return; }
+   141	  echo "$out" | jq -r --arg l "$SENT_LABEL" 'if (.labels | map(.name) | index($l)) then "yes" else "no" end'
+   142	}
+   143	
+   144	gh label create "$LABEL" --repo "$REPO" --color B60205 \
+   145	  --description "An unattended news-pipeline problem needing attention" --force >/dev/null 2>&1
+   146	gh label create "$SENT_LABEL" --repo "$REPO" --color CCCCCC \
+   147	  --description "The alert email for this incident was sent" --force >/dev/null 2>&1
+   148	
+   149	if [ -z "$KEY" ]; then
+   150	  # Healthy. Close anything open and say so once — recovery is worth one email, because it
+   151	  # tells her she can stop thinking about it.
+   152	  for open_title in "${ALL_TITLES[@]}"; do
+   153	    number=$(find_open_issue "$open_title")
+   154	    [ -z "$number" ] && continue
+   155	    [ "$number" = "?" ] && continue
+   156	    gh issue comment "$number" --repo "$REPO" --body "✅ Recovered — a later run published successfully. Closing." >/dev/null 2>&1
+   157	    gh issue close "$number" --repo "$REPO" >/dev/null 2>&1
+   158	    notify="recovered"
+   159	    issue_number="$number"
+   160	    subject="✅ RepresentDC news: recovered"
+   161	    body="The news pipeline is working again, so the earlier problem has cleared.
+   162	Nothing to do.
+   163	
+   164	$PAGE"
+   165	  done
+   166	  [ "$notify" = "none" ] && echo "Healthy ($OUTCOME / ${DECISION:-none}); nothing to report."
+   167	  exit 0
+   168	fi
+   169	
+   170	existing=$(find_open_issue "$TITLE")
+   171	
+   172	if [ "$existing" = "?" ]; then
+   173	  # Rule 4: the lookup failed, so we cannot know whether she has been told. Tell her.
+   174	  notify="open"
+   175	  subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+   176	  body="$BODY
+   177	
+   178	(GitHub issue lookup failed during this run, so this email may repeat one you have
+   179	already had.)"
+   180	  echo "Lookup failed; alerting rather than risking silence."
+   181	  exit 0
+   182	fi
+   183	
+   184	if [ -n "$existing" ]; then
+   185	  issue_number="$existing"
+   186	  sent=$(has_sent_label "$existing")
+   187	  if [ "$sent" = "yes" ]; then
+   188	    echo "Incident '$KEY' already open as #$existing and already emailed — staying quiet."
+   189	    exit 0
+   190	  fi
+   191	  # Open but never successfully emailed (rule 2): try again.
+   192	  notify="open"
+   193	  subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+   194	  body="$BODY
+   195	
+   196	Nothing is urgent — the site keeps working and stale summaries hide themselves after
+   197	72 hours. You will not get another email about this until it recovers."
+   198	  echo "Incident '$KEY' open as #$existing but not yet emailed — retrying the email."
+   199	  exit 0
+   200	fi
+   201	
+   202	created=$(gh issue create --repo "$REPO" --title "$TITLE" --label "$LABEL" --assignee antzzz10 \
+   203	  --body "@antzzz10
+   204	
+   205	$BODY
+   206	
+   207	This issue stays open until a run succeeds, and closes itself then. Comment \`/withhold\`
+   208	here to pull a live summary.
+   209	
+   210	To stop summaries entirely while this is unresolved: Settings → Secrets and variables →
+   211	Actions → Variables → set \`NEWS_SUMMARY_ENABLED\` to \`false\`." 2>/dev/null)
+   212	
+   213	# Even if issue creation failed, the email still goes out (rule 3).
+   214	issue_number=$(echo "$created" | grep -oE '[0-9]+$' || true)
+   215	notify="open"
+   216	subject="⚠️ RepresentDC news: ${TITLE#News pipeline: }"
+   217	body="$BODY
+   218	
+   219	Nothing is urgent — the site keeps working and stale summaries hide themselves after
+   220	72 hours. You will not get another email about this until it recovers.
+   221	
+   222	${created:+Track it here: $created}"
+   223	echo "Opened incident '$KEY'${issue_number:+ as #$issue_number}."
+     1	name: Fetch DC News
+     2	
+     3	# Publishes www.representdc.org/api/news.json — one file, twice a day. It never rebuilds
+     4	# or redeploys the site, because releases are manual and unreleased commits on main must
+     5	# not ship on a schedule.
+     6	#
+     7	# This runs unattended. It therefore notifies ONLY on exceptions, and only once per
+     8	# incident: a healthy run says nothing, and an ongoing problem does not email twice a day.
+     9	# A summary publishes only when the judge passes it (scripts/fetch-news.mjs); anything
+    10	# else publishes the headlines alone, which is a normal outcome and not an incident.
+    11	
+    12	on:
+    13	  workflow_dispatch:
+    14	    inputs:
+    15	      dry_run:
+    16	        description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
+    17	        type: boolean
+    18	        default: false
+    19	  schedule:
+    20	    # Deliberately not on the hour: GitHub delays and sometimes drops scheduled jobs
+    21	    # queued at minute 0.
+    22	    - cron: '17 6,18 * * *'
+    23	
+    24	concurrency:
+    25	  group: news-publish
+    26	  cancel-in-progress: false
+    27	
+    28	jobs:
+    29	  fetch:
+    30	    runs-on: ubuntu-latest
+    31	    timeout-minutes: 20
+    32	    permissions:
+    33	      contents: write
+    34	      issues: write
+    35	    outputs:
+    36	      outcome: ${{ steps.run.outputs.outcome }}
+    37	      summary_decision: ${{ steps.run.outputs.summary_decision }}
+    38	    steps:
+    39	      - uses: actions/checkout@v4
+    40	
+    41	      - uses: actions/setup-node@v4
+    42	        with:
+    43	          node-version: '22'
+    44	
+    45	      - run: npm ci
+    46	
+    47	      - name: Fetch, gate, judge, publish and verify
+    48	        id: run
+    49	        env:
+    50	          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    51	          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    52	          NEWS_SUMMARY_ENABLED: ${{ vars.NEWS_SUMMARY_ENABLED }}
+    53	          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+    54	        run: node scripts/fetch-news.mjs
+    55	
+    56	      # The durable diagnostic record, replacing the news-data branch log. 90 days is
+    57	      # enough to investigate a failure; nothing downstream depends on it.
+    58	      - name: Keep the run record
+    59	        if: always() && hashFiles('run-record.json') != ''
+    60	        uses: actions/upload-artifact@v4
+    61	        with:
+    62	          name: run-record-${{ github.run_id }}-${{ github.run_attempt }}
+    63	          path: run-record.json
+    64	          retention-days: 90
+    65	
+    66	      - name: Open or close an incident
+    67	        id: incident
+    68	        if: always()
+    69	        env:
+    70	          GH_TOKEN: ${{ github.token }}
+    71	          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    72	          OUTCOME: ${{ steps.run.outputs.outcome }}
+    73	          DECISION: ${{ steps.run.outputs.summary_decision }}
+    74	          REASON: ${{ steps.run.outputs.reason }}
+    75	          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+    76	        run: bash .github/scripts/news-incident.sh
+    77	
+    78	      # Email is the alert; the issue above is only the state that keeps this from firing
+    79	      # twice for the same episode (decisions/2026-09-15-alert-channels.md). Same sender
+    80	      # and secrets as dc-bills-tracker's monitor, so there is one pattern to maintain.
+    81	      - name: Email on an incident or a recovery
+    82	        id: email
+    83	        if: always() && steps.incident.outputs.notify != 'none' && steps.incident.outputs.notify != ''
+    84	        uses: dawidd6/action-send-mail@v3
+    85	        with:
+    86	          server_address: smtp.gmail.com
+    87	          server_port: 465
+    88	          secure: true
+    89	          username: ${{ secrets.EMAIL_USERNAME }}
+    90	          password: ${{ secrets.EMAIL_PASSWORD }}
+    91	          subject: ${{ steps.incident.outputs.subject }}
+    92	          to: ${{ secrets.NOTIFICATION_EMAIL }}
+    93	          from: RepresentDC News <noreply@representdc.org>
+    94	          body: ${{ steps.incident.outputs.body }}
+    95	          ignore_cert: false
+    96	
+    97	      # Only now is the alert considered delivered. The incident script keys its dedupe on
+    98	      # this label, not on the issue existing — otherwise one SMTP failure would silence
+    99	      # that incident permanently (both Codex reviews, blocker). Needs `always()`: the
+   100	      # `run` step fails on exactly the runs that matter most here (a real incident), and
+   101	      # without it GitHub Actions' implicit default condition (require every prior step to
+   102	      # have succeeded) skips this step on precisely those runs — so the label never gets
+   103	      # applied, and dedupe silently breaks for the failure case it exists to cover (Codex
+   104	      # review, pre-push). Also gated on the email step's own outcome, not just `notify`,
+   105	      # so a failed send still doesn't get mislabeled as delivered.
+   106	      - name: Mark the alert as sent
+   107	        if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
+   108	        env:
+   109	          GH_TOKEN: ${{ github.token }}
+   110	          # Through env, never interpolated into the script: the value is step output.
+   111	          ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
+   112	        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
+    85	
+    86	  const raw = message.content[0].text.trim();
+    87	  const check = checkFilterResponse(raw, articles.length);
+    88	  return {
+    89	    check,
+    90	    raw,
+    91	    usage: message.usage,
+    92	    articles: check.pass ? check.indices.map((i) => articles[i]).filter(Boolean) : null,
+    93	  };
+    94	}
+    95	
+    96	/**
+    97	 * Returns the model-written body and its chosen closer key. The caller appends the
+    98	 * vetted sentence — this function never returns a closing sentence of its own.
+    99	 */
+   100	export async function summarizeArticles(client, articles, now = Date.now()) {
+   101	  if (!articles.length) return null;
+   102	
+   103	  const message = await client.messages.create({
+   104	    model: MODEL,
+   105	    max_tokens: 300,
+   106	    messages: [
+   107	      {
+   108	        role: 'user',
+   109	        content: `You write a short neutral news-digest summary for a DC statehood advocacy website (www.representdc.org). Below are the current DC statehood/home-rule headlines the site is showing, each with its publication date and age.
+   110	
+   111	Write 2-3 sentences summarizing what is happening across these stories, for a reader who wants the gist before deciding which to read in full.
+   112	
+   113	Rules:
+   114	- Use ONLY information present in the headlines below. Do not infer or invent specifics — numbers, dates, names, durations, or outcomes — that are not stated in a headline.
+   115	- Respect the dates, but do not be pedantic about them: this beat moves slowly, so "currently", "ongoing" and the present tense are fine for anything within the last two months or so. What you must never do is state an outcome the headlines do not support — calling something pending when a headline says it was decided, passed or rejected; saying an event ended, lasted a set time, or is still going on when the headlines only mark its anniversary; or attaching a date the headlines do not give. If the only headline behind a claim is older than about two months, write it in the past tense.
+   116	- Attribute contested claims to whoever made them ("advocates say", "the group argues"). Do not assert them in the site's own voice, and do not claim the coverage proves anything.
+   117	- Do NOT state what powers D.C. does or does not have as a non-state. A separate vetted sentence handles that, and it is added after your text.
+   118	- Write about the events, not about the coverage. Do not open with "Recent headlines...", "These stories...", "Coverage shows..." or any other reference to the list itself.
+   119	- Do not characterise a pattern, trend, escalation or wider significance that no headline states. One vote is one vote; two stories are two stories. Phrases like "continuing a pattern of", "part of a broader effort", "demonstrating ongoing", "underscoring how" are the failure to avoid — report what happened instead.
+   120	- Plain prose. One paragraph, no headers, no bullet points, no preamble like "Here is a summary."
+   121	- If the headlines are too thin to summarize substantively, write one shorter, more general sentence rather than guessing.
+   122	
+   123	Then, on a final separate line, output exactly:
+   124	CLOSER: <key>
+   125	
+   126	where <key> is whichever of these standing facts best matches what these headlines are about:
+   127	${closerMenu()}
+   128	
+   129	Choose the key by subject matter only. If nothing matches cleanly, use "laws".
+   130	
+   131	Headlines:
+   132	${headlineBlock(articles, now)}`,
+   133	      },
+   134	    ],
+   135	  });
+   136	
+   137	  const text = message.content[0].text.trim();
+   138	  const match = text.match(/^CLOSER:\s*([a-z]+)\s*$/im);
+   139	  const key = match ? match[1].toLowerCase() : null;
+   140	  const body = text.replace(/^CLOSER:.*$/im, '').trim();
+   141	
+   142	  return {
+   143	    body,
+   144	    key,
+   145	    keyWasStated: Boolean(match) && CLOSER_KEYS.includes(key),
+   146	    raw: text,
+   147	    // Carried so the caller can reject a truncated answer. A reply cut off at max_tokens
+   148	    // can still read as a clean paragraph and pass every gate — verified in review with
+   149	    // output ending "after members debated the".
+   150	    stopReason: message.stop_reason,
+   151	    usage: message.usage,
+   152	  };
+   153	}
+     1	/**
+     2	 * The summary judge: a second, stronger model reading what Haiku wrote.
+     3	 *
+     4	 * Offline only for now (NEWS-SUMMARY-EVAL-PLAN.md, layer 4). It flags; it never blocks a
+     5	 * run. Promoting it to a live gate is a decision for after a month of data, because an
+     6	 * uncalibrated judge that blocks is just a second way to lose summaries.
+     7	 *
+     8	 * It reads ONLY the model-written body. The vetted closing sentence is deliberately kept
+     9	 * out of its input: that sentence states law the headlines do not contain, so a
+    10	 * grounding judge would flag every correct closer. Closer accuracy is a one-time human
+    11	 * check against a primary source, not this model's job — which is also why calibration
+    12	 * requires the three historical BODY errors, not all five known errors.
+    13	 */
+    14	
+    15	import Anthropic from '@anthropic-ai/sdk';
+    16	import { headlineBlock } from './summarize.mjs';
+    17	
+    18	export const JUDGE_MODEL = 'claude-sonnet-5';
+    19	export const JUDGE_VERSION = '2026-09-12.1';
+    20	
+    21	const CRITERIA = `J1 supported — every claim is stated or directly implied by a headline. Flag invented specifics (dates, numbers, names), inferences the headlines do not support (an anniversary is not proof that something ended or is still happening), and a proposal described as though it were already in force. Completing a name or title the headline already gives is NOT an invention: "Norton reintroduces a bill" supports "Delegate Eleanor Holmes Norton reintroduced a bill".
+    22	J2 no legal claims — the text must not state what powers D.C. does or does not have as a non-state. A separate vetted sentence does that.
+    23	J3 temporal — D.C. statehood news moves slowly, so "currently", "ongoing", "recent" and the present tense are FINE for anything within roughly the last two months. Do not flag ordinary tense or word choice. Flag only outright errors: (a) describing something as pending, underway or under consideration when a headline shows it was already decided, passed, rejected or completed; (b) a date, duration or sequence the headlines contradict; (c) present-tense claims resting only on an article more than about two months old.
+    24	J4 attributed — flag only a contested claim stated AS FACT in the site's own voice, where no headline supports it ("the takeover proves D.C. can never be safe"). Characterising advocates' position ("advocates say momentum is growing", "groups call it urgent") is fine and is not a flag.`;
+    25	
+    26	export function buildPrompt(body, articles, now) {
+    27	  return `You are checking a short news-digest paragraph written for a D.C. statehood website, against the only source it was given: the headlines below, with their publication dates. Today is ${new Date(now).toISOString().slice(0, 10)}.
+    28	
+    29	Judge it on four criteria:
+    30	
+    31	${CRITERIA}
+    32	
+    33	Headlines:
+    34	${headlineBlock(articles, now)}
+    35	
+    36	Paragraph to check:
+    37	"""
+    38	${body}
+    39	"""
+    40	
+    41	Return ONLY a JSON object:
+    42	{"verdicts": [{"criterion": "J1", "pass": true|false, "quote": "the exact words at issue, or null", "why": "one sentence"}], "overall": "pass"|"flag"}
+    43	
+    44	Include one entry per criterion. Be specific and quote the text you are flagging. A paragraph with nothing wrong returns four passes and "pass".`;
+    45	}
+    46	
+    47	/** Returns { verdicts, overall, raw, usage } — never throws on a bad reply. */
+    48	export async function judgeSummary(client, body, articles, now = Date.now()) {
+    49	  // 4096, not 1024: this model thinks before it answers, and at 1024 an entire run came
+    50	  // back with output_tokens == thinking_tokens == 1024 and no text block at all
+    51	  // (2026-09-12, replaying the 2026-08-29 summary). A judge that silently returns
+    52	  // nothing is worse than no judge, because "no flags" reads as "nothing wrong".
+    53	  const message = await client.messages.create({
+    54	    model: JUDGE_MODEL,
+    55	    max_tokens: 4096,
+    56	    messages: [{ role: 'user', content: buildPrompt(body, articles, now) }],
+    57	  });
+    58	
+    59	  // Not content[0]: a model that emits a thinking block first would put no text there.
+    60	  const raw = (message.content.find((block) => block.type === 'text')?.text ?? '').trim();
+    61	  // Distinct from 'unparseable': no text at all means the call was truncated or refused,
+    62	  // which is an error to chase, never a quiet pass. Callers must not treat either as
+    63	  // "the summary is fine".
+    64	  if (!raw) {
+    65	    return {
+    66	      verdicts: [],
+    67	      overall: 'no-text',
+    68	      stopReason: message.stop_reason,
+    69	      raw: '',
+    70	      usage: message.usage,
+    71	    };
+    72	  }
+    73	  // A truncated reply can still contain a JSON-looking fragment that parses. Its verdicts
+    74	  // are whatever the model managed to emit before being cut off, which is not a judgment.
+    75	  // Only a normally completed reply may be read as one.
+    76	  if (message.stop_reason !== 'end_turn' && message.stop_reason !== 'stop_sequence') {
+    77	    return {
+    78	      verdicts: [],
+    79	      overall: 'incomplete',
+    80	      stopReason: message.stop_reason,
+     1	import { useState, useEffect } from 'react'
+     2	import { Link } from 'react-router-dom'
+     3	import Nav from './components/Nav'
+     4	import Footer from './components/Footer'
+     5	import Icon from './components/Icon'
+     6	import { READING, readingRoute } from './data/reading'
+     7	import { formatCheckedInstant } from './utils/formatCheckedInstant'
+     8	import './App.css'
+     9	import './Reading.css'
+    10	
+    11	// Same origin now: this site publishes its own feed (NEWS-AND-ANALYSIS-PRD.md).
+    12	// It used to fetch the bill tracker's copy cross-origin.
+    13	const NEWS_URL = '/api/news.json'
+    14	
+    15	// A summary older than this stops being shown. Headlines keep their own dates, so they
+    16	// age honestly on their own; a stale digest does not.
+    17	const SUMMARY_MAX_AGE_MS = 72 * 60 * 60 * 1000
+    18	
+    19	const DAY_MS = 24 * 60 * 60 * 1000
+    20	
+    21	// The 72-hour cutoff is keyed on when the summary was written, and the pipeline rewrites
+    22	// it every run — so on a quiet stretch a "fresh" summary described five-week-old news as
+    23	// recent (2026-10, Codex review). This second cutoff keys on the coverage itself.
+    24	const SUMMARY_MAX_COVERAGE_AGE_MS = 14 * DAY_MS
+    25	
+    26	// Past this, the check line also names the newest story, so an old dateline under a
+    27	// recent check reads as a quiet stretch rather than a stalled page.
+    28	const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
+    29	
+    30	// A feed stamp further in the future than clock skew explains is not trustworthy.
+    31	const CLOCK_SKEW_MS = 15 * 60 * 1000
+    32	
+    33	function formatRelativeDate(pubDate) {
+    34	  const date = new Date(pubDate)
+    35	  if (isNaN(date)) return ''
+    36	  const days = Math.floor((Date.now() - date) / (1000 * 60 * 60 * 24))
+    37	  if (days === 0) return 'Today'
+    38	  if (days === 1) return 'Yesterday'
+    39	  if (days < 7) return `${days} days ago`
+    40	  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    41	}
+    42	
+    43	function formatArticleDate(iso) {
+    44	  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', {
+    45	    month: 'long',
+    46	    day: 'numeric',
+    47	    year: 'numeric',
+    48	  })
+    49	}
+    50	
+    51	function isFresh(lastUpdated) {
+    52	  const ts = new Date(lastUpdated).getTime()
+    53	  return Number.isFinite(ts) && Date.now() - ts < SUMMARY_MAX_AGE_MS
+    54	}
+    55	
+    56	// lastUpdated advances only when a run gets as far as publishing (withholding preserves
+    57	// it), so during an outage it ages honestly rather than claiming a check that failed.
+    58	function validCheckedInstant(lastUpdated) {
+    59	  const ts = new Date(lastUpdated).getTime()
+    60	  return Number.isFinite(ts) && ts <= Date.now() + CLOCK_SKEW_MS ? lastUpdated : null
+    61	}
+    62	
+    63	// Near-future dates (a source's clock skew) clamp to now rather than read as "newer than now".
+    64	function newestCoverage(articles = []) {
+    65	  const times = articles.map((a) => new Date(a.pubDate).getTime()).filter(Number.isFinite)
+    66	  if (!times.length) return { newest: null, age: null }
+    67	  const now = Date.now()
+    68	  const newest = Math.min(Math.max(...times), now)
+    69	  return { newest, age: now - newest }
+    70	}
+    71	
+    72	function formatCoverageDate(ts) {
+    73	  return new Date(ts).toLocaleDateString('en-US', {
+    74	    timeZone: 'America/New_York',
+    75	    month: 'long',
+    76	    day: 'numeric',
+    77	    year: 'numeric',
+    78	  })
+    79	}
+    80	
+    81	function NewsAndAnalysis() {
+    82	  const [data, setData] = useState(null)
+    83	  const [error, setError] = useState(false)
+    84	  // Advances on its own so the 72-hour cutoff still fires in a tab left open while the
+    85	  // feed is unreachable. Relying on the poll alone did not: a repeated fetch failure sets
+    86	  // the same error value, React skips the re-render, and the age is only re-checked when
+    87	  // something renders.
+    88	  const [, setClockTick] = useState(0)
+    89	
+    90	  useEffect(() => {
+    91	    const tick = setInterval(() => setClockTick((n) => n + 1), 5 * 60 * 1000)
+    92	    return () => clearInterval(tick)
+    93	  }, [])
+    94	
+    95	  useEffect(() => {
+    96	    let cancelled = false
+    97	
+    98	    const load = () =>
+    99	      fetch(NEWS_URL, { cache: 'no-store' })
+   100	        .then((r) => {
+   101	          if (!r.ok) throw new Error('not found')
+   102	          return r.json()
+   103	        })
+   104	        .then((payload) => {
+   105	          if (cancelled) return
+   106	          setData(payload)
+   107	          setError(false)
+   108	        })
+   109	        .catch(() => {
+   110	          if (!cancelled) setError(true)
+   111	        })
+   112	
+   113	    load()
+   114	    // A left-open tab would otherwise keep showing a summary past its 72 hours, and
+   115	    // would never learn that one was withheld — the freshness cutoff is evaluated at
+   116	    // render, so something has to prompt another render.
+   117	    const timer = setInterval(load, 10 * 60 * 1000)
+   118	    return () => {
+   119	      cancelled = true
+   120	      clearInterval(timer)
+   121	    }
+   122	  }, [])
+   123	
+   124	  const checkedAt = validCheckedInstant(data?.lastUpdated)
+   125	  const { newest, age: coverageAge } = newestCoverage(data?.articles)
+   126	  const showSummary =
+   127	    data?.summary &&
+   128	    isFresh(data.lastUpdated) &&
+   129	    coverageAge !== null &&
+   130	    coverageAge < SUMMARY_MAX_COVERAGE_AGE_MS
+   131	
+   132	  return (
+   133	    <div className="app">
+   134	      <Nav />
+   135	      <header className="page-hero">
+   136	        <div className="container">
+   137	          <h1>News &amp; analysis</h1>
+   138	        </div>
+   139	      </header>
+   140	
+   141	      <section className="impact-section" id="news">
+   142	        <div className="container">
+   143	          <h2 className="section-heading">In the news</h2>
+   144	
+   145	          {error && (
+   146	            <p className="news-status">
+   147	              The news feed couldn&apos;t load right now. Try again shortly.
+   148	            </p>
+   149	          )}
+   150	          {!error && !data && <p className="news-status">Loading the latest coverage…</p>}
+   151	
+   152	          {showSummary && (
+   153	            <div className="news-summary">
+   154	              <p>{data.summary}</p>
+   155	              <span className="news-ai-disclosure">
+{
+  "name": "representdc-main",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "import:article": "node scripts/import-article.mjs",
+    "test:news": "node --test scripts/eval/*.test.mjs",
+    "news:fetch": "node scripts/fetch-news.mjs",
+    "eval:news": "node scripts/eval/run-golden.mjs",
+    "predeploy": "npm run build",
+    "deploy": "node scripts/deploy.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.544.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.1",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "@eslint/js": "9.39.1",
+    "@mozilla/readability": "^0.6.0",
+    "@types/react": "19.2.4",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.1",
+    "eslint": "9.39.1",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.4.24",
+    "gh-pages": "6.3.0",
+    "globals": "16.5.0",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.63.0",
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2",
+    "vite": "7.2.2"
+  }
+}
+rg: .github/scripts/run-news.sh: No such file or directory (os error 2)
+scripts/news/feeds.mjs:58:  //   valid RSS, but every item's pubDate is from December 2020 — an abandoned endpoint
+scripts/news/feeds.mjs:136:    const pubDate = getTag(raw, 'pubDate') || getTag(raw, 'published') || getTag(raw, 'updated');
+scripts/news/feeds.mjs:139:    if (title && link) items.push({ title, link, pubDate, source });
+scripts/news/feeds.mjs:181:      const ts = new Date(a.pubDate).getTime();
+scripts/news/feeds.mjs:188:    const datedItems = result.items.filter((a) => Number.isFinite(new Date(a.pubDate).getTime()));
+scripts/news/feeds.mjs:206:      articles.push({ ...item, _ts: new Date(item.pubDate).getTime() });
+scripts/eval/news.test.mjs:8: * they are named so a future change that reintroduces one fails here first.
+scripts/eval/news.test.mjs:62:  assert.equal(items[0].pubDate, '2026-09-10T12:00:00Z');
+scripts/eval/news.test.mjs:164:test('G4: rejects http links, future dates and a mismatched article set', () => {
+scripts/eval/news.test.mjs:165:  const good = { title: 't', source: 's', link: 'https://x.org/a', pubDate: 'Wed, 10 Sep 2026 00:00:00 GMT' };
+scripts/eval/news.test.mjs:169:  assert.equal(checkArticles([{ ...good, pubDate: 'Wed, 01 Jan 2031 00:00:00 GMT' }], null, now).pass, false);
+scripts/eval/news.test.mjs:221:        pubDate: 'Tue, 21 Jul 2026 11:38:51 +0000',
+scripts/fetch-news.mjs:17: *   summary-withheld   articles published, summary blocked by a gate
+scripts/fetch-news.mjs:62:  reason: null,
+scripts/fetch-news.mjs:72:  if (!process.env.GITHUB_OUTPUT) return;
+scripts/fetch-news.mjs:74:  appendFileSync(process.env.GITHUB_OUTPUT, `${key}<<${delimiter}\n${value}\n${delimiter}\n`);
+scripts/fetch-news.mjs:77:function finish(outcome, reason = null) {
+scripts/fetch-news.mjs:79:  record.reason = reason;
+scripts/fetch-news.mjs:83:  setOutput('reason', reason ?? '');
+scripts/fetch-news.mjs:84:  console.log(`\noutcome: ${outcome}${reason ? ` (${reason})` : ''}`);
+scripts/fetch-news.mjs:119:    pubDate: a.pubDate,
+scripts/fetch-news.mjs:146:    record.reason = 'no relevant articles';
+scripts/fetch-news.mjs:149:    record.reason = 'NEWS_SUMMARY_ENABLED=false';
+scripts/fetch-news.mjs:161:        record.reason = `summary generation failed: ${err.message}`;
+scripts/fetch-news.mjs:172:        detail: result.stopReason === 'max_tokens' ? 'reply truncated at max_tokens' : `stop_reason ${result.stopReason}`,
+scripts/fetch-news.mjs:224:    if (summary === null) record.reason = `summary withheld (${decision})`;
+scripts/fetch-news.mjs:256:    finish('dry-run', summary ? 'summary generated, nothing pushed' : 'no summary generated, nothing pushed');
+scripts/fetch-news.mjs:266:        record.reason = `a withholding at ${current.withheldAt} superseded this run's summary`;
+scripts/fetch-news.mjs:290:  if (!articles.length) finish('published-empty', record.reason);
+scripts/fetch-news.mjs:291:  else if (!publishedSummary && !SUMMARIES_ENABLED) finish('summary-disabled', record.reason);
+scripts/fetch-news.mjs:292:  else if (!publishedSummary) finish('summary-withheld', record.reason);
+
+codex
+The incident fixes address the preview and output-injection findings. The mixed-age summary finding remains: one fresh article still allows older claims to appear as current. I’m finishing the focused checks.
+exec
+/bin/zsh -lc "bash -c 'gh() { return 1; }; export -f gh; export GITHUB_REPOSITORY=fixture/repo RUN_URL=https://example.invalid/run GITHUB_OUTPUT=/dev/stdout DECISION=generation-failure REASON=\"API error\"; for fixture_outcome in not-published pushed-not-live summary-withheld; do OUTCOME=\""'$fixture_outcome" bash .github/scripts/news-incident.sh; done; DRY_RUN=1 OUTCOME=not-published bash .github/scripts/news-incident.sh'"'" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+Lookup failed; alerting rather than risking silence.
+.github/scripts/news-incident.sh: line 46: /dev/stdout: Operation not permitted
+Lookup failed; alerting rather than risking silence.
+.github/scripts/news-incident.sh: line 46: /dev/stdout: Operation not permitted
+Lookup failed; alerting rather than risking silence.
+.github/scripts/news-incident.sh: line 46: /dev/stdout: Operation not permitted
+Preview run (not-published); incidents left untouched.
+.github/scripts/news-incident.sh: line 46: /dev/stdout: Operation not permitted
+
+exec
+/bin/zsh -lc "sed -n '65,90p' scripts/fetch-news.mjs; sed -n '165,220p' scripts/news/feeds.mjs; rg -n 'pubDate|future|MAX' scripts/news/gates.mjs; sed -n '1,35p' scripts/eval/news.test.mjs; git diff --stat; git status --short" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+
+/** Writes the record where CI can pick it up even if the log push later fails. */
+function saveRecordLocally() {
+  writeFileSync('run-record.json', `${JSON.stringify(record, null, 2)}\n`);
+}
+
+function setOutput(key, value) {
+  if (!process.env.GITHUB_OUTPUT) return;
+  const delimiter = `EOF_${Math.random().toString(36).slice(2)}`;
+  appendFileSync(process.env.GITHUB_OUTPUT, `${key}<<${delimiter}\n${value}\n${delimiter}\n`);
+}
+
+function finish(outcome, reason = null) {
+  record.outcome = outcome;
+  record.reason = reason;
+  record.finishedAt = new Date().toISOString();
+  saveRecordLocally();
+  setOutput('outcome', outcome);
+  setOutput('reason', reason ?? '');
+  console.log(`\noutcome: ${outcome}${reason ? ` (${reason})` : ''}`);
+}
+
+async function main() {
+  console.log(`Run ${RUN_ID} — fetching feeds…\n`);
+  const { sourceResults, articles: candidates } = await fetchAllFeeds();
+  record.sources = sourceResults;
+    return { source, url, status: `error-${err.message}`, items: [] };
+  }
+}
+
+/** Fetches every feed and applies each one's freshness window. */
+export async function fetchAllFeeds(feeds = FEEDS, now = Date.now()) {
+  const results = [];
+  const articles = [];
+  const seen = new Set();
+
+  for (const feed of feeds) {
+    const result = await fetchFeed(feed);
+    const maxAgeDays = feed.maxAgeDays ?? DEFAULT_MAX_AGE_DAYS;
+    const cutoff = now - maxAgeDays * 24 * 60 * 60 * 1000;
+
+    const fresh = result.items.filter((a) => {
+      const ts = new Date(a.pubDate).getTime();
+      return Number.isFinite(ts) && ts > cutoff;
+    });
+
+    // A feed whose items all carry unparseable dates is broken, not quiet. Counting it
+    // healthy let a date-format regression mask other failures and replace good headlines
+    // with an empty feed, reported as a normal run (Codex, high).
+    const datedItems = result.items.filter((a) => Number.isFinite(new Date(a.pubDate).getTime()));
+    const allDatesBad = result.items.length > 0 && datedItems.length === 0;
+
+    results.push({
+      source: feed.source,
+      url: feed.url,
+      // 'ok' covers a live feed whose items are all older than its window: the source
+      // worked, it simply has nothing recent.
+      status: allDatesBad ? 'bad-dates' : result.status === 'no-items' ? 'ok' : result.status,
+      fetched: result.items.length,
+      dated: datedItems.length,
+      fresh: fresh.length,
+      maxAgeDays,
+    });
+
+    for (const item of fresh) {
+      if (seen.has(item.link)) continue;
+      seen.add(item.link);
+      articles.push({ ...item, _ts: new Date(item.pubDate).getTime() });
+    }
+  }
+
+  return { sourceResults: results, articles };
+}
+11:export const MAX_BODY_WORDS = 90;
+20:export const MAX_ARTICLES = 5;
+76:  if (words > MAX_BODY_WORDS) problems.push(`${words} words > ${MAX_BODY_WORDS}`);
+87: * decided upstream by G5/G6); what is not allowed is a malformed or future-dated item,
+93:  if (articles.length > MAX_ARTICLES) problems.push(`${articles.length} articles > ${MAX_ARTICLES}`);
+99:    const ts = new Date(a?.pubDate ?? '').getTime();
+101:    // A future date means a broken feed or a bad parse, not news. The tolerance covers
+103:    // future" untrue, and a tomorrow-dated item would sort to the top and render as
+105:    else if (ts > now + 2 * 60 * 60 * 1000) problems.push(`#${i} dated in the future`);
+/**
+ * Unit tests for the news pipeline's pure parts: feed parsing and the pre-publish gates.
+ *
+ * Uses node:test, which ships with Node — no test framework added to the project. Run
+ * with `npm run test:news`.
+ *
+ * Several cases below are real failures this pipeline published before the rewrite;
+ * they are named so a future change that reintroduces one fails here first.
+ */
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { looksLikeFeed, feedIsComplete, parseItems, decodeEntities } from '../news/feeds.mjs';
+import {
+  checkCloserKey,
+  checkNumericGrounding,
+  checkFormat,
+  checkArticles,
+  checkSourceHealth,
+  checkFilterResponse,
+} from '../news/gates.mjs';
+import { closerFor, CLOSER_KEYS } from '../news/closers.mjs';
+import { headlineBlock } from '../news/summarize.mjs';
+
+const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), 'fixtures/feeds');
+const fixture = (name) => readFileSync(join(FIXTURES, name), 'utf8');
+
+test('feed detection: valid RSS parses', () => {
+  const body = fixture('valid-rss.xml');
+  assert.equal(looksLikeFeed(body), true);
+  const items = parseItems(body);
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-vJ5KCGqw' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-DCJtavyA' (errno=Operation not permitted)
+ .github/scripts/news-incident.sh | 50 +++++++++++++++++++++++++--------
+ .github/workflows/fetch-news.yml |  6 +++-
+ scripts/eval/news.test.mjs       |  4 +++
+ scripts/news/feeds.mjs           | 11 ++++++--
+ src/Home.jsx                     | 15 +---------
+ src/NewsAndAnalysis.jsx          | 60 +++++++++++++++++++++++++++++++++++++---
+ 6 files changed, 112 insertions(+), 34 deletions(-)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-rJf2JuDZ' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-cAjtK7M0' (errno=Operation not permitted)
+ M .github/scripts/news-incident.sh
+ M .github/workflows/fetch-news.yml
+ M scripts/eval/news.test.mjs
+ M scripts/news/feeds.mjs
+ M src/Home.jsx
+ M src/NewsAndAnalysis.jsx
+?? TALKING-POINT-GENERATOR-PRD.md
+?? decisions/2026-07-26-talking-point-generator-scope.md
+?? reviews/
+?? src/utils/
+
+exec
+/bin/zsh -lc 'node --test scripts/eval/news.test.mjs; bash -n .github/scripts/news-incident.sh; ./node_modules/.bin/eslint src/NewsAndAnalysis.jsx src/Home.jsx src/utils/formatCheckedInstant.js' in /Users/andriathomas/Projects/representdc-main
+ succeeded in 536ms:
+TAP version 13
+# Subtest: feed detection: valid RSS parses
+ok 1 - feed detection: valid RSS parses
+  ---
+  duration_ms: 1.30825
+  type: 'test'
+  ...
+# Subtest: feed parsing: HTML entities in titles are decoded
+ok 2 - feed parsing: HTML entities in titles are decoded
+  ---
+  duration_ms: 0.234959
+  type: 'test'
+  ...
+# Subtest: feed detection: Atom entries parse, including href links
+ok 3 - feed detection: Atom entries parse, including href links
+  ---
+  duration_ms: 0.237083
+  type: 'test'
+  ...
+# Subtest: feed detection: an HTML bot-check page served with HTTP 200 is not a feed
+ok 4 - feed detection: an HTML bot-check page served with HTTP 200 is not a feed
+  ---
+  duration_ms: 0.1905
+  type: 'test'
+  ...
+# Subtest: feed detection: a closed feed with no items is healthy, just quiet
+ok 5 - feed detection: a closed feed with no items is healthy, just quiet
+  ---
+  duration_ms: 0.22925
+  type: 'test'
+  ...
+# Subtest: feed detection: a truncated feed is a failed source, not a quiet one
+ok 6 - feed detection: a truncated feed is a failed source, not a quiet one
+  ---
+  duration_ms: 0.13175
+  type: 'test'
+  ...
+# Subtest: G1: only approved closer keys pass, and unknown keys fall back to laws
+ok 7 - G1: only approved closer keys pass, and unknown keys fall back to laws
+  ---
+  duration_ms: 0.229166
+  type: 'test'
+  ...
+# Subtest: G1: inherited Object keys are not valid closers
+ok 8 - G1: inherited Object keys are not valid closers
+  ---
+  duration_ms: 0.04125
+  type: 'test'
+  ...
+# Subtest: G2: catches the January 2021 invention (published 2026-09-05)
+ok 9 - G2: catches the January 2021 invention (published 2026-09-05)
+  ---
+  duration_ms: 0.239875
+  type: 'test'
+  ...
+# Subtest: G2: a number that appears in a headline passes
+ok 10 - G2: a number that appears in a headline passes
+  ---
+  duration_ms: 0.211959
+  type: 'test'
+  ...
+# Subtest: G2: an invented number is not grounded by digits inside a larger one
+ok 11 - G2: an invented number is not grounded by digits inside a larger one
+  ---
+  duration_ms: 0.07725
+  type: 'test'
+  ...
+# Subtest: G2: accurate compound figures and trailing punctuation still pass
+ok 12 - G2: accurate compound figures and trailing punctuation still pass
+  ---
+  duration_ms: 0.034459
+  type: 'test'
+  ...
+# Subtest: G2: known blind spot — "lasted a year" carries no digits and passes
+ok 13 - G2: known blind spot — "lasted a year" carries no digits and passes
+  ---
+  duration_ms: 0.02
+  type: 'test'
+  ...
+# Subtest: G3: rejects markdown, preambles, overlong and empty bodies; accepts plain prose
+ok 14 - G3: rejects markdown, preambles, overlong and empty bodies; accepts plain prose
+  ---
+  duration_ms: 0.1275
+  type: 'test'
+  ...
+# Subtest: G4: rejects http links, future dates and a mismatched article set
+ok 15 - G4: rejects http links, future dates and a mismatched article set
+  ---
+  duration_ms: 0.262
+  type: 'test'
+  ...
+# Subtest: G4: an empty article list is allowed here (healthy-empty is decided by G5/G6)
+ok 16 - G4: an empty article list is allowed here (healthy-empty is decided by G5/G6)
+  ---
+  duration_ms: 0.019625
+  type: 'test'
+  ...
+# Subtest: G5: every source failing blocks publication; a partial failure does not
+ok 17 - G5: every source failing blocks publication; a partial failure does not
+  ---
+  duration_ms: 0.044875
+  type: 'test'
+  ...
+# Subtest: G6: only a clean JSON array passes; malformed replies never mean "no news"
+ok 18 - G6: only a clean JSON array passes; malformed replies never mean "no news"
+  ---
+  duration_ms: 0.666541
+  type: 'test'
+  ...
+# Subtest: prompt: headlines carry dates and ages, the fix for "currently considering"
+ok 19 - prompt: headlines carry dates and ages, the fix for "currently considering"
+  ---
+  duration_ms: 3.151584
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 77.908416
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+exec
+/bin/zsh -lc "bash -c 'gh() { return 1; }; export GITHUB_REPOSITORY=fixture/repo RUN_URL=https://example.invalid/run GITHUB_OUTPUT=/dev/stdout DECISION=generation-failure REASON=\"API error\"; fixture_script="'$(sed '"'\\''s/} >> \""'$GITHUB_OUTPUT"/}/'"'\\'' .github/scripts/news-incident.sh); for fixture_outcome in not-published pushed-not-live summary-withheld; do ( OUTCOME=\""'$fixture_outcome"; eval "$fixture_script" ); done; ( DRY_RUN=1 OUTCOME=not-published; eval "$fixture_script" )'"'" in /Users/andriathomas/Projects/representdc-main
+ succeeded in 0ms:
+Lookup failed; alerting rather than risking silence.
+notify=open
+issue_number=
+subject=⚠️ RepresentDC news: nothing published
+body<<EOF_NEWS_BODY_0b1eaddb894a7121
+A run ended without publishing. Reason:
+
+    API error
+
+The page still shows the last feed that published, and any summary older than 72 hours
+hides itself.
+
+Run log: https://example.invalid/run
+
+(GitHub issue lookup failed during this run, so this email may repeat one you have
+already had.)
+EOF_NEWS_BODY_0b1eaddb894a7121
+Lookup failed; alerting rather than risking silence.
+notify=open
+issue_number=
+subject=⚠️ RepresentDC news: published but not live
+body<<EOF_NEWS_BODY_1c32c18850bc4719
+The news feed was pushed, but https://www.representdc.org/news never served this run.
+The page may be showing older news.
+
+Run log: https://example.invalid/run
+
+(GitHub issue lookup failed during this run, so this email may repeat one you have
+already had.)
+EOF_NEWS_BODY_1c32c18850bc4719
+Lookup failed; alerting rather than risking silence.
+notify=open
+issue_number=
+subject=⚠️ RepresentDC news: summaries are failing
+body<<EOF_NEWS_BODY_00ed86cd3d4f8818
+Summaries are not being produced (reason: generation-failure). The page is publishing
+headlines with no summary, which is safe — but it will keep doing that until this is fixed.
+
+Run log: https://example.invalid/run
+
+(GitHub issue lookup failed during this run, so this email may repeat one you have
+already had.)
+EOF_NEWS_BODY_00ed86cd3d4f8818
+Preview run (not-published); incidents left untouched.
+notify=none
+issue_number=
+subject=
+body<<EOF_NEWS_BODY_3faa332260a69032
+
+EOF_NEWS_BODY_3faa332260a69032
+
+codex
+**MATERIAL — prior finding remains:** [NewsAndAnalysis.jsx:130](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:130). One fresh article permits a summary containing five-week-old claims. [summarize.mjs:115](/Users/andriathomas/Projects/representdc-main/scripts/news/summarize.mjs:115) and [judge.mjs:23](/Users/andriathomas/Projects/representdc-main/scripts/news/judge.mjs:23) still allow those claims to read as current or recent. **Fix:** require explicit dates for older claims in both prompts and add a mixed-age regression eval.
+
+No other BLOCKER or MATERIAL findings.
+tokens used
+37,956
+**MATERIAL — prior finding remains:** [NewsAndAnalysis.jsx:130](/Users/andriathomas/Projects/representdc-main/src/NewsAndAnalysis.jsx:130). One fresh article permits a summary containing five-week-old claims. [summarize.mjs:115](/Users/andriathomas/Projects/representdc-main/scripts/news/summarize.mjs:115) and [judge.mjs:23](/Users/andriathomas/Projects/representdc-main/scripts/news/judge.mjs:23) still allow those claims to read as current or recent. **Fix:** require explicit dates for older claims in both prompts and add a mixed-age regression eval.
+
+No other BLOCKER or MATERIAL findings.

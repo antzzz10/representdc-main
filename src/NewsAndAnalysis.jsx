@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { READING, readingRoute } from './data/reading'
+import { formatCheckedInstant } from './utils/formatCheckedInstant'
 import './App.css'
 import './Reading.css'
 
@@ -14,6 +15,20 @@ const NEWS_URL = '/api/news.json'
 // A summary older than this stops being shown. Headlines keep their own dates, so they
 // age honestly on their own; a stale digest does not.
 const SUMMARY_MAX_AGE_MS = 72 * 60 * 60 * 1000
+
+const DAY_MS = 24 * 60 * 60 * 1000
+
+// The 72-hour cutoff is keyed on when the summary was written, and the pipeline rewrites
+// it every run — so on a quiet stretch a "fresh" summary described five-week-old news as
+// recent (2026-10, Codex review). This second cutoff keys on the coverage itself.
+const SUMMARY_MAX_COVERAGE_AGE_MS = 14 * DAY_MS
+
+// Past this, the check line also names the newest story, so an old dateline under a
+// recent check reads as a quiet stretch rather than a stalled page.
+const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
+
+// A feed stamp further in the future than clock skew explains is not trustworthy.
+const CLOCK_SKEW_MS = 15 * 60 * 1000
 
 function formatRelativeDate(pubDate) {
   const date = new Date(pubDate)
@@ -36,6 +51,31 @@ function formatArticleDate(iso) {
 function isFresh(lastUpdated) {
   const ts = new Date(lastUpdated).getTime()
   return Number.isFinite(ts) && Date.now() - ts < SUMMARY_MAX_AGE_MS
+}
+
+// lastUpdated advances only when a run gets as far as publishing (withholding preserves
+// it), so during an outage it ages honestly rather than claiming a check that failed.
+function validCheckedInstant(lastUpdated) {
+  const ts = new Date(lastUpdated).getTime()
+  return Number.isFinite(ts) && ts <= Date.now() + CLOCK_SKEW_MS ? lastUpdated : null
+}
+
+// Near-future dates (a source's clock skew) clamp to now rather than read as "newer than now".
+function newestCoverage(articles = []) {
+  const times = articles.map((a) => new Date(a.pubDate).getTime()).filter(Number.isFinite)
+  if (!times.length) return { newest: null, age: null }
+  const now = Date.now()
+  const newest = Math.min(Math.max(...times), now)
+  return { newest, age: now - newest }
+}
+
+function formatCoverageDate(ts) {
+  return new Date(ts).toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
 }
 
 function NewsAndAnalysis() {
@@ -81,7 +121,13 @@ function NewsAndAnalysis() {
     }
   }, [])
 
-  const showSummary = data?.summary && isFresh(data.lastUpdated)
+  const checkedAt = validCheckedInstant(data?.lastUpdated)
+  const { newest, age: coverageAge } = newestCoverage(data?.articles)
+  const showSummary =
+    data?.summary &&
+    isFresh(data.lastUpdated) &&
+    coverageAge !== null &&
+    coverageAge < SUMMARY_MAX_COVERAGE_AGE_MS
 
   return (
     <div className="app">
@@ -114,11 +160,17 @@ function NewsAndAnalysis() {
             </div>
           )}
 
+          {checkedAt && (
+            <p className="news-status news-status--meta">
+              Last checked {formatCheckedInstant(checkedAt)}
+              {coverageAge !== null && coverageAge >= NEWEST_COVERAGE_NOTE_AFTER_MS && (
+                <> · Newest coverage: {formatCoverageDate(newest)}</>
+              )}
+            </p>
+          )}
+
           {data && data.articles?.length > 0 && (
             <>
-              <p className="news-status news-status--meta">
-                Updated {formatRelativeDate(data.lastUpdated)}
-              </p>
               <ul className="news-list">
                 {data.articles.map((article) => (
                   <li className="news-item" key={article.link}>

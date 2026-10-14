@@ -71,6 +71,8 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           OUTCOME: ${{ steps.run.outputs.outcome }}
           DECISION: ${{ steps.run.outputs.summary_decision }}
+          REASON: ${{ steps.run.outputs.reason }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: bash .github/scripts/news-incident.sh
 
       # Email is the alert; the issue above is only the state that keeps this from firing
@@ -105,4 +107,6 @@ jobs:
         if: always() && steps.incident.outputs.notify == 'open' && steps.incident.outputs.issue_number != '' && steps.email.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh issue edit "${{ steps.incident.outputs.issue_number }}" --repo "$GITHUB_REPOSITORY" --add-label alert-sent
+          # Through env, never interpolated into the script: the value is step output.
+          ISSUE_NUMBER: ${{ steps.incident.outputs.issue_number }}
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label alert-sent

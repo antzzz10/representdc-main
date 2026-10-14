@@ -47,6 +47,10 @@ test('feed parsing: HTML entities in titles are decoded', () => {
   assert.equal(decodeEntities('Q&amp;A &amp;#8217; &#x2019; &rsquo;'), 'Q&A \u2019 \u2019 \u2019');
   // Unknown or out-of-range entities stay as written rather than becoming garbage.
   assert.equal(decodeEntities('&bogus; &#0; &#99999999;'), '&bogus; &#0; &#99999999;');
+  // Inherited object keys and lone surrogates (Codex review, 2026-10-14).
+  assert.equal(decodeEntities('&constructor; &#55296;'), '&constructor; &#55296;');
+  const linked = parseItems('<rss><item><title>T</title><link>https://ex.org/?a=1&amp;b=2</link></item></rss>');
+  assert.equal(linked[0].link, 'https://ex.org/?a=1&b=2');
 });
 
 test('feed detection: Atom entries parse, including href links', () => {

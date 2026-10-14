@@ -4,20 +4,7 @@ import { useBillStats } from './hooks/useBillStats'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
-
-// Matches the bill tracker's freshness line ("September 21, 2026 at 2:59 PM ET"): the
-// most recent daily Congress.gov sweep, in Eastern Time for a DC audience. The value is
-// validated as a true ISO instant in useBillStats, which is what makes pinning a
-// timezone safe here.
-const formatCheckedInstant = (isoInstant) =>
-  `${new Date(isoInstant).toLocaleString('en-US', {
-    timeZone: 'America/New_York',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  })} ET`
+import { formatCheckedInstant } from './utils/formatCheckedInstant'
 
 function Home() {
   const { totalBills, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()

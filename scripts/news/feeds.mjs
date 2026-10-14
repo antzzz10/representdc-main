@@ -84,11 +84,14 @@ export function decodeEntities(text) {
     .replace(/&amp;/g, '&')
     .replace(/&#(\d+);/g, (m, n) => safeCodePoint(Number(n)) ?? m)
     .replace(/&#x([0-9a-f]+);/gi, (m, n) => safeCodePoint(parseInt(n, 16)) ?? m)
-    .replace(/&([a-z]+);/gi, (m, name) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
+    .replace(/&([a-z]+);/gi, (m, name) =>
+      Object.hasOwn(NAMED_ENTITIES, name.toLowerCase()) ? NAMED_ENTITIES[name.toLowerCase()] : m,
+    );
 }
 
 function safeCodePoint(n) {
-  return Number.isInteger(n) && n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : null;
+  const valid = Number.isInteger(n) && n > 0 && n <= 0x10ffff && !(n >= 0xd800 && n <= 0xdfff);
+  return valid ? String.fromCodePoint(n) : null;
 }
 
 function getTag(xml, tag) {
@@ -127,7 +130,9 @@ export function parseItems(xml) {
     const linkMatch =
       raw.match(/<link>(https?:\/\/[^<\s]+)<\/link>/i) ||
       raw.match(/<link[^>]*href="(https?:\/\/[^"]+)"/i);
-    const link = linkMatch ? linkMatch[1] : getTag(raw, 'guid');
+    // XML-escaped query strings ("?a=1&amp;b=2") would otherwise request the wrong URL.
+    // Only &amp;: a URL is not prose, so the headline decoder does not apply.
+    const link = (linkMatch ? linkMatch[1] : getTag(raw, 'guid')).replace(/&amp;/g, '&');
     const pubDate = getTag(raw, 'pubDate') || getTag(raw, 'published') || getTag(raw, 'updated');
     const sourceMatch = raw.match(/<source[^>]*>([^<]+)<\/source>/i);
     const source = sourceMatch ? decodeEntities(extractCDATA(sourceMatch[1]).trim()) : '';

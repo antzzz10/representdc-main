@@ -16,9 +16,16 @@
 # 5. Classification reads the DECISION, not just the outcome. `generation-failure` and
 #    `judge-api-failure` publish headlines and look like an ordinary withheld summary, so
 #    treating every `summary-withheld` as healthy would let a permanently broken judge
-#    strip summaries forever with green runs and no alert.
+#    strip summaries forever with green runs and no alert. But only once the headlines
+#    actually published: a generation failure followed by a failed push is an outage, and
+#    calling it "degraded, headlines still publishing" would be false (Codex, 2026-10-14).
+# 6. A preview (DRY_RUN) never opens or closes anything. It publishes nothing, so it
+#    proves nothing about recovery — on 2026-10-14 a passing preview closed a live outage
+#    while the feed was still stale.
+# 7. REASON is untrusted text (it can carry raw API error bodies), so the body heredoc gets
+#    a random delimiter, and issue_number is emitted only if it is purely numeric.
 #
-# Called by fetch-news.yml with OUTCOME, DECISION, RUN_URL, GH_TOKEN.
+# Called by fetch-news.yml with OUTCOME, DECISION, REASON, DRY_RUN, RUN_URL, GH_TOKEN.
 set -uo pipefail   # deliberately NOT -e: see rule 3.
 
 LABEL="news-incident"
@@ -26,6 +33,8 @@ SENT_LABEL="alert-sent"
 REPO="${GITHUB_REPOSITORY}"
 OUTCOME="${OUTCOME:-}"
 DECISION="${DECISION:-}"
+# One line, bounded: it lands in an email, an issue body and an output heredoc.
+REASON="$(printf '%s' "${REASON:-}" | tr '\r\n' '  ' | cut -c1-400)"
 PAGE="https://www.representdc.org/news"
 
 notify="none"
@@ -35,24 +44,37 @@ issue_number=""
 
 # Rule 3: whatever happens below, the workflow gets its outputs.
 write_outputs() {
+  local delim
+  delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+  while [[ "$body" == *"$delim"* ]]; do
+    delim="EOF_NEWS_BODY_$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')"
+  done
+  [[ "$issue_number" =~ ^[0-9]+$ ]] || issue_number=""
   {
     echo "notify=$notify"
     echo "issue_number=$issue_number"
     echo "subject=$subject"
-    echo "body<<EOF_NEWS_BODY"
+    echo "body<<$delim"
     echo "$body"
-    echo "EOF_NEWS_BODY"
+    echo "$delim"
   } >> "$GITHUB_OUTPUT"
 }
 trap write_outputs EXIT
 
-# Operational failures hide behind an ordinary-looking outcome (rule 5).
-case "$DECISION" in
-  generation-failure|judge-api-failure)
-    OPERATIONAL=1 ;;
-  *)
-    OPERATIONAL=0 ;;
-esac
+# Rule 6.
+if [ -n "${DRY_RUN:-}" ]; then
+  echo "Preview run ($OUTCOME); incidents left untouched."
+  exit 0
+fi
+
+# Operational failures hide behind an ordinary-looking outcome (rule 5) — but only an
+# outcome where the headlines really did publish.
+OPERATIONAL=0
+if [ "$OUTCOME" = "summary-withheld" ]; then
+  case "$DECISION" in
+    generation-failure|judge-api-failure) OPERATIONAL=1 ;;
+  esac
+fi
 
 # A judge flag or a gate withholding is the design working, not a fault.
 if [ "$OPERATIONAL" = "1" ]; then
@@ -76,7 +98,11 @@ Run log: $RUN_URL" ;;
     not-published)
       KEY="not-published"
       TITLE="News pipeline: nothing published"
-      BODY="A run ended without publishing (reason: ${DECISION:-unknown}).
+      # Indented four spaces so the issue renders the raw error as code, not Markdown.
+      BODY="A run ended without publishing. Reason:
+
+    ${REASON:-${DECISION:-unknown}}
+
 The page still shows the last feed that published, and any summary older than 72 hours
 hides itself.
 
