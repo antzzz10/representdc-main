@@ -1,7 +1,7 @@
 {
-  "runId": "38587160075-1",
-  "lastUpdated": "2026-10-14T15:12:08.665Z",
-  "summary": "DC Vote recently documented nine instances of congressional interference with District authority and outlined the current state of advocacy efforts, while the ACLU DC has raised concerns about the role of National Guard troops in the District. A senator has previously committed to prioritizing DC statehood legislation. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "38642912781-1",
+  "lastUpdated": "2026-10-14T21:47:42.180Z",
+  "summary": "A legal challenge to the District's RESALE Act, which caps ticket prices, is underway as resale platforms sue to block the law from taking effect. Separately, a court is hearing arguments about presidential authority over the National Guard deployment in D.C., with judges questioning the scope of executive power in the matter. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -13,28 +13,34 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
-      "source": "DC Vote"
+      "title": "Ticket Policy Forum Has Sued D.C. to Block RESALE Act",
+      "link": "https://washingtoncitypaper.com/article/793279/ticket-policy-forum-has-sued-d-c-to-block-resale-act/",
+      "pubDate": "Wed, 14 Oct 2026 21:29:28 +0000",
+      "source": "Washington City Paper"
     },
     {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
+      "title": "Trump’s Military Occupation of D.C. Faces Court Test as Judges Question Presidential Power",
+      "link": "https://www.washingtoninformer.com/trump-dc-national-guard-lawsuit/",
+      "pubDate": "Wed, 14 Oct 2026 20:30:00 +0000",
+      "source": "Washington Informer"
     },
     {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
+      "title": "The 51st in print!",
+      "link": "https://51st.news/the-51st-in-print/",
+      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
+      "source": "The 51st"
     },
     {
-      "title": "VIDEO: Senator Slotkin Commits to Making DC Statehood a Top Priority",
-      "link": "https://www.dcvote.org/video-senator-slotkin-commits-to-making-dc-statehood-a-top-priority/",
-      "pubDate": "Mon, 24 Aug 2026 15:05:27 +0000",
-      "source": "DC Vote"
+      "title": "Ticket Resale Platforms Sue D.C. to Block Price Cap",
+      "link": "https://www.washingtonsun.com/metro/dc-ticket-resale-act-lawsuit",
+      "pubDate": "Wed, 14 Oct 2026 18:57:33 GMT",
+      "source": "The Washington Sun"
+    },
+    {
+      "title": "The Needle: A Hearing About Whether the National Guard Should Leave D.C., GOP Rep Investigates Local Activist Groups, Bipartisan Coalition Wants Trump to Rescind Deal With Putin, and More",
+      "link": "https://washingtoncitypaper.com/article/793222/the-needle-a-hearing-about-whether-the-national-guard-should-leave-d-c-gop-rep-investigates-local-activist-groups-bipartisan-coalition-wants-trump-to-rescind-deal-with-putin-and-more/",
+      "pubDate": "Wed, 14 Oct 2026 16:26:44 +0000",
+      "source": "Washington City Paper"
     }
   ]
 }
