@@ -14,7 +14,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { looksLikeFeed, feedIsComplete, parseItems } from '../news/feeds.mjs';
+import { looksLikeFeed, feedIsComplete, parseItems, decodeEntities } from '../news/feeds.mjs';
 import {
   checkCloserKey,
   checkNumericGrounding,
@@ -38,6 +38,15 @@ test('feed detection: valid RSS parses', () => {
   assert.equal(items[0].link, 'https://www.dcvote.org/post/urges');
   // CDATA titles must come through unwrapped.
   assert.match(items[1].title, /^VIDEO: Senator Commits/);
+});
+
+test('feed parsing: HTML entities in titles are decoded', () => {
+  // The live 2026-10-07 DC Vote item, which reached the page as "DC&#8217;s".
+  const body = `<rss><channel><item><title><![CDATA[Nine Attacks on DC&#8217;s Local Authority &#8211; and How We Responded]]></title><link>https://dcvote.org/nine</link></item></channel></rss>`;
+  assert.equal(parseItems(body)[0].title, 'Nine Attacks on DC\u2019s Local Authority \u2013 and How We Responded');
+  assert.equal(decodeEntities('Q&amp;A &amp;#8217; &#x2019; &rsquo;'), 'Q&A \u2019 \u2019 \u2019');
+  // Unknown or out-of-range entities stay as written rather than becoming garbage.
+  assert.equal(decodeEntities('&bogus; &#0; &#99999999;'), '&bogus; &#0; &#99999999;');
 });
 
 test('feed detection: Atom entries parse, including href links', () => {

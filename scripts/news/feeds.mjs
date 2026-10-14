@@ -68,6 +68,29 @@ function extractCDATA(text) {
   return text.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim();
 }
 
+const NAMED_ENTITIES = {
+  quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ',
+  lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”',
+  ndash: '–', mdash: '—', hellip: '…',
+};
+
+/**
+ * Feeds escape titles inconsistently: WordPress sends `&#8217;` inside CDATA, where XML
+ * leaves it untouched, so it reached the page verbatim ("DC&#8217;s", 2026-10-07).
+ * `&amp;` goes first so a double-escaped `&amp;#8217;` also resolves.
+ */
+export function decodeEntities(text) {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&#(\d+);/g, (m, n) => safeCodePoint(Number(n)) ?? m)
+    .replace(/&#x([0-9a-f]+);/gi, (m, n) => safeCodePoint(parseInt(n, 16)) ?? m)
+    .replace(/&([a-z]+);/gi, (m, name) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
+}
+
+function safeCodePoint(n) {
+  return Number.isInteger(n) && n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : null;
+}
+
 function getTag(xml, tag) {
   const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i'));
   return match ? extractCDATA(match[1]).trim() : '';
@@ -100,14 +123,14 @@ export function parseItems(xml) {
     ...xml.matchAll(/<entry[\s>]([\s\S]*?)<\/entry>/g),
   ];
   for (const [, raw] of blocks) {
-    const title = getTag(raw, 'title');
+    const title = decodeEntities(getTag(raw, 'title'));
     const linkMatch =
       raw.match(/<link>(https?:\/\/[^<\s]+)<\/link>/i) ||
       raw.match(/<link[^>]*href="(https?:\/\/[^"]+)"/i);
     const link = linkMatch ? linkMatch[1] : getTag(raw, 'guid');
     const pubDate = getTag(raw, 'pubDate') || getTag(raw, 'published') || getTag(raw, 'updated');
     const sourceMatch = raw.match(/<source[^>]*>([^<]+)<\/source>/i);
-    const source = sourceMatch ? extractCDATA(sourceMatch[1]).trim() : '';
+    const source = sourceMatch ? decodeEntities(extractCDATA(sourceMatch[1]).trim()) : '';
     if (title && link) items.push({ title, link, pubDate, source });
   }
   return items;
