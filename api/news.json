@@ -1,16 +1,10 @@
 {
-  "runId": "38642912781-1",
-  "lastUpdated": "2026-10-14T21:47:42.180Z",
-  "summary": "A legal challenge to the District's RESALE Act, which caps ticket prices, is underway as resale platforms sue to block the law from taking effect. Separately, a court is hearing arguments about presidential authority over the National Guard deployment in D.C., with judges questioning the scope of executive power in the matter. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
-  "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "38729066257-1",
+  "lastUpdated": "2026-10-15T11:41:40.770Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
     {
       "title": "Ticket Policy Forum Has Sued D.C. to Block RESALE Act",
