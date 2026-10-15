@@ -1,16 +1,22 @@
 {
-  "runId": "38729066257-1",
-  "lastUpdated": "2026-10-15T11:41:40.770Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "38810392656-1",
+  "lastUpdated": "2026-10-15T21:31:13.218Z",
+  "summary": "A federal court is examining questions about presidential authority over military forces in the District as litigation proceeds over the National Guard's presence in D.C., while advocacy groups continue to press the case that the District's population and governance warrant statehood. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "summarySource": {
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "Ticket Policy Forum Has Sued D.C. to Block RESALE Act",
-      "link": "https://washingtoncitypaper.com/article/793279/ticket-policy-forum-has-sued-d-c-to-block-resale-act/",
-      "pubDate": "Wed, 14 Oct 2026 21:29:28 +0000",
-      "source": "Washington City Paper"
+      "title": "DC Has More People Than Some States Already Have",
+      "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
+      "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
+      "source": "DC Vote"
     },
     {
       "title": "Trump’s Military Occupation of D.C. Faces Court Test as Judges Question Presidential Power",
@@ -25,16 +31,16 @@
       "source": "The 51st"
     },
     {
-      "title": "Ticket Resale Platforms Sue D.C. to Block Price Cap",
-      "link": "https://www.washingtonsun.com/metro/dc-ticket-resale-act-lawsuit",
-      "pubDate": "Wed, 14 Oct 2026 18:57:33 GMT",
-      "source": "The Washington Sun"
-    },
-    {
       "title": "The Needle: A Hearing About Whether the National Guard Should Leave D.C., GOP Rep Investigates Local Activist Groups, Bipartisan Coalition Wants Trump to Rescind Deal With Putin, and More",
       "link": "https://washingtoncitypaper.com/article/793222/the-needle-a-hearing-about-whether-the-national-guard-should-leave-d-c-gop-rep-investigates-local-activist-groups-bipartisan-coalition-wants-trump-to-rescind-deal-with-putin-and-more/",
       "pubDate": "Wed, 14 Oct 2026 16:26:44 +0000",
       "source": "Washington City Paper"
+    },
+    {
+      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
+      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
+      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
+      "source": "DC Vote"
     }
   ]
 }
