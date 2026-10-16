@@ -1,40 +1,46 @@
 {
-  "runId": "38894678027-1",
-  "lastUpdated": "2026-10-16T11:35:10.598Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "38968644020-1",
+  "lastUpdated": "2026-10-16T21:20:46.366Z",
+  "summary": "Recent coverage highlights representation and fiscal matters affecting the District, with headlines addressing taxation, budget concerns, and population comparisons to states, alongside separate reporting on National Guard deployment and other local issues. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "summarySource": {
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "The Needle: Trump Is Refusing to Testify and Turn Over Documents Related to Kennedy Center Takeover, D.C. Is No. 2 on List of Cities Most Vulnerable to AI, a Confederate Memorial May Return to Arlington Cemetery, and More",
+      "link": "https://washingtoncitypaper.com/article/793326/the-needle-trump-is-refusing-to-testify-and-turn-over-documents-related-to-kennedy-center-takeover-d-c-is-no-2-on-list-of-cities-most-vulnerable-to-ai-a-confederate-memorial-may-return-to-arlingt/",
+      "pubDate": "Fri, 16 Oct 2026 16:36:49 +0000",
+      "source": "Washington City Paper"
+    },
+    {
+      "title": "The Washington Sun Metro: Representation Talks Taxation",
+      "link": "https://www.washingtonsun.com/metro-newsletter/representation-talks-taxation-10-16-2026",
+      "pubDate": "Fri, 16 Oct 2026 10:30:00 GMT",
+      "source": "The Washington Sun"
+    },
+    {
+      "title": "Morning Sun: What the Money Says",
+      "link": "https://www.washingtonsun.com/newsletters/what-the-money-says",
+      "pubDate": "Fri, 16 Oct 2026 10:01:00 GMT",
+      "source": "The Washington Sun"
+    },
+    {
+      "title": "The Needle: White House Is Investigating Missing Kennedy Center Donation, Families Protest National Guard Deployment at Schools, Ballroom Donor Details Unearthed, and More",
+      "link": "https://washingtoncitypaper.com/article/793288/the-needle-white-house-is-investigating-missing-kennedy-center-donation-families-protest-national-guard-deployment-at-schools-ballroom-donor-details-unearthed-and-more/",
+      "pubDate": "Thu, 15 Oct 2026 15:53:39 +0000",
+      "source": "Washington City Paper"
+    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Ticket Policy Forum Has Sued D.C. to Block RESALE Act",
-      "link": "https://washingtoncitypaper.com/article/793279/ticket-policy-forum-has-sued-d-c-to-block-resale-act/",
-      "pubDate": "Wed, 14 Oct 2026 21:29:28 +0000",
-      "source": "Washington City Paper"
-    },
-    {
-      "title": "Trump’s Military Occupation of D.C. Faces Court Test as Judges Question Presidential Power",
-      "link": "https://www.washingtoninformer.com/trump-dc-national-guard-lawsuit/",
-      "pubDate": "Wed, 14 Oct 2026 20:30:00 +0000",
-      "source": "Washington Informer"
-    },
-    {
-      "title": "The 51st in print!",
-      "link": "https://51st.news/the-51st-in-print/",
-      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
-      "source": "The 51st"
-    },
-    {
-      "title": "The Needle: A Hearing About Whether the National Guard Should Leave D.C., GOP Rep Investigates Local Activist Groups, Bipartisan Coalition Wants Trump to Rescind Deal With Putin, and More",
-      "link": "https://washingtoncitypaper.com/article/793222/the-needle-a-hearing-about-whether-the-national-guard-should-leave-d-c-gop-rep-investigates-local-activist-groups-bipartisan-coalition-wants-trump-to-rescind-deal-with-putin-and-more/",
-      "pubDate": "Wed, 14 Oct 2026 16:26:44 +0000",
-      "source": "Washington City Paper"
     }
   ]
 }
