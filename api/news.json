@@ -1,7 +1,7 @@
 {
-  "runId": "39026642929-1",
-  "lastUpdated": "2026-10-17T10:54:36.170Z",
-  "summary": "A military deployment in the District is facing judicial scrutiny over presidential authority, while separate investigations into a Kennedy Center donation and concerns about National Guard deployment at schools are unfolding. Advocates continue to note that D.C.'s population exceeds that of some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "39067875881-1",
+  "lastUpdated": "2026-10-17T20:43:24.537Z",
+  "summary": "A federal judge is weighing challenges to the Trump administration's military presence in the District, with questions raised about presidential authority and the status of the National Guard in D.C., while separately a dispute over tree removal in East Potomac Park has reached federal court with the Department of Justice now seeking recusal of the presiding judge. Statehood advocates note that D.C.'s population already exceeds that of some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -13,16 +13,10 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "The Needle: Trump Is Refusing to Testify and Turn Over Documents Related to Kennedy Center Takeover, D.C. Is No. 2 on List of Cities Most Vulnerable to AI, a Confederate Memorial May Return to Arlington Cemetery, and More",
-      "link": "https://washingtoncitypaper.com/article/793326/the-needle-trump-is-refusing-to-testify-and-turn-over-documents-related-to-kennedy-center-takeover-d-c-is-no-2-on-list-of-cities-most-vulnerable-to-ai-a-confederate-memorial-may-return-to-arlingt/",
-      "pubDate": "Fri, 16 Oct 2026 16:36:49 +0000",
-      "source": "Washington City Paper"
-    },
-    {
-      "title": "The Needle: White House Is Investigating Missing Kennedy Center Donation, Families Protest National Guard Deployment at Schools, Ballroom Donor Details Unearthed, and More",
-      "link": "https://washingtoncitypaper.com/article/793288/the-needle-white-house-is-investigating-missing-kennedy-center-donation-families-protest-national-guard-deployment-at-schools-ballroom-donor-details-unearthed-and-more/",
-      "pubDate": "Thu, 15 Oct 2026 15:53:39 +0000",
-      "source": "Washington City Paper"
+      "title": "DOJ Asks a Judge to Recuse Herself From East Potomac Park Case",
+      "link": "https://www.washingtonsun.com/metro/east-potomac-park-trump-doj-asks-judge-recuse-herself",
+      "pubDate": "Sat, 17 Oct 2026 19:50:44 GMT",
+      "source": "The Washington Sun"
     },
     {
       "title": "DC Has More People Than Some States Already Have",
@@ -37,10 +31,16 @@
       "source": "Washington Informer"
     },
     {
-      "title": "The 51st in print!",
-      "link": "https://51st.news/the-51st-in-print/",
-      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
-      "source": "The 51st"
+      "title": "The Needle: A Hearing About Whether the National Guard Should Leave D.C., GOP Rep Investigates Local Activist Groups, Bipartisan Coalition Wants Trump to Rescind Deal With Putin, and More",
+      "link": "https://washingtoncitypaper.com/article/793222/the-needle-a-hearing-about-whether-the-national-guard-should-leave-d-c-gop-rep-investigates-local-activist-groups-bipartisan-coalition-wants-trump-to-rescind-deal-with-putin-and-more/",
+      "pubDate": "Wed, 14 Oct 2026 16:26:44 +0000",
+      "source": "Washington City Paper"
+    },
+    {
+      "title": "The Needle: Trump Destroys 430 Trees in East Potomac Park Despite Judge’s Order to Stop, Federal Agents Search Ilhan Omar’s Home, Arlington First Responders Have PTSD, and More",
+      "link": "https://washingtoncitypaper.com/article/793136/the-needle-trump-destroys-430-trees-in-east-potomac-park-despite-judges-order-to-stop-federal-agents-search-ilhan-omars-home-arlington-first-responders-have-ptsd-and-more/",
+      "pubDate": "Tue, 13 Oct 2026 17:06:40 +0000",
+      "source": "Washington City Paper"
     }
   ]
 }
