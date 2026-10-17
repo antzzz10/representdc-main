@@ -1,10 +1,10 @@
 {
-  "runId": "38968644020-1",
-  "lastUpdated": "2026-10-16T21:20:46.366Z",
-  "summary": "Recent coverage highlights representation and fiscal matters affecting the District, with headlines addressing taxation, budget concerns, and population comparisons to states, alongside separate reporting on National Guard deployment and other local issues. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "39026642929-1",
+  "lastUpdated": "2026-10-17T10:54:36.170Z",
+  "summary": "A military deployment in the District is facing judicial scrutiny over presidential authority, while separate investigations into a Kennedy Center donation and concerns about National Guard deployment at schools are unfolding. Advocates continue to note that D.C.'s population exceeds that of some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
-    "closerKey": "representation",
-    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -19,18 +19,6 @@
       "source": "Washington City Paper"
     },
     {
-      "title": "The Washington Sun Metro: Representation Talks Taxation",
-      "link": "https://www.washingtonsun.com/metro-newsletter/representation-talks-taxation-10-16-2026",
-      "pubDate": "Fri, 16 Oct 2026 10:30:00 GMT",
-      "source": "The Washington Sun"
-    },
-    {
-      "title": "Morning Sun: What the Money Says",
-      "link": "https://www.washingtonsun.com/newsletters/what-the-money-says",
-      "pubDate": "Fri, 16 Oct 2026 10:01:00 GMT",
-      "source": "The Washington Sun"
-    },
-    {
       "title": "The Needle: White House Is Investigating Missing Kennedy Center Donation, Families Protest National Guard Deployment at Schools, Ballroom Donor Details Unearthed, and More",
       "link": "https://washingtoncitypaper.com/article/793288/the-needle-white-house-is-investigating-missing-kennedy-center-donation-families-protest-national-guard-deployment-at-schools-ballroom-donor-details-unearthed-and-more/",
       "pubDate": "Thu, 15 Oct 2026 15:53:39 +0000",
@@ -41,6 +29,18 @@
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
       "source": "DC Vote"
+    },
+    {
+      "title": "Trump’s Military Occupation of D.C. Faces Court Test as Judges Question Presidential Power",
+      "link": "https://www.washingtoninformer.com/trump-dc-national-guard-lawsuit/",
+      "pubDate": "Wed, 14 Oct 2026 20:30:00 +0000",
+      "source": "Washington Informer"
+    },
+    {
+      "title": "The 51st in print!",
+      "link": "https://51st.news/the-51st-in-print/",
+      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
+      "source": "The 51st"
     }
   ]
 }
