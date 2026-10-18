@@ -1,16 +1,10 @@
 {
-  "runId": "39122790271-1",
-  "lastUpdated": "2026-10-18T11:20:23.795Z",
-  "summary": "These headlines touch on several distinct local matters—a judicial recusal request in a parks case, investigations involving the Kennedy Center, concerns about National Guard deployment at schools, and economic analysis of worker wage gains—alongside a demographic comparison noting D.C.'s population relative to some states. The stories do not form a coherent narrative around a single statehood or governance issue. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
-  "summarySource": {
-    "closerKey": "laws",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "39165302578-1",
+  "lastUpdated": "2026-10-18T20:53:28.308Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
     {
       "title": "DOJ Asks a Judge to Recuse Herself From East Potomac Park Case",
@@ -37,9 +31,9 @@
       "source": "DC Vote"
     },
     {
-      "title": "Workers Lose 52 Cents of Every Dollar Gained to Pay Down Debt, Says New Report",
-      "link": "https://www.washingtoninformer.com/racial-wealth-gap-affordability/",
-      "pubDate": "Thu, 15 Oct 2026 04:00:00 +0000",
+      "title": "Trump’s Military Occupation of D.C. Faces Court Test as Judges Question Presidential Power",
+      "link": "https://www.washingtoninformer.com/trump-dc-national-guard-lawsuit/",
+      "pubDate": "Wed, 14 Oct 2026 20:30:00 +0000",
       "source": "Washington Informer"
     }
   ]
