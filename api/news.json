@@ -1,10 +1,10 @@
 {
-  "runId": "39261157327-1",
-  "lastUpdated": "2026-10-19T13:33:47.882Z",
-  "summary": "The Trump administration is contesting judicial oversight of East Potomac Park renovation plans, with the Department of Justice seeking recusal of a judge overseeing the case. Separately, the White House is resisting requests for testimony and documents related to a Kennedy Center takeover, while families have protested the National Guard deployment at schools. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "39335039761-1",
+  "lastUpdated": "2026-10-19T22:27:32.257Z",
+  "summary": "D.C. residents are preparing for the general election while advocates continue to press the case for statehood, noting that the District's population exceeds that of some states. Recent coverage has highlighted congressional challenges to D.C.'s local authority and traced the current state of statehood advocacy efforts. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -13,33 +13,33 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "Trump Administration Says East Potomac Renovation Plans Aren’t Final or Reviewable",
-      "link": "https://www.washingtonsun.com/metro/trump-east-potomac-park-golf-course-renovation",
-      "pubDate": "Sun, 18 Oct 2026 15:37:52 GMT",
-      "source": "The Washington Sun"
-    },
-    {
-      "title": "DOJ Asks a Judge to Recuse Herself From East Potomac Park Case",
-      "link": "https://www.washingtonsun.com/metro/east-potomac-park-trump-doj-asks-judge-recuse-herself",
-      "pubDate": "Sat, 17 Oct 2026 19:50:44 GMT",
-      "source": "The Washington Sun"
-    },
-    {
-      "title": "The Needle: Trump Is Refusing to Testify and Turn Over Documents Related to Kennedy Center Takeover, D.C. Is No. 2 on List of Cities Most Vulnerable to AI, a Confederate Memorial May Return to Arlington Cemetery, and More",
-      "link": "https://washingtoncitypaper.com/article/793326/the-needle-trump-is-refusing-to-testify-and-turn-over-documents-related-to-kennedy-center-takeover-d-c-is-no-2-on-list-of-cities-most-vulnerable-to-ai-a-confederate-memorial-may-return-to-arlingt/",
-      "pubDate": "Fri, 16 Oct 2026 16:36:49 +0000",
-      "source": "Washington City Paper"
-    },
-    {
-      "title": "The Needle: White House Is Investigating Missing Kennedy Center Donation, Families Protest National Guard Deployment at Schools, Ballroom Donor Details Unearthed, and More",
-      "link": "https://washingtoncitypaper.com/article/793288/the-needle-white-house-is-investigating-missing-kennedy-center-donation-families-protest-national-guard-deployment-at-schools-ballroom-donor-details-unearthed-and-more/",
-      "pubDate": "Thu, 15 Oct 2026 15:53:39 +0000",
-      "source": "Washington City Paper"
+      "title": "Yes, D.C. does still have a general election … Here’s what to know",
+      "link": "https://51st.news/dc-general-election-2026-voter-guide/",
+      "pubDate": "Mon, 19 Oct 2026 18:34:12 GMT",
+      "source": "The 51st"
     },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "The 51st in print!",
+      "link": "https://51st.news/the-51st-in-print/",
+      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
+      "source": "The 51st"
+    },
+    {
+      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
+      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
+      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
+      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
+      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
     }
   ]
