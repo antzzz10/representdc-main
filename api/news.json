@@ -1,16 +1,10 @@
 {
-  "runId": "39335039761-1",
-  "lastUpdated": "2026-10-19T22:27:32.257Z",
-  "summary": "D.C. residents are preparing for the general election while advocates continue to press the case for statehood, noting that the District's population exceeds that of some states. Recent coverage has highlighted congressional challenges to D.C.'s local authority and traced the current state of statehood advocacy efforts. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
-  "summarySource": {
-    "closerKey": "representation",
-    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "39417616337-1",
+  "lastUpdated": "2026-10-20T11:49:14.454Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
     {
       "title": "Yes, D.C. does still have a general election … Here’s what to know",
