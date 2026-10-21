@@ -1,11 +1,35 @@
 {
-  "runId": "39596180351-1",
-  "lastUpdated": "2026-10-21T12:01:15.727Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "39681757765-1",
+  "lastUpdated": "2026-10-21T21:49:09.654Z",
+  "summary": "The District's Attorney General has cautioned federal agents and the National Guard against interfering with the upcoming November election, while local media outlets continue covering D.C.'s electoral process and statehood advocacy, including comparisons of the District's population to that of existing states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "summarySource": {
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "The 51st's first crossword puzzle",
+      "link": "https://51st.news/the-51sts-first-crossword-puzzle/",
+      "pubDate": "Wed, 21 Oct 2026 19:19:16 GMT",
+      "source": "The 51st"
+    },
+    {
+      "title": "D.C. Attorney General Warns Federal Agents, National Guard Against Interfering with November Election",
+      "link": "https://www.washingtoninformer.com/dc-attorney-general-warns-election-interference/",
+      "pubDate": "Wed, 21 Oct 2026 15:52:00 +0000",
+      "source": "Washington Informer"
+    },
+    {
+      "title": "Yes, D.C. does still have a general election … Here’s what to know",
+      "link": "https://51st.news/dc-general-election-2026-voter-guide/",
+      "pubDate": "Mon, 19 Oct 2026 18:34:12 GMT",
+      "source": "The 51st"
+    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
@@ -17,24 +41,6 @@
       "link": "https://51st.news/the-51st-in-print/",
       "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
       "source": "The 51st"
-    },
-    {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     }
   ]
 }
