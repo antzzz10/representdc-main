@@ -1,23 +1,11 @@
 {
-  "runId": "39502537256-1",
-  "lastUpdated": "2026-10-20T21:43:04.606Z",
-  "summary": "D.C. residents are preparing for an upcoming general election, while advocates continue highlighting the District's population size relative to states and documenting what they characterize as congressional encroachments on local authority. The statehood movement remains active in communicating its case to the public. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
-  "summarySource": {
-    "closerKey": "representation",
-    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "39596180351-1",
+  "lastUpdated": "2026-10-21T12:01:15.727Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
-    {
-      "title": "Yes, D.C. does still have a general election … Here’s what to know",
-      "link": "https://51st.news/dc-general-election-2026-voter-guide/",
-      "pubDate": "Mon, 19 Oct 2026 18:34:12 GMT",
-      "source": "The 51st"
-    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
@@ -41,6 +29,12 @@
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
+    },
+    {
+      "title": "Why we shouldn’t have National Guard Troops in D.C.",
+      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
+      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "source": "ACLU DC"
     }
   ]
 }
