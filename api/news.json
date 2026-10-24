@@ -1,10 +1,10 @@
 {
-  "runId": "40089046132-1",
-  "lastUpdated": "2026-10-24T11:14:06.292Z",
-  "summary": "Recent coverage highlights advocacy efforts around DC statehood, including content from statehood-focused publications and updates on challenges to the District's local authority. Advocates note that DC's population exceeds that of some existing states, and statehood groups have documented and responded to what they characterize as attacks on DC's local authority. Without statehood, Congress reviews the District's laws and can vote to repeal them.",
+  "runId": "40132055621-1",
+  "lastUpdated": "2026-10-24T20:57:34.029Z",
+  "summary": "The District's Attorney General has warned federal agents and the National Guard against interfering with the November election, underscoring concerns about outside entities' role in local governance as D.C. prepares for voting. Coverage includes voter information about the general election and demographic comparisons highlighting D.C.'s population relative to some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
-    "closerKey": "laws",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/1-206.02"
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -19,6 +19,18 @@
       "source": "The 51st"
     },
     {
+      "title": "D.C. Attorney General Warns Federal Agents, National Guard Against Interfering with November Election",
+      "link": "https://www.washingtoninformer.com/dc-attorney-general-warns-election-interference/",
+      "pubDate": "Wed, 21 Oct 2026 15:52:00 +0000",
+      "source": "Washington Informer"
+    },
+    {
+      "title": "Yes, D.C. does still have a general election … Here’s what to know",
+      "link": "https://51st.news/dc-general-election-2026-voter-guide/",
+      "pubDate": "Mon, 19 Oct 2026 18:34:12 GMT",
+      "source": "The 51st"
+    },
+    {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
@@ -29,18 +41,6 @@
       "link": "https://51st.news/the-51st-in-print/",
       "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
       "source": "The 51st"
-    },
-    {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
     }
   ]
 }
