@@ -1,10 +1,16 @@
 {
-  "runId": "40329107807-1",
-  "lastUpdated": "2026-10-26T13:16:58.229Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "40414793514-1",
+  "lastUpdated": "2026-10-26T22:45:28.065Z",
+  "summary": "Recent coverage highlights arguments that DC's population rivals that of some states, while advocates document multiple recent challenges to local authority and discuss the current state of statehood efforts. A separate story raises concerns about National Guard presence in the District. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "summarySource": {
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
     {
       "title": "DC Has More People Than Some States Already Have",
