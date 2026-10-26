@@ -1,23 +1,11 @@
 {
-  "runId": "40233162066-1",
-  "lastUpdated": "2026-10-25T20:57:41.951Z",
-  "summary": "The District's attorney general recently cautioned federal agents and the National Guard against interfering with the November election, while statehood advocates point to D.C.'s population as comparable to several states and highlight ongoing challenges to local authority. The conversation reflects concerns about federal oversight of District operations and elections. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
-  "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "40329107807-1",
+  "lastUpdated": "2026-10-26T13:16:58.229Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
-    {
-      "title": "D.C. Attorney General Warns Federal Agents, National Guard Against Interfering with November Election",
-      "link": "https://www.washingtoninformer.com/dc-attorney-general-warns-election-interference/",
-      "pubDate": "Wed, 21 Oct 2026 15:52:00 +0000",
-      "source": "Washington Informer"
-    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
