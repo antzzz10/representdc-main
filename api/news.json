@@ -1,7 +1,7 @@
 {
-  "runId": "40414793514-1",
-  "lastUpdated": "2026-10-26T22:45:28.065Z",
-  "summary": "Recent coverage highlights arguments that DC's population rivals that of some states, while advocates document multiple recent challenges to local authority and discuss the current state of statehood efforts. A separate story raises concerns about National Guard presence in the District. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "40503434627-1",
+  "lastUpdated": "2026-10-27T12:24:24.336Z",
+  "summary": "As early voting begins in D.C., some advocates prepare for potential federal interference in the electoral process, while others are sharing voting information and highlighting demographic arguments for statehood. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
     "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
@@ -13,28 +13,34 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "Tue, 27 Oct 2026 12:18:55 +0000",
+      "source": "ACLU DC"
+    },
+    {
+      "title": "As Early Voting Begins in D.C., Some Prepare for Federal Interference",
+      "link": "https://www.washingtonsun.com/metro/dc-election-polling-places-national-guard",
+      "pubDate": "Tue, 27 Oct 2026 09:20:00 GMT",
+      "source": "The Washington Sun"
+    },
+    {
+      "title": "The 51st's first crossword puzzle",
+      "link": "https://51st.news/the-51sts-first-crossword-puzzle/",
+      "pubDate": "Wed, 21 Oct 2026 19:19:16 GMT",
+      "source": "The 51st"
+    },
+    {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
       "source": "DC Vote"
     },
     {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
+      "title": "The 51st in print!",
+      "link": "https://51st.news/the-51st-in-print/",
+      "pubDate": "Wed, 14 Oct 2026 20:26:27 GMT",
+      "source": "The 51st"
     }
   ]
 }
