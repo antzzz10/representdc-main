@@ -1,10 +1,10 @@
 {
-  "runId": "40594346604-1",
-  "lastUpdated": "2026-10-27T22:23:09.055Z",
-  "summary": "As early voting begins in the District, statehood advocates are preparing for potential federal interference in local elections, while also highlighting that D.C.'s population exceeds that of some states. Recent coverage documents ongoing challenges to D.C.'s local authority and raises concerns about federal control over the District's National Guard. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "40694024214-1",
+  "lastUpdated": "2026-10-28T13:10:54.978Z",
+  "summary": "D.C.'s delegate race is drawing attention as the election approaches, with coverage of candidate Robert White's efforts regarding his eligibility and broader discussions of voting and the delegate position itself. Recent headlines also reflect on the legacy of longtime Delegate Eleanor Holmes Norton. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -13,34 +13,34 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "As Early Voting Begins in D.C., Some Prepare for Federal Interference",
-      "link": "https://www.washingtonsun.com/metro/dc-election-polling-places-national-guard",
-      "pubDate": "Tue, 27 Oct 2026 09:20:00 GMT",
+      "title": "Delegate on Deadline",
+      "link": "https://www.washingtonsun.com/metro-newsletter/delegate-on-deadline",
+      "pubDate": "Wed, 28 Oct 2026 10:31:00 GMT",
       "source": "The Washington Sun"
     },
     {
-      "title": "DC Has More People Than Some States Already Have",
-      "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
-      "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
-      "source": "DC Vote"
+      "title": "Morning Sun: Presidential Politicking",
+      "link": "https://www.washingtonsun.com/newsletters/presidential-politicking",
+      "pubDate": "Wed, 28 Oct 2026 10:01:00 GMT",
+      "source": "The Washington Sun"
     },
     {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
-      "source": "DC Vote"
+      "title": "Robert White Is Rushing to Preserve His Eligibility in the D.C. Delegate Race",
+      "link": "https://www.washingtonsun.com/metro/robert-white-eligibility-dc-delegate-election",
+      "pubDate": "Tue, 27 Oct 2026 18:23:05 GMT",
+      "source": "The Washington Sun"
     },
     {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "Tue, 27 Oct 2026 12:18:55 +0000",
       "source": "ACLU DC"
+    },
+    {
+      "title": "Honoring the ‘Warrior on the Hill’: Eleanor Holmes Norton Legacy Fund Luncheon Celebrates Namesake’s Longtime Leadership",
+      "link": "https://www.washingtoninformer.com/eleanor-holmes-norton-legacy-event/",
+      "pubDate": "Mon, 26 Oct 2026 13:58:00 +0000",
+      "source": "Washington Informer"
     }
   ]
 }
