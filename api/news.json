@@ -1,16 +1,10 @@
 {
-  "runId": "40880425478-1",
-  "lastUpdated": "2026-10-29T13:16:53.793Z",
-  "summary": "DC statehood advocates are highlighting the District's population size as a basis for representation and addressing what they characterize as repeated congressional challenges to local authority. Recent coverage has also focused on the National Guard's presence in the District and voting access for DC residents. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
-  "summarySource": {
-    "closerKey": "representation",
-    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "40968855408-1",
+  "lastUpdated": "2026-10-29T22:50:57.102Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
     {
       "title": "Three Things to Know When Voting in D.C.",
