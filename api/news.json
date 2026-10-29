@@ -1,10 +1,10 @@
 {
-  "runId": "40781818095-1",
-  "lastUpdated": "2026-10-28T22:41:18.321Z",
-  "summary": "Recent coverage highlights advocacy arguments that D.C.'s population rivals that of some states, while documenting what advocates characterize as multiple attacks on the District's local authority and raising concerns about National Guard deployment in the capital. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "40880425478-1",
+  "lastUpdated": "2026-10-29T13:16:53.793Z",
+  "summary": "DC statehood advocates are highlighting the District's population size as a basis for representation and addressing what they characterize as repeated congressional challenges to local authority. Recent coverage has also focused on the National Guard's presence in the District and voting access for DC residents. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -12,6 +12,12 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "Tue, 27 Oct 2026 12:18:55 +0000",
+      "source": "ACLU DC"
+    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
