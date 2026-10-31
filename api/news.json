@@ -1,7 +1,7 @@
 {
-  "runId": "41202459027-1",
-  "lastUpdated": "2026-10-31T12:45:27.875Z",
-  "summary": "DC statehood advocates are highlighting population figures and ongoing congressional interference with local governance, while raising concerns about federal control of the District's National Guard. Recent posts document attacks on DC's authority and efforts to counter them, alongside arguments against the current National Guard arrangement. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "41244817841-1",
+  "lastUpdated": "2026-10-31T21:42:43.928Z",
+  "summary": "The District is currently defending its local authority against federal overreach, including a lawsuit with Virginia over a Trump administration proposal and responses to multiple recent challenges to D.C.'s governance. Advocates argue that D.C.'s population already exceeds that of some states, and point to concerns about federal control of the District's National Guard as part of a broader case for greater local autonomy. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
     "closerKey": "guard",
     "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
@@ -12,6 +12,12 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "D.C., Virginia Sue Trump Adminstration Over Proposed Triumphal Arch",
+      "link": "https://www.washingtonsun.com/metro/dc-virginia-sue-trump-administration-triumphal-arch",
+      "pubDate": "Sat, 31 Oct 2026 14:40:07 GMT",
+      "source": "The Washington Sun"
+    },
     {
       "title": "DC Has More People Than Some States Already Have",
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
