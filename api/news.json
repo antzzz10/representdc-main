@@ -1,23 +1,17 @@
 {
-  "runId": "41653729266-1",
-  "lastUpdated": "2026-11-03T14:27:37.182Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "41739486961-1",
+  "lastUpdated": "2026-11-03T23:29:42.772Z",
+  "summary": "The District is currently contending with federal actions that advocates argue constrain local authority, including disputes over land use and National Guard deployment. DC Vote and allied groups have documented multiple instances of federal intervention in District governance, while also highlighting that D.C.'s population exceeds that of some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "summarySource": {
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
-    {
-      "title": "The Needle: Hundreds Rally to Protect Hains Point, D.C. and Virginia Sue to Block Trump’s Arch, Joyce Beatty’s Lawyers Suggest Kennedy Center Board Is Hiding Financial Mismanagement, and More",
-      "link": "https://washingtoncitypaper.com/article/794286/the-needle-hundreds-rally-to-protect-hains-point-d-c-and-virginia-sue-to-block-trumps-arch-joyce-beattys-lawyers-suggest-kennedy-center-board-is-hiding-financial-mismanagement-a/",
-      "pubDate": "Mon, 02 Nov 2026 17:52:09 +0000",
-      "source": "Washington City Paper"
-    },
-    {
-      "title": "Trump’s Power on Trial as D.C. Faces Political Upheaval",
-      "link": "https://www.washingtoninformer.com/trump-midterm-judgment-congress/",
-      "pubDate": "Mon, 02 Nov 2026 17:15:00 +0000",
-      "source": "Washington Informer"
-    },
     {
       "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
@@ -25,16 +19,28 @@
       "source": "Washington Informer"
     },
     {
-      "title": "At-Large D.C. Council Member White to Resign, While D.C. Democrats Allege Interference in Process to Appoint a Successor",
-      "link": "https://www.washingtoninformer.com/robert-white-resigning-dc-council/",
-      "pubDate": "Fri, 30 Oct 2026 21:07:35 +0000",
-      "source": "Washington Informer"
+      "title": "DC Has More People Than Some States Already Have",
+      "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
+      "pubDate": "Thu, 15 Oct 2026 15:37:43 +0000",
+      "source": "DC Vote"
     },
     {
-      "title": "The Needle: Data Shows Black Workers Were Hit Hardest by DOGE Cuts, DOJ Filed Notice That East Potomac Park Will Close Nov. 15, a Small Minnesota Firm Given $257 Million Kennedy Center Contract, and More",
-      "link": "https://washingtoncitypaper.com/article/794220/the-needle-data-shows-black-workers-were-hit-hardest-by-doge-cuts-doj-filed-notice-that-east-potomac-park-will-close-nov-15-a-small-minnesota-firm-given-257-million-kennedy-center-contract-and-m/",
-      "pubDate": "Fri, 30 Oct 2026 16:45:22 +0000",
-      "source": "Washington City Paper"
+      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
+      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
+      "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
+      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
+      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
+      "source": "DC Vote"
+    },
+    {
+      "title": "Why we shouldn’t have National Guard Troops in D.C.",
+      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
+      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "source": "ACLU DC"
     }
   ]
 }
