@@ -106,7 +106,7 @@ async function main() {
   // G6 lives inside filterByRelevance: a malformed reply is a failure, not "no news".
   console.log(`\n${candidates.length} candidates — filtering…`);
   let filtered = await filterByRelevance(client, candidates);
-  usage.push({ call: 'filter', attempt: 1, ...filtered.usage });
+  if (filtered.usage) usage.push({ call: 'filter', attempt: 1, ...filtered.usage });
   if (!filtered.check.pass) {
     console.warn(`  filter reply rejected (${filtered.check.detail}) — retrying once`);
     filtered = await filterByRelevance(client, candidates);

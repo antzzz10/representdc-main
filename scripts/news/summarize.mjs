@@ -19,7 +19,7 @@ import { closerMenu, CLOSER_KEYS } from './closers.mjs';
 import { checkFilterResponse } from './gates.mjs';
 
 export const MODEL = 'claude-haiku-4-5-20251001';
-export const PROMPT_VERSION = '2026-09-12.1';
+export const PROMPT_VERSION = '2026-11-04.1';
 
 export function getClient(apiKey = process.env.ANTHROPIC_API_KEY) {
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
@@ -51,7 +51,21 @@ export function headlineBlock(articles, now = Date.now()) {
     .join('\n');
 }
 
-export async function filterByRelevance(client, articles) {
+// Multi-story roundups (City Paper's daily "The Needle: A, B, C, and More" and its
+// "Weekend Roundup") passed the title-only filter whenever one item in the list touched
+// home rule, and then read as off-topic on /news (Andria, 2026-11-04). They are skipped
+// in code, before the model sees them, so the rule cannot drift with the prompt.
+const ROUNDUP_PREFIXES = /^\s*(the needle|weekend roundup)\s*:/i;
+
+export function isRoundup(title = '') {
+  return ROUNDUP_PREFIXES.test(title);
+}
+
+export async function filterByRelevance(client, allArticles) {
+  const articles = allArticles.filter((a) => !isRoundup(a.title));
+  if (!articles.length) {
+    return { check: checkFilterResponse('[]', 0), raw: '[]', usage: null, articles: [] };
+  }
   const titlesBlock = articles.map((a, i) => `${i}: ${a.title}`).join('\n');
 
   const message = await client.messages.create({
@@ -73,6 +87,7 @@ Do NOT include articles about:
 - DC neighborhood or community stories
 - Federal policy that affects DC only as a city/region (not as a self-governance issue)
 - Human interest stories unrelated to DC autonomy or statehood
+- Multi-story roundups or digests (titles listing several unrelated stories, often ending "and More"), unless the roundup as a whole is about statehood or home rule
 
 Return a JSON array of index numbers only, e.g. [0, 3, 7]. Return [] if none qualify.
 Output the bare array and nothing else: no code fences, no explanation, no repeated indices.

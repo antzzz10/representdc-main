@@ -24,7 +24,7 @@ import {
   checkFilterResponse,
 } from '../news/gates.mjs';
 import { closerFor, CLOSER_KEYS } from '../news/closers.mjs';
-import { headlineBlock } from '../news/summarize.mjs';
+import { headlineBlock, isRoundup, filterByRelevance } from '../news/summarize.mjs';
 
 const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), 'fixtures/feeds');
 const fixture = (name) => readFileSync(join(FIXTURES, name), 'utf8');
@@ -225,4 +225,40 @@ test('prompt: headlines carry dates and ages, the fix for "currently considering
   );
   assert.match(block, /2026-07-21/);
   assert.match(block, /38 days ago/);
+});
+
+// Real City Paper titles from 2026-11-04. The arch story inside the second one let the
+// whole multi-topic roundup onto /news.
+test('roundups: City Paper digests are skipped, single stories are not', () => {
+  assert.equal(isRoundup('The Needle: Judge Sets Deadlines for Arch Construction, Sen. Tammy Duckworth Criticizes Air Force One’s Low Flyover, Trump Is Reportedly Using Our Tax Dollars to Fund His Media Company, and More'), true);
+  assert.equal(isRoundup('Weekend Roundup: All Voters Eve'), true);
+  assert.equal(isRoundup('Politics Party: D.C. Is Ready for a New Era Under Mayor-Elect Janeese Lewis George'), false);
+  assert.equal(isRoundup('House Votes to Overturn D.C. Needle Exchange Law'), false);
+  assert.equal(isRoundup(undefined), false);
+});
+
+test('roundups: never reach the model, and indices map to the remaining articles', async () => {
+  let sent = '';
+  const client = {
+    messages: {
+      create: async ({ messages }) => {
+        sent = messages[0].content;
+        return { content: [{ text: '[0]' }], usage: { input_tokens: 1, output_tokens: 1 } };
+      },
+    },
+  };
+  const articles = [
+    { title: 'The Needle: Arch Lawsuit, a Flyover, and More', link: 'a' },
+    { title: 'Congress Moves to Block D.C. Budget', link: 'b' },
+  ];
+  const result = await filterByRelevance(client, articles);
+  assert.doesNotMatch(sent, /The Needle/);
+  assert.deepEqual(result.articles.map((a) => a.link), ['b']);
+});
+
+test('roundups: an all-roundup batch is an empty pass without a model call', async () => {
+  const client = { messages: { create: async () => { throw new Error('should not be called'); } } };
+  const result = await filterByRelevance(client, [{ title: 'The Needle: A, B, and More', link: 'a' }]);
+  assert.equal(result.check.pass, true);
+  assert.deepEqual(result.articles, []);
 });
