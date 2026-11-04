@@ -1,10 +1,10 @@
 {
-  "runId": "41739486961-1",
-  "lastUpdated": "2026-11-03T23:29:42.772Z",
-  "summary": "The District is currently contending with federal actions that advocates argue constrain local authority, including disputes over land use and National Guard deployment. DC Vote and allied groups have documented multiple instances of federal intervention in District governance, while also highlighting that D.C.'s population exceeds that of some states. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "41850083868-1",
+  "lastUpdated": "2026-11-04T14:42:10.722Z",
+  "summary": "D.C.'s new delegate is working to build congressional support for statehood as advocates highlight the District's population size relative to existing states and document what they describe as repeated congressional incursions into local authority, including recent concerns about National Guard deployment in the capital. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -13,10 +13,10 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
-      "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
-      "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
-      "pubDate": "Mon, 02 Nov 2026 06:29:00 +0000",
-      "source": "Washington Informer"
+      "title": "Can DC’s new delegate get Congress to care about statehood?",
+      "link": "https://rollcall.com/2026/11/04/robert-white-new-delegate-statehood/",
+      "pubDate": "2026-11-04 01:47:43",
+      "source": "Roll Call"
     },
     {
       "title": "DC Has More People Than Some States Already Have",
