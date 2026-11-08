@@ -7,6 +7,7 @@ This repo is the main site of **representdc.org**, a three-app DC statehood advo
 | **Landing Page** | `representdc-main/` (this repo) | www.representdc.org | Advocacy site with loss-framing messaging, live bill stats, CTAs to the other tools |
 | Bill Tracker | `../dc-bills-tracker/` | billtracker.representdc.org | 71+ anti-DC bills, automated Congress.gov monitoring |
 | Candidate Tracker | `../dc-statehood-pledge/` | candidates.representdc.org | 2026 candidate questionnaire responses |
+| Bill archive (data, private) | `../representdc-data/` | github.com/antzzz10/representdc-data | Permanent official bill histories from GovInfo; daily update. See `decisions/2026-11-08-bill-history-archive.md` |
 
 **Stack:** React 19, Vite 7, ESLint 9, gh-pages.
 **Cross-site links:** all three sites link to each other in navigation/footers — keep links intact when editing nav.
