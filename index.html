@@ -12,12 +12,20 @@
 
     <!-- GitHub Pages SPA routing support -->
     <script>
-      // Check if we were redirected from 404.html
+      // Check if we were redirected from 404.html. Only restore on the root landing:
+      // since every route now has its own file, a leftover redirectPath must not hijack
+      // a direct load of another page. Also drop a stray ".html" from typed URLs
+      // (/about.html -> /about) so the router matches.
       (function() {
         var redirectPath = sessionStorage.getItem('redirectPath');
-        if (redirectPath) {
-          sessionStorage.removeItem('redirectPath');
+        sessionStorage.removeItem('redirectPath');
+        if (redirectPath && location.pathname === '/') {
           history.replaceState(null, null, redirectPath);
+        }
+        var p = location.pathname;
+        if (/\.html$/.test(p)) {
+          p = p.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+          history.replaceState(null, null, (p || '/') + location.search + location.hash);
         }
       })();
     </script>
