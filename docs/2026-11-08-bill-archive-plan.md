@@ -1,16 +1,16 @@
 # Bill-history archive: implementation plan
 
-**Version:** v0.1, 2026-11-08 · Plan for review, nothing built in any repo · Implements section C0 of `2026-11-08-value-updates-plan.md`. Codex's design review: `reviews/2026-11-08-bill-history-archive-codex-high.raw.md`.
+**Version:** v0.2, 2026-11-08 · Approved by Andria (answers recorded below); build in progress in `~/Projects/representdc-data` · Implements section C0 of `2026-11-08-value-updates-plan.md`. Codex's design review: `reviews/2026-11-08-bill-history-archive-codex-high.raw.md`.
 
 ## ✏️ YOUR INPUT GOES HERE
 
 | # | Question | Your answer | My default |
 |---|---|---|---|
-| 1 | New GitHub repository for the archive. I prepare it locally; you OK the creation, and visibility stays yours to set by hand. Name? | ___ | `representdc-data`, created **private**; you make it public when ready to share |
-| 2 | What to seed first | ___ | The 134 measures the tracker has curated in the 119th Congress, plus earlier versions of the statehood bill (H.R. 51 and S. 51, 116th–118th) for the long view |
-| 3 | Licence for RepresentDC's own labels when you share | ___ | Decide later; facts are public domain either way |
-| 4 | OK to add one small library (`fast-xml-parser`) to read the official XML? | ___ | Yes |
-| 5 | Should the archive replace the tracker's own daily Congress.gov calls later, or only verify them? | ___ | Verify first, for one month; switch later if the two agree |
+| 1 | New GitHub repository for the archive. I prepare it locally; you OK the creation, and visibility stays yours to set by hand. Name? | **Yes** (2026-11-08) | `representdc-data`, created **private**; you make it public when ready to share |
+| 2 | What to seed first | **Yes.** Next step after that: go back 10 years, covering her time on the DC Dems (114th–118th Congresses, 2015–2024) | The 134 measures the tracker has curated in the 119th Congress, plus earlier versions of the statehood bill (H.R. 51 and S. 51, 116th–118th) for the long view |
+| 3 | Licence for RepresentDC's own labels when you share | **Defer the formal licence**, but document the methodology now and add basic terms, e.g. "public use allowed with acknowledgment and a link back to the site". Not her current priority | Decide later; facts are public domain either way |
+| 4 | OK to add one small library (`fast-xml-parser`) to read the official XML? | **Yes** | Yes |
+| 5 | Should the archive replace the tracker's own daily Congress.gov calls later, or only verify them? | **Yes, agreed.** She checked that the switch depends on the archive updating daily. It does: GovInfo refreshes current-Congress files every 4 hours, and the archive checks them daily | Verify first, for one month; switch later if the two agree |
 
 ## What the test run showed (2026-11-08, scratch folder only)
 
