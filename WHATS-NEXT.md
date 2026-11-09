@@ -7,7 +7,28 @@ linger in code or in conversation. Pair with `decisions/` (resolved decisions) a
 `DESIGN-GUARDRAILS.md` (standing rules) — this file is for what's *not* decided or
 built yet.
 
-## Proposed roadmap
+**This is the single RepresentDC to-do list** (merged 2026-11-09). It leads with the
+four goals of the November 2026 plan. Tracker-only engineering detail stays in
+`../dc-bills-tracker/WHATS-NEXT.md`; this file links to it rather than repeating it.
+
+## Now: the four goals (plan of 2026-11-08)
+
+Plan: `docs/2026-11-08-value-updates-plan.md`. Goal 2's build plan:
+`../dc-bills-tracker/docs/2026-11-09-support-page-and-congress-switch-plan.md`, whose
+✏️ table holds the open questions for Andria.
+
+| Goal | Status (2026-11-09) |
+|---|---|
+| **1. Bugs** (404s, sitemap, robots) | ✅ Done 2026-11-08, all sites. |
+| **C0. Bill-history archive** (`representdc-data`, private) | ✅ Built 2026-11-08; updates daily from GovInfo. Next: back-fill to the 114th Congress. The tracker reads from it after a month in which the two agree (about 2026-12-08). |
+| **2. 120th Congress: support page, separate counts, visible reviews, Congress switch** | Step 0 (count measures, not entries) ✅ live 2026-11-09. Step 1b (daily check covers riders, support and routine) built, in review, not deployed. Next: 1a statuses for every measure type, 1c reviews that can't be missed, 1d `/support` (needs Andria's heading and intro). Congress switch rehearsed in December, run Jan 3–4, 2027. |
+| **3. Timeline of bills and key actions** | Not started. Builds on the archive (C0). |
+| **4. Updates from statehood organizations** | Not started. Waiting on ✏️ 7: links only, no AI summary. |
+
+**Next after the goals:** the navigation review across all three sites (see
+"Exploratory" below).
+
+## Proposed roadmap (July 2026)
 
 This is a proposed sequence, not a decision — reorder or reject phases as you see fit.
 The logic: settle strategy (audience, content) before building new features on top of
