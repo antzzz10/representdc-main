@@ -42,6 +42,6 @@ Andria asked why histories weren't stored. She wanted trends and change patterns
 
 ## Found while building
 
-The archive showed two errors on the live tracker, now waiting on Andria:
-- **H.R. 5525 shows as "passed the House", but it only cleared committee.** The published count should be 14, not 15.
-- **The monitor stamps "last action" with the date it noticed a change,** not the official action date. Those dates appear in "recent activity".
+The archive showed two errors on the live tracker. Both were **fixed and deployed on 2026-11-08** (`dc-bills-tracker` `42532e3`, synced by monitor run `b5c2472`; see that repo's `decisions/2026-11-08-official-action-dates-and-hr5525.md`):
+- **H.R. 5525 showed as "passed the House", but it only cleared committee.** The published count is now 14, not 15.
+- **The monitor stamped "last action" with the date it noticed a change,** not the official action date. It now copies Congress.gov's own latest action; all 78 monitored bills match the archive.
