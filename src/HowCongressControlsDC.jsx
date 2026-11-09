@@ -7,7 +7,8 @@ import './App.css'
 import './HowCongressControlsDC.css'
 
 function HowCongressControlsDC() {
-  const { totalBills } = useBillStats()
+  const { pendingBills, loading, error } = useBillStats()
+  const showBillCount = !loading && !error
 
   return (
     <div className="app">
@@ -163,8 +164,8 @@ function HowCongressControlsDC() {
             </div>
           </div>
           <p className="explainer-next">
-            {totalBills} bills using these exact mechanisms—review, riders, and budget
-            authority—are moving through Congress right now.
+            {showBillCount ? `${pendingBills} anti-DC bills, resolutions and riders` : 'Anti-DC bills, resolutions and riders'} using
+            these exact mechanisms—review, riders, and budget authority—are pending in Congress right now.
           </p>
           <div className="interim-links">
             <div className="interim-row">

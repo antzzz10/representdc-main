@@ -29,9 +29,12 @@ function normalizeCheckedInstant(value) {
  */
 export function useBillStats() {
   const [stats, setStats] = useState({
-    totalBills: 74,
-    pendingBills: 61,
-    passedBills: 13,
+    // No fallback counts: hardcoded numbers went stale (74/61/13 from January) and were
+    // shown on every load and after any failed fetch. Pages render counts only once
+    // real stats arrive (`!loading && !error`).
+    totalBills: null,
+    pendingBills: null,
+    passedBills: null,
     lastUpdated: '2026-01-20',
     // No fallback: a hardcoded "last checked" date would go stale silently. The
     // homepage hides the date until real stats arrive.

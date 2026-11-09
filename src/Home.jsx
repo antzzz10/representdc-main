@@ -34,7 +34,7 @@ function Home() {
           <p className="hero-note">
             {showBillCount ? (
               <>
-                {totalBills} anti-DC bills and riders introduced in this Congress
+                {totalBills} anti-DC bills, resolutions and riders introduced in this Congress
                 {lastChecked && <> · Last checked {formatCheckedInstant(lastChecked)}</>}
               </>
             ) : (
@@ -60,8 +60,8 @@ function Home() {
               <div className="fact-detail">D.C.'s delegate can introduce bills but cannot vote on final passage</div>
             </div>
             <div className="fact-card highlight-card">
-              <div className="fact-number">{totalBills}</div>
-              <div className="fact-label">Bills to block local D.C. laws</div>
+              <div className="fact-number">{showBillCount ? pendingBills : '—'}</div>
+              <div className="fact-label">Anti-DC bills, resolutions and riders</div>
               <div className="fact-detail">Pending in the current Congress—and counting</div>
             </div>
           </div>
@@ -141,8 +141,8 @@ function Home() {
                 <p>
                   Every law the D.C. Council passes goes to Congress for review before it can take
                   effect—and Congress retains authority over the District's budget. That standing
-                  authority is why {totalBills} bills to override local D.C. decisions can move through
-                  Congress today.
+                  authority is why {showBillCount ? `${pendingBills} pending bills, resolutions and riders` : 'bills, resolutions and riders'} to
+                  override local D.C. decisions can move through Congress today.
                 </p>
               </div>
             </div>
@@ -203,11 +203,11 @@ function Home() {
           </p>
           <div className="trend-highlight">
             <div className="trend-stat">
-              <span className="trend-number">{passedBills}</span>
+              <span className="trend-number">{showBillCount ? passedBills : '—'}</span>
               <span className="trend-label">already passed a chamber</span>
             </div>
             <div className="trend-stat">
-              <span className="trend-number">{pendingBills}</span>
+              <span className="trend-number">{showBillCount ? pendingBills : '—'}</span>
               <span className="trend-label">still pending</span>
             </div>
           </div>
