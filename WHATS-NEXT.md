@@ -169,6 +169,11 @@ donation without representation"**
 
 ## Exploratory / not yet scoped
 
+- **Navigation review across all three sites** (Andria, 2026-11-09). Do it after the
+  tracker's `/support` page ships. Plan the navigation for a possible change in which
+  party leads Congress, which shifts the weight between bills to oppose and bills to
+  back. Not scoped yet.
+
 - **Take Action Hub page** — has a coming-soon placeholder scoped in Phase 4 (see
   above) but the full page is still Phase 7, not yet built.
 - **Action & Persona IA Brainstorm** — raw information-architecture exploration behind
