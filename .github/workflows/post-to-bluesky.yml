@@ -1,0 +1,51 @@
+name: Post to Bluesky (bills account)
+
+# Publishes one post to @bills.representdc.org. Manual only, never scheduled: Andria runs
+# it from the GitHub app (Actions → Post to Bluesky → Run workflow), or Claude runs it
+# after her explicit yes to the exact text. Exists so posting doesn't mean logging out of
+# her own account on her phone (2026-11-10).
+#
+# Leave "dry_run" on to check the length and links first; the run log shows the post as
+# it would appear.
+
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: 'The post, exactly as approved (300 characters max)'
+        type: string
+        required: true
+      dry_run:
+        description: 'Check only; do not post'
+        type: boolean
+        default: true
+
+# One post at a time, so a second identical dispatch always finds the first (the script
+# checks recent posts and won't post the same text twice). Known limit: GitHub keeps only
+# one *waiting* run per group, so dispatching several posts at once can replace a waiting
+# one (the trap withhold.yml documents). Dispatch one post, check its run and link, then
+# the next: whoever dispatches confirms each run's result.
+concurrency:
+  group: bluesky-post
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Post
+        env:
+          # Passed through the environment, never interpolated into the script, so text
+          # with quotes or $() can't run as shell.
+          POST_TEXT: ${{ inputs.text }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          BLUESKY_SECRET: ${{ secrets.BLUESKY_BILLS_REPRESENTDC_ACCOUNT }}
+        run: node scripts/post-to-bluesky.mjs

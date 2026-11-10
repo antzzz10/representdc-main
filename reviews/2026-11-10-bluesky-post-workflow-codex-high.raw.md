@@ -1,0 +1,33 @@
+**0 BLOCKER, 3 MATERIAL findings. Fix the MATERIAL findings before live use.** This is Tier 2 code because it handles credentials and public posting.
+
+1. **MATERIAL — Reruns can publish duplicate posts.** [scripts/post-to-bluesky.mjs:88](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:88)  
+   Every execution calls `createRecord` without an `rkey`, so the server generates a new record key. If Bluesky saves the post but the response is lost—or the workflow is cancelled before reporting success—rerunning creates another post. Concurrency only serializes those requests. Use a stable record key tied to the original dispatch and reconcile an existing record before retrying. There is no automatic retry loop currently. [API definition](https://raw.githubusercontent.com/bluesky-social/atproto/main/lexicons/com/atproto/repo/createRecord.json)
+
+2. **MATERIAL — Link detection can publish incorrect destinations.** [scripts/post-to-bluesky.mjs:40](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:40), [scripts/post-to-bluesky.mjs:47](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:47)  
+   Reproduced locally:
+   - `example.company` and `example.com.evil.invalid` both become links to `https://example.com` because the TLD has no ending boundary.
+   - `https://example.org?x=1` and `https://example.org#anchor` lose their query/fragment.
+   - `HTTPS://EXAMPLE.ORG` becomes `https://HTTPS://EXAMPLE.ORG`: matching ignores case, but `startsWith('http')` does not.
+   - `.edu`, `.io`, and `.us` links are missed, even with an explicit HTTPS scheme.
+   - `https://example.org/a_(b)` loses its valid closing parenthesis.
+
+   Use an established link parser or correct the domain boundaries, scheme handling, and URL termination rules.
+
+3. **MATERIAL — A later dispatch can cancel a pending approved post.** [.github/workflows/post-to-bluesky.yml:25](/Users/andriathomas/Projects/representdc-main/.github/workflows/post-to-bluesky.yml:25)  
+   With A running and B pending, dispatching C replaces B—even if C is only a dry-run. `cancel-in-progress: false` protects the running workflow from concurrency cancellation; it does not preserve every pending run or prevent manual cancellation/timeouts. `withhold.yml:22` already documents this exact pending-run limitation. Preserve queued dispatches or explicitly reject additional ones. [GitHub concurrency behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#concurrency)
+
+Other checks:
+
+- **NOTE — Dispatch authorization and injection:** [.github/workflows/post-to-bluesky.yml:12](/Users/andriathomas/Projects/representdc-main/.github/workflows/post-to-bluesky.yml:12), [line 45](/Users/andriathomas/Projects/representdc-main/.github/workflows/post-to-bluesky.yml:45). Public readers cannot dispatch the upstream workflow; repository write access is required. Any writer can dispatch, so exact-text approval remains procedural. Forks do not inherit the upstream secret. Passing text through `env` into a fixed command prevents shell injection and recursive GitHub-expression evaluation, consistent with `withhold.yml`. [Dispatch permissions](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow?tool=webui), [secret handling](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)
+
+- **NOTE — Logs and credentials:** [scripts/post-to-bluesky.mjs:60](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:60), [line 81](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:81). No direct password or token logging found. Both secret formats parse correctly. However, printing arbitrary API error messages is weaker than logging bounded error codes; the “never contains the password” comment is not an enforced guarantee. Mask the extracted password separately when accepting `handle:password`, rather than relying on masking the combined secret. Submitted text—including dry-runs—is visible in public-repository logs. Text containing workflow-command syntax can also create misleading annotations. [Log access](https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs), [workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands)
+
+- **NOTE — AT Protocol routing:** [scripts/post-to-bluesky.mjs:19](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:19). Both calls through `bsky.social` are supported for Bluesky-hosted accounts: its entryway forwards requests to the account’s PDS. A custom-domain handle does not itself require a different endpoint. An independently hosted or migrated account would require PDS discovery. I resolved this handle’s DID but could not retrieve its current DID document, so its actual hosting remains unverified. [Bluesky entryway documentation](https://raw.githubusercontent.com/bluesky-social/bsky-docs/main/docs/advanced-guides/entryway.md)
+
+- **NOTE — Facet offsets and abbreviations pass:** [scripts/post-to-bluesky.mjs:39](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:39). UTF-8 offsets correctly selected the URL after emoji and combining characters. Neither `D.C.` nor `H.R. 51` produced false links.
+
+- **NOTE — Length validation is incomplete:** [scripts/post-to-bluesky.mjs:32](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:32). Grapheme counting correctly rejects 301 graphemes. Bluesky additionally limits text to **3,000 UTF-8 bytes**; 300 family emoji passed dry-run while occupying 7,500 bytes. Add that validation to make dry-run reliable. [Post schema](https://raw.githubusercontent.com/bluesky-social/bsky/main/lexicons/app/bsky/feed/post.json), [byte-length definition](https://atproto.com/specs/lexicon)
+
+- **NOTE — Dry-run and account guard:** [.github/workflows/post-to-bluesky.yml:21](/Users/andriathomas/Projects/representdc-main/.github/workflows/post-to-bluesky.yml:21), [scripts/post-to-bluesky.mjs:23](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:23), [line 86](/Users/andriathomas/Projects/representdc-main/scripts/post-to-bluesky.mjs:86). The workflow safely defaults to dry-run and exits before authentication. The script itself defaults to live posting when `DRY_RUN` is missing or misspelled; requiring explicit `"false"` would fail closed. A mismatched session handle correctly prevents `createRecord`, and posting uses the authenticated session’s DID.
+
+Verified with Node syntax checking and in-memory mocked requests. No credentials used, posts sent, or files edited; Git state remained unchanged.

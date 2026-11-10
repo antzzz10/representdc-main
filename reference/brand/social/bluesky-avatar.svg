@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 64 64">
+  <!-- Bluesky avatar: reversed mark (white star, gold hatched accent point) on navy, per
+       reference/brand/RepresentDC Logo Style Guide ("Reversed, on navy": gold replaces red).
+       Full-bleed square because Bluesky crops avatars to a circle; the star is centred and
+       scaled so the circle crop keeps the guide's clear space. -->
+  <defs>
+    <pattern id="hatch" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="#E0A500"/>
+      <line x1="0" y1="0" x2="0" y2="4" stroke="#14213D" stroke-width="1.6"/>
+    </pattern>
+  </defs>
+  <rect width="64" height="64" fill="#14213D"/>
+  <g transform="translate(32 33.5) scale(0.82) translate(-32 -30.6)">
+    <path d="M32,10 L37.29,24.72 L52.92,25.20 L40.56,34.78 L44.93,49.80 L32,41 L19.07,49.80 L23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="#fff"/>
+    <path d="M23.44,34.78 L11.08,25.20 L26.71,24.72 Z" fill="url(#hatch)"/>
+  </g>
+</svg>
