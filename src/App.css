@@ -214,6 +214,25 @@ a.preview-card-live:focus-visible {
   margin: 0;
 }
 
+/* Follow page: cards stretch to the row height and pin the call-to-action line to the
+   bottom, so the links line up across a row on desktop */
+a.preview-card-live.follow-card {
+  display: flex;
+  flex-direction: column;
+}
+.preview-card p.follow-cta {
+  margin-top: auto;
+  padding-top: var(--s-3);
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.preview-card .follow-cta svg {
+  margin: 0;
+}
+
 .interim-links {
   margin-top: var(--s-7);
   text-align: center;
