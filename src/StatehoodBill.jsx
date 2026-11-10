@@ -15,11 +15,14 @@ import './StatehoodBill.css'
 // Public sentences are the approved drafts in dc-bills-tracker's PRD § 7
 // (docs/2026-11-10-cosponsor-page-and-120th-overview-prd.md).
 
-// Approved by Andria 2026-11-10 ("Use the draft"); drafted from /myths Myth 2. Its two
-// sources (New States Clause, CRS R47101) are in StatehoodBillSources. If this is ever
-// set back to null, the dev server shows a marked placeholder and production omits it.
+// Approved by Andria 2026-11-10 ("My edited version"), revised after a Codex fact check
+// (reviews/2026-11-10-statehood-bill-what-it-is-codex-high.raw.md): it describes the
+// legislative route and stays clear of D.C.'s own unresolved constitutional questions.
+// Its two sources (New States Clause overview, CRS R47101) are in StatehoodBillSources.
+// If this is ever set back to null, the dev server shows a marked placeholder and
+// production omits it.
 const WHAT_IT_IS =
-  'The Washington, D.C. Admission Act would admit the land outside a shrunken federal district as a state, the way most states have joined: by an ordinary act of Congress and a presidential signature, with no constitutional amendment.'
+  'The Washington, D.C. Admission Act would admit the land outside a shrunken federal district as a state by legislation, the route used for all 37 states admitted after the original 13.'
 
 const CHAMBER_NAME = { house: 'House', senate: 'Senate' }
 

@@ -6,11 +6,12 @@ const link = (href, text) => (
   <a href={href} target="_blank" rel="noopener noreferrer">{text}</a>
 )
 
-// Sources for the "what the bill is" paragraph; same URLs and labels as /myths.
+// Sources for the "what the bill is" paragraph (CRS R47101 as on /myths; the Cornell
+// overview essay rather than the bare clause page, per the Codex fact check).
 const EXPLAINER = [
   {
-    label: 'Constitution Annotated, Art. IV, § 3, cl. 1 (New States Clause), via Cornell LII',
-    href: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1',
+    label: 'Constitution Annotated, "Overview of Admissions (New States) Clause," Art. IV, § 3, cl. 1, via Cornell LII',
+    href: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1/overview-of-admissions-new-states-clause',
     host: 'law.cornell.edu',
   },
   {
