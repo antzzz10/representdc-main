@@ -17,6 +17,12 @@ const PARTIES = new Set(['R', 'D', 'I'])
 const NON_VOTING = new Set(['DC', 'PR', 'GU', 'VI', 'AS', 'MP'])
 // Upper bounds on any one chamber's population, voting and non-voting seats together.
 const CHAMBER_MAX = { house: 441, senate: 100 }
+// Freshness limits. The cosponsor check runs daily and the roster weekly; past these, a
+// "this month" or "not yet" statement could describe a world that has since changed, so
+// those sections are withheld (the count cards still show their own "Last checked" date).
+const DAY_MS = 24 * 60 * 60 * 1000
+const CHECK_MAX_AGE_MS = 2 * DAY_MS
+const ROSTER_MAX_AGE_MS = 15 * DAY_MS
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 const isStr = (v) => typeof v === 'string' && v.trim() !== ''
@@ -56,10 +62,13 @@ export function etDate(instant) {
 
 // A link is only shown under an official label if it really points at that host: https, no
 // embedded credentials, and the expected hostname (exact, or a subdomain where allowed).
-function officialUrl(value, hostOk) {
+function officialUrl(value, hostOk, upgradeHttp = false) {
   if (typeof value !== 'string') return null
   try {
     const u = new URL(value)
+    // Congress.gov lists a few member sites as http (e.g. menefee.house.gov, 2026-11-10);
+    // House and Senate sites all serve https, so those are upgraded rather than dropped.
+    if (upgradeHttp && u.protocol === 'http:') u.protocol = 'https:'
     if (u.protocol !== 'https:' || u.username || u.password || u.port) return null
     return hostOk(u.hostname.toLowerCase(), u.pathname) ? u.href : null
   } catch {
@@ -181,7 +190,7 @@ export function parseCosponsors(json) {
  * file's URL; the file must say the same, and its published counts must match its rows.
  */
 export function parseMembers(json, expectedCongress) {
-  if (!isObj(json) || json.congress !== expectedCongress || !Array.isArray(json.members)) return null
+  if (!isObj(json) || json.congress !== expectedCongress || !Array.isArray(json.members) || !isInstant(json.generatedAt)) return null
   const members = []
   const seen = new Set()
   for (const raw of json.members) {
@@ -197,7 +206,7 @@ export function parseMembers(json, expectedCongress) {
       ...p,
       chamber: raw.chamber,
       votingMember: raw.votingMember,
-      officialWebsiteUrl: officialUrl(raw.officialWebsiteUrl, isMemberSite),
+      officialWebsiteUrl: officialUrl(raw.officialWebsiteUrl, isMemberSite, true),
     })
   }
   const count = (fn) => members.filter(fn).length
@@ -210,7 +219,7 @@ export function parseMembers(json, expectedCongress) {
   const c = json.counts
   if (!isObj(c) || Object.keys(actual).some((k) => c[k] !== actual[k])) return null
   if (actual.house === 0 || actual.senate === 0 || actual.house > CHAMBER_MAX.house || actual.senate > CHAMBER_MAX.senate) return null
-  return { congress: expectedCongress, members }
+  return { congress: expectedCongress, generatedAt: json.generatedAt, members }
 }
 
 function historyBill(raw, chamber) {
@@ -281,11 +290,14 @@ export function formatDate(dateOnly, month = 'long') {
 
 /**
  * Cosponsors who signed on in the current Eastern calendar month (`now`), across the bills
- * shown, plus the latest sponsorship date overall for the empty state.
+ * shown, plus the latest sponsorship date overall for the empty state. Null (section
+ * hidden) when any shown bill's last successful check is more than two days old.
  */
 export function signedThisMonth(bills, now = new Date()) {
   const shown = bills.filter((b) => b && b.complete)
   if (shown.length === 0) return null
+  // Every chamber shown must have been checked recently, or "since <date>" overreaches.
+  if (shown.some((b) => now - Date.parse(b.checkedAt) > CHECK_MAX_AGE_MS)) return null
   const month = etDate(now).slice(0, 7)
   const rows = []
   let latestDate = null
@@ -306,13 +318,15 @@ export function signedThisMonth(bills, now = new Date()) {
  * here. Returns null if the two files disagree about who someone is (same ID, different
  * state), since a wrong "Not yet" is worse than no list.
  */
-export function memberStatuses(roster, bill) {
+export function memberStatuses(roster, bill, now = new Date()) {
   if (!roster || roster.congress !== bill.congress) return null
+  if (now - Date.parse(roster.generatedAt) > ROSTER_MAX_AGE_MS) return null
   const members = roster.members.filter((m) => m.chamber === bill.chamber)
   const byId = new Map(members.map((m) => [m.bioguideId, m]))
+  // Same ID must mean the same seat (state and, in the House, district; at-large is 0).
   for (const p of [bill.sponsor, ...bill.cosponsors]) {
     const m = byId.get(p.bioguideId)
-    if (m && m.state !== p.state) return null
+    if (m && (m.state !== p.state || (bill.chamber === 'house' && (m.district ?? 0) !== (p.district ?? 0)))) return null
   }
   const signed = new Map(bill.cosponsors.map((c) => [c.bioguideId, c.sponsorshipDate]))
   return members

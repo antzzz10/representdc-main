@@ -73,9 +73,7 @@ function CountCard({ bill }) {
   )
 }
 
-function RecentSignOns({ bills }) {
-  const recent = signedThisMonth(bills)
-  if (!recent) return null
+function RecentSignOns({ recent }) {
   if (recent.rows.length === 0) {
     return recent.latestDate ? <p className="section-note">No new cosponsors since {formatDate(recent.latestDate)}.</p> : null
   }
@@ -137,6 +135,7 @@ function StatehoodBill() {
   const bills = cosponsors.data
   const shown = bills ? [bills.house, bills.senate].filter(Boolean) : []
   const counted = shown.filter((b) => b.complete)
+  const recent = signedThisMonth(counted)
   const congress = shown.length ? Math.max(...shown.map((b) => b.congress)) : null
   const historyRows = history.data ? historyWithLive(history.data, bills?.house, bills?.senate) : null
 
@@ -187,10 +186,10 @@ function StatehoodBill() {
             </section>
           )}
 
-          {counted.length > 0 && (
+          {recent && (
             <section aria-labelledby="sb-recent">
               <h2 id="sb-recent">Signed on this month</h2>
-              <RecentSignOns bills={counted} />
+              <RecentSignOns recent={recent} />
             </section>
           )}
 

@@ -66,7 +66,9 @@ function cosponsorsFrom(members, { count, original, introduced, latest, nonVotin
   }))
 }
 
-const CHECKED_AT = '2026-11-09T18:10:00Z'
+// The page withholds "this month" and the lookup when checks are stale, so the fixture
+// is always "checked an hour ago" (the real tracker check on 2026-11-09 was 1:10 PM ET).
+const CHECKED_AT = new Date(Date.now() - 60 * 60 * 1000).toISOString()
 
 function bills(scenario) {
   const members = roster()
