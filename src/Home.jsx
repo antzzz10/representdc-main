@@ -7,7 +7,7 @@ import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 
 function Home() {
-  const { totalBills, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
+  const { introducedThisCongress, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
 
   // The hook falls back to hardcoded counts, which are a snapshot from January 2026 and
   // drift further every week. Publishing them unlabelled would state a stale number as
@@ -34,7 +34,7 @@ function Home() {
           <p className="hero-note">
             {showBillCount ? (
               <>
-                {totalBills} anti-DC bills, resolutions and riders introduced in this Congress
+                {introducedThisCongress} anti-DC bills, resolutions and riders introduced in this Congress
                 {lastChecked && <> · Last checked {formatCheckedInstant(lastChecked)}</>}
               </>
             ) : (

@@ -33,6 +33,7 @@ export function useBillStats() {
     // shown on every load and after any failed fetch. Pages render counts only once
     // real stats arrive (`!loading && !error`).
     totalBills: null,
+    introducedThisCongress: null,
     pendingBills: null,
     passedBills: null,
     lastUpdated: '2026-01-20',
@@ -52,6 +53,10 @@ export function useBillStats() {
         const data = await response.json()
         setStats({
           totalBills: data.totalBills,
+          // Everything introduced this Congress, archived measures included (the tracker
+          // archives measures that are finished, e.g. riders left out of a funding law).
+          // Older stats files predate the field; until then the totals are the same.
+          introducedThisCongress: data.introducedThisCongress ?? data.totalBills,
           pendingBills: data.pendingBills,
           passedBills: data.passedBills,
           lastUpdated: data.lastUpdated,
