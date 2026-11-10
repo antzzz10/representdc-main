@@ -124,7 +124,8 @@ function bill(raw) {
     isCongressGov(h) && path.replace(/\/+$/, '') === `/bill/${ordinal(raw.congress)}-congress/${CHAMBER_PATH[chamber]}/${billNumber.match(/\d+$/)[0]}`)
   const sponsor = person(raw.sponsor)
   const action = raw.latestAction
-  const totals = raw.totals
+  // Incomplete lists carry `totals: null` (tracker 61ba66a); zeros are accepted too.
+  const totals = raw.complete === false && raw.totals == null ? { cosponsors: 0, original: 0, nonVoting: 0 } : raw.totals
   const complete = raw.complete !== false
   if (
     !Number.isInteger(raw.congress) || raw.congress < 100 ||
@@ -133,7 +134,7 @@ function bill(raw) {
     !isDateOnly(raw.introducedDate) ||
     !isObj(action) || !isDateOnly(action.actionDate) || !isStr(action.text) ||
     !congressGovUrl ||
-    // The tracker publishes `complete: false` (empty list, zero totals, no checkedAt) when
+    // The tracker publishes `complete: false` (empty list, null totals, no checkedAt) when
     // the last fetch did not return the whole list. That bill keeps its official facts but
     // shows no counts, sign-ons or lookup.
     (complete && !isInstant(raw.checkedAt)) ||
@@ -200,6 +201,9 @@ export function parseCosponsors(json) {
  * file's URL; the file must say the same, and its published counts must match its rows.
  */
 export function parseMembers(json, expectedCongress) {
+  // At a Congress switch the tracker may publish a placeholder ({ congress, pending: true,
+  // members: [] }): no lookup yet, same as a missing file.
+  if (isObj(json) && json.pending === true) return null
   if (!isObj(json) || json.congress !== expectedCongress || !Array.isArray(json.members) || !isInstant(json.generatedAt)) return null
   const members = []
   const seen = new Set()
