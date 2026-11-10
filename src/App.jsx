@@ -9,6 +9,7 @@ import HowCongressControlsDC from './HowCongressControlsDC'
 import StatehoodPartnerMap from './StatehoodPartnerMap'
 import About from './About'
 import Follow from './Follow'
+import StatehoodBill from './StatehoodBill'
 import Article from './reading/Article'
 import ScrollToTop from './components/ScrollToTop'
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/statehood-partner-map" element={<StatehoodPartnerMap />} />
         <Route path="/about" element={<About />} />
         <Route path="/follow" element={<Follow />} />
+        <Route path="/statehood-bill" element={<StatehoodBill />} />
         {/* The Reading hub folded into /news as "Analysis & essays" (2026-09-12).
             Article URLs are unchanged — only the hub moved. */}
         <Route path="/reading" element={<Navigate to="/news" replace />} />

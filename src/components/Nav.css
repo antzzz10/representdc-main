@@ -62,6 +62,25 @@
   display: none;
 }
 
+/* Tablet widths: with "Statehood bill" added (2026-11-10) the links overflowed the bar
+   between 769 and ~950 px. Tighten the gaps and drop the "Bill tracker" text link, which
+   goes to the same place as the "See the bills" button beside it. */
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: var(--s-4);
+  }
+
+  .nav-link--tracker {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    gap: var(--s-3);
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links {
     gap: var(--s-4);
