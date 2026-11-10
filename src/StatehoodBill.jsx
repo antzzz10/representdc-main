@@ -135,7 +135,7 @@ function StatehoodBill() {
   const bills = cosponsors.data
   const shown = bills ? [bills.house, bills.senate].filter(Boolean) : []
   const counted = shown.filter((b) => b.complete)
-  const recent = signedThisMonth(counted)
+  const recent = signedThisMonth(shown)
   const congress = shown.length ? Math.max(...shown.map((b) => b.congress)) : null
   const historyRows = history.data ? historyWithLive(history.data, bills?.house, bills?.senate) : null
 
