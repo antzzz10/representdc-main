@@ -1,4 +1,8 @@
 .bsky-section {
+  /* Bluesky's current brand blue (bsky.social/about/support/branding), used only for the
+     butterfly, the follow button and post links. 5.09:1 on white, so it passes WCAG AA
+     for the button label and links; the older #1185fe did not. */
+  --bsky-blue: #0560ff;
   margin-top: var(--s-7);
   background: var(--white);
   border: 1px solid var(--line);
@@ -20,7 +24,22 @@
   margin: 0 0 var(--s-3);
 }
 
-.bsky-follow {
+.bsky-butterfly {
+  color: var(--bsky-blue);
+  flex-shrink: 0;
+}
+
+.bsky-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* clear space around the butterfly, per Bluesky's brand guidance */
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 var(--s-4);
+}
+
+.bsky-account {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -30,17 +49,40 @@
   border-bottom: 1px solid var(--line);
 }
 
-.bsky-follow h2 {
-  font-size: var(--fs-h3);
-  font-weight: 700;
+.bsky-account-id {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
   color: var(--ink);
-  margin: 0 0 var(--s-2);
+  min-width: 0;
 }
 
-.bsky-follow p {
-  font-size: var(--fs-sm);
+.bsky-account-names {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.bsky-account-names strong {
+  font-size: var(--fs-md, 1.05rem);
+}
+
+.bsky-handle {
   color: var(--slate-500);
-  margin: 0;
+  font-size: var(--fs-sm);
+  overflow-wrap: anywhere;
+}
+
+.bsky-avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: var(--navy);
+}
+
+.bsky-avatar-blank {
+  display: inline-block;
 }
 
 .bsky-actions {
@@ -52,14 +94,18 @@
 .bsky-follow-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: var(--navy);
+  gap: 10px;
+  background: var(--bsky-blue);
   color: var(--white);
   font-weight: 700;
   font-size: var(--fs-sm);
   padding: 10px 16px;
   border-radius: var(--r-pill);
   text-decoration: none;
+}
+
+.bsky-follow-btn .bsky-butterfly {
+  color: var(--white);
 }
 
 .bsky-follow-btn:hover,
@@ -83,6 +129,8 @@
 }
 
 .bsky-post {
+  display: flex;
+  gap: var(--s-3);
   padding: var(--s-4) 0;
   border-bottom: 1px solid var(--line);
 }
@@ -92,15 +140,28 @@
   padding-bottom: 0;
 }
 
-.bsky-post p {
-  margin: 0 0 var(--s-2);
+.bsky-post-body {
+  min-width: 0;
+}
+
+.bsky-post-meta {
+  margin: 0 0 4px;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+}
+
+.bsky-post-meta a,
+.bsky-post-meta span {
+  color: var(--slate-500);
+}
+
+.bsky-post-text {
+  margin: 0;
   color: var(--ink);
   line-height: 1.55;
   overflow-wrap: anywhere;
 }
 
-.bsky-post a,
-.bsky-post span {
-  font-size: var(--fs-sm);
-  color: var(--slate-500);
+.bsky-post-text a {
+  color: var(--bsky-blue);
 }

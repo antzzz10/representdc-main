@@ -1,0 +1,19 @@
+**0 BLOCKER, 1 MATERIAL.** Fix the text contrast before shipping. No files edited.
+
+- **MATERIAL — [BlueskySection.css:97](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.css:97), [:165](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.css:165): insufficient text contrast.** `#1185fe` against white measures **3.61:1**, affecting the follow-button label and inline post links. Their sizes require **4.5:1** under [WCAG AA](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum). Bluesky’s current official blue, `#0560FF`, measures **5.09:1** and would resolve both combinations.
+
+- **NOTE — [BlueskySection.jsx:47](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.jsx:47): malformed facets aren’t safely ignored.** Valid UTF-8 offsets work, and overlapping links use the first accepted span without duplicating text. However, offsets splitting a multibyte character produce replacement characters: `"éx"` with bytes `[1,2]` becomes `"��x"`. Fractional offsets also pass. Malformed shapes such as `[null]`, `facets: {}`, or `features: {}` throw during rendering, outside the fetch catch; there is no error boundary. Validate shapes, integer offsets, UTF-8 boundaries, and parsed HTTP(S) URLs—the prefix check currently accepts invalid URLs such as `https://`.
+
+- **NOTE — [BlueskySection.css:4](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.css:4), [BlueskySection.jsx:114](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.jsx:114): brand details need updating.** The [current brand guidance](https://bsky.social/about/support/branding) specifies `#0560FF` and butterfly-sized clear space; the heading/button gaps are only 8px/6px. Butterfly links to your profile are explicitly permitted. Simple Icons’ [CC0 license](https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md) does not waive trademark rights; using the [official asset](https://bsky.social/about/support/icons) would remove provenance uncertainty.
+
+- **NOTE — [BlueskySection.jsx:69](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.jsx:69): partial failures hide everything.** Fixture checks confirmed that either request failing discards the successful result and hides the section. This satisfies hide-on-failure behavior, but a profile-only outage also hides otherwise usable posts.
+
+- **NOTE — [BlueskySection.jsx:72](/Users/andriathomas/Projects/representdc-main/src/components/BlueskySection.jsx:72): eligible posts can fall outside the fetch window.** Only 15 entries are examined. Fifteen consecutive reposts hide the section despite older originals. The maximum-five cap is correct; reposts are filtered before slicing, and replies are excluded through `posts_no_replies`.
+
+- **NOTE — [Follow.jsx:40](/Users/andriathomas/Projects/representdc-main/src/Follow.jsx:40): existing heading-level skip.** The three cards use `h3` immediately after the page’s `h1`. The Bluesky section’s own `h2` is appropriate.
+
+React escaping and malicious-link fixtures found **no XSS**: HTML-looking text stays text, and `javascript:` links remain plain text. Empty avatar alt text is appropriate beside the account name; decorative butterflies and link names are acceptable. No remaining `/follow` copy promises automatic Bluesky posts. The daily tracker/news claims have supporting workflow schedules.
+
+Lint and `git diff --check` passed. Live API/CDN loading, exact Simple Icons path equivalence, and rendered mobile layout remain unverified. Static inspection found no image policy blocking `cdn.bsky.app`.
+
+The medium/high passes differed on malformed-shape severity. I retain **NOTE** because those shapes violate the expected schema and were demonstrated with fixtures, not observed API responses.
