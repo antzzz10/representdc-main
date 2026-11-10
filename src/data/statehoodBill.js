@@ -29,9 +29,11 @@ const isStr = (v) => typeof v === 'string' && v.trim() !== ''
 const isCount = (v) => Number.isInteger(v) && v >= 0
 const squash = (s) => s.trim().replace(/\s+/g, ' ')
 const SUFFIX = /^(jr|sr|i{1,3}|iv|v)$/
-// Last name token, case-, accent- and punctuation-insensitive, generational suffix dropped.
+// Last surname token, case-, accent- and punctuation-insensitive, generational suffix
+// dropped. Handles both name orders Congress.gov uses: "Donald M. Payne, Jr." and
+// "Payne, Donald M., Jr." \u2014 in either, the surname ends the text before the first comma.
 function surname(name) {
-  const tokens = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  const tokens = name.split(',')[0].normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '').split(/\s+/).filter(Boolean)
   while (tokens.length > 1 && SUFFIX.test(tokens.at(-1))) tokens.pop()
   return tokens.at(-1) ?? ''
