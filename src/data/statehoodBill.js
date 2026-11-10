@@ -328,7 +328,7 @@ export function signedThisMonth(bills, now = new Date()) {
  * ID: the sponsor, a cosponsor (with date), or not yet. Members who cosponsored and have
  * since left are absent from the roster, so they count in the recorded total but not
  * here. Returns null if the two files disagree about who someone is (same ID, different
- * state), since a wrong "Not yet" is worse than no list.
+ * state or surname), since a wrong "Not yet" is worse than no list.
  */
 export function memberStatuses(roster, bill, now = new Date()) {
   if (!roster || roster.congress !== bill.congress || !bill.complete) return null
@@ -336,13 +336,14 @@ export function memberStatuses(roster, bill, now = new Date()) {
   if (now - Date.parse(bill.checkedAt) > CHECK_MAX_AGE_MS) return null
   const members = roster.members.filter((m) => m.chamber === bill.chamber)
   const byId = new Map(members.map((m) => [m.bioguideId, m]))
-  // Same ID must mean the same person: same seat (state and, in the House, district;
-  // at-large is 0) and same surname.
+  // Same ID must mean the same person: same state and same surname. District is NOT
+  // compared: the cosponsor record keeps the district at sponsorship, and redistricting
+  // moves members (real case, 2026-11-10: McBath, GA-7 on H.R. 51, GA-6 today). Rows here
+  // come from the roster, so they show the member's current district.
   for (const p of [bill.sponsor, ...bill.cosponsors]) {
     const m = byId.get(p.bioguideId)
     if (!m) continue
     if (m.state !== p.state || surname(m.name) !== surname(p.name)) return null
-    if (bill.chamber === 'house' && (m.district ?? 0) !== (p.district ?? 0)) return null
   }
   const signed = new Map(bill.cosponsors.map((c) => [c.bioguideId, c.sponsorshipDate]))
   return members
