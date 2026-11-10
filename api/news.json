@@ -1,10 +1,10 @@
 {
-  "runId": "42839846336-1",
-  "lastUpdated": "2026-11-10T15:01:01.596Z",
-  "summary": "Recent midterm election results are creating new momentum for DC statehood advocacy, as advocates point to the District's population as comparable to that of existing states and highlight ongoing constraints on local authority. The ACLU and statehood supporters are also raising concerns about the District's National Guard arrangements and the broader limitations on DC's self-governance. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "42923790350-1",
+  "lastUpdated": "2026-11-10T23:29:56.714Z",
+  "summary": "Recent midterm election results have energized statehood advocates, who point to D.C.'s population size as support for equal representation, while the District has faced multiple recent challenges to its local authority that courts and Congress are now contesting. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -13,10 +13,22 @@
   "summaryDecision": "judge-pass",
   "articles": [
     {
+      "title": "Trump’s Grip on Washington Faces New Resistance as Courts, Congress Challenge His Remaking of D.C.",
+      "link": "https://www.washingtoninformer.com/trump-washington-monuments-arch/",
+      "pubDate": "Tue, 10 Nov 2026 17:39:00 +0000",
+      "source": "Washington Informer"
+    },
+    {
       "title": "DC Vote: Midterm Results Create New Momentum for DC Statehood",
       "link": "https://www.dcvote.org/dc-vote-midterm-results-create-new-momentum-for-dc-statehood/",
       "pubDate": "Wed, 04 Nov 2026 16:30:09 +0000",
       "source": "DC Vote"
+    },
+    {
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "Tue, 27 Oct 2026 12:18:55 +0000",
+      "source": "ACLU DC"
     },
     {
       "title": "DC Has More People Than Some States Already Have",
@@ -29,18 +41,6 @@
       "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
       "pubDate": "Wed, 07 Oct 2026 15:05:49 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
-      "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     }
   ]
 }
