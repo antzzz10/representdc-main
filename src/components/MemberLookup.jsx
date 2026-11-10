@@ -15,7 +15,7 @@ const FILTERS = [
 // The organizer view: every current member, their status on this chamber's bill.
 // Tabs follow the WAI-ARIA tabs pattern (arrow keys move between them); filters are a
 // native radio group, so they work by keyboard with no extra code.
-function MemberLookup({ bills, roster }) {
+function MemberLookup({ bills, rosters }) {
   const [chamber, setChamber] = useState('house')
   const [filter, setFilter] = useState('not-yet')
   const [stateCode, setStateCode] = useState('')
@@ -25,10 +25,15 @@ function MemberLookup({ bills, roster }) {
 
   const bill = bills[chamber]
   // A roster only answers "not yet" for its own Congress, and only while this chamber's
-  // bill is the current one.
-  const usable = bill && bill.current && bill.complete && (roster.congress === null || roster.congress === bill.congress)
-
-  const all = useMemo(() => (usable ? memberStatuses(roster.members, bill) : []), [usable, roster, bill])
+  // bill is the current one with a complete cosponsor list. memberStatuses returns null
+  // when the files disagree about a member, and the panel then shows nothing.
+  const roster = bill ? rosters[bill.congress]?.data : null
+  const statuses = useMemo(
+    () => (bill && bill.current && bill.complete ? memberStatuses(roster, bill) : null),
+    [bill, roster],
+  )
+  const usable = Boolean(statuses)
+  const all = useMemo(() => statuses ?? [], [statuses])
   const states = useMemo(() => [...new Set(all.map((m) => m.state))].sort(), [all])
   const needle = query.trim().toLowerCase()
   const shown = all.filter((m) =>

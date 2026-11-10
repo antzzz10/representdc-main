@@ -22,7 +22,7 @@
 }
 
 .sb-container {
-  max-width: 880px;
+  max-width: 55rem;
 }
 
 .statehood-bill section {
@@ -52,6 +52,10 @@
   font-size: var(--fs-base);
   line-height: var(--lh-body);
   margin: var(--s-4) 0 0;
+}
+
+.recent-count {
+  margin: 0 0 var(--s-3);
 }
 
 .draft-placeholder {
@@ -162,7 +166,7 @@
 /* Counts */
 .count-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: var(--s-4);
 }
 
@@ -372,7 +376,7 @@
 
 .history-table {
   width: 100%;
-  min-width: 640px;
+  min-width: 40rem;
   border-collapse: collapse;
   font-size: var(--fs-sm);
 }

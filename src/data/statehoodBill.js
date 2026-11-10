@@ -1,116 +1,164 @@
 // Validation and derivations for /statehood-bill. Pure functions only, so the page and any
 // future check script share one definition of what the tracker files must look like.
 // Anything that fails validation is dropped whole: the page shows no number rather than a
-// number from a half-understood file (same rule as useBillStats).
+// number from a half-understood file (same rule as useBillStats). The checks below came
+// from the Codex medium/high/attack passes of 2026-11-10 (reviews/2026-11-10-statehood-
+// bill-page-codex-*.raw.md): every published total is re-derived from the rows it
+// summarizes, identities are canonical before any join, and links must point at the
+// official host they are labelled with.
 
 const DATE_ONLY = /^(\d{4})-(\d{2})-(\d{2})$/
-const ISO_INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})$/
+const ISO_INSTANT = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(Z|[+-]\d{2}:?\d{2})$/
+const BIOGUIDE = /^[A-Z]\d{6}$/
+const STATE = /^[A-Z]{2}$/
 const PARTIES = new Set(['R', 'D', 'I'])
 // Non-voting House seats. Puerto Rico's member is a Resident Commissioner; the rest are
-// Delegates. Used only for the courtesy title, never for a count.
+// Delegates. Used for courtesy titles and to re-derive the non-voting subtotal.
 const NON_VOTING = new Set(['DC', 'PR', 'GU', 'VI', 'AS', 'MP'])
+// Upper bounds on any one chamber's population, voting and non-voting seats together.
+const CHAMBER_MAX = { house: 441, senate: 100 }
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 const isStr = (v) => typeof v === 'string' && v.trim() !== ''
 const isCount = (v) => Number.isInteger(v) && v >= 0
+const squash = (s) => s.trim().replace(/\s+/g, ' ')
+
+function validCalendar(y, mo, d) {
+  const dt = new Date(Date.UTC(y, mo - 1, d))
+  return mo >= 1 && mo <= 12 && dt.getUTCFullYear() === y && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d
+}
 
 export function isDateOnly(value) {
   if (typeof value !== 'string') return false
   const m = DATE_ONLY.exec(value)
-  if (!m) return false
-  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])]
-  const dt = new Date(Date.UTC(y, mo - 1, d))
-  return dt.getUTCFullYear() === y && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d
+  return Boolean(m) && validCalendar(Number(m[1]), Number(m[2]), Number(m[3]))
 }
 
+// Same rule as useBillStats: Date() silently rolls "2026-02-30" into March, so the calendar
+// is checked before the value is trusted.
 export function isInstant(value) {
-  return typeof value === 'string' && ISO_INSTANT.test(value) && !Number.isNaN(Date.parse(value))
+  if (typeof value !== 'string') return false
+  const m = ISO_INSTANT.exec(value)
+  if (!m) return false
+  const [hour, minute, second] = [Number(m[4]), Number(m[5]), Number(m[6] ?? 0)]
+  if (hour > 23 || minute > 59 || second > 59) return false
+  return validCalendar(Number(m[1]), Number(m[2]), Number(m[3])) && !Number.isNaN(Date.parse(value))
 }
 
-const isHttpsUrl = (v) => {
-  if (typeof v !== 'string') return false
+/** Eastern calendar date (YYYY-MM-DD) of an instant. */
+export function etDate(instant) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date(instant))
+  const get = (t) => parts.find((p) => p.type === t).value
+  return `${get('year')}-${get('month')}-${get('day')}`
+}
+
+// A link is only shown under an official label if it really points at that host: https, no
+// embedded credentials, and the expected hostname (exact, or a subdomain where allowed).
+function officialUrl(value, hostOk) {
+  if (typeof value !== 'string') return null
   try {
-    return new URL(v).protocol === 'https:'
+    const u = new URL(value)
+    if (u.protocol !== 'https:' || u.username || u.password || u.port) return null
+    return hostOk(u.hostname.toLowerCase(), u.pathname) ? u.href : null
   } catch {
-    return false
+    return null
   }
 }
+const isCongressGov = (h) => h === 'www.congress.gov' || h === 'congress.gov'
+const isGovInfo = (h) => h === 'www.govinfo.gov' || h === 'govinfo.gov'
+const isMemberSite = (h) => /^[a-z0-9-]+(\.[a-z0-9-]+)*\.(house|senate)\.gov$/.test(h)
 
-const district = (v) => (v === null || v === undefined || isCount(v) ? v ?? null : undefined)
+const CHAMBER_PREFIX = { house: /^H\.R\. \d+$/, senate: /^S\. \d+$/ }
+const CHAMBER_PATH = { house: 'house-bill', senate: 'senate-bill' }
 
-function person(raw) {
-  if (!isObj(raw) || !isStr(raw.bioguideId) || !isStr(raw.name) || !isStr(raw.state)) return null
-  const d = district(raw.district)
-  if (d === undefined) return null
-  return {
-    bioguideId: raw.bioguideId,
-    name: raw.name.trim(),
-    party: PARTIES.has(raw.party) ? raw.party : null,
-    state: raw.state.toUpperCase(),
-    district: d,
-  }
-}
-
-function chamberOf(raw) {
-  if (raw.chamber === 'house' || raw.chamber === 'senate') return raw.chamber
-  if (typeof raw.billNumber === 'string') {
-    if (/^H\.\s?R\./i.test(raw.billNumber)) return 'house'
-    if (/^S\./i.test(raw.billNumber)) return 'senate'
-  }
+function chamberFromNumber(billNumber) {
+  if (CHAMBER_PREFIX.house.test(billNumber)) return 'house'
+  if (CHAMBER_PREFIX.senate.test(billNumber)) return 'senate'
   return null
 }
 
+function person(raw) {
+  if (!isObj(raw) || typeof raw.bioguideId !== 'string' || !isStr(raw.name) || typeof raw.state !== 'string') return null
+  const bioguideId = raw.bioguideId.trim().toUpperCase()
+  const state = raw.state.trim().toUpperCase()
+  if (!BIOGUIDE.test(bioguideId) || !STATE.test(state)) return null
+  const d = raw.district
+  if (!(d === null || d === undefined || isCount(d))) return null
+  return {
+    bioguideId,
+    name: squash(raw.name),
+    party: PARTIES.has(raw.party) ? raw.party : null,
+    state,
+    district: d ?? null,
+  }
+}
+
 function bill(raw) {
-  if (!isObj(raw)) return null
-  const chamber = chamberOf(raw)
+  if (!isObj(raw) || !isStr(raw.billNumber)) return null
+  const billNumber = squash(raw.billNumber)
+  const chamber = chamberFromNumber(billNumber)
+  // The chamber field, the bill number and the official URL must all agree.
+  if (!chamber || (raw.chamber !== undefined && raw.chamber !== chamber)) return null
+  const congressGovUrl = officialUrl(raw.congressGovUrl, (h, path) =>
+    isCongressGov(h) && path.replace(/\/+$/, '') === `/bill/${ordinal(raw.congress)}-congress/${CHAMBER_PATH[chamber]}/${billNumber.match(/\d+$/)[0]}`)
   const sponsor = person(raw.sponsor)
   const action = raw.latestAction
   const totals = raw.totals
+  const complete = raw.complete !== false
   if (
-    !chamber ||
-    !Number.isInteger(raw.congress) ||
-    !isStr(raw.billNumber) ||
+    !Number.isInteger(raw.congress) || raw.congress < 100 ||
     typeof raw.current !== 'boolean' ||
     !sponsor ||
     !isDateOnly(raw.introducedDate) ||
     !isObj(action) || !isDateOnly(action.actionDate) || !isStr(action.text) ||
-    !isHttpsUrl(raw.congressGovUrl) ||
+    !congressGovUrl ||
     // The tracker publishes `complete: false` (empty list, zero totals, no checkedAt) when
     // the last fetch did not return the whole list. That bill keeps its official facts but
     // shows no counts, sign-ons or lookup.
-    (raw.complete !== false && !isInstant(raw.checkedAt)) ||
+    (complete && !isInstant(raw.checkedAt)) ||
     !Array.isArray(raw.cosponsors) ||
     !isObj(totals) || !isCount(totals.cosponsors) || !isCount(totals.original) || !isCount(totals.nonVoting)
   ) return null
+
+  const checkedDate = complete ? etDate(raw.checkedAt) : null
+  // Chronology: nothing happens before introduction or after the check that recorded it.
+  if (action.actionDate < raw.introducedDate || (checkedDate && action.actionDate > checkedDate)) return null
 
   const cosponsors = []
   for (const c of raw.cosponsors) {
     const p = person(c)
     if (!p || !isDateOnly(c.sponsorshipDate) || typeof c.isOriginalCosponsor !== 'boolean') return null
+    if (p.bioguideId === sponsor.bioguideId) return null // the sponsor is never a cosponsor
+    if (c.sponsorshipDate < raw.introducedDate || (checkedDate && c.sponsorshipDate > checkedDate)) return null
     cosponsors.push({ ...p, sponsorshipDate: c.sponsorshipDate, isOriginalCosponsor: c.isOriginalCosponsor })
   }
-  // The published total must agree with the list it summarizes, or neither is trusted.
-  if (cosponsors.length !== totals.cosponsors) return null
-  if (new Set(cosponsors.map((c) => c.bioguideId)).size !== cosponsors.length) return null
-  if (cosponsors.filter((c) => c.isOriginalCosponsor).length !== totals.original) return null
-  if (totals.nonVoting > totals.cosponsors) return null
-
-  const complete = raw.complete !== false
   if (!complete && (cosponsors.length > 0 || totals.cosponsors > 0)) return null
+
+  // Every published total must equal what the list itself says, or neither is trusted.
+  const nonVoting = chamber === 'house' ? cosponsors.filter((c) => NON_VOTING.has(c.state)).length : 0
+  if (
+    cosponsors.length !== totals.cosponsors ||
+    cosponsors.length > CHAMBER_MAX[chamber] ||
+    new Set(cosponsors.map((c) => c.bioguideId)).size !== cosponsors.length ||
+    cosponsors.filter((c) => c.isOriginalCosponsor).length !== totals.original ||
+    nonVoting !== totals.nonVoting
+  ) return null
 
   return {
     chamber,
     complete,
     congress: raw.congress,
-    billNumber: raw.billNumber.trim(),
+    billNumber,
     current: raw.current,
     sponsor,
     introducedDate: raw.introducedDate,
-    latestAction: { actionDate: action.actionDate, text: action.text.trim() },
-    congressGovUrl: raw.congressGovUrl,
+    latestAction: { actionDate: action.actionDate, text: squash(action.text) },
+    congressGovUrl,
     checkedAt: complete ? raw.checkedAt : null,
     cosponsors,
-    totals: { cosponsors: totals.cosponsors, original: totals.original, nonVoting: totals.nonVoting },
+    totals: { cosponsors: totals.cosponsors, original: totals.original, nonVoting },
   }
 }
 
@@ -128,31 +176,49 @@ export function parseCosponsors(json) {
   return out.house || out.senate ? out : null
 }
 
-/** Returns { congress, members } or null. */
-export function parseMembers(json) {
-  const rows = Array.isArray(json) ? json : Array.isArray(json?.members) ? json.members : null
-  if (!rows || rows.length === 0) return null
+/**
+ * Returns { congress, members } or null. `expectedCongress` is the Congress named in the
+ * file's URL; the file must say the same, and its published counts must match its rows.
+ */
+export function parseMembers(json, expectedCongress) {
+  if (!isObj(json) || json.congress !== expectedCongress || !Array.isArray(json.members)) return null
   const members = []
   const seen = new Set()
-  for (const raw of rows) {
+  for (const raw of json.members) {
     const p = person(raw)
     if (!p || (raw.chamber !== 'house' && raw.chamber !== 'senate') || typeof raw.votingMember !== 'boolean') return null
+    // Seat and voting status must agree: senators and state House seats vote, the six
+    // territorial/district seats do not.
+    const shouldVote = raw.chamber === 'senate' || !NON_VOTING.has(p.state)
+    if (raw.votingMember !== shouldVote || (raw.chamber === 'senate' && NON_VOTING.has(p.state))) return null
     if (seen.has(p.bioguideId)) return null
     seen.add(p.bioguideId)
     members.push({
       ...p,
       chamber: raw.chamber,
       votingMember: raw.votingMember,
-      officialWebsiteUrl: isHttpsUrl(raw.officialWebsiteUrl) ? raw.officialWebsiteUrl : null,
+      officialWebsiteUrl: officialUrl(raw.officialWebsiteUrl, isMemberSite),
     })
   }
-  return { congress: Number.isInteger(json?.congress) ? json.congress : null, members }
+  const count = (fn) => members.filter(fn).length
+  const actual = {
+    house: count((m) => m.chamber === 'house'),
+    senate: count((m) => m.chamber === 'senate'),
+    houseVoting: count((m) => m.chamber === 'house' && m.votingMember),
+    houseNonVoting: count((m) => m.chamber === 'house' && !m.votingMember),
+  }
+  const c = json.counts
+  if (!isObj(c) || Object.keys(actual).some((k) => c[k] !== actual[k])) return null
+  if (actual.house === 0 || actual.senate === 0 || actual.house > CHAMBER_MAX.house || actual.senate > CHAMBER_MAX.senate) return null
+  return { congress: expectedCongress, members }
 }
 
-function historyBill(raw) {
+function historyBill(raw, chamber) {
   if (raw === null || raw === undefined) return null
   if (!isObj(raw) || !isStr(raw.billNumber) || !isCount(raw.cosponsors)) return undefined
-  return { billNumber: raw.billNumber.trim(), cosponsors: raw.cosponsors, url: isHttpsUrl(raw.url) ? raw.url : null }
+  const billNumber = squash(raw.billNumber)
+  if (chamberFromNumber(billNumber) !== chamber || raw.cosponsors > CHAMBER_MAX[chamber]) return undefined
+  return { billNumber, cosponsors: raw.cosponsors, url: officialUrl(raw.url, isGovInfo) }
 }
 
 /** Returns an array of rows ordered by Congress, or null. */
@@ -160,21 +226,25 @@ export function parseHistory(json) {
   const rows = Array.isArray(json?.congresses) ? json.congresses : null
   if (!rows || rows.length === 0) return null
   const out = []
+  const seen = new Set()
   for (const raw of rows) {
-    if (!isObj(raw) || !Number.isInteger(raw.congress) || !Number.isInteger(raw.startYear)) return null
-    const house = historyBill(raw.house)
-    const senate = historyBill(raw.senate)
-    if (house === undefined || senate === undefined) return null
+    if (!isObj(raw) || !Number.isInteger(raw.congress) || !Number.isInteger(raw.startYear) || seen.has(raw.congress)) return null
+    seen.add(raw.congress)
+    const house = historyBill(raw.house, 'house')
+    const senate = historyBill(raw.senate, 'senate')
+    if (house === undefined || senate === undefined || (!house && !senate)) return null
     const fa = raw.furthestAction
     let furthestAction = null
     if (fa !== null && fa !== undefined) {
       if (!isObj(fa) || !isStr(fa.text) || (fa.date != null && !isDateOnly(fa.date))) return null
-      furthestAction = { text: fa.text.trim(), date: fa.date ?? null }
+      furthestAction = { text: squash(fa.text), date: fa.date ?? null }
     }
     out.push({
       congress: raw.congress,
       startYear: raw.startYear,
       endYear: Number.isInteger(raw.endYear) ? raw.endYear : null,
+      // Only an explicit `final: false` marks a snapshot the live file may update.
+      final: raw.final !== false,
       house,
       senate,
       furthestAction,
@@ -191,11 +261,10 @@ export function ordinal(n) {
   return `${n}${{ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] ?? 'th'}`
 }
 
-/** Courtesy title from chamber and seat; Senate and voting House members are unambiguous. */
-export function memberTitle(chamber, state, votingMember) {
+/** Courtesy title from chamber and seat (validated: seat and voting status agree). */
+export function memberTitle(chamber, state) {
   if (chamber === 'senate') return 'Sen.'
-  const nonVoting = votingMember === undefined ? NON_VOTING.has(state) : !votingMember
-  if (!nonVoting) return 'Rep.'
+  if (!NON_VOTING.has(state)) return 'Rep.'
   return state === 'PR' ? 'Res. Comm.' : 'Del.'
 }
 
@@ -210,22 +279,14 @@ export function formatDate(dateOnly, month = 'long') {
   })
 }
 
-const etYearMonth = (instant) => {
-  const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit' })
-    .formatToParts(new Date(instant))
-  const get = (t) => parts.find((p) => p.type === t).value
-  return `${get('year')}-${get('month')}`
-}
-
 /**
- * Cosponsors who signed on in the calendar month (Eastern) of the most recent check, across
- * the bills shown, plus the latest sponsorship date overall for the empty state.
+ * Cosponsors who signed on in the current Eastern calendar month (`now`), across the bills
+ * shown, plus the latest sponsorship date overall for the empty state.
  */
-export function signedThisMonth(bills) {
+export function signedThisMonth(bills, now = new Date()) {
   const shown = bills.filter((b) => b && b.complete)
   if (shown.length === 0) return null
-  const latestCheck = shown.map((b) => b.checkedAt).sort((a, b) => Date.parse(b) - Date.parse(a))[0]
-  const month = etYearMonth(latestCheck)
+  const month = etDate(now).slice(0, 7)
   const rows = []
   let latestDate = null
   for (const b of shown) {
@@ -241,13 +302,20 @@ export function signedThisMonth(bills) {
 /**
  * Every current member of the chamber with their status on this bill, joined by Bioguide
  * ID: the sponsor, a cosponsor (with date), or not yet. Members who cosponsored and have
- * since left are simply absent from the roster, so they appear in the recorded count but
- * not here.
+ * since left are absent from the roster, so they count in the recorded total but not
+ * here. Returns null if the two files disagree about who someone is (same ID, different
+ * state), since a wrong "Not yet" is worse than no list.
  */
-export function memberStatuses(members, bill) {
+export function memberStatuses(roster, bill) {
+  if (!roster || roster.congress !== bill.congress) return null
+  const members = roster.members.filter((m) => m.chamber === bill.chamber)
+  const byId = new Map(members.map((m) => [m.bioguideId, m]))
+  for (const p of [bill.sponsor, ...bill.cosponsors]) {
+    const m = byId.get(p.bioguideId)
+    if (m && m.state !== p.state) return null
+  }
   const signed = new Map(bill.cosponsors.map((c) => [c.bioguideId, c.sponsorshipDate]))
   return members
-    .filter((m) => m.chamber === bill.chamber)
     .map((m) => {
       if (m.bioguideId === bill.sponsor.bioguideId) return { ...m, status: 'sponsor', date: null }
       if (signed.has(m.bioguideId)) return { ...m, status: 'signed', date: signed.get(m.bioguideId) }
@@ -257,12 +325,14 @@ export function memberStatuses(members, bill) {
 }
 
 /**
- * History rows, with the row for the bill's own Congress taking its counts from the live
- * cosponsor file so the table and the headline never disagree.
+ * History rows. A row the tracker marks provisional (`final: false`) takes its count from
+ * the live cosponsor file when that file holds the same bill as the current, complete one,
+ * so the table and the headline never disagree. Final rows are never overwritten.
  */
 export function historyWithLive(history, house, senate) {
   return history.map((row) => {
-    const live = (b, side) => (b && b.complete && side && b.congress === row.congress && b.billNumber === side.billNumber
+    if (row.final) return row
+    const live = (b, side) => (b && b.current && b.complete && side && b.congress === row.congress && b.billNumber === side.billNumber
       ? { ...side, cosponsors: b.totals.cosponsors }
       : side)
     return { ...row, house: live(house, row.house), senate: live(senate, row.senate) }

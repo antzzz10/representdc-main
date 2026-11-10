@@ -79,15 +79,19 @@ function RecentSignOns({ bills }) {
   if (recent.rows.length === 0) {
     return recent.latestDate ? <p className="section-note">No new cosponsors since {formatDate(recent.latestDate)}.</p> : null
   }
+  const n = recent.rows.length
   return (
-    <ul className="recent-list">
-      {recent.rows.map((c) => (
-        <li key={`${c.chamber}-${c.bioguideId}`} className="recent-row">
-          <MemberName chamber={c.chamber} member={c} />
-          <span className="mono-date">{c.billNumber} · {formatDate(c.sponsorshipDate, 'short')}</span>
-        </li>
-      ))}
-    </ul>
+    <>
+      <p className="section-note recent-count">{n} new {n === 1 ? 'cosponsor' : 'cosponsors'} this month.</p>
+      <ul className="recent-list">
+        {recent.rows.map((c) => (
+          <li key={`${c.chamber}-${c.bioguideId}`} className="recent-row">
+            <MemberName chamber={c.chamber} member={c} />
+            <span className="mono-date">{c.billNumber} · {formatDate(c.sponsorshipDate, 'short')}</span>
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 
@@ -129,7 +133,7 @@ function HistoryTable({ rows }) {
 }
 
 function StatehoodBill() {
-  const { cosponsors, members, history } = useStatehoodBillData()
+  const { cosponsors, history, rosters } = useStatehoodBillData()
   const bills = cosponsors.data
   const shown = bills ? [bills.house, bills.senate].filter(Boolean) : []
   const counted = shown.filter((b) => b.complete)
@@ -190,10 +194,10 @@ function StatehoodBill() {
             </section>
           )}
 
-          {bills && members.data && (
+          {bills && Object.values(rosters).some((r) => r.data) && (
             <section aria-labelledby="sb-lookup">
               <h2 id="sb-lookup">Members who have not yet signed on</h2>
-              <MemberLookup bills={bills} roster={members.data} />
+              <MemberLookup bills={bills} rosters={rosters} />
             </section>
           )}
 

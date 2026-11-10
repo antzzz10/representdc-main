@@ -7,14 +7,17 @@
 // 2025-01-09; end-of-Congress history 115th–119th.
 //
 // Every MEMBER row (cosponsors and roster) is deliberately fake: names are "Fixture
-// member …", Bioguide IDs start with "FX", websites point at example.org. They exist to
-// exercise the counts, the join and the filters, never to look like real people.
+// member …", Bioguide IDs are Z100001 and up (real Z IDs are Z000…), websites are
+// fixture-member-*.house.gov / .senate.gov hosts that do not exist. They exist to exercise
+// the counts, the join and the filters, never to look like real people.
 
 const STATES = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
   'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH',
   'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 const PARTIES = ['D', 'R', 'R', 'D', 'I']
 const pad = (n) => String(n).padStart(3, '0')
+const HOUSE_SPONSOR = 'Z800001'
+const SENATE_SPONSOR = 'Z800002'
 
 function roster() {
   const members = []
@@ -23,21 +26,21 @@ function roster() {
     const state = STATES[(i - 1) % STATES.length]
     districtCount[state] = (districtCount[state] ?? 0) + 1
     members.push({
-      bioguideId: `FXH${pad(i)}`, name: `Fixture member H${pad(i)}`, party: PARTIES[i % PARTIES.length],
+      bioguideId: `Z${100000 + i}`, name: `Fixture member H${pad(i)}`, party: PARTIES[i % PARTIES.length],
       state, district: districtCount[state], chamber: 'house', votingMember: true,
-      officialWebsiteUrl: `https://example.org/fixture/house/${i}`,
+      officialWebsiteUrl: `https://fixture-member-h${pad(i)}.house.gov`,
     })
   }
   ;['DC', 'PR', 'VI', 'GU', 'AS', 'MP'].forEach((state, j) => members.push({
-    bioguideId: state === 'DC' ? 'FXSPONSORH' : `FXN${pad(j)}`, name: `Fixture member ${state} non-voting`,
+    bioguideId: state === 'DC' ? HOUSE_SPONSOR : `Z${200000 + j}`, name: `Fixture member ${state} non-voting`,
     party: 'D', state, district: null, chamber: 'house', votingMember: false,
-    officialWebsiteUrl: j === 3 ? null : `https://example.org/fixture/non-voting/${state}`,
+    officialWebsiteUrl: j === 3 ? null : `https://fixture-member-${state.toLowerCase()}.house.gov`,
   }))
   for (let i = 1; i <= 100; i++) {
     members.push({
-      bioguideId: i === 1 ? 'FXSPONSORS' : `FXS${pad(i)}`, name: `Fixture member S${pad(i)}`,
+      bioguideId: i === 1 ? SENATE_SPONSOR : `Z${300000 + i}`, name: `Fixture member S${pad(i)}`,
       party: PARTIES[i % PARTIES.length], state: STATES[(i - 1) % STATES.length], district: null,
-      chamber: 'senate', votingMember: true, officialWebsiteUrl: `https://example.org/fixture/senate/${i}`,
+      chamber: 'senate', votingMember: true, officialWebsiteUrl: `https://fixture-member-s${pad(i)}.senate.gov`,
     })
   }
   return members
@@ -54,7 +57,7 @@ function laterDates(n, from, to) {
 function cosponsorsFrom(members, { count, original, introduced, latest, nonVoting = [] }) {
   const pool = [
     ...members.filter((m) => nonVoting.includes(m.state)),
-    ...members.filter((m) => m.votingMember && !m.bioguideId.startsWith('FXSPONSOR')),
+    ...members.filter((m) => m.votingMember && m.bioguideId !== HOUSE_SPONSOR && m.bioguideId !== SENATE_SPONSOR),
   ].slice(0, count)
   const later = laterDates(count - original, '2025-02-01', latest)
   return pool.map((m, k) => ({
@@ -74,7 +77,7 @@ function bills(scenario) {
     bills: [
       {
         chamber: 'house', congress: 119, billNumber: 'H.R. 51', current: true,
-        sponsor: { bioguideId: 'FXSPONSORH', name: 'Fixture member DC non-voting', party: 'D', state: 'DC', district: null },
+        sponsor: { bioguideId: HOUSE_SPONSOR, name: 'Fixture member DC non-voting', party: 'D', state: 'DC', district: null },
         introducedDate: '2025-01-03',
         latestAction: { actionDate: '2025-01-03', text: 'Referred to the Committee on Oversight and Government Reform.' },
         congressGovUrl: 'https://www.congress.gov/bill/119th-congress/house-bill/51',
@@ -84,7 +87,7 @@ function bills(scenario) {
       },
       {
         chamber: 'senate', congress: 119, billNumber: 'S. 51', current: scenario !== 'transition',
-        sponsor: { bioguideId: 'FXSPONSORS', name: 'Fixture member S001', party: 'D', state: 'AL', district: null },
+        sponsor: { bioguideId: SENATE_SPONSOR, name: 'Fixture member S001', party: 'D', state: 'AL', district: null },
         introducedDate: '2025-01-09',
         latestAction: { actionDate: '2025-01-09', text: 'Read twice and referred to the Committee on Homeland Security and Governmental Affairs.' },
         congressGovUrl: 'https://www.congress.gov/bill/119th-congress/senate-bill/51',
@@ -105,13 +108,21 @@ const HISTORY = {
     { congress: 116, startYear: 2019, endYear: 2021, house: { billNumber: 'H.R. 51', cosponsors: 227, url: govinfo(116, 'hr', 51) }, senate: { billNumber: 'S. 631', cosponsors: 42, url: govinfo(116, 's', 631) }, furthestAction: { text: 'Passed House', date: '2020-06-26' } },
     { congress: 117, startYear: 2021, endYear: 2023, house: { billNumber: 'H.R. 51', cosponsors: 216, url: govinfo(117, 'hr', 51) }, senate: { billNumber: 'S. 51', cosponsors: 45, url: govinfo(117, 's', 51) }, furthestAction: { text: 'Passed House', date: '2021-04-22' } },
     { congress: 118, startYear: 2023, endYear: 2025, house: { billNumber: 'H.R. 51', cosponsors: 211, url: govinfo(118, 'hr', 51) }, senate: { billNumber: 'S. 51', cosponsors: 46, url: govinfo(118, 's', 51) }, furthestAction: null },
-    { congress: 119, startYear: 2025, endYear: null, house: { billNumber: 'H.R. 51', cosponsors: 209 }, senate: { billNumber: 'S. 51', cosponsors: 43 }, furthestAction: null },
+    { congress: 119, startYear: 2025, endYear: null, final: false, house: { billNumber: 'H.R. 51', cosponsors: 209 }, senate: { billNumber: 'S. 51', cosponsors: 43 }, furthestAction: null },
   ],
 }
 
 export function fixture(key, scenario) {
-  if (key === 'cosponsors') return bills(scenario)
-  if (key === 'members') return { congress: 119, generatedAt: CHECKED_AT, members: roster() }
-  if (key === 'history') return HISTORY
+  if (key === 'statehood-cosponsors') return bills(scenario)
+  if (key === 'members-119') {
+    const members = roster()
+    const n = (fn) => members.filter(fn).length
+    const counts = {
+      house: n((m) => m.chamber === 'house'), senate: n((m) => m.chamber === 'senate'),
+      houseVoting: n((m) => m.chamber === 'house' && m.votingMember), houseNonVoting: n((m) => m.chamber === 'house' && !m.votingMember),
+    }
+    return { congress: 119, generatedAt: CHECKED_AT, counts, members }
+  }
+  if (key === 'statehood-bill-history') return structuredClone(HISTORY)
   throw new Error(`no fixture for ${key}`)
 }
