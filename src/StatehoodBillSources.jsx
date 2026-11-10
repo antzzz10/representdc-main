@@ -6,6 +6,20 @@ const link = (href, text) => (
   <a href={href} target="_blank" rel="noopener noreferrer">{text}</a>
 )
 
+// Sources for the "what the bill is" paragraph; same URLs and labels as /myths.
+const EXPLAINER = [
+  {
+    label: 'Constitution Annotated, Art. IV, § 3, cl. 1 (New States Clause), via Cornell LII',
+    href: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1',
+    host: 'law.cornell.edu',
+  },
+  {
+    label: 'Congressional Research Service R47101, "DC Statehood: Constitutional Considerations for Proposed Legislation"',
+    href: 'https://www.everycrsreport.com/reports/R47101.html',
+    host: 'everycrsreport.com',
+  },
+]
+
 const PROCEDURE = [
   {
     // Same CRS report as congress.gov/crs-product/98-988, which blocks automated link checks.
@@ -25,7 +39,7 @@ const PROCEDURE = [
   },
 ]
 
-function StatehoodBillSources({ bills, history, congress }) {
+function StatehoodBillSources({ bills, history, congress, explainer }) {
   const earlier = (history ?? []).filter((r) => r.congress !== congress)
   return (
     <div className="sources-block">
@@ -48,6 +62,9 @@ function StatehoodBillSources({ bills, history, congress }) {
             GovInfo, bill status of {s.billNumber} ({ordinal(r.congress)} Congress)—{link(s.url, 'govinfo.gov')}
           </span>
         )))}
+        {explainer && EXPLAINER.map((p) => (
+          <span key={p.href}>{p.label}—{link(p.href, p.host)}</span>
+        ))}
         {bills.length > 0 && PROCEDURE.map((p) => (
           <span key={p.href}>{p.label}—{link(p.href, p.host)}</span>
         ))}

@@ -15,9 +15,11 @@ import './StatehoodBill.css'
 // Public sentences are the approved drafts in dc-bills-tracker's PRD § 7
 // (docs/2026-11-10-cosponsor-page-and-120th-overview-prd.md).
 
-// Andria writes this paragraph (PRD § 9 Q2). Until then the dev server shows a marked
-// placeholder and production builds omit the paragraph rather than ship placeholder copy.
-const WHAT_IT_IS = null
+// Approved by Andria 2026-11-10 ("Use the draft"); drafted from /myths Myth 2. Its two
+// sources (New States Clause, CRS R47101) are in StatehoodBillSources. If this is ever
+// set back to null, the dev server shows a marked placeholder and production omits it.
+const WHAT_IT_IS =
+  'The Washington, D.C. Admission Act would admit the land outside a shrunken federal district as a state, the way most states have joined: by an ordinary act of Congress and a presidential signature, with no constitutional amendment.'
 
 const CHAMBER_NAME = { house: 'House', senate: 'Senate' }
 
@@ -207,7 +209,7 @@ function StatehoodBill() {
             </section>
           )}
 
-          <StatehoodBillSources bills={shown} history={historyRows} congress={congress} />
+          <StatehoodBillSources bills={shown} history={historyRows} congress={congress} explainer={Boolean(WHAT_IT_IS)} />
         </div>
       </main>
       <Footer />
