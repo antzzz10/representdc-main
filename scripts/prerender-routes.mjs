@@ -53,6 +53,10 @@ const redirectTarget = {};
 const navigateRe = /<Route\s+path="([^"]+)"\s+element=\{\s*<Navigate\s+to="([^"]+)"/g;
 for (const [, path, to] of appSrc.matchAll(navigateRe)) redirectTarget[path] = to;
 for (const [, path, element] of appSrc.matchAll(routeRe)) {
+  if (path.includes(':') && path !== '/reading/:slug') {
+    console.error(`Route ${path} has a parameter with no expansion here — add one to prerender-routes.mjs (and titles to src/data/routeMeta.js).`);
+    process.exit(1);
+  }
   if (path === '/' || path.includes(':')) continue; // root exists; params expand below
   (element === 'Navigate' ? redirects : pages).push(path);
 }
@@ -95,10 +99,9 @@ function htmlFor(route) {
     console.error(`No title/description for ${metaRoute} in src/data/routeMeta.js — add one.`);
     process.exit(1);
   }
-  return indexHtml.replace(
-    titleRe,
-    `<title>${escapeHtml(meta.title)}</title>\n    <meta name="description" content="${escapeHtml(meta.description)}" />`,
-  );
+  const head = `<title>${escapeHtml(meta.title)}</title>\n    <meta name="description" content="${escapeHtml(meta.description)}" />`;
+  // Callback, not a string: a replacement string would expand $&, $' etc. in the copy.
+  return indexHtml.replace(titleRe, () => head);
 }
 for (const route of redirects) {
   if (!redirectTarget[route]) {

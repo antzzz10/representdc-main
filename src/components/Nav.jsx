@@ -31,8 +31,11 @@ function NavItem({ item, className, onClick }) {
 function Nav() {
   const location = useLocation()
   // The menu remembers which navigation it was opened on, so any navigation (including
-  // a link to the page already showing) closes it without an extra effect.
+  // a link to the page already showing) closes it. The stale key is also dropped, so
+  // Back to that history entry can't reopen it. (Adjusting state during render is
+  // React's documented alternative to a reset effect.)
   const [openedOn, setOpenedOn] = useState(null)
+  if (openedOn !== null && openedOn !== location.key) setOpenedOn(null)
   const open = openedOn === location.key
   const setOpen = (next) => setOpenedOn(next ? location.key : null)
   const navRef = useRef(null)
@@ -47,7 +50,11 @@ function Nav() {
     function onKeyDown(event) {
       if (event.key === 'Escape') {
         setOpenedOn(null)
-        buttonRef.current?.focus()
+        // Only pull focus back if it was in the nav; don't yank it from elsewhere.
+        const active = document.activeElement
+        if (!active || active === document.body || navRef.current?.contains(active)) {
+          buttonRef.current?.focus()
+        }
       }
     }
     function onPointerDown(event) {
@@ -56,7 +63,12 @@ function Nav() {
     // The panel only exists below the breakpoint; widening the window past it closes it.
     const wide = window.matchMedia('(min-width: 1025px)')
     function onWide(event) {
-      if (event.matches) setOpenedOn(null)
+      if (!event.matches) return
+      // The menu button vanishes at this width too, so park focus on the brand link.
+      if (panelRef.current?.contains(document.activeElement)) {
+        navRef.current?.querySelector('.nav-brand')?.focus()
+      }
+      setOpenedOn(null)
     }
 
     document.addEventListener('keydown', onKeyDown)
@@ -71,8 +83,14 @@ function Nav() {
 
   const close = () => setOpen(false)
 
+  // Tabbing past the last menu item would otherwise leave focus on page content hidden
+  // under the open panel.
+  function onBlur(event) {
+    if (open && event.relatedTarget && !navRef.current?.contains(event.relatedTarget)) close()
+  }
+
   return (
-    <nav className="nav" ref={navRef}>
+    <nav className="nav" ref={navRef} onBlur={onBlur}>
       <div className="container nav-inner">
         <Link to="/" className="nav-brand" aria-label="RepresentDC — back to top">
           <Logo size={26} />

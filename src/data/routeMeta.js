@@ -64,8 +64,17 @@ for (const piece of READING) {
   ROUTE_META[readingRoute(piece.slug)] = { title: pageTitle(piece.title), description: piece.dek }
 }
 
-/** Metadata for a pathname; trailing slashes are ignored, unknown paths get the home entry. */
+/**
+ * Metadata for a pathname. Matches the way React Router matches: case-insensitive,
+ * percent-decoded, trailing slashes ignored. Unknown paths get the home entry.
+ */
 export function metaForPath(pathname) {
-  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') || '/' : pathname
+  let path = pathname
+  try {
+    path = decodeURIComponent(path)
+  } catch {
+    // Malformed escapes: fall back to the raw path.
+  }
+  path = path.toLowerCase().replace(/\/+$/, '') || '/'
   return ROUTE_META[path] || ROUTE_META['/']
 }
