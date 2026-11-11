@@ -21,12 +21,14 @@ Plan: `docs/2026-11-08-value-updates-plan.md`. Goal 2's build plan:
 |---|---|
 | **1. Bugs** (404s, sitemap, robots) | ✅ Done 2026-11-08, all sites. |
 | **C0. Bill-history archive** (`representdc-data`, private) | ✅ Built 2026-11-08; updates daily from GovInfo. Next: back-fill to the 114th Congress. The tracker reads from it after a month in which the two agree (about 2026-12-08). |
-| **2. 120th Congress: support page, separate counts, visible reviews, Congress switch** | Step 0 (count measures, not entries) ✅ live 2026-11-09. Step 1b (daily check covers riders, support and routine) built, in review, not deployed. Next: 1a statuses for every measure type, 1c reviews that can't be missed, 1d `/support` (needs Andria's heading and intro). Congress switch rehearsed in December, run Jan 3–4, 2027. |
+| **2. 120th Congress: support page, separate counts, visible reviews, Congress switch** | ✅ Live: step 0 (count measures, 2026-11-09), 1b (daily check covers every section, 2026-11-09), 1a (a status path for every measure type; 2 riders law, 18 riders and amendments archived, 2026-11-10). Next: 1c reviews that can't be missed, 1d `/support` (Claude drafts the heading and intro under the copy guardrails). Congress switch: design memo in `../dc-bills-tracker/docs/2026-11-10-congress-switch-deep-dive.md`; rehearse in December, run Jan 3–4, 2027. |
 | **3. Timeline of bills and key actions** | Not started. Builds on the archive (C0). |
 | **4. Updates from statehood organizations** | Not started. Waiting on ✏️ 7: links only, no AI summary. |
 
 **Next after the goals:** the navigation review across all three sites (see
 "Exploratory" below).
+
+**Bluesky (@bills.representdc.org):** live 2026-11-10, with the `/follow` page and a manual posting workflow. Automatic posting is planned in `../dc-bills-tracker/docs/2026-11-10-bluesky-auto-posting-plan.md` and waits on Andria's ✏️ answers.
 
 ## Proposed roadmap (July 2026)
 
