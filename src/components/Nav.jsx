@@ -65,7 +65,8 @@ function Nav() {
     function onWide(event) {
       if (!event.matches) return
       // The menu button vanishes at this width too, so park focus on the brand link.
-      if (panelRef.current?.contains(document.activeElement)) {
+      const active = document.activeElement
+      if (panelRef.current?.contains(active) || active === buttonRef.current) {
         navRef.current?.querySelector('.nav-brand')?.focus()
       }
       setOpenedOn(null)
