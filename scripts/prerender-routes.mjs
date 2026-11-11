@@ -18,12 +18,17 @@
  * Routes come from src/App.jsx itself (every literal `path="..."`), so a new page can't
  * silently miss its file. Redirect-only routes (<Navigate>) still get a file — the
  * client-side redirect then runs — but stay out of the sitemap.
+ *
+ * Each file also gets its route's own <title> and meta description from
+ * src/data/routeMeta.js (redirects get their target's), so search results and link
+ * previews don't all show the home page's title. A route without an entry fails the build.
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { READING, readingRoute } from '../src/data/reading.js';
+import { ROUTE_META } from '../src/data/routeMeta.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -44,6 +49,9 @@ const SRC_NAME = 'src/App.jsx';
 const routeRe = /<Route\s+path="([^"]+)"\s+element=\{\s*<(\w+)/g;
 const pages = [];
 const redirects = [];
+const redirectTarget = {};
+const navigateRe = /<Route\s+path="([^"]+)"\s+element=\{\s*<Navigate\s+to="([^"]+)"/g;
+for (const [, path, to] of appSrc.matchAll(navigateRe)) redirectTarget[path] = to;
 for (const [, path, element] of appSrc.matchAll(routeRe)) {
   if (path === '/' || path.includes(':')) continue; // root exists; params expand below
   (element === 'Navigate' ? redirects : pages).push(path);
@@ -67,14 +75,50 @@ if (!appSrc.includes('path="/reading/:slug"')) {
 }
 const articles = READING.map((a) => readingRoute(a.slug));
 
+// Per-route <title> + meta description. The source index.html carries exactly one
+// <title> and no description; both are replaced/inserted here.
+const escapeHtml = (text) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const titleRe = /<title>[^<]*<\/title>/;
+if ((indexHtml.match(/<title>/g) || []).length !== 1 || !titleRe.test(indexHtml)) {
+  console.error('dist/index.html must contain exactly one <title> — update prerender-routes.mjs.');
+  process.exit(1);
+}
+if (/<meta\s+name="description"/.test(indexHtml)) {
+  console.error('index.html already has a meta description; prerender-routes.mjs inserts its own — remove one.');
+  process.exit(1);
+}
+function htmlFor(route) {
+  const metaRoute = redirectTarget[route] || route;
+  const meta = ROUTE_META[metaRoute];
+  if (!meta) {
+    console.error(`No title/description for ${metaRoute} in src/data/routeMeta.js — add one.`);
+    process.exit(1);
+  }
+  return indexHtml.replace(
+    titleRe,
+    `<title>${escapeHtml(meta.title)}</title>\n    <meta name="description" content="${escapeHtml(meta.description)}" />`,
+  );
+}
+for (const route of redirects) {
+  if (!redirectTarget[route]) {
+    console.error(`Redirect ${route} has no literal to="..." target in ${SRC_NAME} — update prerender-routes.mjs.`);
+    process.exit(1);
+  }
+}
+
+// The root file is rewritten in place: dist/index.html also serves "/".
+writeFileSync(indexPath, htmlFor('/'));
+
 const written = [];
 for (const route of [...pages, ...redirects, ...articles]) {
   // <route>.html serves /route; <route>/index.html serves /route/ (Pages would
   // otherwise 404 the trailing-slash form).
   const rel = route.replace(/^\//, '');
+  const html = htmlFor(route);
   for (const file of [join(DIST, `${rel}.html`), join(DIST, rel, 'index.html')]) {
     mkdirSync(dirname(file), { recursive: true });
-    writeFileSync(file, indexHtml);
+    writeFileSync(file, html);
   }
   written.push(route);
 }
