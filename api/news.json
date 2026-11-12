@@ -1,16 +1,10 @@
 {
-  "runId": "43247554393-1",
-  "lastUpdated": "2026-11-12T15:25:32.494Z",
-  "summary": "Recent midterm results have energized DC statehood advocates, who argue that the District's population exceeds that of some states and point to multiple recent attacks on DC's local authority as evidence of the need for full representation. An ACLU commentary has raised concerns about the District's National Guard arrangement in the context of broader questions about DC's autonomy. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
-  "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
-  },
-  "summaryCheck": {
-    "judge": "pass",
-    "judgeVersion": "2026-09-12.1"
-  },
-  "summaryDecision": "judge-pass",
+  "runId": "43330980510-1",
+  "lastUpdated": "2026-11-12T23:42:33.678Z",
+  "summary": null,
+  "summarySource": null,
+  "summaryCheck": null,
+  "summaryDecision": "judge-flag",
   "articles": [
     {
       "title": "DC Vote: Midterm Results Create New Momentum for DC Statehood",
