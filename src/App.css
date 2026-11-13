@@ -395,12 +395,6 @@ a.preview-card-live.follow-card {
   box-shadow: var(--shadow-lg);
 }
 
-.hero-note {
-  margin-top: var(--s-5);
-  font-size: var(--fs-sm);
-  color: rgba(255, 255, 255, 0.7);
-  font-style: italic;
-}
 
 /* Facts Section */
 .facts-section {
@@ -478,6 +472,13 @@ a.preview-card-live.follow-card {
 
 .highlight-card .fact-detail {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.fact-checked {
+  margin-top: var(--s-2);
+  font-size: var(--fs-xs);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Impact Section */

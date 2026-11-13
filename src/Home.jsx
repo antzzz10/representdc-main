@@ -7,13 +7,10 @@ import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 
 function Home() {
-  const { introducedThisCongress, pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
+  const { pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
 
-  // The hook falls back to hardcoded counts, which are a snapshot from January 2026 and
-  // drift further every week. Publishing them unlabelled would state a stale number as
-  // current, so the note is withheld until real stats arrive; the page reads fine
-  // without it. The paragraph itself stays mounted holding a blank line, so the hero
-  // doesn't jump when the fetch resolves.
+  // Counts and the "last checked" date show only once live stats have loaded, so the page
+  // never states a placeholder or stale number as current.
   const showBillCount = !loading && !error
 
   return (
@@ -31,16 +28,6 @@ function Home() {
           <a href="#picker" className="cta-primary">
             <span>Find your starting point</span> <Icon name="arrow-down" />
           </a>
-          <p className="hero-note">
-            {showBillCount ? (
-              <>
-                {introducedThisCongress} anti-DC bills, resolutions and riders introduced in this Congress
-                {lastChecked && <> · Last checked {formatCheckedInstant(lastChecked)}</>}
-              </>
-            ) : (
-              '\u00A0'
-            )}
-          </p>
         </div>
       </section>
 
@@ -63,6 +50,10 @@ function Home() {
               <div className="fact-number">{showBillCount ? pendingBills : '—'}</div>
               <div className="fact-label">Anti-DC bills, resolutions and riders</div>
               <div className="fact-detail">Pending in the current Congress—and counting</div>
+              {/* Stays mounted with a blank line until stats load, so the card doesn't grow. */}
+              <div className="fact-checked">
+                {showBillCount && lastChecked ? `Last checked ${formatCheckedInstant(lastChecked)}` : '\u00A0'}
+              </div>
             </div>
           </div>
         </div>
