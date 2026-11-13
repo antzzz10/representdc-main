@@ -19,6 +19,7 @@ const NAV_ITEMS = [
     href: 'https://candidates.representdc.org',
     title: 'For D.C. voters — 2026 primary candidate positions on statehood',
   },
+  { label: 'Follow', to: '/follow' },
 ]
 
 function NavItem({ item, className, onClick }) {
@@ -61,7 +62,7 @@ function Nav() {
       if (!navRef.current?.contains(event.target)) setOpenedOn(null)
     }
     // The panel only exists below the breakpoint; widening the window past it closes it.
-    const wide = window.matchMedia('(min-width: 1025px)')
+    const wide = window.matchMedia('(min-width: 1120px)')
     function onWide(event) {
       if (!event.matches) return
       // The menu button vanishes at this width too, so park focus on the brand link.

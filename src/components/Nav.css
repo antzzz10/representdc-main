@@ -150,11 +150,12 @@
   min-height: calc(var(--s-6) + var(--s-3)); /* 44px touch target */
 }
 
-/* At 1024 px and below the full row of links no longer fits beside the brand (it
-   overflowed between 769 and ~950 px once "Statehood bill" was added, 2026-11-10). The
+/* At 1119 px and below the full row of links no longer fits beside the brand (it
+   overflowed between 769 and ~950 px once "Statehood bill" was added, 2026-11-10, and
+   up to ~1070 px once "Follow" was added, 2026-11-13). The
    bar keeps the brand, the CTA and a menu button; the menu lists every destination,
    including the "Bill tracker" text link the tablet bar used to drop. */
-@media (max-width: 1024px) {
+@media (max-width: 1119px) {
   .nav-links {
     gap: var(--s-3);
   }
@@ -190,7 +191,7 @@
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1120px) {
   .nav-menu {
     display: none;
   }
