@@ -11,13 +11,14 @@ const CHAMBERS = [
 function DepartedNote({ bill, departed, chamberLabel }) {
   if (departed.length === 0) return null
   const n = departed.length
+  const total = bill.totals.cosponsors
   const names = [...departed]
     .sort((a, b) => lastNameKey(a.name).localeCompare(lastNameKey(b.name)))
     .map((c) => `${c.name} (${c.state})`)
     .join(', ')
   return (
     <p className="lookup-footnote">
-      Congress.gov records {bill.totals.cosponsors} cosponsors of {bill.billNumber}. {n} of them{' '}
+      Congress.gov records {total} {total === 1 ? 'cosponsor' : 'cosponsors'} of {bill.billNumber}. {n} of them{' '}
       {n === 1 ? 'has' : 'have'} since left the {chamberLabel} and {n === 1 ? 'is' : 'are'} not listed here: {names}.
     </p>
   )
