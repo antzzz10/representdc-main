@@ -1,6 +1,7 @@
 import { useId, useMemo, useRef, useState } from 'react'
 import { MemberRow } from './MemberRow'
 import { memberStatuses, ordinal } from '../data/statehoodBill'
+import { SORTS, partyKey, partyOptions, sortMembers } from '../data/memberSort'
 
 const CHAMBERS = [
   { key: 'house', label: 'House', plural: 'House members' },
@@ -14,11 +15,14 @@ const FILTERS = [
 
 // The organizer view: every current member, their status on this chamber's bill.
 // Tabs follow the WAI-ARIA tabs pattern (arrow keys move between them); filters are a
-// native radio group, so they work by keyboard with no extra code.
+// native radio group, so they work by keyboard with no extra code. Party and sort are
+// native selects for the same reason.
 function MemberLookup({ bills, rosters }) {
   const [chamber, setChamber] = useState('house')
   const [filter, setFilter] = useState('not-yet')
   const [stateCode, setStateCode] = useState('')
+  const [partyChoice, setPartyChoice] = useState('')
+  const [sort, setSort] = useState('name')
   const [query, setQuery] = useState('')
   const tabRefs = useRef({})
   const id = useId()
@@ -35,11 +39,27 @@ function MemberLookup({ bills, rosters }) {
   const usable = Boolean(statuses)
   const all = useMemo(() => statuses ?? [], [statuses])
   const states = useMemo(() => [...new Set(all.map((m) => m.state))].sort(), [all])
+  const parties = useMemo(() => partyOptions(all), [all])
+  // A party picked in one chamber may not exist in the other; then it filters nothing.
+  const party = parties.some((p) => p.key === partyChoice) ? partyChoice : ''
+  const sorted = useMemo(() => sortMembers(all, sort), [all, sort])
   const needle = query.trim().toLowerCase()
-  const shown = all.filter((m) =>
+  const shown = sorted.filter((m) =>
     (filter === 'all' || m.status === filter || (filter === 'signed' && m.status === 'sponsor')) &&
     (!stateCode || m.state === stateCode) &&
+    (!party || partyKey(m) === party) &&
     (!needle || m.name.toLowerCase().includes(needle)))
+
+  // Sign-on order says nothing about members who have not signed on, so the two choices
+  // move together: picking it shows who has signed, and leaving for "not yet" drops it.
+  const chooseSort = (key) => {
+    setSort(key)
+    if (key === 'recent' && filter === 'not-yet') setFilter('signed')
+  }
+  const chooseFilter = (key) => {
+    setFilter(key)
+    if (key === 'not-yet' && sort === 'recent') setSort('name')
+  }
 
   const selectTab = (key) => {
     setChamber(key)
@@ -90,7 +110,7 @@ function MemberLookup({ bills, rosters }) {
                 <legend className="sr-only">Show</legend>
                 {FILTERS.map((f) => (
                   <label key={f.key} className="filter-chip">
-                    <input type="radio" name={`${id}-filter`} value={f.key} checked={filter === f.key} onChange={() => setFilter(f.key)} />
+                    <input type="radio" name={`${id}-filter`} value={f.key} checked={filter === f.key} onChange={() => chooseFilter(f.key)} />
                     <span>{f.label}</span>
                   </label>
                 ))}
@@ -100,6 +120,19 @@ function MemberLookup({ bills, rosters }) {
                 <select value={stateCode} onChange={(e) => setStateCode(e.target.value)}>
                   <option value="">All states</option>
                   {states.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </label>
+              <label className="lookup-field">
+                <span>Party</span>
+                <select value={party} onChange={(e) => setPartyChoice(e.target.value)}>
+                  <option value="">All parties</option>
+                  {parties.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+                </select>
+              </label>
+              <label className="lookup-field">
+                <span>Sort by</span>
+                <select value={sort} onChange={(e) => chooseSort(e.target.value)}>
+                  {SORTS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
                 </select>
               </label>
               <label className="lookup-field">
