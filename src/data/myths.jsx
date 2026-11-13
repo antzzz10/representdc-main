@@ -28,7 +28,7 @@ const SRC = {
     'https://news.ballotpedia.org/2025/04/24/on-this-day-in-1956-alaska-voters-passed-the-tennessee-plan-to-gain-statehood-how-is-that-plan-being-used-today/',
   dcConstitution: 'https://statehood.dc.gov/publication/constitution-state-washington-dc',
   shadowDelegation: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-123',
-  newStatesClause: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1',
+  newStatesClause: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1/overview-of-admissions-new-states-clause',
   wwi: 'https://home.nps.gov/places/000/district-of-columbia-war-memorial.htm',
   fy25Budget: 'https://www.everycrsreport.com/reports/R48609.html',
 }
@@ -61,11 +61,9 @@ export const ITEMS = [
     q: '"Statehood for D.C. is far-fetched."',
     a: (
       <>
-        <Link to="/the-case">Thirty-seven states have joined</Link> since the original 13, most
-        admitted from territory by{' '}
-        <Cite href={SRC.newStatesClause}>an ordinary act of Congress</Cite> and a presidential
-        signature—no constitutional amendment has ever been required. The bills before Congress
-        would admit the land outside a shrunken federal district on that same footing.
+        <Link to="/the-case">Thirty-seven states have joined</Link> since the original 13, all
+        admitted by <Cite href={SRC.newStatesClause}>legislation</Cite>. The bills before
+        Congress would admit the land outside a shrunken federal district by legislation too.
       </>
     ),
   },
@@ -306,7 +304,7 @@ export const SOURCES = [
     display: 'code.dccouncil.gov',
   },
   {
-    label: 'Constitution Annotated, Art. IV, § 3, cl. 1 (New States Clause), via Cornell LII',
+    label: 'Constitution Annotated, "Overview of Admissions (New States) Clause," Art. IV, § 3, cl. 1, via Cornell LII',
     href: SRC.newStatesClause,
     display: 'law.cornell.edu',
   },
