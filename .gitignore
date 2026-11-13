@@ -29,3 +29,6 @@ scripts/eval/last-golden-run.json
 *.njsproj
 *.sln
 *.sw?
+
+# Private ideas file (resync skill); never committed.
+private/IDEAS.md

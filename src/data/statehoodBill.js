@@ -360,6 +360,20 @@ export function memberStatuses(roster, bill, now = new Date()) {
 }
 
 /**
+ * Cosponsors on the bill's record who are absent from the chamber's current roster, i.e.
+ * members who signed on and have since left. They count in the recorded total but cannot
+ * appear in the member list, which is built from the roster. Only a cosponsor who signed on
+ * before the roster's date counts: one who signed on that day or later may be a new member
+ * the weekly roster has not caught up with, not a departure (Codex review, 2026-11-13).
+ */
+export function departedCosponsors(roster, bill) {
+  if (!roster || !bill || roster.congress !== bill.congress || !bill.complete) return []
+  const seated = new Set(roster.members.filter((m) => m.chamber === bill.chamber).map((m) => m.bioguideId))
+  const rosterDate = etDate(roster.generatedAt)
+  return bill.cosponsors.filter((c) => !seated.has(c.bioguideId) && c.sponsorshipDate < rosterDate)
+}
+
+/**
  * History rows. A row the tracker marks provisional (`final: false`) takes its count from
  * the live cosponsor file when that file holds the same bill as the current, complete one,
  * so the table and the headline never disagree. Final rows are never overwritten.

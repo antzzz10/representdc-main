@@ -1,12 +1,29 @@
 import { useId, useMemo, useRef, useState } from 'react'
 import { MemberRow } from './MemberRow'
-import { memberStatuses, ordinal } from '../data/statehoodBill'
-import { SORTS, partyKey, partyOptions, sortMembers } from '../data/memberSort'
+import { departedCosponsors, memberStatuses, ordinal } from '../data/statehoodBill'
+import { SORTS, lastNameKey, partyKey, partyOptions, sortMembers } from '../data/memberSort'
 
 const CHAMBERS = [
   { key: 'house', label: 'House', plural: 'House members' },
   { key: 'senate', label: 'Senate', plural: 'senators' },
 ]
+// Why the recorded total is larger than the number of rows marked "Signed on".
+function DepartedNote({ bill, departed, chamberLabel }) {
+  if (departed.length === 0) return null
+  const n = departed.length
+  const total = bill.totals.cosponsors
+  const names = [...departed]
+    .sort((a, b) => lastNameKey(a.name).localeCompare(lastNameKey(b.name)))
+    .map((c) => `${c.name} (${c.state})`)
+    .join(', ')
+  return (
+    <p className="lookup-footnote">
+      Congress.gov records {total} {total === 1 ? 'cosponsor' : 'cosponsors'} of {bill.billNumber}. {n} of them{' '}
+      {n === 1 ? 'has' : 'have'} since left the {chamberLabel} and {n === 1 ? 'is' : 'are'} not listed here: {names}.
+    </p>
+  )
+}
+
 const FILTERS = [
   { key: 'not-yet', label: 'Not yet signed on' },
   { key: 'signed', label: 'Signed on' },
@@ -37,6 +54,7 @@ function MemberLookup({ bills, rosters }) {
     [bill, roster],
   )
   const usable = Boolean(statuses)
+  const departed = useMemo(() => (usable ? departedCosponsors(roster, bill) : []), [usable, roster, bill])
   const all = useMemo(() => statuses ?? [], [statuses])
   const states = useMemo(() => [...new Set(all.map((m) => m.state))].sort(), [all])
   const parties = useMemo(() => partyOptions(all), [all])
@@ -148,6 +166,7 @@ function MemberLookup({ bills, rosters }) {
                 {shown.map((m) => <MemberRow key={m.bioguideId} member={m} />)}
               </ul>
             )}
+            <DepartedNote bill={bill} departed={departed} chamberLabel={active.label} />
           </>
         )}
       </div>

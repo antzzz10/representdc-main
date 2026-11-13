@@ -361,6 +361,13 @@
   margin: 0 0 var(--s-2);
 }
 
+.lookup-footnote {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--slate-700);
+  margin: var(--s-3) 0 0;
+}
+
 .lookup-empty {
   font-weight: 700;
   color: var(--navy);
