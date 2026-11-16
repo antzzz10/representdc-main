@@ -5,19 +5,17 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
-import { contextParts, progressTiles, headlineNoun } from './lib/billProgress'
+import { contextParts, headlineNoun } from './lib/billProgress'
 
 function Home() {
   const { totalBills, progress, lastChecked, loading, error } = useBillStats()
 
   // Counts and the "last checked" date show only once live stats have loaded, so the page
   // never states a placeholder or stale number as current.
-  const showBillCount = !loading && !error && Number.isInteger(totalBills)
+  const showBillCount = !loading && !error
   // One headline number everywhere: every tracked anti-DC measure, with the split beneath
   // it as context (Andria, 2026-11-15).
   const context = showBillCount ? contextParts(progress) : []
-  const tiles = showBillCount ? progressTiles(progress) : []
-  const lawCount = showBillCount && progress ? progress.law : 0
 
   return (
     <div className="app">
@@ -140,9 +138,9 @@ function Home() {
                 <p>
                   Every law the D.C. Council passes goes to Congress for review before it can take
                   effect—and Congress retains authority over the District's budget. That standing
-                  authority is behind the {showBillCount ? `${totalBills} bills, resolutions and riders` : 'bills, resolutions and riders'} in
-                  this Congress that would override local D.C. decisions
-                  {lawCount > 0 ? `—${lawCount} of them already law.` : '.'}
+                  authority is behind the {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'threats to D.C. home rule'} in
+                  this Congress: bills, resolutions and budget riders that would override
+                  D.C.'s local laws or limit its self-government.
                 </p>
               </div>
             </div>
@@ -199,21 +197,16 @@ function Home() {
         <div className="container">
           <h2 className="section-title">Not stalled—actively moving through Congress</h2>
           <p className="section-intro">
-            {showBillCount ? `These ${totalBills} bills, resolutions and riders` : 'These bills'} aren't sitting untouched. Some are already law and others have cleared a chamber; most have not passed either chamber yet—all of them threats to D.C.'s home rule.
+            How far the bills, resolutions and budget riders that would override D.C.'s local
+            laws or limit its self-government have got in this Congress.
           </p>
           <div className="trend-highlight">
-            {tiles.length > 0 ? tiles.map(tile => (
-              <div className="trend-stat" key={tile.label}>
-                <span className="trend-number">{tile.number}</span>
-                <span className="trend-label">{tile.label}</span>
-              </div>
-            )) : (
-              <div className="trend-stat">
-                <span className="trend-number">{showBillCount ? totalBills : '—'}</span>
-                <span className="trend-label">{headlineNoun(showBillCount ? totalBills : 2)}</span>
-              </div>
-            )}
+            <div className="trend-stat">
+              <span className="trend-number">{showBillCount ? totalBills : '—'}</span>
+              <span className="trend-label">{headlineNoun(showBillCount ? totalBills : 2)}</span>
+            </div>
           </div>
+          {context.length > 0 && <p className="trend-context">{context.join(' · ')}</p>}
           <a href="https://billtracker.representdc.org" className="cta-secondary">
             <span>Explore the bill tracker</span> <Icon name="arrow-right" />
           </a>

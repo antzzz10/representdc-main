@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { readProgress } from '../lib/billProgress'
+import { readProgress, isHeadlineCount } from '../lib/billProgress'
 
 // Only a true instant is safe to render in a fixed timezone. A date-only value like
 // "2026-09-17" parses as UTC midnight and renders a day early in ET — the bug this
@@ -55,6 +55,9 @@ export function useBillStats() {
         if (!response.ok) throw new Error('Failed to fetch')
 
         const data = await response.json()
+        // A response that parses but carries no usable headline is no data: every page
+        // then hides its counts, instead of one showing "undefined" and another a dash.
+        if (!isHeadlineCount(data?.totalBills)) throw new Error('Malformed bill stats')
         setStats({
           totalBills: data.totalBills,
           // Everything introduced this Congress, archived measures included (the tracker

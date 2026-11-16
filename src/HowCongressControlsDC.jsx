@@ -3,12 +3,14 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { useBillStats } from './hooks/useBillStats'
+import { contextParts, headlineNoun } from './lib/billProgress'
 import './App.css'
 import './HowCongressControlsDC.css'
 
 function HowCongressControlsDC() {
   const { totalBills, progress, loading, error } = useBillStats()
   const showBillCount = !loading && !error
+  const context = showBillCount ? contextParts(progress) : []
 
   return (
     <div className="app">
@@ -164,9 +166,10 @@ function HowCongressControlsDC() {
             </div>
           </div>
           <p className="explainer-next">
-            {showBillCount ? `${totalBills} anti-DC bills, resolutions and riders` : 'Anti-DC bills, resolutions and riders'} in
-            this Congress use these exact mechanisms—review, riders, and budget authority
-            {showBillCount && progress?.law > 0 ? `—and ${progress.law} ${progress.law === 1 ? 'is' : 'are'} already law.` : '.'}
+            {showBillCount ? `${totalBills} ${headlineNoun(totalBills)} are` : 'Threats to D.C. home rule are'} tracked
+            in this Congress: bills, resolutions and budget riders that would override
+            D.C.'s local laws or limit its self-government.
+            {context.length > 0 && ` ${context.join(' · ')}.`}
           </p>
           <div className="interim-links">
             <div className="interim-row">

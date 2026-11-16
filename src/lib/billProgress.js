@@ -6,7 +6,7 @@
 // The wording mirrors dc-bills-tracker/src/lib/progressSplit.js, which publishes the
 // counts in stats.json as `progress`.
 
-const isCount = value => Number.isInteger(value) && value >= 0
+const isCount = value => Number.isSafeInteger(value) && value >= 0
 
 /**
  * Read `progress` from stats.json. Returns null unless every count is present and the
@@ -14,7 +14,7 @@ const isCount = value => Number.isInteger(value) && value >= 0
  */
 export function readProgress(data) {
   const progress = data?.progress
-  if (!progress) return null
+  if (!progress || !isCount(data.totalBills)) return null
   const { law, clearedChamber, clearedChamberWhere, notPassedEitherChamber } = progress
   if (![law, clearedChamber, notPassedEitherChamber].every(isCount)) return null
   if (law + clearedChamber + notPassedEitherChamber !== data.totalBills) return null
@@ -28,7 +28,7 @@ const one = n => n === 1
 export function movingPhrase(n, where) {
   if (where === 'house') return `passed the House and ${one(n) ? 'awaits' : 'await'} the Senate`
   if (where === 'senate') return `passed the Senate and ${one(n) ? 'awaits' : 'await'} the House`
-  return `cleared at least one chamber and ${one(n) ? 'is' : 'are'} not yet law`
+  return `cleared at least one chamber and ${one(n) ? 'is' : 'are'} not law`
 }
 
 /**
@@ -45,16 +45,8 @@ export function contextParts(progress) {
   ].filter(Boolean)
 }
 
-/** The same three groups as number + label pairs, for stat tiles. */
-export function progressTiles(progress) {
-  if (!progress) return []
-  const { law, moving, movingWhere, notPassed } = progress
-  return [
-    law > 0 && { number: law, label: one(law) ? 'is law' : 'are law' },
-    moving > 0 && { number: moving, label: movingPhrase(moving, movingWhere) },
-    notPassed > 0 && { number: notPassed, label: `${one(notPassed) ? 'has' : 'have'} not passed either chamber` },
-  ].filter(Boolean)
-}
+/** A headline count is a whole number, zero or more. Anything else is treated as no data. */
+export const isHeadlineCount = value => Number.isSafeInteger(value) && value >= 0
 
 /** "threats to D.C. home rule": the one headline label, used with totalBills everywhere. */
 export const headlineNoun = count => `${count === 1 ? 'threat' : 'threats'} to D.C. home rule`

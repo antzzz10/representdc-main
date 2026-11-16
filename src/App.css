@@ -692,11 +692,19 @@ a.preview-card-live.follow-card {
   font-variant-numeric: tabular-nums;
 }
 
+.trend-context {
+  margin: 0 auto var(--s-6, 24px);
+  max-width: 640px;
+  font-size: var(--fs-lg);
+  color: var(--slate-500);
+  text-align: center;
+}
+
 .trend-label {
   font-size: var(--fs-lg);
   color: var(--slate-500);
   margin-top: var(--s-2);
-  max-width: 200px;
+  max-width: 320px;
 }
 
 .cta-secondary {
