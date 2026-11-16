@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { readProgress } from '../lib/billProgress'
 
 // Only a true instant is safe to render in a fixed timezone. A date-only value like
 // "2026-09-17" parses as UTC midnight and renders a day early in ET — the bug this
@@ -36,6 +37,9 @@ export function useBillStats() {
     introducedThisCongress: null,
     pendingBills: null,
     passedBills: null,
+    // Law / cleared a chamber / not passed either chamber; null until stats arrive, or if
+    // the published split doesn't add up to totalBills.
+    progress: null,
     lastUpdated: '2026-01-20',
     // No fallback: a hardcoded "last checked" date would go stale silently. The
     // homepage hides the date until real stats arrive.
@@ -59,6 +63,7 @@ export function useBillStats() {
           introducedThisCongress: data.introducedThisCongress ?? data.totalBills,
           pendingBills: data.pendingBills,
           passedBills: data.passedBills,
+          progress: readProgress(data),
           lastUpdated: data.lastUpdated,
           // Stamped on every successful daily Congress.gov sweep, even when no bill
           // changed; `lastUpdated` only moves when bill data changes. Older stats

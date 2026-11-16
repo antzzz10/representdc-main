@@ -5,13 +5,19 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
+import { contextParts, progressTiles, headlineNoun } from './lib/billProgress'
 
 function Home() {
-  const { pendingBills, passedBills, lastChecked, loading, error } = useBillStats()
+  const { totalBills, progress, lastChecked, loading, error } = useBillStats()
 
   // Counts and the "last checked" date show only once live stats have loaded, so the page
   // never states a placeholder or stale number as current.
-  const showBillCount = !loading && !error
+  const showBillCount = !loading && !error && Number.isInteger(totalBills)
+  // One headline number everywhere: every tracked anti-DC measure, with the split beneath
+  // it as context (Andria, 2026-11-15).
+  const context = showBillCount ? contextParts(progress) : []
+  const tiles = showBillCount ? progressTiles(progress) : []
+  const lawCount = showBillCount && progress ? progress.law : 0
 
   return (
     <div className="app">
@@ -47,9 +53,11 @@ function Home() {
               <div className="fact-detail">D.C.'s delegate can introduce bills but cannot vote on final passage</div>
             </div>
             <div className="fact-card highlight-card">
-              <div className="fact-number">{showBillCount ? pendingBills : '—'}</div>
-              <div className="fact-label">Anti-DC bills, resolutions and riders</div>
-              <div className="fact-detail">Pending in the current Congress—and counting</div>
+              <div className="fact-number">{showBillCount ? totalBills : '—'}</div>
+              <div className="fact-label">{showBillCount && totalBills === 1 ? 'Threat' : 'Threats'} to D.C. home rule in this Congress</div>
+              <div className="fact-detail">
+                {context.length > 0 ? context.join(' · ') : 'Bills, resolutions and budget riders'}
+              </div>
               {/* Stays mounted with a blank line until stats load, so the card doesn't grow. */}
               <div className="fact-checked">
                 {showBillCount && lastChecked ? `Last checked ${formatCheckedInstant(lastChecked)}` : '\u00A0'}
@@ -132,8 +140,9 @@ function Home() {
                 <p>
                   Every law the D.C. Council passes goes to Congress for review before it can take
                   effect—and Congress retains authority over the District's budget. That standing
-                  authority is why {showBillCount ? `${pendingBills} pending bills, resolutions and riders` : 'bills, resolutions and riders'} to
-                  override local D.C. decisions can move through Congress today.
+                  authority is behind the {showBillCount ? `${totalBills} bills, resolutions and riders` : 'bills, resolutions and riders'} in
+                  this Congress that would override local D.C. decisions
+                  {lawCount > 0 ? `—${lawCount} of them already law.` : '.'}
                 </p>
               </div>
             </div>
@@ -190,17 +199,20 @@ function Home() {
         <div className="container">
           <h2 className="section-title">Not stalled—actively moving through Congress</h2>
           <p className="section-intro">
-            These bills aren't sitting untouched. Some have already cleared a chamber; most are still pending—all of them live threats to D.C.'s home rule.
+            {showBillCount ? `These ${totalBills} bills, resolutions and riders` : 'These bills'} aren't sitting untouched. Some are already law and others have cleared a chamber; most have not passed either chamber yet—all of them threats to D.C.'s home rule.
           </p>
           <div className="trend-highlight">
-            <div className="trend-stat">
-              <span className="trend-number">{showBillCount ? passedBills : '—'}</span>
-              <span className="trend-label">already passed a chamber</span>
-            </div>
-            <div className="trend-stat">
-              <span className="trend-number">{showBillCount ? pendingBills : '—'}</span>
-              <span className="trend-label">still pending</span>
-            </div>
+            {tiles.length > 0 ? tiles.map(tile => (
+              <div className="trend-stat" key={tile.label}>
+                <span className="trend-number">{tile.number}</span>
+                <span className="trend-label">{tile.label}</span>
+              </div>
+            )) : (
+              <div className="trend-stat">
+                <span className="trend-number">{showBillCount ? totalBills : '—'}</span>
+                <span className="trend-label">{headlineNoun(showBillCount ? totalBills : 2)}</span>
+              </div>
+            )}
           </div>
           <a href="https://billtracker.representdc.org" className="cta-secondary">
             <span>Explore the bill tracker</span> <Icon name="arrow-right" />
