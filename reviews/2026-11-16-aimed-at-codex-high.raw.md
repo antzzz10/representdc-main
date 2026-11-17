@@ -1,0 +1,8 @@
+**BLOCKER: 0. MATERIAL: 0.** Reviewed `bd2fff4` (`git show HEAD`); no files modified.
+
+- **NOTE — `src/Home.jsx:141`; `src/HowCongressControlsDC.jsx:169`:** Both components render grammatical wording for counts **0, 1 and many**, plus loading, failed stats and unavailable progress splits. “Overriding … or limiting …” is parallel. The plural list after the colon defines measure types and works with a singular count.
+- **NOTE — `src/Home.jsx:142`; `src/HowCongressControlsDC.jsx:170`:** “Aimed at” describes purpose without asserting future enactment or successful effect. It therefore fits bills, resolutions and budget riders, enacted or otherwise—including the four already-law measures. It also avoids implying that every resolution independently has legal force. These mechanisms align with [CRS’s account of congressional authority over D.C.](https://www.congress.gov/crs-product/IF12577).
+- **NOTE — `reviews/2026-11-16-headline-74-copy-codex-medium.raw.md:5`:** The old wording survives only in historical review records, including the high and recheck records. No current reader-facing definition retains it; the existing generated bundle also contains the new wording.
+- **NOTE — `scripts/eval/billProgress.test.mjs:10`:** No test or gate depends on the old phrase. All **6 count/progress tests pass**, and ESLint passes for both changed files. Verification used in-memory React rendering; no build files were written.
+
+**Verdict: PASS — the wording change is grammatical, consistent and accurate across the requested states and measure types.**
