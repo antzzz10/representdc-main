@@ -84,7 +84,7 @@ function HowCongressControlsDC() {
             <div className="bill-type-card">
               <div className="bill-type-days">30 days</div>
               <div className="bill-type-label">Civil legislation</div>
-              <div className="bill-type-detail">Counted only on days Congress is in session. Congress can disapprove before the law takes effect.</div>
+              <div className="bill-type-detail">Weekends, holidays and long congressional recesses don't count. Congress can disapprove before the law takes effect.</div>
             </div>
             <div className="bill-type-card">
               <div className="bill-type-days">60 days</div>
@@ -101,14 +101,14 @@ function HowCongressControlsDC() {
             <div className="explainer-step">
               <span className="step-num">1</span>
               <div>
-                <h3>Laws go to Congress before they take effect</h3>
+                <h3>Most laws go to Congress before they take effect</h3>
                 <p>
-                  Before a law the Council passes can take effect, it sits in front of Congress
-                  for the review period shown above, counted only on days Congress is in session.
-                  During that window, Congress can pass a joint resolution disapproving the law.
-                  If the President signs it, the law never takes effect. Temporary emergency laws,
-                  which last up to 90 days, are the exception. No state legislature answers to a
-                  review period like this.
+                  Before most laws the Council passes can take effect, they sit in front of
+                  Congress for the review period shown above. Weekends, holidays and long
+                  congressional recesses don't count toward it. Congress can stop a law by passing
+                  a joint resolution of disapproval that becomes federal law, which normally takes
+                  the President's signature. Emergency laws, which last up to 90 days, take effect
+                  without this wait. No state legislature answers to a review period like this.
                 </p>
               </div>
             </div>
@@ -128,12 +128,12 @@ function HowCongressControlsDC() {
             <div className="explainer-step">
               <span className="step-num">3</span>
               <div>
-                <h3>The budget itself needs congressional sign-off</h3>
+                <h3>Congress keeps power over D.C.'s budget</h3>
                 <p>
-                  The Council approves D.C.'s annual budget, built from the District's own local
-                  tax revenue, but it takes effect only when Congress approves it through the
-                  federal appropriations process. States don't send their budgets to Congress for
-                  approval.
+                  The Council passes D.C.'s annual budget, built from the District's own local
+                  tax revenue, and sends it to Congress for review. Congress still approves that
+                  budget in its own spending bills, and can change it or restrict how D.C. spends
+                  its money. States don't send their budgets to Congress for approval.
                 </p>
               </div>
             </div>
