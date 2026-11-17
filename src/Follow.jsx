@@ -6,15 +6,16 @@ import BlueskySection from './components/BlueskySection'
 import './App.css'
 
 // Lists only ways to follow that exist today, per the site rule. The Bluesky section shows
-// itself once the account has posts. The weekly email card (added 2026-11-17) points at the
-// newsletter's own sign-up page; the newsletter is sent from beehiiv, not from this site.
+// itself once the account has posts. The email card (added 2026-11-17) points at the
+// newsletter's sign-up page on beehiiv. It names no schedule until issues are going out:
+// say "weekly" here once that is true.
 const BLUESKY_HANDLE = 'bills.representdc.org'
 
 const WAYS = [
   {
     icon: 'mail',
-    title: 'Weekly email',
-    body: 'What Congress did to D.C. this week, what D.C. is doing about it, and how you can help. One email a week.',
+    title: 'Email updates',
+    body: 'What Congress does to D.C., what D.C. is doing about it, and how you can help, sent to your inbox.',
     href: 'https://representdc.beehiiv.com/subscribe',
     cta: 'Sign up',
   },
