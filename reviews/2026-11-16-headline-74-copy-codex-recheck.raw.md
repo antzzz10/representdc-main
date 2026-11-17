@@ -10,7 +10,7 @@ The five distinct findings across both previous reviews:
 | Counted unit left implicit | **FIXED** | The homepage now labels the count “bills, resolutions and budget riders.” |
 | “Are tracked” narration and singular disagreement | **FIXED** | Removed. The explainer correctly renders “0 threats” and “1 threat.” |
 
-**New MATERIAL — singular count label:** [Home.jsx:202](/private/tmp/claude-501/-Users-andriathomas-Projects-mervalabs-com/b69ea3cb-6c11-4386-89e1-c841f39c6b37/scratchpad/main-74/src/Home.jsx:202) now renders **“1 bills, resolutions and budget riders.”** Previously, the singular-aware label rendered “1 threat to D.C. home rule.” Keep a singular-aware count label and put the category list separately.
+**New MATERIAL — singular count label:** [Home.jsx:202](src/Home.jsx:202) now renders **“1 bills, resolutions and budget riders.”** Previously, the singular-aware label rendered “1 threat to D.C. home rule.” Keep a singular-aware count label and put the category list separately.
 
 Other checks:
 
