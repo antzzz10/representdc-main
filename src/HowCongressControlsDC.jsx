@@ -45,7 +45,7 @@ function HowCongressControlsDC() {
                 <span className="gov-connector"></span>
                 <span className="gov-node">3-person Board of Commissioners</span>
                 <span className="gov-connector"></span>
-                <span className="gov-node muted">D.C. residents: no vote, no local ballot</span>
+                <span className="gov-node muted">D.C. residents: no elected local government</span>
               </div>
             </div>
             <div className="gov-chart-col">
@@ -84,7 +84,7 @@ function HowCongressControlsDC() {
             <div className="bill-type-card">
               <div className="bill-type-days">30 days</div>
               <div className="bill-type-label">Civil legislation</div>
-              <div className="bill-type-detail">Congress can disapprove before it takes effect</div>
+              <div className="bill-type-detail">Counted only on days Congress is in session. Congress can disapprove before the law takes effect.</div>
             </div>
             <div className="bill-type-card">
               <div className="bill-type-days">60 days</div>
@@ -101,12 +101,14 @@ function HowCongressControlsDC() {
             <div className="explainer-step">
               <span className="step-num">1</span>
               <div>
-                <h3>Every law goes back to Congress first</h3>
+                <h3>Laws go to Congress before they take effect</h3>
                 <p>
-                  Before any bill the Council passes can take effect, it sits in front of Congress
-                  for the review period shown above. During that window, Congress can pass a
-                  resolution disapproving the law outright, and it never takes effect. No state
-                  legislature answers to a review period like this.
+                  Before a law the Council passes can take effect, it sits in front of Congress
+                  for the review period shown above, counted only on days Congress is in session.
+                  During that window, Congress can pass a joint resolution disapproving the law.
+                  If the President signs it, the law never takes effect. Temporary emergency laws,
+                  which last up to 90 days, are the exception. No state legislature answers to a
+                  review period like this.
                 </p>
               </div>
             </div>
@@ -129,8 +131,9 @@ function HowCongressControlsDC() {
                 <h3>The budget itself needs congressional sign-off</h3>
                 <p>
                   The Council approves D.C.'s annual budget, built from the District's own local
-                  tax revenue, but Congress reviews it and retains authority over it before D.C.
-                  can spend a dollar. States don't send their budgets to Congress for approval.
+                  tax revenue, but it takes effect only when Congress approves it through the
+                  federal appropriations process. States don't send their budgets to Congress for
+                  approval.
                 </p>
               </div>
             </div>
@@ -151,8 +154,8 @@ function HowCongressControlsDC() {
             <p>
               Eleanor Holmes Norton has held that one seat for more than three decades, 18 terms as
               of 2026. Before Congress, she was a civil-rights attorney who took part in the 1964
-              Mississippi Freedom Summer, won a landmark 1970 sex-discrimination case against
-              Newsweek, and became the first woman to chair the U.S. Equal Employment Opportunity
+              Mississippi Freedom Summer, represented the women of Newsweek in a landmark 1970
+              sex-discrimination complaint, and became the first woman to chair the U.S. Equal Employment Opportunity
               Commission. She did not seek re-election in 2026, closing out a career spent
               as D.C.'s only voice in the room, even without a vote on the floor.
             </p>
