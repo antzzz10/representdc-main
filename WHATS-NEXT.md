@@ -25,6 +25,14 @@ Plan: `docs/2026-11-08-value-updates-plan.md`. Goal 2's build plan:
 | **3. Timeline of bills and key actions** | Not started. Builds on the archive (C0). |
 | **4. Updates from statehood organizations** | Not started. Waiting on ✏️ 7: links only, no AI summary. |
 
+**Supportive bills page: revisit about 2026-11-30** (Andria, 2026-11-16). Stays parked
+for now; decide then so a page can be ready for the new Congress on 2027-01-03. All 36
+parked bills need a status re-check before they go public.
+
+**Menu and link gaps across all three sites** (Andria, 2026-11-16, ahead of an email
+push): one menu, phone menu and footer on the main site, tracker and candidates site.
+In progress. The wider navigation review below still waits on the supportive bills page.
+
 **Next after the goals:** the navigation review across all three sites (see
 "Exploratory" below).
 
