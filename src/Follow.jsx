@@ -5,11 +5,19 @@ import Icon from './components/Icon'
 import BlueskySection from './components/BlueskySection'
 import './App.css'
 
-// Lists only ways to follow that exist today, per the site rule. A weekly email digest gets
-// a card when it ships; the Bluesky section shows itself once the account has posts.
+// Lists only ways to follow that exist today, per the site rule. The Bluesky section shows
+// itself once the account has posts. The weekly email card (added 2026-11-17) points at the
+// newsletter's own sign-up page; the newsletter is sent from beehiiv, not from this site.
 const BLUESKY_HANDLE = 'bills.representdc.org'
 
 const WAYS = [
+  {
+    icon: 'mail',
+    title: 'Weekly email',
+    body: 'What Congress did to D.C. this week, what D.C. is doing about it, and how you can help. One email a week.',
+    href: 'https://representdc.beehiiv.com/subscribe',
+    cta: 'Sign up',
+  },
   {
     icon: 'landmark',
     title: 'Bill tracker',
