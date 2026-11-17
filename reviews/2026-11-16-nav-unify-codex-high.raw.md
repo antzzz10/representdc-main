@@ -1,0 +1,13 @@
+0 BLOCKER, 1 MATERIAL, 2 NOTE. Reviewed `eda2673` and the sibling integration checkouts. No files changed by me.
+
+- **MATERIAL — URL searches can reach PostHog.** `tracker-74/index.html:35`, `tracker-74/src/App.jsx:74`. With PostHog enabled, opening `/?search=<sensitive text>` and then expanding a bill or changing category sends a custom event containing the current URL. Disabling autocapture and pageviews does not remove this [default event property](https://posthog.com/docs/data/events). This conflicts with the tracker’s explicit rule against tracking searches. **Fix:** add a [`before_send` sanitizer](https://posthog.com/docs/privacy/data-collection#overriding-captured-events) that removes search text from URL-derived properties, and verify captured payloads with a distinctive test string.
+
+- **NOTE — Clearing filters leaves the original query behind.** `tracker-74/src/App.jsx:224`. The visible list clears, but reloading restores the original category/search; copying the address also shares the old filters. **Fix:** remove the relevant query parameters with `history.replaceState` when cleared, preserving unrelated parameters and the hash.
+
+- **NOTE — Pre-existing copy violations remain in the touched category data.** `src/data/categoryDetails.js:13`, `:17`. Titles such as “Criminal Justice Reform” use title case, and descriptions repeatedly use “DC” in body copy. **Fix:** use sentence-case titles and “D.C.” in prose, preserving proper names. The new menu wording and RepresentDC branding comply; no reader-facing em-dashes were introduced.
+
+Verification: all nine menu destinations and category mappings agree. DOM checks passed for opening, closing, Escape, outside dismissal, initial focus, Escape focus restoration, resize closure, and main-site navigation closure. CSS and JS both switch at 1160px; the explicit `[hidden]` rule is correct. Current-page spans are appropriately noninteractive and remain readable by assistive technology. No XSS path was found; unknown categories are ignored.
+
+All three sites compile in memory. Main-site lint, 28 read-only tests, and 16 URL-filter checks pass. Seven additional test failures came from sandbox-blocked temporary files. Visual overflow/overlap at **320, 375, 768, 1024, 1160 and 1280px remains unverified** because Playwright could not create its temporary files; full build/deploy scripts were not run.
+
+**Verdict: fix tracker analytics sanitization before deployment and complete the six-width visual check.**

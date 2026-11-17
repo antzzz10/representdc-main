@@ -157,7 +157,7 @@
    "Congress & D.C." and the tracker's longer button, 2026-11-16). The
    bar keeps the brand, the CTA and a menu button; the menu lists every destination,
    including the "Bill tracker" text link the tablet bar used to drop. */
-@media (max-width: 1159px) {
+@media (max-width: 1159.98px) {
   .nav-links {
     gap: var(--s-3);
   }
@@ -195,6 +195,14 @@
 
 @media (min-width: 1160px) {
   .nav-menu {
+    display: none;
+  }
+}
+
+/* The narrowest phones: the bar keeps the brand and the menu button; the red button
+   is still the last item in the menu. */
+@media (max-width: 359px) {
+  .nav-links > .nav-cta {
     display: none;
   }
 }

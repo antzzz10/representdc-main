@@ -117,7 +117,7 @@ function HowCongressControlsDC() {
                 <p>
                   Congress has a second lever: attaching a rider to the District's annual federal
                   appropriations bill, funding legislation D.C. depends on in a way states don't.
-                  In 2025, for example, a rider in the House's D.C. appropriations bill (H.R. 8773)
+                  In 2025, for example, a rider in the House's D.C. appropriations bill (H.R. 5166)
                   tried to bar the District from spending its own local funds to enforce its
                   no-turn-on-red law.
                 </p>
@@ -142,18 +142,18 @@ function HowCongressControlsDC() {
         <div className="container">
           <h2 className="section-title">One seat, no vote</h2>
           <p className="section-intro">
-            D.C. has elected a delegate to the House since 1970. The delegate can introduce
+            D.C. has elected a delegate to the House since 1971. The delegate can introduce
             legislation and vote in committee, but not on the House floor, where bills are
             actually decided. D.C. has never had a senator.
           </p>
           <div className="norton-callout">
             <h3>D.C.'s only voice in the House since 1991</h3>
             <p>
-              Eleanor Holmes Norton has held that one seat for more than three decades, 17 terms as
+              Eleanor Holmes Norton has held that one seat for more than three decades, 18 terms as
               of 2026. Before Congress, she was a civil-rights attorney who took part in the 1964
               Mississippi Freedom Summer, won a landmark 1970 sex-discrimination case against
               Newsweek, and became the first woman to chair the U.S. Equal Employment Opportunity
-              Commission. She has announced she won't seek re-election, closing out a career spent
+              Commission. She did not seek re-election in 2026, closing out a career spent
               as D.C.'s only voice in the room, even without a vote on the floor.
             </p>
             <div className="norton-callout-links">

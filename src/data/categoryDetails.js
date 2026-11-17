@@ -5,7 +5,7 @@
 
 // `billTrackerCategory` keys the talking points. `trackerQuery` is the bill tracker's own
 // filter for the same topic (its category ids differ, and it has no budget category,
-// so that card searches instead). The tracker reads it in src/lib/urlFilters.js.
+// so that card opens the whole list). The tracker reads it in src/lib/urlFilters.js.
 export const categoryDetails = [
   {
     id: 'criminal-justice',
@@ -65,7 +65,7 @@ The dual attack from both Congress and the executive branch demonstrates extraor
     title: 'Local Budget',
     summary: '$1+ billion cut from D.C.\'s locally-funded budget',
     billTrackerCategory: 'budget',
-    trackerQuery: 'search=budget',
+    trackerQuery: '',
     description: `For decades, DC has been denied control over its own locally-raised tax dollars, the only city in America whose budget requires Congressional approval under the Home Rule Act. This fundamental restriction has led to repeated crises, shutdowns, and forced spending cuts.
 
 One egregious example: In March 2025, the House passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a roughly 16 percent hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
