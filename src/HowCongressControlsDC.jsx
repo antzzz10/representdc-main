@@ -167,8 +167,8 @@ function HowCongressControlsDC() {
           </div>
           <p className="explainer-next">
             {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'Threats to D.C. home rule'} in
-            this Congress: bills, resolutions and budget riders that would override
-            D.C.'s local laws or limit its self-government.
+            this Congress: bills, resolutions and budget riders aimed at overriding
+            D.C.'s local laws or limiting its self-government.
             {context.length > 0 && ` ${context.join(' · ')}.`}
           </p>
           <div className="interim-links">
