@@ -51,7 +51,7 @@ function CategoryCard({ category }) {
 
           <div className="category-footer">
             <a
-              href={`https://billtracker.representdc.org?category=${category.billTrackerCategory}`}
+              href={`https://billtracker.representdc.org/?${category.trackerQuery}`}
               className="view-all-link"
               onClick={(e) => e.stopPropagation()}
             >

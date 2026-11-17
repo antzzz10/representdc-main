@@ -9,6 +9,7 @@ const TRACKER_URL = 'https://billtracker.representdc.org'
 // One list feeds both the desktop bar and the narrow-screen menu, so the two can't drift.
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
+  { label: 'Congress & D.C.', to: '/how-congress-controls-dc' },
   { label: 'The case', to: '/the-case' },
   { label: 'Myths', to: '/myths' },
   { label: 'News & analysis', to: '/news' },
@@ -62,7 +63,7 @@ function Nav() {
       if (!navRef.current?.contains(event.target)) setOpenedOn(null)
     }
     // The panel only exists below the breakpoint; widening the window past it closes it.
-    const wide = window.matchMedia('(min-width: 1120px)')
+    const wide = window.matchMedia('(min-width: 1160px)')
     function onWide(event) {
       if (!event.matches) return
       // The menu button vanishes at this width too, so park focus on the brand link.
