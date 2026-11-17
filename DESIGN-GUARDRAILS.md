@@ -62,6 +62,11 @@ something else first rather than stacking a 4th. See
   footer/copyright text, not an intentional variant.)
 - **"D.C." with periods in body copy**; "DC" acceptable in compact UI and the wordmark.
 - **No emoji in copy, ever.**
+- **No em-dashes in reader-facing copy (established 2026-11-16).** They read as an AI-writing
+  tell. In a headline, section title or label they are a hard no. In body copy use a
+  comma, colon, period or parentheses instead. Ranges keep their en-dash (1874–1967).
+  Leave guest authors' text and official bill titles as written. All published em-dashes
+  were removed from representdc-main and dc-bills-tracker on this date.
 - Non-partisan, concrete, loss-framed voice; no party-label rhetoric (sponsor party shown
   only as a neutral R/D/I badge). Full voice rules in the design system's own README if
   copied locally, otherwise treat this section as authoritative.
