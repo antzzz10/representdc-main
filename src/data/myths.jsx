@@ -41,7 +41,7 @@ export const ITEMS = [
     a: (
       <>
         D.C. has already worked through the{' '}
-        <Cite href={SRC.tennesseePlan}>Tennessee Plan</Cite>—the route eight states used to join
+        <Cite href={SRC.tennesseePlan}>Tennessee Plan</Cite>, the route eight states used to join
         the Union. It has <Cite href={SRC.dcConstitution}>ratified a state constitution</Cite>,
         drawn the proposed borders, approved statehood in a{' '}
         <Cite href={SRC.dcboe}>2016 referendum</Cite> by about 86% of the votes cast, and{' '}
@@ -75,7 +75,7 @@ export const ITEMS = [
       <>
         Federal employment is one slice of a working city of roughly{' '}
         <Cite href={SRC.census}>694,000 residents</Cite>. The District's largest single
-        industry isn't government at all—it's{' '}
+        industry isn't government at all. It's{' '}
         <Cite href={SRC.dataUsa}>professional, scientific, and technical services</Cite>.
       </>
     ),
@@ -92,7 +92,7 @@ export const ITEMS = [
     a: (
       <>
         The IRS collected more federal tax per person in D.C. than in any state in fiscal 2025.
-        Residents also pay local taxes—on a budget{' '}
+        Residents also pay local taxes, on a budget{' '}
         <Cite href={SRC.budgetReview}>Congress must clear</Cite> before the District is allowed
         to spend its own money.
       </>
@@ -100,7 +100,7 @@ export const ITEMS = [
     fact: {
       value: '$60,067',
       label: 'in federal tax collected per D.C. resident',
-      detail: 'Highest in the nation—2.4× second-place Massachusetts (FY2025).',
+      detail: 'Highest in the nation: 2.4× second-place Massachusetts (FY2025).',
     },
   },
   {
@@ -109,8 +109,8 @@ export const ITEMS = [
     q: '"D.C. residents have the same rights as other Americans."',
     a: (
       <>
-        They pay federal taxes, serve in the military—
-        <Cite href={SRC.wwi}>499 died in the First World War alone</Cite>—and sit on federal
+        They pay federal taxes, serve in the military (
+        <Cite href={SRC.wwi}>499 died in the First World War alone</Cite>) and sit on federal
         juries. But their sole member of the House{' '}
         <Cite href={SRC.delegates}>cannot vote on final passage</Cite> of a bill, they have no
         senators, and{' '}
@@ -133,7 +133,7 @@ export const ITEMS = [
     a: (
       <>
         Proximity isn't accountability. Not one voting member of Congress is elected by D.C.
-        residents, so not one answers to them at the ballot box—while Congress retains{' '}
+        residents, so not one answers to them at the ballot box, while Congress retains{' '}
         <Cite href={SRC.lawReview}>a veto over the laws they do pass</Cite> locally.
       </>
     ),
@@ -145,7 +145,7 @@ export const ITEMS = [
     a: (
       <>
         D.C.'s <Cite href={SRC.censusArea}>61 square miles</Cite> of land hold{' '}
-        <Cite href={SRC.census}>more people than Wyoming or Vermont</Cite>—and every state gets
+        <Cite href={SRC.census}>more people than Wyoming or Vermont</Cite>, and every state gets
         two senators regardless of size.
       </>
     ),
@@ -163,7 +163,7 @@ export const ITEMS = [
       <>
         The monumental core is a fraction of the District. The rest is where nearly{' '}
         <Cite href={SRC.census}>694,000 people</Cite> live, across{' '}
-        <Cite href={SRC.wards}>eight wards</Cite>—and congressional control extends over all of
+        <Cite href={SRC.wards}>eight wards</Cite>, and congressional control extends over all of
         it, not just the federal buildings.
       </>
     ),
@@ -182,7 +182,7 @@ export const ITEMS = [
         The Constitution caps the federal district at{' '}
         <Cite href={SRC.districtClause}>"ten Miles square"</Cite> but sets no minimum size and
         doesn't fix its borders. The nonpartisan Congressional Research Service reads the text
-        the same way—the Framers "chose to set a maximum size for the Federal District, but no
+        the same way: the Framers "chose to set a maximum size for the Federal District, but no
         other size-related restrictions." Whether Congress can admit the rest as a state by
         ordinary legislation is{' '}
         <Cite href={SRC.constitutionality}>genuinely contested among scholars</Cite>, with little

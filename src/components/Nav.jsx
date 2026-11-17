@@ -17,7 +17,7 @@ const NAV_ITEMS = [
   {
     label: 'Candidates',
     href: 'https://candidates.representdc.org',
-    title: 'For D.C. voters — 2026 primary candidate positions on statehood',
+    title: 'For D.C. voters: 2026 primary candidate positions on statehood',
   },
   { label: 'Follow', to: '/follow' },
 ]
@@ -94,7 +94,7 @@ function Nav() {
   return (
     <nav className="nav" ref={navRef} onBlur={onBlur}>
       <div className="container nav-inner">
-        <Link to="/" className="nav-brand" aria-label="RepresentDC — back to top">
+        <Link to="/" className="nav-brand" aria-label="RepresentDC, back to top">
           <Logo size={26} />
           <Wordmark size={15} />
         </Link>

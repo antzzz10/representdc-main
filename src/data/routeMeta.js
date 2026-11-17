@@ -32,7 +32,7 @@ export const ROUTE_META = {
   },
   '/take-action': {
     title: pageTitle('Take action hub'),
-    description: 'Already convinced? Get talking points, sourced data, and ways to organize—built for speed.',
+    description: 'Already convinced? Get talking points, sourced data, and ways to organize, built for speed.',
   },
   '/news': {
     title: pageTitle('News & analysis'),
@@ -40,7 +40,7 @@ export const ROUTE_META = {
   },
   '/how-congress-controls-dc': {
     title: pageTitle('How Congress controls D.C.'),
-    description: "Didn't know D.C. isn't a state? Start with the basics—what home rule means, and why Congress can overturn D.C.'s own laws.",
+    description: "Didn't know D.C. isn't a state? Start with the basics: what home rule means, and why Congress can overturn D.C.'s own laws.",
   },
   '/statehood-partner-map': {
     title: pageTitle('The Statehood Partner Map'),

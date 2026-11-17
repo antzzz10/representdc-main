@@ -28,7 +28,7 @@ function StatehoodPartnerMap() {
         <div className="container">
           <span className="eyebrow">Meet the movement</span>
           <h1>The Statehood Partner Map</h1>
-          <p>Dozens of organizations, one shared goal — see who's leading, and how to plug in.</p>
+          <p>Dozens of organizations, one shared goal. See who's leading, and how to plug in.</p>
         </div>
       </header>
 
@@ -116,7 +116,7 @@ function StatehoodPartnerMap() {
             <div className="sources-list">
               {SOURCES.map((s) => (
                 <span key={s.url}>
-                  {s.name}—<a href={s.url} target="_blank" rel="noopener noreferrer">{s.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a>
+                  {s.name}: <a href={s.url} target="_blank" rel="noopener noreferrer">{s.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a>
                 </span>
               ))}
             </div>

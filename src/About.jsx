@@ -39,7 +39,7 @@ function About() {
           <h1>Who's behind RepresentDC</h1>
           <p>
             RepresentDC is volunteer-run. No one on this project is paid, and the
-            site isn't a business or nonprofit organization — it's built and kept
+            site isn't a business or nonprofit organization. It's built and kept
             running on personal time by people who care about DC's lack of
             representation.
           </p>

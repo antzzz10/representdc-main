@@ -74,17 +74,17 @@ function Home() {
               D.C. residents pay federal taxes but have{' '}
               <span
                 className="gloss"
-                title="Home rule: the limited local self-government Congress granted D.C. in 1973 — Congress can still overturn any D.C. law or budget."
+                title="Home rule: the limited local self-government Congress granted D.C. in 1973. Congress can still overturn any D.C. law or budget."
               >
                 no vote in Congress
-              </span>. Pick the path that fits you—or keep scrolling for the full picture.
+              </span>. Pick the path that fits you, or keep scrolling for the full picture.
             </p>
           </div>
           <div className="persona-grid">
             <Link className="persona-card" to="/how-congress-controls-dc">
               <span className="picon"><Icon name="landmark" size={22} /></span>
               <h3>New to D.C.</h3>
-              <p>Didn't know D.C. isn't a state? Start with the basics—what home rule means, and why Congress can overturn D.C.'s own laws.</p>
+              <p>Didn't know D.C. isn't a state? Start with the basics: what home rule means, and why Congress can overturn D.C.'s own laws.</p>
               <span className="plink">Start the explainer <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card" to="/statehood-curious">
@@ -102,7 +102,7 @@ function Home() {
             <Link className="persona-card accent" to="/take-action">
               <span className="picon"><Icon name="megaphone" size={22} /></span>
               <h3>Statehood activist</h3>
-              <p>Already convinced? Get talking points, sourced data, and ways to organize—built for speed.</p>
+              <p>Already convinced? Get talking points, sourced data, and ways to organize, built for speed.</p>
               <span className="plink">Open the action hub <Icon name="arrow-right" size={15} /></span>
             </Link>
           </div>
@@ -114,7 +114,7 @@ function Home() {
         <div className="container">
           <h2 className="section-title">How Congress controls D.C.</h2>
           <p className="section-intro">
-            "Home rule" sounds like self-government. Here's what it actually means—and where it stops.
+            "Home rule" sounds like self-government. Here's what it actually means, and where it stops.
           </p>
           <div className="explainer-steps">
             <div className="explainer-step">
@@ -149,14 +149,14 @@ function Home() {
               <div>
                 <h3>No vote, no recourse</h3>
                 <p>
-                  D.C. residents have no senators and no voting House member—so they can't vote out
+                  D.C. residents have no senators and no voting House member, so they can't vote out
                   the members of Congress who overturn their laws.
                 </p>
               </div>
             </div>
           </div>
           <p className="explainer-next">
-            Want the specifics? <Link to="/the-case">See what Congress has blocked</Link>—category by
+            Want the specifics? <Link to="/the-case">See what Congress has blocked</Link>, category by
             category, with sources.
           </p>
         </div>
@@ -171,7 +171,7 @@ function Home() {
               No taxation without representation
             </blockquote>
             <p className="quote-attribution">
-              The rallying cry of the American Revolution—still denied to D.C. residents today
+              The rallying cry of the American Revolution, still denied to D.C. residents today
             </p>
           </div>
 
@@ -216,7 +216,7 @@ function Home() {
         <div className="container">
           <h2 className="section-title">The solution: full democracy for D.C.</h2>
           <p className="section-intro">
-            D.C. statehood isn't a radical idea—it's about ensuring that all Americans have equal representation.
+            D.C. statehood isn't a radical idea. It's about ensuring that all Americans have equal representation.
           </p>
 
           <div className="solution-points">

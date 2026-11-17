@@ -56,7 +56,7 @@ function Myths() {
             <div className="sources-list">
               {SOURCES.map((source) => (
                 <span key={source.href + source.label}>
-                  {source.label}—
+                  {source.label}:{' '}
                   <a href={source.href} target="_blank" rel="noopener noreferrer">
                     {source.display}
                   </a>

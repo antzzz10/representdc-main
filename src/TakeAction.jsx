@@ -18,7 +18,7 @@ const PREVIEWS = [
   {
     icon: 'hand-coins',
     title: '"No donation without representation"',
-    body: "Before you give money or time to a candidate, ask where they stand on D.C. statehood—and withhold support from those who haven't committed.",
+    body: "Before you give money or time to a candidate, ask where they stand on D.C. statehood, and withhold support from those who haven't committed.",
   },
 ]
 

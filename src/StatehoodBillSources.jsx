@@ -48,26 +48,26 @@ function StatehoodBillSources({ bills, history, congress, explainer }) {
       <div className="sources-list">
         {bills.filter((b) => b.complete).map((b) => (
           <span key={b.chamber}>
-            Congress.gov, {b.billNumber} ({ordinal(b.congress)} Congress), cosponsors—
+            Congress.gov, {b.billNumber} ({ordinal(b.congress)} Congress), cosponsors:{' '}
             {link(`${b.congressGovUrl.replace(/\/+$/, '')}/cosponsors`, 'congress.gov')}
           </span>
         ))}
         {congress && (
           <span>
-            Congress.gov, members of the {ordinal(congress)} Congress—
+            Congress.gov, members of the {ordinal(congress)} Congress:{' '}
             {link(`https://www.congress.gov/members?q=${encodeURIComponent(JSON.stringify({ congress }))}`, 'congress.gov')}
           </span>
         )}
         {earlier.flatMap((r) => [r.house, r.senate].filter((s) => s?.url).map((s) => (
           <span key={s.url}>
-            GovInfo, bill status of {s.billNumber} ({ordinal(r.congress)} Congress)—{link(s.url, 'govinfo.gov')}
+            GovInfo, bill status of {s.billNumber} ({ordinal(r.congress)} Congress): {link(s.url, 'govinfo.gov')}
           </span>
         )))}
         {explainer && EXPLAINER.map((p) => (
-          <span key={p.href}>{p.label}—{link(p.href, p.host)}</span>
+          <span key={p.href}>{p.label}: {link(p.href, p.host)}</span>
         ))}
         {bills.length > 0 && PROCEDURE.map((p) => (
-          <span key={p.href}>{p.label}—{link(p.href, p.host)}</span>
+          <span key={p.href}>{p.label}: {link(p.href, p.host)}</span>
         ))}
       </div>
     </div>
