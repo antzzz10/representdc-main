@@ -49,7 +49,7 @@ export const DATA = {
       id: 'new-columbia-statehood-commission', name: 'New Columbia Statehood Commission', col: 'gov',
       scope: 'local', url: 'https://statehood.dc.gov/page/new-columbia-statehood-commission',
       blurb: 'New Columbia Statehood Commission',
-      desc: "Created in 2014 to coordinate D.C.'s statehood initiatives. Members: the Mayor, the Council Chairman, and D.C.'s two shadow Senators, a separate body from the Shadow Delegation above, though membership overlaps.",
+      desc: "Created in 2014 to coordinate D.C.'s statehood initiatives. Members: the Mayor, the Council Chairman, and D.C.'s two shadow Senators. A separate body from the Shadow Delegation above, though membership overlaps.",
     },
     {
       id: 'dc-vote', name: 'DC Vote', col: 'policy',

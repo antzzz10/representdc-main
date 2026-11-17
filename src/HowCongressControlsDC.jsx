@@ -94,7 +94,7 @@ function HowCongressControlsDC() {
             <div className="bill-type-card alert">
               <div className="bill-type-days">0 days</div>
               <div className="bill-type-label">Appropriations rider</div>
-              <div className="bill-type-detail">Skips review entirely and attaches straight to a funding bill</div>
+              <div className="bill-type-detail">Skips review entirely: attaches straight to a funding bill</div>
             </div>
           </div>
           <div className="explainer-steps">

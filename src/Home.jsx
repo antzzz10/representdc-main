@@ -102,7 +102,7 @@ function Home() {
             <Link className="persona-card accent" to="/take-action">
               <span className="picon"><Icon name="megaphone" size={22} /></span>
               <h3>Statehood activist</h3>
-              <p>Already convinced? Get talking points, sourced data, and ways to organize, built for speed.</p>
+              <p>Already convinced? Get talking points, sourced data, and ways to organize. Built for speed.</p>
               <span className="plink">Open the action hub <Icon name="arrow-right" size={15} /></span>
             </Link>
           </div>

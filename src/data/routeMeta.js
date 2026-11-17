@@ -32,7 +32,7 @@ export const ROUTE_META = {
   },
   '/take-action': {
     title: pageTitle('Take action hub'),
-    description: 'Already convinced? Get talking points, sourced data, and ways to organize, built for speed.',
+    description: 'Already convinced? Get talking points, sourced data, and ways to organize. Built for speed.',
   },
   '/news': {
     title: pageTitle('News & analysis'),
