@@ -166,8 +166,8 @@ function HowCongressControlsDC() {
             </div>
           </div>
           <p className="explainer-next">
-            {showBillCount ? `${totalBills} ${headlineNoun(totalBills)} are` : 'Threats to D.C. home rule are'} tracked
-            in this Congress: bills, resolutions and budget riders that would override
+            {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'Threats to D.C. home rule'} in
+            this Congress: bills, resolutions and budget riders that would override
             D.C.'s local laws or limit its self-government.
             {context.length > 0 && ` ${context.join(' · ')}.`}
           </p>
@@ -195,6 +195,10 @@ function HowCongressControlsDC() {
               <span>
                 National Women's History Museum, "Eleanor Holmes Norton"—
                 <a href="https://www.womenshistory.org/education-resources/biographies/eleanor-holmes-norton" target="_blank" rel="noopener noreferrer">womenshistory.org</a>
+              </span>
+              <span>
+                RepresentDC bill tracker, bill counts and status in this Congress:{' '}
+                <a href="https://billtracker.representdc.org" target="_blank" rel="noopener noreferrer">billtracker.representdc.org</a>
               </span>
               <span>
                 Ballotpedia, "Eleanor Holmes Norton"—

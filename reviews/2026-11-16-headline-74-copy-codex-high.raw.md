@@ -1,0 +1,15 @@
+No BLOCKER findings. Three MATERIAL findings and two NOTEs. No files modified.
+
+- **MATERIAL — `src/Home.jsx:198`: The heading overstates what the data establishes.** “Congress is using its power over D.C. now” reasonably summarizes this Congress’s record today: 4 measures are law and 10 passed the House. It does not establish activity happening *now*, or movement on all 74. With zero measures, the heading remains despite having no supporting counts; after a failed fetch, it remains while both the number and breakdown disappear. Those states make the claim unsupported, rather than proving it false. Suggested heading: **“D.C. home rule in this Congress.”**
+
+- **MATERIAL — `src/HowCongressControlsDC.jsx:169`: “Are tracked” narrates the site’s process.** This conflicts with “No self-descriptive copy.” It also produces **“1 threat to D.C. home rule are tracked”** when the count is one. Suggested count-led wording: **“Threats to D.C. home rule in this Congress: 74 bills, resolutions and budget riders.”** Keep the number dynamic; use **“Threats to D.C. home rule”** when unavailable.
+
+- **MATERIAL — `src/HowCongressControlsDC.jsx:172`: The new status figures lack a supporting citation on this page.** The Sources list at line 184 contains historical and biographical references, but no source for the total or legislative breakdown. The homepage has a tracker link; this page does not. Add a Sources entry such as **“RepresentDC bill tracker, current Congress totals and legislative status”**, linking to the specific tracker page supporting those figures.
+
+- **NOTE — `src/Home.jsx:142`; `src/HowCongressControlsDC.jsx:170`: “Would override” frames the entire total as hypothetical.** Four included measures are already law. Suggested replacement: **“bills, resolutions and budget riders aimed at overriding D.C.’s local laws or limiting its self-government.”** This accommodates proposed and enacted measures.
+
+- **NOTE — `src/Home.jsx:202`: Removing the intro leaves the counted unit implicit.** The number is not completely undefined: “74 threats to D.C. home rule in this Congress” supplies a topic and timeframe. But someone landing here must infer that each “threat” is a legislative measure. Suggested label: **“bills, resolutions and budget riders threatening D.C. home rule.”** This supplies the missing definition without restoring a separate intro.
+
+The changed reader-facing copy contains **no remaining em-dashes**, including headlines, and no “not X but Y” contrast. Sentence case and “D.C.” are correct; there are no added emoji or Unicode icons. The middle dots separate statistics, and the nonbreaking spaces are whitespace. Heroes are unchanged. Repeating the agreed total across sections is not itself a duplicative-subheading breach; the breakdown is concrete and matches the supplied 4/10/60 data.
+
+**Verdict: Revise before approval, chiefly the unconditional “now” heading, process narration, and missing statistics citation.**

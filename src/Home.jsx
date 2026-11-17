@@ -51,7 +51,7 @@ function Home() {
               <div className="fact-detail">D.C.'s delegate can introduce bills but cannot vote on final passage</div>
             </div>
             <div className="fact-card highlight-card">
-              <div className="fact-number">{showBillCount ? totalBills : '—'}</div>
+              <div className="fact-number">{showBillCount ? totalBills : '\u00A0'}</div>
               <div className="fact-label">{showBillCount && totalBills === 1 ? 'Threat' : 'Threats'} to D.C. home rule in this Congress</div>
               <div className="fact-detail">
                 {context.length > 0 ? context.join(' · ') : 'Bills, resolutions and budget riders'}
@@ -137,7 +137,7 @@ function Home() {
                 <h3>Congress keeps the final say</h3>
                 <p>
                   Every law the D.C. Council passes goes to Congress for review before it can take
-                  effect—and Congress retains authority over the District's budget. That standing
+                  effect, and Congress retains authority over the District's budget. That standing
                   authority is behind the {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'threats to D.C. home rule'} in
                   this Congress: bills, resolutions and budget riders that would override
                   D.C.'s local laws or limit its self-government.
@@ -192,18 +192,16 @@ function Home() {
         </div>
       </section>
 
-      {/* The Pattern - Bills Are Actively Moving, Not Stalled */}
+      {/* The Pattern - the headline count and how far the measures have got */}
       <section className="trend-section">
         <div className="container">
-          <h2 className="section-title">Not stalled—actively moving through Congress</h2>
-          <p className="section-intro">
-            How far the bills, resolutions and budget riders that would override D.C.'s local
-            laws or limit its self-government have got in this Congress.
-          </p>
+          <h2 className="section-title">Threats to D.C. home rule in this Congress</h2>
           <div className="trend-highlight">
             <div className="trend-stat">
-              <span className="trend-number">{showBillCount ? totalBills : '—'}</span>
-              <span className="trend-label">{headlineNoun(showBillCount ? totalBills : 2)}</span>
+              <span className="trend-number">{showBillCount ? totalBills : '\u00A0'}</span>
+              <span className="trend-label">
+                {showBillCount && totalBills === 1 ? 'bill, resolution or budget rider' : 'bills, resolutions and budget riders'}
+              </span>
             </div>
           </div>
           {context.length > 0 && <p className="trend-context">{context.join(' · ')}</p>}
