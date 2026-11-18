@@ -216,3 +216,25 @@ donation without representation"**
 
 - Design system rollout to dc-statehood-pledge (new `--support-green` tokens staged,
   full component work not yet scoped)
+
+### Tech debt cleanup: analytics (added 2026-11-18, parked by Andria)
+
+Page views and named click events went live on the main site and the candidates site on
+2026-11-18 (`decisions/2026-11-18-analytics-events.md`). The priority was a working site
+and usable analytics; these were left for a later cleanup pass:
+
+- **Bill tracker privacy filter.** The tracker still runs the July 2026 PostHog setup
+  with no `before_send` filter, so its four events carry the full page address
+  (including `?category=` and any ad click identifier a visitor arrives with). Bring it
+  to the allowlist in `src/lib/analytics.js` used on the other two sites. About 30
+  minutes plus Codex passes.
+- **Bill tracker page views.** It sends none to PostHog, so campaign tags on links to
+  the tracker are not attributed. Same change as above.
+- **One copy of the analytics file.** `src/lib/analytics.js` is now copied by hand
+  across sites, like the shared menu. Keep the copies in step, or share them.
+- **PostHog project setting.** Switch on "Discard client IP data" (Andria; it is a
+  setting in PostHog, not code).
+- **Tag outgoing links.** Add `utm_source` and `utm_campaign` to links in Bluesky posts
+  and newsletter issues so visits can be traced to a campaign.
+- **Phone and Safari check** of the candidates site with tracking on (the main site was
+  checked at phone width on 2026-11-18).
