@@ -13,12 +13,14 @@ import StatehoodBill from './StatehoodBill'
 import Article from './reading/Article'
 import ScrollToTop from './components/ScrollToTop'
 import RouteMeta from './components/RouteMeta'
+import TrackPageviews from './components/TrackPageviews'
 
 function App() {
   return (
     <>
       <ScrollToTop />
       <RouteMeta />
+      <TrackPageviews />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/myths" element={<Myths />} />

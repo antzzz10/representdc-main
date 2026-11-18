@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test:analytics": "node --test scripts/analytics.test.mjs",
     "import:article": "node scripts/import-article.mjs",
     "test:news": "node --test scripts/eval/*.test.mjs",
     "news:fetch": "node scripts/fetch-news.mjs",

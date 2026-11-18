@@ -1,6 +1,7 @@
 import { useId, useMemo, useRef, useState } from 'react'
 import { MemberRow } from './MemberRow'
 import { departedCosponsors, memberStatuses, ordinal } from '../data/statehoodBill'
+import { EVENTS, track } from '../lib/analytics'
 import { SORTS, lastNameKey, partyKey, partyOptions, sortMembers } from '../data/memberSort'
 
 const CHAMBERS = [
@@ -74,13 +75,17 @@ function MemberLookup({ bills, rosters }) {
     setSort(key)
     if (key === 'recent' && filter === 'not-yet') setFilter('signed')
   }
+  // Analytics records which control was used, never the choice or the name typed.
+  const used = (control) => track(EVENTS.MEMBER_LOOKUP_USED, { control })
   const chooseFilter = (key) => {
     setFilter(key)
+    used('filter')
     if (key === 'not-yet' && sort === 'recent') setSort('name')
   }
 
   const selectTab = (key) => {
     setChamber(key)
+    used('chamber')
     setStateCode('')
     tabRefs.current[key]?.focus()
   }
@@ -135,7 +140,7 @@ function MemberLookup({ bills, rosters }) {
               </fieldset>
               <label className="lookup-field">
                 <span>State</span>
-                <select value={stateCode} onChange={(e) => setStateCode(e.target.value)}>
+                <select value={stateCode} onChange={(e) => { setStateCode(e.target.value); used('state') }}>
                   <option value="">All states</option>
                   {states.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
