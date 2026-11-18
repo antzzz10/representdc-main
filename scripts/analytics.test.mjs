@@ -1,12 +1,14 @@
-// Offline checks for analytics: which links are recorded, and what the snippet in
-// index.html lets out of the browser. Run with `npm run test:analytics`.
+// Offline checks for analytics: which links are recorded, and what the filter lets out
+// of the browser. Run with `npm run test:analytics`. These test our own code. What the
+// real PostHog library does with it was checked by hand in a browser (see the decision
+// note, decisions/2026-11-18-analytics-events.md).
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import vm from 'node:vm'
-import { classifyLink, EVENTS } from '../src/lib/analytics.js'
+import { classifyLink, cleanEvent, cleanPageUrl, referringHost, EVENTS } from '../src/lib/analytics.js'
 
-const here = { host: 'www.representdc.org', pathname: '/the-page' }
+const HOST = 'www.representdc.org'
+const here = { host: HOST, pathname: '/the-page' }
 
 test('known destinations get their own event', () => {
   assert.equal(classifyLink('https://representdc.beehiiv.com/subscribe', here).event, EVENTS.EMAIL_SIGNUP_OPENED)
@@ -22,8 +24,8 @@ test('the follow page is recorded with where the click was', () => {
 })
 
 test('other links inside the site are left to page views', () => {
-  assert.equal(classifyLink('https://www.representdc.org/somewhere-else', here), null)
-  assert.equal(classifyLink('https://www.representdc.org/the-page#part', here), null)
+  assert.equal(classifyLink(`https://${HOST}/somewhere-else`, here), null)
+  assert.equal(classifyLink(`https://${HOST}/the-page#part`, here), null)
 })
 
 test('an outside link is recorded by host alone', () => {
@@ -40,70 +42,121 @@ test('mail, phone and broken links are ignored', () => {
   assert.equal(classifyLink('not a link', here), null)
 })
 
-// Run the real snippet from index.html against a stand-in browser and take the
-// before_send function it hands to PostHog.
-function beforeSendFromIndexHtml(key) {
-  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
-  const block = html.split('<!-- PostHog:')[1].split('<!-- End PostHog -->')[0]
-  const script = block.split('<script>')[1].split('</script>')[0].replace('%VITE_POSTHOG_KEY%', key)
-  const document = {
-    createElement: () => ({}),
-    getElementsByTagName: () => [{ parentNode: { insertBefore() {} } }],
-  }
-  // In a browser the global object is `window`, and the snippet relies on that.
-  const window = { document, URL, encodeURIComponent }
-  window.window = window
-  vm.runInNewContext(script, window)
-  return window.posthog?._i?.[0]?.[1]
-}
-
-test('with no key the snippet loads nothing', () => {
-  assert.equal(beforeSendFromIndexHtml('%VITE_POSTHOG_KEY%'), undefined)
-  assert.equal(beforeSendFromIndexHtml(''), undefined)
+test('a page address keeps its path and well-formed campaign tags, nothing else', () => {
+  assert.equal(
+    cleanPageUrl(`https://${HOST}/follow?utm_source=bluesky&candidate=abc&fbclid=XYZ&q=words#frag`),
+    `https://${HOST}/follow?utm_source=bluesky`,
+  )
+  // A tag that is not a short label is dropped: an email address, a sentence, a long id.
+  assert.equal(cleanPageUrl(`https://${HOST}/?utm_term=someone%40example.org`), `https://${HOST}/`)
+  assert.equal(cleanPageUrl(`https://${HOST}/?utm_source=two+words`), `https://${HOST}/`)
+  assert.equal(cleanPageUrl(`https://${HOST}/?utm_campaign=${'x'.repeat(61)}`), `https://${HOST}/`)
+  assert.equal(cleanPageUrl('javascript:alert(1)'), '')
+  assert.equal(cleanPageUrl('$direct'), '')
 })
 
-test('the settings keep cookies, autocapture and recording off', () => {
-  const config = beforeSendFromIndexHtml('phc_test')
-  assert.equal(config.persistence, 'memory')
-  assert.equal(config.autocapture, false)
-  assert.equal(config.capture_pageview, false)
-  assert.equal(config.disable_session_recording, true)
-  assert.equal(config.capture_heatmaps, false)
-  assert.equal(config.capture_dead_clicks, false)
+test('a referrer is reduced to its host', () => {
+  assert.equal(referringHost('https://www.google.com/search?q=private+words'), 'www.google.com')
+  assert.equal(referringHost('$direct'), '')
+  assert.equal(referringHost(''), '')
 })
 
-test('only campaign tags survive from an address', () => {
-  const { before_send } = beforeSendFromIndexHtml('phc_test')
-  const event = before_send({
+// Shaped like what the PostHog library builds for a visit that arrived from a search
+// engine through an ad link: its own copies of the address, click identifiers, search
+// words and person properties, under several prefixes.
+const sdkEvent = () => ({
+  uuid: 'u-1',
+  event: '$pageview',
+  properties: {
+    token: 'phc_test',
+    distinct_id: 'd-1',
+    $session_id: 's-1',
+    $browser: 'Safari',
+    $device_type: 'Mobile',
+    site: 'main',
+    $current_url: `https://${HOST}/follow?utm_source=bluesky&candidate=abc&email=a%40b.org&fbclid=XYZ#frag`,
+    $host: HOST,
+    $pathname: '/follow',
+    $referrer: 'https://www.google.com/search?q=private+words',
+    $referring_domain: 'www.google.com',
+    utm_source: 'bluesky',
+    utm_term: 'someone@example.org',
+    fbclid: 'XYZ',
+    gclid: 'G1',
+    oppref: 'O1',
+    bfcid: 'B1',
+    $fbc: 'fb.1.XYZ',
+    ph_keyword: 'private words',
+    $initial_gclid: 'G1',
+    $session_entry_gclid: 'G1',
+    $session_entry_fbclid: 'XYZ',
+    $session_entry_ph_keyword: 'private words',
+    $session_entry_url: `https://${HOST}/follow?candidate=abc&fbclid=XYZ`,
+    $session_entry_referrer: 'https://www.google.com/search?q=private+words',
+    $session_entry_utm_source: 'y'.repeat(500),
+    $exception_message: 'typed text',
+    something_new_in_a_later_version: 'private words',
+    $set: { email: 'a@b.org' },
+    $set_once: { $initial_current_url: `https://${HOST}/?candidate=abc`, $initial_ph_keyword: 'private words' },
+  },
+  $set: { name: 'A Visitor' },
+  $set_once: { $initial_referrer: 'https://www.google.com/search?q=private+words' },
+})
+
+test('only listed properties leave the browser', () => {
+  const sent = cleanEvent(sdkEvent())
+  assert.deepEqual(sent, {
+    uuid: 'u-1',
     event: '$pageview',
     properties: {
-      $current_url: 'https://www.representdc.org/follow?utm_source=bluesky&candidate=abc&email=a%40b.org&fbclid=XYZ#frag',
-      $referrer: 'https://www.google.com/search?q=private+words',
-      $referring_domain: 'www.google.com',
-      $pathname: '/follow',
+      token: 'phc_test',
+      distinct_id: 'd-1',
+      $session_id: 's-1',
+      $browser: 'Safari',
+      $device_type: 'Mobile',
+      site: 'main',
       utm_source: 'bluesky',
-      fbclid: 'XYZ',
-      $initial_gclid: 'G1',
-      $set_once: { $initial_current_url: 'https://www.representdc.org/?candidate=abc&utm_campaign=sendoff', $initial_fbclid: 'XYZ' },
+      $current_url: `https://${HOST}/follow?utm_source=bluesky`,
+      $host: HOST,
+      $pathname: '/follow',
+      $referring_domain: 'www.google.com',
     },
-    $set_once: { $initial_referrer: 'https://t.co/abc?x=1' },
   })
-  assert.equal(event.properties.$current_url, 'https://www.representdc.org/follow?utm_source=bluesky')
-  assert.equal(event.properties.$referrer, 'https://www.google.com/search')
-  assert.equal(event.properties.utm_source, 'bluesky')
-  assert.equal('fbclid' in event.properties, false)
-  assert.equal('$initial_gclid' in event.properties, false)
-  assert.equal(event.properties.$set_once.$initial_current_url, 'https://www.representdc.org/?utm_campaign=sendoff')
-  assert.equal('$initial_fbclid' in event.properties.$set_once, false)
-  assert.equal(event.$set_once.$initial_referrer, 'https://t.co/abc')
-  assert.equal(JSON.stringify(event).includes('private'), false)
-  assert.equal(JSON.stringify(event).includes('abc&'), false)
+  const text = JSON.stringify(sent)
+  for (const secret of ['private', 'XYZ', 'G1', 'O1', 'B1', 'abc', 'a@b.org', 'a%40b.org', 'Visitor', 'typed', 'yyy']) {
+    assert.equal(text.includes(secret), false, `"${secret}" must not be sent`)
+  }
 })
 
-test('a campaign tag is cut to 100 characters', () => {
-  const { before_send } = beforeSendFromIndexHtml('phc_test')
-  const long = 'x'.repeat(300)
-  const event = before_send({ properties: { $current_url: `https://www.representdc.org/?utm_source=${long}`, utm_source: long } })
-  assert.equal(event.properties.utm_source.length, 100)
-  assert.equal(event.properties.$current_url, `https://www.representdc.org/?utm_source=${'x'.repeat(100)}`)
+test('an event that is not ours is dropped whole', () => {
+  for (const name of ['$exception', '$autocapture', '$snapshot', '$pageleave', '$identify', 'survey sent', 'anything']) {
+    assert.equal(cleanEvent({ event: name, properties: { token: 'phc_test' } }), null)
+  }
+  assert.equal(cleanEvent(null), null)
+})
+
+test('our own properties are held to the values we expect', () => {
+  const sent = cleanEvent({
+    event: EVENTS.OUTBOUND_LINK_OPENED,
+    properties: { site: 'somewhere else', area: 'sidebar', page: 'no-slash', host: 'Bad Host/with path', control: 'state' },
+  })
+  assert.deepEqual(sent.properties, { control: 'state' })
+  const bad = cleanEvent({ event: EVENTS.OUTBOUND_LINK_OPENED, properties: { control: 'DC', candidate: 'someone' } })
+  assert.deepEqual(bad.properties, {})
+})
+
+test('index.html defines the PostHog stub only when a key was set at build time', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
+  const script = html.split('<!-- PostHog loader stub')[1].split('<script>')[1].split('</script>')[0]
+  const run = (key) => {
+    const window = { document: { createElement: () => ({}), getElementsByTagName: () => [{ parentNode: { insertBefore() {} } }] } }
+    window.window = window
+    new Function('window', 'document', script.replace('%VITE_POSTHOG_KEY%', key))(window, window.document)
+    return window.posthog
+  }
+  assert.equal(run('%VITE_POSTHOG_KEY%'), undefined)
+  assert.equal(run(''), undefined)
+  assert.equal(typeof run('phc_test').init, 'function')
+  // The settings and the filter live in src/lib/analytics.js, not in the page.
+  assert.equal(html.includes('posthog.init('), false)
 })

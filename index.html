@@ -29,81 +29,17 @@
         }
       })();
     </script>
-    <!-- PostHog: page views and a short list of named events (src/lib/analytics.js).
-         Loaded by async snippet, not the posthog-js package, to keep it off first paint.
-         Cookies, autocapture and session recording are all off on purpose; see
-         decisions/2026-11-18-analytics-events.md. With no key at build time (dev, or an
-         unset VITE_POSTHOG_KEY) nothing loads and nothing is sent. -->
+    <!-- PostHog loader stub. It only defines window.posthog; nothing is fetched or
+         sent until src/lib/analytics.js starts it, and that file holds the settings
+         and the filter on what may leave the browser. Loaded this way, not from the
+         posthog-js package, to keep it off first paint. With no key at build time
+         (dev, or an unset VITE_POSTHOG_KEY) the stub is not even defined.
+         See decisions/2026-11-18-analytics-events.md. -->
     <script>
       (function () {
         var key = '%VITE_POSTHOG_KEY%'
         if (!key || key.charAt(0) === '%') return
-
-        // Nothing from the address leaves the browser except campaign tags. Every
-        // property that holds a web address is cut down to origin and path; the page's
-        // own address also keeps utm_* tags so a tagged link shows which campaign sent
-        // the visit. Per-click ad identifiers (fbclid, gclid and the like) are dropped.
-        var CAMPAIGN = /^utm_(source|medium|campaign|content|term)$/
-        var CLICK_ID = /^(\$initial_)?(gclid|gclsrc|dclid|gbraid|wbraid|gad_source|fbclid|msclkid|twclid|ttclid|li_fat_id|igshid|mc_cid|mc_eid|rdt_cid|epik|qclid|sccid|irclid|_kx)$/
-        function cleanUrl(value, keepCampaign) {
-          try {
-            var u = new URL(value)
-            var kept = []
-            if (keepCampaign) {
-              u.searchParams.forEach(function (v, k) {
-                if (CAMPAIGN.test(k)) kept.push(k + '=' + encodeURIComponent(String(v).slice(0, 100)))
-              })
-            }
-            return u.origin + u.pathname + (kept.length ? '?' + kept.join('&') : '')
-          } catch (e) {
-            return ''
-          }
-        }
-        function clean(props) {
-          if (!props || typeof props !== 'object') return
-          Object.keys(props).forEach(function (k) {
-            var v = props[k]
-            if (CLICK_ID.test(k)) { delete props[k]; return }
-            if (typeof v === 'string' && /^https?:\/\//i.test(v)) {
-              props[k] = cleanUrl(v, !/referrer/i.test(k))
-            } else if (typeof v === 'string' && /^utm_/.test(k.replace(/^\$initial_/, ''))) {
-              props[k] = v.slice(0, 100)
-            }
-          })
-        }
-
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init(key, {
-          api_host: 'https://us.i.posthog.com',
-          persistence: 'memory',        // cookieless: no consent banner needed
-          autocapture: false,           // only the events we chose
-          capture_pageview: false,      // sent by hand per route, see analytics.js
-          capture_pageleave: false,
-          disable_session_recording: true,
-
-          // These default to "ask PostHog's server", and the server turns them on
-          // (verified on the bill tracker, 2026-07-28). Only an explicit false keeps
-          // them off. Do not remove these lines.
-          capture_dead_clicks: false,
-          capture_performance: false,   // Cloudflare already does Core Web Vitals
-          capture_heatmaps: false,
-          rageclick: false,
-          disable_surveys: true,
-          disable_web_experiments: true,
-          advanced_disable_flags: true, // we use no feature flags
-
-          before_send: function (event) {
-            if (!event) return event
-            clean(event.properties)
-            clean(event.$set)
-            clean(event.$set_once)
-            if (event.properties) {
-              clean(event.properties.$set)
-              clean(event.properties.$set_once)
-            }
-            return event
-          },
-        })
       })()
     </script>
     <!-- End PostHog -->
