@@ -15,8 +15,9 @@ did on arrival.
 ## What is recorded
 
 - **One page view per path**, sent by hand when the router moves to a new path. A link
-  tagged `utm_source=...` then shows which campaign sent the visit, and PostHog keeps
-  that tag on the visit's later events. Cloudflare keeps counting visits too; the two
+  tagged `utm_source=...` then shows which campaign sent the visit. Our own code keeps
+  the first tags it sees in memory and puts them on that visit's later events, until
+  the page is reloaded or closed. Cloudflare keeps counting visits too; the two
   will not match exactly, and Cloudflare stays the reference for totals. A change of
   fragment or address parameter on the same path is not counted as a new page.
 - **Clicks on links we chose**, decided by `classifyLink` in `src/lib/analytics.js`:
@@ -54,8 +55,9 @@ visitor types and no link text.
 - the referrer is reduced to its host name;
 - person properties (`$set`, `$set_once`) are deleted.
 
-Anything else the PostHog library adds, now or in a later version, is dropped by
-default. Checked against library version 1.450.0, which adds click identifiers
+Anything else the PostHog library adds to an event, now or in a later version, is
+dropped by default. The filter covers events; it has no say over other requests the
+library might make, which is what the settings and the browser check below are for. Checked against library version 1.450.0, which adds click identifiers
 (`gclid`, `fbclid` and others, also under `$session_entry_` names), the raw user-agent
 string and session-entry addresses: none of them is sent.
 
@@ -71,8 +73,8 @@ someone else puts in a link or types in the address bar:
   setting lives in PostHog, not in this code.
 
 The library itself is loaded from PostHog at its current version, not a pinned one, as
-on the bill tracker. The allowlist is what keeps a change in a future version from
-widening what is sent. `disable_external_dependency_loading` stops the library fetching
+on the bill tracker. The allowlist keeps a change in a future version from widening
+what an event carries; it is not a guarantee about every future version's behaviour. `disable_external_dependency_loading` stops the library fetching
 further PostHog scripts.
 
 ## How it is switched on
@@ -101,7 +103,8 @@ browser storage were set; the only requests to PostHog were the library and the 
 With no key, there were no requests to PostHog at all.
 
 In local development React runs effects twice, so some events would fire twice there.
-Development builds have no key, so nothing is sent.
+`initAnalytics()` refuses to start under `npm run dev`, key or no key, so nothing is
+sent from development.
 
 ## Not done here
 

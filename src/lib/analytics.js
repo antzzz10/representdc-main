@@ -115,7 +115,7 @@ export function cleanEvent(event) {
   const kept = {}
   for (const [name, value] of Object.entries(given)) {
     if (ALLOWED.has(name)) kept[name] = value
-    else if (OWN[name]?.(value)) kept[name] = value
+    else if (Object.hasOwn(OWN, name) && OWN[name](value)) kept[name] = value
     else if (CAMPAIGN_TAGS.includes(name) && typeof value === 'string' && TAG_VALUE.test(value)) kept[name] = value
   }
   // Addresses are rebuilt, never passed through.
@@ -171,6 +171,8 @@ let started = false
 /** Start PostHog, once. Does nothing without a project key. */
 export function initAnalytics() {
   if (started) return
+  // Never in local development, even when .env.local holds the key for deploys.
+  if (import.meta.env?.DEV) return
   const key = import.meta.env?.VITE_POSTHOG_KEY
   const ph = client()
   if (!key || !ph || typeof ph.init !== 'function') return
@@ -195,9 +197,24 @@ function whereNow() {
   const from = referringHost(document.referrer)
   return {
     $current_url: pageUrl,
-    ...campaignTags(new URL(pageUrl)),
+    ...visitTags(new URL(pageUrl)),
     ...(from ? { $referrer: `https://${from}/` } : {}),
   }
+}
+
+let firstTags = null
+
+/**
+ * The campaign tags for this visit: the first tagged address seen since the page loaded,
+ * kept in memory so the tag stays with the visit as the visitor moves around the site.
+ * All five names are always given, null when absent, so PostHog cannot fill a gap later
+ * from whatever address the visitor has reached by then.
+ */
+export function visitTags(url) {
+  const here = campaignTags(url)
+  if (!firstTags && Object.keys(here).length > 0) firstTags = here
+  const tags = firstTags ?? {}
+  return Object.fromEntries(CAMPAIGN_TAGS.map((name) => [name, tags[name] ?? null]))
 }
 
 /**

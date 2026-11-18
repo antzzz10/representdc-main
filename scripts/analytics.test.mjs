@@ -5,7 +5,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { classifyLink, cleanEvent, cleanPageUrl, referringHost, EVENTS } from '../src/lib/analytics.js'
+import { classifyLink, cleanEvent, cleanPageUrl, referringHost, visitTags, EVENTS } from '../src/lib/analytics.js'
 
 const HOST = 'www.representdc.org'
 const here = { host: HOST, pathname: '/the-page' }
@@ -143,6 +143,26 @@ test('our own properties are held to the values we expect', () => {
   assert.deepEqual(sent.properties, { control: 'state' })
   const bad = cleanEvent({ event: EVENTS.OUTBOUND_LINK_OPENED, properties: { control: 'DC', candidate: 'someone' } })
   assert.deepEqual(bad.properties, {})
+})
+
+test('names every object inherits are not let through', () => {
+  const sent = cleanEvent({
+    event: EVENTS.BLUESKY_OPENED,
+    properties: { toString: 'typed text', valueOf: 'typed text', constructor: 'typed text', hasOwnProperty: 'x', __proto__: null },
+  })
+  assert.deepEqual(Object.keys(sent.properties), [])
+})
+
+test('the first campaign tags seen stay with the visit, and gaps are filled with null', () => {
+  const none = { utm_source: null, utm_medium: null, utm_campaign: null, utm_content: null, utm_term: null }
+  assert.deepEqual(visitTags(new URL(`https://${HOST}/`)), none)
+  const tagged = { ...none, utm_source: 'bluesky' }
+  assert.deepEqual(visitTags(new URL(`https://${HOST}/follow?utm_source=bluesky`)), tagged)
+  assert.deepEqual(visitTags(new URL(`https://${HOST}/news`)), tagged)
+  assert.deepEqual(visitTags(new URL(`https://${HOST}/news?utm_source=other&utm_medium=email`)), tagged)
+  // A null tag is not sent.
+  const sent = cleanEvent({ event: '$pageview', properties: { ...none, utm_source: 'bluesky' } })
+  assert.deepEqual(sent.properties, { utm_source: 'bluesky' })
 })
 
 test('index.html defines the PostHog stub only when a key was set at build time', () => {
