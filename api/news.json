@@ -1,10 +1,10 @@
 {
-  "runId": "44429455274-1",
-  "lastUpdated": "2026-11-19T00:30:22.990Z",
-  "summary": "Following recent midterm elections, statehood advocates say new momentum is building for DC's cause. The headlines highlight arguments that DC's population exceeds that of some states and document recent instances in which the site says DC's local authority has faced attack, alongside a statement on the current state of the statehood effort. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "44559700161-1",
+  "lastUpdated": "2026-11-19T15:52:55.196Z",
+  "summary": "Recent midterm results are being cited by statehood advocates as creating new momentum for the cause, while the movement also emphasizes that D.C.'s population exceeds that of some existing states. Advocates have documented nine recent attacks on D.C.'s local authority and outlined the current state of the statehood fight, and separately raised concerns about the District's National Guard arrangements. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
   "summarySource": {
-    "closerKey": "representation",
-    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
+    "closerKey": "guard",
+    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -35,6 +35,12 @@
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
+    },
+    {
+      "title": "Why we shouldn’t have National Guard Troops in D.C.",
+      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
+      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
+      "source": "ACLU DC"
     }
   ]
 }
