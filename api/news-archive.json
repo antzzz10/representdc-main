@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T21:19:18.782Z",
-  "runId": "44950851802-1",
+  "updatedAt": "2026-11-21T23:27:59.594Z",
+  "runId": "44961858470-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -162,17 +162,17 @@
       "pubDate": "2026-08-24T15:05:27.000Z",
       "firstSeen": "2026-10-09T13:26:17.777Z",
       "confirmedAt": "2026-10-09T22:44:02.211Z"
-    }
-  ],
-  "pending": [
+    },
     {
       "link": "https://51st.news/dc-medicaid-work-requirements-delayed-trump/",
       "title": "D.C. delays Medicaid work requirements, but thousands may still lose their health insurance next year",
       "source": "The 51st",
       "pubDate": "2026-11-19T18:13:15.000Z",
-      "yes": 1,
-      "firstSeen": "2026-11-21T21:18:54.920Z"
-    },
+      "firstSeen": "2026-11-21T21:18:54.920Z",
+      "confirmedAt": "2026-11-21T23:27:24.068Z"
+    }
+  ],
+  "pending": [
     {
       "link": "https://51st.news/dc-utility-bill-reform-grid-act/",
       "title": "D.C. is poised to pass major utility reforms. Will they get gas and electric bills under control?",
@@ -236,8 +236,8 @@
       "lastStatus": "ok"
     },
     "newsletter:League of Women Voters DC": {
-      "failingSince": null,
-      "lastStatus": "ok"
+      "failingSince": "2026-11-21T23:27:24.068Z",
+      "lastStatus": "http-403"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
-  "runId": "44950851802-1",
-  "lastUpdated": "2026-11-21T21:19:18.782Z",
-  "summary": "Recent election results have energized D.C. statehood advocates, who say the political landscape has shifted in their favor. Meanwhile, D.C. residents continue to navigate local governance challenges—including disputes over utility reforms, Medicaid coverage, and Council succession—while facing federal legal conflicts over matters like the proposed Triumphal Arch and concerns about federal interference in local affairs. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "44961858470-1",
+  "lastUpdated": "2026-11-21T23:27:59.594Z",
+  "summary": "Recent midterm election results have energized advocates pushing for D.C. statehood, while the District simultaneously faces multiple challenges to its local authority, including litigation over a proposed federal monument, concerns about federal interference in local elections and appointments, and disputes over health insurance policy implementation. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
     "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
@@ -16,12 +16,6 @@
       "title": "D.C. delays Medicaid work requirements, but thousands may still lose their health insurance next year",
       "link": "https://51st.news/dc-medicaid-work-requirements-delayed-trump/",
       "pubDate": "2026-11-19T18:13:15.000Z",
-      "source": "The 51st"
-    },
-    {
-      "title": "D.C. is poised to pass major utility reforms. Will they get gas and electric bills under control?",
-      "link": "https://51st.news/dc-utility-bill-reform-grid-act/",
-      "pubDate": "2026-11-19T17:25:36.000Z",
       "source": "The 51st"
     },
     {
@@ -97,40 +91,9 @@
       "source": "ACLU DC"
     }
   ],
-  "newsletters": [
-    {
-      "title": "Full Rights Update (11/20/26): How to Talk to Friends & Family About Statehood This Holiday Season, National Guard Update, and What the LWVDC Team is Thankful For",
-      "link": "https://lwvdc.substack.com/p/full-rights-update-112026-how-to",
-      "pubDate": "2026-11-21T00:54:42.000Z",
-      "source": "League of Women Voters DC"
-    },
-    {
-      "title": "Full Rights Update (11/13/26): D.C. Council Member Calls for End of Militarization in D.C., Mayor-Elect’s Transition Team Includes Statehood Committee, Recap of Veterans Day, and Positive News",
-      "link": "https://lwvdc.substack.com/p/full-rights-update-111326-dc-council",
-      "pubDate": "2026-11-14T01:47:30.000Z",
-      "source": "League of Women Voters DC"
-    },
-    {
-      "title": "Full Rights Update (11/7/26): National Guard Patrols Ramped Up in D.C., Marking Veterans Day, Protect East Potomac Park Lobby Day, and Positive News of the Week",
-      "link": "https://lwvdc.substack.com/p/full-rights-update-11726-national",
-      "pubDate": "2026-11-07T05:06:40.000Z",
-      "source": "League of Women Voters DC"
-    },
-    {
-      "title": "Full Rights Update (10/30/26): Early Voting Now Taking Place, Election Day Approaching, National Guard Remains in our Communities, and Halloween in D.C.",
-      "link": "https://lwvdc.substack.com/p/full-rights-update-103026-early-voting",
-      "pubDate": "2026-10-30T22:40:30.000Z",
-      "source": "League of Women Voters DC"
-    },
-    {
-      "title": "Full Rights Update (10/23/26): National Guard Continues to Patrol D.C. Neighborhoods, Questions Linger About Victim of Federal Overreach, A Recap of No Kings, and Positive News of the Week",
-      "link": "https://lwvdc.substack.com/p/full-rights-update-102326-national",
-      "pubDate": "2026-10-24T03:57:03.000Z",
-      "source": "League of Women Voters DC"
-    }
-  ],
+  "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 20
+    "items": 21
   }
 }
