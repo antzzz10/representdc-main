@@ -1,6 +1,7 @@
 name: Fetch DC News
 
-# Publishes www.representdc.org/api/news.json — one file, twice a day. It never rebuilds
+# Publishes www.representdc.org/api/news.json, and its memory api/news-archive.json in the
+# same commit, twice a day. It never rebuilds
 # or redeploys the site, because releases are manual and unreleased commits on main must
 # not ship on a schedule.
 #
@@ -14,6 +15,10 @@ on:
     inputs:
       dry_run:
         description: 'Preview only — run fetch/filter/summarize/judge and log the result, skip the publish'
+        type: boolean
+        default: false
+      bootstrap_archive:
+        description: 'ONE TIME: create the news archive from the seed. Only when gh-pages has no api/news-archive.json; ignored if one exists'
         type: boolean
         default: false
       test_email:
@@ -58,6 +63,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEWS_SUMMARY_ENABLED: ${{ vars.NEWS_SUMMARY_ENABLED }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+          # Set only by a person ticking the box on a manual run. A scheduled run has no
+          # inputs, so it can never seed: with no archive on gh-pages it ends
+          # not-published and raises the usual incident.
+          NEWS_ARCHIVE_BOOTSTRAP: ${{ github.event.inputs.bootstrap_archive == 'true' && '1' || '' }}
         run: node scripts/fetch-news.mjs
 
       # The durable diagnostic record, replacing the news-data branch log. 90 days is
@@ -81,6 +90,25 @@ jobs:
           REASON: ${{ steps.run.outputs.reason }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: bash .github/scripts/news-incident.sh
+
+      # One dead feed does not fail a run (G5 needs every source to fail), so it gets its
+      # own standing issue: opened when a source has failed for two days, updated when the
+      # list changes, closed only when no source is failing at all. Never one issue per
+      # run. The script exits non-zero when a GitHub call fails, so the failure shows in
+      # the log; continue-on-error keeps that from turning a published run red, and the
+      # next run retries. The values go through env, never interpolated into the script:
+      # they are step output.
+      - name: Open, update or close the failing-feed issue
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FEED_ALERT: ${{ steps.run.outputs.feed_alert }}
+          FEED_FAILING_NOW: ${{ steps.run.outputs.feed_failing_now }}
+          FEED_ALERT_CHECKED: ${{ steps.run.outputs.feed_alert_checked }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+        run: bash .github/scripts/news-feed-alert.sh
 
       # Email is the alert; the issue above is only the state that keeps this from firing
       # twice for the same episode (decisions/2026-09-15-alert-channels.md). Same sender

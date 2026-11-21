@@ -43,7 +43,7 @@ a labeled pass, so treat them as a floor.**
 | G1 | Closing key in the approved set; the code appends the sentence | Retry once, then `general` |
 | G2 | Every year, number, dollar amount, or percentage in model-written text appears in a published headline. Narrow by design: catches F1 numbers only | Retry once, then `summary: null` |
 | G3 | One paragraph, ≤90 model-written words, no markdown or preamble | Retry once, then `summary: null` |
-| G4 | 0–5 articles; each has an https link, title, source, and a parseable date **not in the future**. The summary was generated from exactly this set | Don't publish; fail the run |
+| G4 | 0–15 articles (0–5 until 2026-11-21); each has an https link, title, source, and a parseable date **not in the future**. The summary was generated from exactly this set | Don't publish; fail the run |
 | G5 | Source health: at least one source returned a **valid parsed feed** (RSS or Atom root and channel; HTML-with-200 counts as failed); each source's status is recorded | All failed: don't publish, fail the run. Some failed: publish and log |
 | G6 | Filter output is a JSON array of in-range integer indices | Retry once, then fail the run and keep the last file |
 

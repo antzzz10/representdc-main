@@ -72,6 +72,24 @@ read, and activists checking what's moving this week.
   gap between "pushed" and "deployed" is used on purpose. A CI rebuild would ship
   unreleased commits twice a day. No bot commits land on `main`.
 - **Manual deploys and news writers own separate files on `gh-pages`.**
+  - **Changed 2026-11-21 (built, not yet committed or live):** the news workflow now
+    owns two files, `api/news.json` and its memory `api/news-archive.json`, written in
+    one commit. The deploy's remove list excludes both and refuses a build containing
+    either (`scripts/eval/deploy.test.mjs`). An article the filter confirms twice stays
+    on the page for 30 days and in the archive for good, the page shows up to 15, and a
+    source failing for two days opens one standing issue. See `scripts/news/archive.mjs`.
+    Nothing is seeded automatically. The archive is created once, by hand: run the
+    "Fetch DC News" workflow with `bootstrap_archive` ticked (`NEWS_ARCHIVE_BOOTSTRAP=1`),
+    which starts it from `scripts/news/seed-archive.json`. Without that flag, a run that
+    finds no archive ends `not-published`; with it and an archive present, the flag is
+    ignored. `api/news.json` also carries an `archive` marker (`initialized`, `items`)
+    as a second check: if the archive file goes missing, or holds fewer items than the
+    marker records, runs stop as `not-published` rather than reseeding. Known
+    limit: per-source failure dates are saved only by a run that publishes, so the
+    two-day clock does not advance while runs cannot publish, and a run where every
+    feed fails stops before feed health is computed. A run that cannot publish already
+    raises the existing incident alert, so neither case is silent.
+    The bullets below describe the original single-file design.
   - Manual deploys write **everything except** `api/news.json`. `dist` never contains
     it (asserted before publishing), and the deploy's remove list excludes it.
   - This means a small `scripts/deploy.mjs` calling `ghpages.publish()` with

@@ -17,7 +17,9 @@ export const MAX_BODY_WORDS = 90;
 // day would have lost its summary every time (golden run, 2026-09-12). This catches the
 // empty and closer-only cases, which are nought to three words, without punishing brevity.
 export const MIN_BODY_WORDS = 10;
-export const MAX_ARTICLES = 5;
+// 15, up from 5, on 2026-11-21: the page now shows confirmed articles for 30 days from the
+// scan's memory (archive.mjs) instead of only what the feeds list at this moment.
+export const MAX_ARTICLES = 15;
 
 /**
  * Every number in a string, normalised for comparison.
@@ -168,7 +170,7 @@ export function checkFilterResponse(raw, articleCount) {
   if (bad.length) {
     return { gate: 'G6', pass: false, detail: `out-of-range indices: ${bad.join(', ')}`, indices: null };
   }
-  // Duplicates would publish the same article twice, burn the five-article budget and
+  // Duplicates would publish the same article twice, burn the article budget and
   // collide as React keys.
   const unique = [...new Set(parsed)];
   if (unique.length !== parsed.length) {

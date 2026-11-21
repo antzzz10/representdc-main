@@ -11,19 +11,29 @@
  * shows headlines without a digest. Five errors reached readers under the old pipeline
  * because nothing stood between the model and the page.
  *
+ * Since 2026-11-21 the run has a memory (scripts/news/archive.mjs): api/news-archive.json
+ * on gh-pages. An article the filter has confirmed twice stays on the page for 30 days
+ * and in the archive for good, whether or not its outlet's feed still lists it. The
+ * summary, the gates and the judge all work on the displayed set, which is memory plus
+ * this run's own relevant candidates.
+ *
  * Outcomes, all recorded:
  *   published          a summary went live
  *   published-empty    no relevant articles; feed published empty (healthy)
  *   summary-withheld   articles published, summary blocked by a gate
  *   summary-disabled   NEWS_SUMMARY_ENABLED=false
  *   pushed-not-live    pushed, but the public URL never served this run
- *   not-published      ingestion failed; the last good file is left alone
+ *   not-published      ingestion failed, or the archive on the branch is unreadable;
+ *                      the last good feed and the archive are both left alone
  *
  * Env: ANTHROPIC_API_KEY (required), GITHUB_TOKEN (to push), NEWS_SUMMARY_ENABLED,
- *      DRY_RUN=1 to run everything except the push.
+ *      DRY_RUN=1 to run everything except the push,
+ *      NEWS_ARCHIVE_BOOTSTRAP=1 to create the archive from the seed when gh-pages has
+ *      none (one time, by hand; ignored when an archive already exists).
  */
 
 import { writeFileSync, appendFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { fetchAllFeeds } from './news/feeds.mjs';
 import { getClient, filterByRelevance, summarizeArticles, MODEL, PROMPT_VERSION } from './news/summarize.mjs';
 import { judgeSummary, JUDGE_MODEL, JUDGE_VERSION } from './news/judge.mjs';
@@ -36,9 +46,34 @@ import {
   checkArticles,
   MAX_ARTICLES,
 } from './news/gates.mjs';
-import { publishFeed, verifyLive } from './news/publish.mjs';
+import { publishFeed, verifyLive, readPublishedArchive, readSeedArchive } from './news/publish.mjs';
+import {
+  applyRun,
+  composePublication,
+  splitCandidates,
+  updateFeedHealth,
+  longFailingSources,
+  failingSources,
+  ArchiveError,
+} from './news/archive.mjs';
+
+// The articles earlier runs already published, rebuilt from their run records by
+// scripts/news/build-seed-archive.mjs, so the page recovers at once instead of starting
+// its memory from nothing. Used ONLY on an explicit bootstrap: NEWS_ARCHIVE_BOOTSTRAP=1,
+// which the workflow sets from a hand-ticked input and never on a schedule, AND no
+// archive on gh-pages. Nothing is seeded automatically: without the flag an absent
+// archive ends the run as not-published (publish.mjs, readArchiveOrRefuse).
+const SEED_PATH = fileURLToPath(new URL('./news/seed-archive.json', import.meta.url));
+
+const loadSeed = () => readSeedArchive(SEED_PATH);
+
+/** Git errors can quote the remote URL, and the remote URL carries the push token. */
+function redact(message) {
+  return String(message ?? '').replace(/x-access-token:[^@\s]+@/g, 'x-access-token:***@');
+}
 
 const DRY_RUN = process.env.DRY_RUN === '1';
+const BOOTSTRAP = process.env.NEWS_ARCHIVE_BOOTSTRAP === '1';
 const SUMMARIES_ENABLED = process.env.NEWS_SUMMARY_ENABLED !== 'false';
 const RUN_ID = process.env.GITHUB_RUN_ID
   ? `${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT ?? '1'}`
@@ -101,15 +136,81 @@ async function main() {
     return;
   }
 
+  // Memory, read before anything is judged. An archive that is absent, unreadable, or
+  // smaller than the feed's marker records stops the run: carrying on would end with an
+  // empty or seed-only archive written over the record. The one exception is the
+  // explicit bootstrap flag with no archive and no marker, which starts from the seed.
+  let archive;
+  try {
+    const onBranch = await readPublishedArchive({ bootstrap: BOOTSTRAP });
+    if (onBranch === null) {
+      archive = loadSeed();
+      console.log(`\nNEWS_ARCHIVE_BOOTSTRAP: no archive on gh-pages, starting from the seed (${archive.items.length} items)`);
+    } else {
+      archive = onBranch;
+      if (BOOTSTRAP) console.log('\nNEWS_ARCHIVE_BOOTSTRAP ignored: gh-pages already has an archive, and it is kept');
+    }
+    record.archiveBootstrap = onBranch === null;
+  } catch (err) {
+    const what = err instanceof ArchiveError ? 'the news archive cannot be used' : 'could not read the news archive';
+    finish('not-published', `${what}: ${redact(err.message)}`);
+    process.exitCode = 1;
+    return;
+  }
+  console.log(`\narchive: ${archive.items.length} confirmed, ${archive.pending.length} pending`);
+
+  // One fixed clock for every use of memory in this run, so re-applying the run's
+  // changes after a rejected push gives the same answer as the first time.
+  const runNow = startedAt.getTime();
+  const windowDaysBySource = Object.fromEntries(sourceResults.map((s) => [s.source, s.maxAgeDays]));
+
+  // G5 only fails the run when EVERY source fails, so one dead feed was invisible: Roll
+  // Call returned 404 for three days in November 2026 with green runs throughout. A
+  // source failing for two days or more is reported through a step output, and the
+  // workflow keeps a single issue open for it. Emitted here, before the filter, so a run
+  // that later fails for another reason still reports it.
+  //
+  // Known limit, accepted: `failingSince` is stored in the archive, and the archive is
+  // written only by a run that publishes. So the two-day clock does not advance through
+  // a stretch of runs that cannot publish (it is computed here from the last published
+  // state plus this run), and a run where EVERY feed fails returns at G5 above, before
+  // this point. Both cases are runs that end `not-published`, which already raise the
+  // existing incident alert, so nothing goes unreported; no second write path was added
+  // for failed runs.
+  const healthNow = updateFeedHealth(archive.feedHealth, sourceResults, runNow);
+  const feedAlert = longFailingSources(healthNow, runNow);
+  const failingNow = failingSources(healthNow);
+  record.feedAlert = feedAlert;
+  record.feedsFailingNow = failingNow;
+  // Statuses can carry raw error text. Keep each line short and plain: it lands in an
+  // issue body.
+  const alertLines = (list) =>
+    list
+      .map((f) => `${f.source}: ${f.lastStatus}, failing since ${f.failingSince.slice(0, 10)}`.replace(/[^\w .:,()/-]/g, ' ').slice(0, 160))
+      .join('\n');
+  setOutput('feed_alert', alertLines(feedAlert));
+  // Every source failing right now, including ones under two days. The issue closes only
+  // when this is empty, so one source recovering while another has been down for a day
+  // is not announced as "all recovered".
+  setOutput('feed_failing_now', alertLines(failingNow));
+  // Tells the workflow an empty list means "all sources fine", not "never checked".
+  setOutput('feed_alert_checked', 'true');
+  if (feedAlert.length) console.warn(`  failing for 2+ days: ${feedAlert.map((f) => f.source).join(', ')}`);
+
   const client = getClient();
 
+  // A confirmed link is never judged again. Re-asking is what made articles flicker on
+  // and off the page: the same headline drew a different verdict on a different run.
+  const { toFilter, alreadyConfirmed } = splitCandidates(archive, candidates);
+  const confirmedLinks = new Set(alreadyConfirmed.map((a) => a.link));
+
   // G6 lives inside filterByRelevance: a malformed reply is a failure, not "no news".
-  console.log(`\n${candidates.length} candidates — filtering…`);
-  let filtered = await filterByRelevance(client, candidates);
+  console.log(`${candidates.length} candidates, ${alreadyConfirmed.length} already confirmed — filtering ${toFilter.length}…`);
+  let filtered = await filterByRelevance(client, toFilter);
   if (filtered.usage) usage.push({ call: 'filter', attempt: 1, ...filtered.usage });
   if (!filtered.check.pass) {
     console.warn(`  filter reply rejected (${filtered.check.detail}) — retrying once`);
-    filtered = await filterByRelevance(client, candidates);
+    filtered = await filterByRelevance(client, toFilter);
     usage.push({ call: 'filter', attempt: 2, ...filtered.usage });
   }
   record.gates.push(filtered.check);
@@ -117,7 +218,12 @@ async function main() {
     title: a.title,
     source: a.source,
     pubDate: a.pubDate,
-    relevant: filtered.articles?.some((f) => f.link === a.link) ?? null,
+    // Recorded since 2026-11-21: without it a run record cannot say which article a
+    // verdict belonged to once two headlines match.
+    link: a.link,
+    // `confirmed` means memory answered and the filter was not asked this run.
+    confirmed: confirmedLinks.has(a.link),
+    relevant: confirmedLinks.has(a.link) ? true : filtered.articles?.some((f) => f.link === a.link) ?? null,
   }));
 
   if (!filtered.check.pass) {
@@ -126,12 +232,22 @@ async function main() {
     return;
   }
 
-  const articles = filtered.articles
-    .sort((a, b) => b._ts - a._ts)
-    .slice(0, MAX_ARTICLES)
-    .map(({ _ts, ...a }) => a);
+  // What this run saw, kept as plain data so it can be applied to the archive now and
+  // re-applied, unchanged, to a newer copy of the archive if the push is rejected.
+  const run = {
+    candidates,
+    relevantLinks: filtered.articles.map((a) => a.link),
+    sourceResults,
+    now: runNow,
+    windowDaysBySource,
+  };
+  // The displayed set: confirmed articles still inside the display window, plus this
+  // run's relevant candidates that are not confirmed yet (so new items still show at
+  // once, as before), newest first, capped at MAX_ARTICLES. Everything downstream (the
+  // summary, the gates, the judge) works on exactly this list.
+  const { articles } = applyRun(archive, run);
   record.articles = articles;
-  console.log(`  ${articles.length} relevant article(s)`);
+  console.log(`  ${run.relevantLinks.length} judged relevant this run; ${articles.length} article(s) to display (cap ${MAX_ARTICLES})`);
 
   // Summarize, unless there is nothing to summarize or summaries are switched off.
   // `summary` stays null until a candidate has passed every gate AND the judge, so no
@@ -140,7 +256,8 @@ async function main() {
   let closer = null;
   // Stable enum, recorded whether or not anything publishes: judge-pass, judge-flag,
   // judge-incomplete, judge-no-text, judge-unparseable, judge-api-failure, gate-withheld,
-  // no-articles, summaries-disabled.
+  // no-articles, summaries-disabled. (The published file can also say archive-changed:
+  // see the publish step.)
   let decision = 'no-articles';
   if (!articles.length) {
     record.reason = 'no relevant articles';
@@ -257,26 +374,35 @@ async function main() {
     return;
   }
 
-  // Rule 3: a withholding that happened after this run started always wins. The run
-  // publishes its fresh headlines but leaves the summary off.
+  // Everything decided per push attempt lives in composePublication (archive.mjs): this
+  // run's observations re-applied to the branch's archive as it is now (rule 2), the
+  // summary dropped if the displayed articles are no longer exactly the ones it was
+  // written from, and a withholding newer than this run winning (rule 3).
   const result = await publishFeed(
-    (current) => {
-      const withheldAt = current?.withheldAt ? new Date(current.withheldAt) : null;
-      if (withheldAt && withheldAt > startedAt) {
-        record.reason = `a withholding at ${current.withheldAt} superseded this run's summary`;
-        return { ...payload, summary: null, summarySource: null, withheldAt: current.withheldAt };
-      }
-      // Carry the stamp forward even when publishing normally. It records when the last
-      // withholding happened, not "currently withheld" — dropping it would let a run that
-      // started even earlier come back and republish its own summary over the removal.
-      return current?.withheldAt ? { ...payload, withheldAt: current.withheldAt } : payload;
+    (current, currentArchive) => {
+      const composed = composePublication({
+        payload,
+        summarisedArticles: articles,
+        run,
+        current,
+        currentArchive,
+        // Reached only on an explicit bootstrap: publishFeed refuses a missing archive
+        // without the flag, and with it once the feed carries the marker.
+        seed: currentArchive ? null : loadSeed(),
+        startedAt,
+        runId: RUN_ID,
+      });
+      if (composed.reason) record.reason = composed.reason;
+      return { feed: composed.feed, archive: composed.archive };
     },
-    { message: `Update news feed — ${payload.lastUpdated}` },
+    { message: `Update news feed — ${payload.lastUpdated}`, withArchive: true, baseArchive: archive, bootstrap: BOOTSTRAP },
   );
   // What actually reached the branch, which is not always what this run generated: a
   // withholding can supersede it (rule 3 above).
   const publishedSummary = result.payload?.summary ?? null;
   record.summaryPublished = publishedSummary;
+  record.articles = result.payload?.articles ?? articles;
+  record.archive = { confirmed: result.archive?.items.length ?? null, pending: result.archive?.pending.length ?? null };
   record.published = { pushed: Boolean(result.pushed), attempt: result.attempt ?? null };
 
   const live = await verifyLive(RUN_ID);

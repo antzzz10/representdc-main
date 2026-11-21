@@ -37,14 +37,18 @@ export const FEEDS = [
   // happens as congressional action on DC (riders, oversight, home-rule bills).
   { url: 'https://thehill.com/homenews/house/feed/', source: 'The Hill (House)' },
   { url: 'https://thehill.com/homenews/senate/feed/', source: 'The Hill (Senate)' },
-  { url: 'https://www.rollcall.com/rss/tag/rss-feed/all-news', source: 'Roll Call' },
+  // Roll Call's URL changed on 2026-11-21: the old path
+  // (www.rollcall.com/rss/tag/rss-feed/all-news) had returned 404 on every run since
+  // 2026-11-18, and nothing alerted because G5 only fails when every source fails.
+  // rollcall.com/feed/ confirmed returning 200 on 2026-11-21. A source failing for two
+  // days is now surfaced by the run (archive.mjs, feedHealth).
+  { url: 'https://rollcall.com/feed/', source: 'Roll Call' },
   // Advocacy org blogs — publish infrequently, so allow a wider window.
   { url: 'https://acludc.org/feed/', source: 'ACLU DC', maxAgeDays: 60 },
   { url: 'https://www.dcvote.org/feed/', source: 'DC Vote', maxAgeDays: 60 },
-  // Added 2026-07-12 and still unconfirmed: a direct fetch was 403'd by a bot-blocker.
-  // fetchFeed fails closed, so a bad URL logs and returns a failed status rather than
-  // breaking the run. Check a run's source report before trusting this one.
-  { url: 'https://lwvdc.org/feed/', source: 'League of Women Voters DC', maxAgeDays: 60 },
+  // League of Women Voters DC (lwvdc.org/feed/): REMOVED 2026-11-21. Added 2026-07-12
+  // unconfirmed, and a bot-blocker returned 403 on 89 of 89 recorded runs, so it never
+  // contributed an article. Needs a URL that answers this fetcher before it comes back.
   // Rep. Norton's office: NOT added. Every RSS path guessed either 403'd or 404'd, and
   // the one that returned a feed was a stale 2021-2022 artifact. Sen. Jain's site has no
   // feed at all. Both need a confirmed URL before they can be sources.
