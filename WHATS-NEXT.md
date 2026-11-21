@@ -33,6 +33,13 @@ parked bills need a status re-check before they go public.
 push): one menu, phone menu and footer on the main site, tracker and candidates site.
 In progress. The wider navigation review below still waits on the supportive bills page.
 
+**News scan memory** (2026-11-21): `/news` now keeps relevant articles for 30 days, shows
+up to 15, and keeps a permanent record in `api/news-archive.json`. WAMU, The GW Hatchet
+and NBC Washington were added, and newsletters get their own list. Assessment:
+`docs/2026-11-21-news-scan-assessment.md`. Still open: merge copies of wire stories, a
+weekly check of what the scan misses, a test of word rules in place of the AI relevance
+check, and asking WUSA9 for permission to read its feed.
+
 **Next after the goals:** the navigation review across all three sites (see
 "Exploratory" below).
 
