@@ -304,6 +304,12 @@ a.preview-card-live.follow-card {
   flex-direction: column;
 }
 
+/* The second list on /news (newsletters), under the headlines. */
+.news-subheading {
+  font-size: var(--fs-h3);
+  margin: var(--s-6) 0 0;
+}
+
 .news-item {
   display: flex;
   flex-direction: column;

@@ -289,7 +289,7 @@ test('feedHealth: a source is reported after two days of failing, not before, an
 
   const day2 = updateFeedHealth(day0, failing, T0 + 2 * DAY);
   assert.deepEqual(longFailingSources(day2, T0 + 2 * DAY), [
-    { source: 'Roll Call', failingSince: new Date(T0).toISOString(), lastStatus: 'http-404' },
+    { source: 'Roll Call', key: 'Roll Call', failingSince: new Date(T0).toISOString(), lastStatus: 'http-404' },
   ]);
 
   // Taken out of the feed list (as League of Women Voters DC was): no longer tracked.

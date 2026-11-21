@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
+import NewsList, { NewsletterSection } from './components/NewsList'
+import { validNewsItems } from './utils/newsItems'
 import { READING, readingRoute } from './data/reading'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 import './App.css'
@@ -29,16 +31,6 @@ const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
 
 // A feed stamp further in the future than clock skew explains is not trustworthy.
 const CLOCK_SKEW_MS = 15 * 60 * 1000
-
-function formatRelativeDate(pubDate) {
-  const date = new Date(pubDate)
-  if (isNaN(date)) return ''
-  const days = Math.floor((Date.now() - date) / (1000 * 60 * 60 * 24))
-  if (days === 0) return 'Today'
-  if (days === 1) return 'Yesterday'
-  if (days < 7) return `${days} days ago`
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
 
 function formatArticleDate(iso) {
   return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', {
@@ -122,7 +114,9 @@ function NewsAndAnalysis() {
   }, [])
 
   const checkedAt = validCheckedInstant(data?.lastUpdated)
-  const { newest, age: coverageAge } = newestCoverage(data?.articles)
+  // Malformed entries are dropped before anything reads the list (utils/newsItems.js).
+  const articles = validNewsItems(data?.articles)
+  const { newest, age: coverageAge } = newestCoverage(articles)
   const showSummary =
     data?.summary &&
     isFresh(data.lastUpdated) &&
@@ -169,35 +163,15 @@ function NewsAndAnalysis() {
             </p>
           )}
 
-          {data && data.articles?.length > 0 && (
-            <>
-              <ul className="news-list">
-                {data.articles.map((article) => (
-                  <li className="news-item" key={article.link}>
-                    <a
-                      className="news-item-title"
-                      href={article.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {article.title}
-                      <Icon name="external-link" size={14} />
-                    </a>
-                    <span className="news-item-meta">
-                      {article.source && <span>{article.source}</span>}
-                      {article.source && article.pubDate && (
-                        <span className="news-item-dot"> · </span>
-                      )}
-                      {article.pubDate && <span>{formatRelativeDate(article.pubDate)}</span>}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {data && !data.articles?.length && (
+          {data && articles.length > 0 && <NewsList items={articles} />}
+          {data && articles.length === 0 && (
             <p className="news-status">No articles in the feed right now. Check back soon.</p>
           )}
+
+          {/* A separate list, below the headlines. The summary and its AI disclosure
+              above belong to the headlines only, and the summary's freshness rules read
+              `articles` only: nothing here feeds either. */}
+          <NewsletterSection newsletters={data?.newsletters} />
         </div>
       </section>
 

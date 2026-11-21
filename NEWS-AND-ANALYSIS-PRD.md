@@ -89,6 +89,15 @@ read, and activists checking what's moving this week.
     two-day clock does not advance while runs cannot publish, and a run where every
     feed fails stops before feed health is computed. A run that cannot publish already
     raises the existing incident alert, so neither case is silent.
+    **Newsletters (2026-11-21, built, not yet committed or live):** `api/news.json`
+    also carries a separate `newsletters` array (last 30 days, newest first, at most 5),
+    from its own feed list (`NEWSLETTERS` in `scripts/news/feeds.mjs`; first entry is the
+    League of Women Voters DC Substack). Newsletters carry more opinion, so no model
+    reads them, they are never in `articles` or the archive, and they do not count
+    toward G5. A bad item is dropped and a failed newsletter feed publishes `[]` on a
+    healthy run; its failure is tracked for the two-day alert. The page shows them in a
+    second list, "Newsletters and opinion", below the headlines. WAMU, The GW Hatchet
+    and NBC Washington were added as news feeds the same day.
     The bullets below describe the original single-file design.
   - Manual deploys write **everything except** `api/news.json`. `dist` never contains
     it (asserted before publishing), and the deploy's remove list excludes it.

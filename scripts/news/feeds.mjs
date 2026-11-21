@@ -43,6 +43,18 @@ export const FEEDS = [
   // rollcall.com/feed/ confirmed returning 200 on 2026-11-21. A source failing for two
   // days is now surfaced by the run (archive.mjs, feedHealth).
   { url: 'https://rollcall.com/feed/', source: 'Roll Call' },
+  // Added 2026-11-21. All three returned 200 with items that day using this fetcher's
+  // user agent. Each note records what the outlet's terms and robots.txt said when
+  // checked; this pipeline takes the headline, link, source and date only.
+  // - WAMU: terms restrict reusing content and say nothing about a headline and a link;
+  //   robots.txt allows generic bots.
+  { url: 'https://wamu.org/feed/', source: 'WAMU' },
+  // - The GW Hatchet: no terms of use found; robots.txt allows crawling with a crawl
+  //   delay of 6 seconds, which one request per run respects.
+  { url: 'https://gwhatchet.com/feed/', source: 'The GW Hatchet' },
+  // - NBC Washington: this exact URL, because robots.txt expressly allows it. The
+  //   NBCUniversal terms were only partly read, so this one is not fully cleared.
+  { url: 'https://www.nbcwashington.com/?rss=y&most_recent=y', source: 'NBC Washington' },
   // Advocacy org blogs — publish infrequently, so allow a wider window.
   { url: 'https://acludc.org/feed/', source: 'ACLU DC', maxAgeDays: 60 },
   { url: 'https://www.dcvote.org/feed/', source: 'DC Vote', maxAgeDays: 60 },
@@ -66,6 +78,29 @@ export const FEEDS = [
   // - DC Council's "News RSS" (dccouncil.gov/dc-council-rss-feeds/): links to a
   //   GovDelivery email-subscription signup page, not an actual RSS/Atom feed.
   // - DCist: permanently shut down by WAMU, February 2024.
+  //
+  // Checked 2026-11-21, NOT added (terms or robots.txt, not a technical failure):
+  // - WUSA9: the feed licence is for individuals' personal use, and the terms bar scripts.
+  // - Axios: the feed host's robots.txt disallows everything.
+  // - WTOP: terms bar systematic retrieval into a database, which the archive is.
+  // - Washington Post: paywalled, and the terms were not read.
+  // - Politico: terms not read (and the feeds were bot-blocked on 2026-09-29, above).
+  // - FOX 5 DC: the terms name deep linking.
+  // - AP and Reuters: robots.txt and terms bar automated reading.
+  // - Google News RSS: for use in a personal feed reader only.
+];
+
+/**
+ * Newsletters, kept apart from FEEDS on purpose (newsletters.mjs explains the rule): they
+ * carry more opinion than news coverage, so they get their own list on the page, no model
+ * reads them, they are never archived, and they do not count toward G5. Fetched and
+ * validated by the same code as FEEDS.
+ */
+export const NEWSLETTERS = [
+  // League of Women Voters DC on Substack: the weekly "Full Rights Update". Returned 200
+  // on 2026-11-21, and Substack's robots.txt allows /feed. This is the League's
+  // newsletter, not its website feed (lwvdc.org/feed/), which was removed above.
+  { url: 'https://lwvdc.substack.com/feed', source: 'League of Women Voters DC' },
 ];
 
 function extractCDATA(text) {
@@ -171,7 +206,7 @@ export async function fetchFeed({ url, source }) {
 }
 
 /** Fetches every feed and applies each one's freshness window. */
-export async function fetchAllFeeds(feeds = FEEDS, now = Date.now()) {
+export async function fetchAllFeeds(feeds = FEEDS, now = Date.now(), kind = 'news') {
   const results = [];
   const articles = [];
   const seen = new Set();
@@ -194,6 +229,11 @@ export async function fetchAllFeeds(feeds = FEEDS, now = Date.now()) {
 
     results.push({
       source: feed.source,
+      // 'news' or 'newsletter'. G5 counts news sources only.
+      kind,
+      // feedHealth key. Distinct for newsletters so one can never inherit the failure
+      // date of a news feed with the same display name (archive.mjs, updateFeedHealth).
+      ...(kind === 'newsletter' ? { healthKey: `newsletter:${feed.source}` } : {}),
       url: feed.url,
       // 'ok' covers a live feed whose items are all older than its window: the source
       // worked, it simply has nothing recent.
@@ -205,9 +245,15 @@ export async function fetchAllFeeds(feeds = FEEDS, now = Date.now()) {
     });
 
     for (const item of fresh) {
-      if (seen.has(item.link)) continue;
-      seen.add(item.link);
-      articles.push({ ...item, _ts: new Date(item.pubDate).getTime() });
+      // Newsletter items are deduped later, by selectNewsletters, after its safety
+      // checks: deduping here would let a bad first copy of a link discard a good one.
+      if (kind !== 'newsletter') {
+        if (seen.has(item.link)) continue;
+        seen.add(item.link);
+      }
+      // The list's own label, always, for a newsletter: an item-level <source> tag must
+      // not be able to relabel opinion as coming from somewhere else.
+      articles.push({ ...item, ...(kind === 'newsletter' ? { source: feed.source } : {}), _ts: new Date(item.pubDate).getTime() });
     }
   }
 

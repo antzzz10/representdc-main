@@ -34,7 +34,8 @@
 
 import { writeFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { fetchAllFeeds } from './news/feeds.mjs';
+import { fetchAllFeeds, NEWSLETTERS } from './news/feeds.mjs';
+import { selectNewsletters } from './news/newsletters.mjs';
 import { getClient, filterByRelevance, summarizeArticles, MODEL, PROMPT_VERSION } from './news/summarize.mjs';
 import { judgeSummary, JUDGE_MODEL, JUDGE_VERSION } from './news/judge.mjs';
 import { closerFor } from './news/closers.mjs';
@@ -121,7 +122,16 @@ function finish(outcome, reason = null) {
 
 async function main() {
   console.log(`Run ${RUN_ID} — fetching feeds…\n`);
-  const { sourceResults, articles: candidates } = await fetchAllFeeds();
+  const { sourceResults: newsResults, articles: candidates } = await fetchAllFeeds();
+  // Newsletters are fetched by the same code but kept apart from here on
+  // (newsletters.mjs): `newsletterItems` goes to the page's second list and nowhere
+  // else. It is never merged into `candidates`, so no model reads it and the archive
+  // never sees it. fetchFeed never throws, so a dead newsletter feed is just a failed
+  // status and an empty list.
+  const { sourceResults: newsletterResults, articles: newsletterItems } = await fetchAllFeeds(NEWSLETTERS, Date.now(), 'newsletter');
+  // Both kinds, for the run record and for feedHealth (the two-day alert covers
+  // newsletter feeds too). G5 below ignores the newsletter ones.
+  const sourceResults = [...newsResults, ...newsletterResults];
   record.sources = sourceResults;
   for (const s of sourceResults) {
     console.log(`  ${s.status === 'ok' ? '✓' : '✗'} ${s.source}: ${s.status} (${s.fresh}/${s.fetched} fresh)`);
@@ -162,7 +172,10 @@ async function main() {
   // One fixed clock for every use of memory in this run, so re-applying the run's
   // changes after a rejected push gives the same answer as the first time.
   const runNow = startedAt.getTime();
-  const windowDaysBySource = Object.fromEntries(sourceResults.map((s) => [s.source, s.maxAgeDays]));
+  const windowDaysBySource = Object.fromEntries(newsResults.map((s) => [s.source, s.maxAgeDays]));
+  // Decided once, here, so every push attempt publishes the same list.
+  const newsletters = selectNewsletters(newsletterItems, runNow);
+  record.newsletters = newsletters;
 
   // G5 only fails the run when EVERY source fails, so one dead feed was invisible: Roll
   // Call returned 404 for three days in November 2026 with green runs throughout. A
@@ -363,6 +376,9 @@ async function main() {
     summaryCheck: summary ? { judge: 'pass', judgeVersion: JUDGE_VERSION } : null,
     summaryDecision: decision,
     articles,
+    // The separate list. Not part of anything the summary or the judge saw, and not
+    // compared when a retry decides whether the summary still matches its articles.
+    newsletters,
   };
 
   if (DRY_RUN) {

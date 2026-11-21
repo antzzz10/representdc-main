@@ -20,7 +20,7 @@
  * owns reading and writing the file; fetch-news.mjs owns the order of operations.
  */
 
-import { MAX_ARTICLES, checkArticles } from './gates.mjs';
+import { MAX_ARTICLES, checkArticles, isHttpsUrl } from './gates.mjs';
 
 export const ARCHIVE_PATH = 'api/news-archive.json';
 export const ARCHIVE_VERSION = 1;
@@ -54,7 +54,7 @@ const toIso = (v) => new Date(v).toISOString();
 function entryProblems(entry, label, extra) {
   const problems = [];
   if (!isObject(entry)) return [`${label} is not an object`];
-  if (!/^https:\/\//.test(entry.link ?? '')) problems.push(`${label} link is not https`);
+  if (!isHttpsUrl(entry.link)) problems.push(`${label} link is not https`);
   if (typeof entry.title !== 'string' || !entry.title) problems.push(`${label} missing title`);
   if (typeof entry.source !== 'string' || !entry.source) problems.push(`${label} missing source`);
   for (const field of ['pubDate', 'firstSeen', ...extra]) {
@@ -131,7 +131,7 @@ export function archivable(article, now) {
   return Boolean(
     article?.title &&
       article?.source &&
-      /^https:\/\//.test(article?.link ?? '') &&
+      isHttpsUrl(article?.link) &&
       Number.isFinite(ts) &&
       ts <= now + FUTURE_TOLERANCE_MS,
   );
@@ -167,8 +167,13 @@ export function updateFeedHealth(previous, sourceResults, now) {
   const next = {};
   for (const result of sourceResults) {
     const failing = result.status !== 'ok';
-    const before = Object.hasOwn(previous, result.source) ? previous[result.source] : null;
-    next[result.source] = {
+    // A newsletter feed carries its own key (`newsletter:<name>`): it can share a display
+    // name with a news feed, past or present, and must not inherit that feed's
+    // failingSince. The League of Women Voters DC newsletter would otherwise have picked
+    // up the date its removed website feed started failing.
+    const key = result.healthKey ?? result.source;
+    const before = Object.hasOwn(previous, key) ? previous[key] : null;
+    next[key] = {
       failingSince: failing ? before?.failingSince ?? toIso(now) : null,
       lastStatus: String(result.status),
     };
@@ -209,6 +214,13 @@ export function readArchiveMarker(feed) {
   return marker;
 }
 
+export const NEWSLETTER_HEALTH_PREFIX = 'newsletter:';
+
+/** A feedHealth key as a person should read it: "newsletter:X" becomes "X (newsletter)". */
+export function feedLabel(key) {
+  return key.startsWith(NEWSLETTER_HEALTH_PREFIX) ? `${key.slice(NEWSLETTER_HEALTH_PREFIX.length)} (newsletter)` : key;
+}
+
 /**
  * Sources failing right now, however recently. The failing-feed issue closes only when
  * this is empty: one source recovering while another has been down for a day is not
@@ -217,7 +229,7 @@ export function readArchiveMarker(feed) {
 export function failingSources(feedHealth) {
   return Object.entries(feedHealth)
     .filter(([, health]) => health.failingSince)
-    .map(([source, health]) => ({ source, failingSince: health.failingSince, lastStatus: health.lastStatus }))
+    .map(([key, health]) => ({ source: feedLabel(key), key, failingSince: health.failingSince, lastStatus: health.lastStatus }))
     .sort((a, b) => a.source.localeCompare(b.source));
 }
 
@@ -225,7 +237,7 @@ export function failingSources(feedHealth) {
 export function longFailingSources(feedHealth, now, afterDays = FEED_ALERT_AFTER_DAYS) {
   return Object.entries(feedHealth)
     .filter(([, health]) => health.failingSince && now - new Date(health.failingSince).getTime() >= afterDays * DAY_MS)
-    .map(([source, health]) => ({ source, failingSince: health.failingSince, lastStatus: health.lastStatus }))
+    .map(([key, health]) => ({ source: feedLabel(key), key, failingSince: health.failingSince, lastStatus: health.lastStatus }))
     .sort((a, b) => a.source.localeCompare(b.source));
 }
 

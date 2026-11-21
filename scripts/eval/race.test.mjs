@@ -842,3 +842,42 @@ test('fetch-news.yml: only a hand-ticked input can set the bootstrap flag', () =
   // The seed is loaded in exactly two places, both behind a null archive from the publisher.
   assert.equal(script.match(/loadSeed\(\)/g).length, 2);
 });
+
+// ── Newsletters (the separate list in api/news.json) ────────────────────────────────
+
+test('newsletters: withholding keeps the list that is on the branch, and a later run replaces it', async () => {
+  await freshMemory();
+  const a = story('beside-newsletters');
+  const letters = [{ title: 'Full Rights Update', link: 'https://lwvdc.substack.com/p/one', pubDate: '2026-11-20T12:00:00.000Z', source: 'League of Women Voters DC' }];
+  const publishWith = (runId, newsletters, now) =>
+    publishFeed(
+      (current, currentArchive) => {
+        const run = observed([a], now);
+        const summarisedArticles = applyRun(currentArchive, run).articles;
+        const payload = { runId, lastUpdated: new Date(now).toISOString(), summary: 'Judged summary.', summarySource: null, summaryCheck: JUDGE_PASS, summaryDecision: 'judge-pass', articles: summarisedArticles, newsletters };
+        const composed = composePublication({ payload, summarisedArticles, run, current, currentArchive, seed: null, startedAt: new Date(now), runId });
+        return { feed: composed.feed, archive: composed.archive };
+      },
+      { message: `news ${runId}`, withArchive: true },
+    );
+
+  await publishWith('l1', letters, T0);
+  assert.deepEqual(JSON.parse(published(NEWS_PATH)).newsletters, letters);
+  assert.doesNotMatch(published(ARCHIVE_PATH), /substack/, 'never in the archive');
+
+  // Exactly the write scripts/news/withhold.mjs makes.
+  await publishFeed(
+    (current) => ({ ...current, summary: null, summarySource: null, withheldAt: '2026-11-21T10:05:00Z', withheldReason: 'test' }),
+    { message: 'Withhold news summary' },
+  );
+  const withheld = JSON.parse(published(NEWS_PATH));
+  assert.equal(withheld.summary, null);
+  assert.deepEqual(withheld.newsletters, letters, 'the newsletters list is untouched by a withholding');
+  assert.equal(withheld.articles.length, 1);
+
+  // The newsletter feed fails on the next run: an empty list, and the headlines still publish.
+  await publishWith('l2', [], T0 + DAY / 2);
+  const next = JSON.parse(published(NEWS_PATH));
+  assert.deepEqual(next.newsletters, []);
+  assert.deepEqual(next.articles.map((x) => x.link), [a.link]);
+});

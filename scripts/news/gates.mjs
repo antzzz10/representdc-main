@@ -38,6 +38,22 @@ function numericTokens(text) {
     .filter(Boolean);
 }
 
+/**
+ * A link a reader can follow: parses as a URL, https, with a hostname. A prefix test
+ * (/^https:\/\//) accepted "https://" on its own, which is a link to nowhere. Shared by
+ * G4, the archive and the newsletters list so the three cannot drift apart.
+ */
+export function isHttpsUrl(link) {
+  if (typeof link !== 'string') return false;
+  let url;
+  try {
+    url = new URL(link);
+  } catch {
+    return false;
+  }
+  return url.protocol === 'https:' && url.hostname.length > 0;
+}
+
 /** G1 — the model chose a key from the approved list; the code supplies the sentence. */
 export function checkCloserKey(key) {
   const pass = CLOSER_KEYS.includes(key);
@@ -97,7 +113,7 @@ export function checkArticles(articles, summarySourceIds = null, now = Date.now(
   articles.forEach((a, i) => {
     if (!a?.title) problems.push(`#${i} missing title`);
     if (!a?.source) problems.push(`#${i} missing source`);
-    if (!/^https:\/\//.test(a?.link ?? '')) problems.push(`#${i} link is not https`);
+    if (!isHttpsUrl(a?.link)) problems.push(`#${i} link is not https`);
     const ts = new Date(a?.pubDate ?? '').getTime();
     if (Number.isNaN(ts)) problems.push(`#${i} unparseable date`);
     // A future date means a broken feed or a bad parse, not news. The tolerance covers
@@ -127,7 +143,11 @@ export function checkArticles(articles, summarySourceIds = null, now = Date.now(
  * dead feed looks identical to a quiet news day and the site would publish an empty feed
  * as if it were the truth.
  */
-export function checkSourceHealth(sourceResults) {
+export function checkSourceHealth(allResults) {
+  // News sources only, enforced here and not left to the caller. A newsletter feed that
+  // works while every news feed is down must not pass this gate: the headlines would be
+  // rebuilt from nothing and published as a quiet news day.
+  const sourceResults = allResults.filter((s) => s.kind !== 'newsletter');
   const ok = sourceResults.filter((s) => s.status === 'ok');
   const failed = sourceResults.filter((s) => s.status !== 'ok');
   return {
