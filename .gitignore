@@ -32,3 +32,8 @@ scripts/eval/last-golden-run.json
 
 # Private ideas file (resync skill); never committed.
 private/IDEAS.md
+
+# Private working files (newsletter mock-ups, build timeline). Backed up by iCloud, not git.
+private/newsletter/
+private/timeline/
+private/research/
