@@ -1,0 +1,9 @@
+**MATERIAL — A malformed newsletter item can crash the news page.** [NewsList.jsx](src/components/NewsList.jsx:17) checks that `newsletters` is an array, but does not validate its entries. For example, `"newsletters": [null]` throws when rendering `item.link`, taking down the page along with the headlines and summary. An object-valued title can also make React throw. Validate each entry’s shape and safe HTTPS URL before rendering, dropping invalid entries; add tests for malformed **array entries**, not only malformed top-level fields.
+
+**NOTE — The new newsletter inherits the removed website feed’s failure history.** [feeds.mjs](scripts/news/feeds.mjs:103) reuses `League of Women Voters DC`, while [archive.mjs](scripts/news/archive.mjs:170) keys health only by source name. If the branch retains the old website feed’s failing state and the new Substack feed fails on its first run, the alert can report that the new feed has been failing since the old feed did. Track health by a stable feed identity including URL or kind, with an explicit migration, or give the new source a distinct health key.
+
+**NOTE — Deduplication can discard a valid newsletter before safety checks.** [feeds.mjs](scripts/news/feeds.mjs:244) keeps the first occurrence of a link before [newsletters.mjs](scripts/news/newsletters.mjs:40) validates it. If the first copy has a date too far in the future and a later copy of the same link is valid, both disappear from the published list. Validate before deduplicating, and test that ordering.
+
+The separation, G5, withholding, retry composition, and live-verification paths did not reveal another concrete defect in this review. I did not run the suite: its new page tests write and remove files, and this review was restricted to read-only inspection.
+
+DO NOT SHIP on code correctness.

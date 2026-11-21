@@ -1,0 +1,13 @@
+1. **CONFIRMED FIXED** — Both lists filter malformed entries before rendering; an all-invalid newsletter list renders no heading or list. The article page also filters before calculating coverage freshness. [newsItems.js:31](src/utils/newsItems.js:31), [NewsList.jsx:15](src/components/NewsList.jsx:15), [NewsAndAnalysis.jsx:118](src/NewsAndAnalysis.jsx:118).
+
+2. **CONFIRMED FIXED** — `isHttpsUrl` rejects hostless URLs and is used by G4, archive admission and validation, and newsletter selection through `archivable`. [gates.mjs:46](scripts/news/gates.mjs:46), [archive.mjs:57](scripts/news/archive.mjs:57), [archive.mjs:129](scripts/news/archive.mjs:129), [newsletters.mjs:44](scripts/news/newsletters.mjs:44).
+
+3. **CONFIRMED FIXED** — Newsletter fetching preserves duplicates; selection validates before deduplicating. [feeds.mjs:247](scripts/news/feeds.mjs:247), [newsletters.mjs:41](scripts/news/newsletters.mjs:41).
+
+4. **CONFIRMED FIXED** — Newsletter health uses its own prefixed key, so it cannot inherit the removed news feed’s failure date. [feeds.mjs:230](scripts/news/feeds.mjs:230), [archive.mjs:167](scripts/news/archive.mjs:167).
+
+5. **CONFIRMED FIXED** — The new test invokes the actual `fetch-news.mjs` process with stubbed fetch, checks model prompts and published data, and exercises a publication retry. [main-path.test.mjs:53](scripts/eval/main-path.test.mjs:53), [main-path.test.mjs:121](scripts/eval/main-path.test.mjs:121). I inspected it but did not run it: it creates files and local Git repositories, while this review is read-only.
+
+No new BLOCKER or MATERIAL defects identified. The stricter URL check accepts all 20 entries in the local seed, but the permanent archive lives on `gh-pages`, which is unavailable in this checkout; its compatibility cannot be confirmed offline. An old archive entry accepted by the former prefix-only check but rejected by URL parsing would stop every run at archive validation. The page filter preserves all seed articles; its deduplication can change freshness for malformed duplicate-link payloads, but the normal pipeline already deduplicates published articles. The alert consumes readable labels rather than health keys, and G5 excludes newsletters. [archive.mjs:74](scripts/news/archive.mjs:74), [archive.mjs:318](scripts/news/archive.mjs:318), [fetch-news.mjs:200](scripts/fetch-news.mjs:200), [gates.mjs:146](scripts/news/gates.mjs:146).
+
+SHIP on code correctness.
