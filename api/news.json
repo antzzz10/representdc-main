@@ -1,10 +1,10 @@
 {
-  "runId": "44840990901-1",
-  "lastUpdated": "2026-11-21T00:02:04.971Z",
-  "summary": "DC Vote reports that midterm results have created new momentum for statehood efforts, while advocates highlight that the District's population exceeds that of some states. Meanwhile, DC Vote has documented nine recent attacks on the District's local authority and responded to them, and the ACLU DC has raised concerns about the National Guard's presence and role in the District. Without statehood, the District's National Guard answers to the President, not to the officials D.C. residents elect.",
+  "runId": "44915628046-1",
+  "lastUpdated": "2026-11-21T14:46:28.273Z",
+  "summary": "Statehood advocates say recent midterm results have created new momentum for DC statehood, while DC Vote has documented nine recent attacks on the District's local authority and outlined the current state of the fight for representation. Advocates also point to DC's population size as relevant to statehood discussions. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
-    "closerKey": "guard",
-    "closerSource": "https://code.dccouncil.gov/us/dc/council/code/sections/49-409"
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
   },
   "summaryCheck": {
     "judge": "pass",
@@ -17,6 +17,12 @@
       "link": "https://www.dcvote.org/dc-vote-midterm-results-create-new-momentum-for-dc-statehood/",
       "pubDate": "Wed, 04 Nov 2026 16:30:09 +0000",
       "source": "DC Vote"
+    },
+    {
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "Tue, 27 Oct 2026 12:18:55 +0000",
+      "source": "ACLU DC"
     },
     {
       "title": "DC Has More People Than Some States Already Have",
@@ -35,12 +41,6 @@
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "Tue, 06 Oct 2026 19:40:49 +0000",
       "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "Thu, 01 Oct 2026 13:00:13 +0000",
-      "source": "ACLU DC"
     }
   ]
 }
