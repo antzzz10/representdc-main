@@ -57,7 +57,12 @@ export const FEEDS = [
   { url: 'https://www.nbcwashington.com/?rss=y&most_recent=y', source: 'NBC Washington' },
   // Advocacy org blogs — publish infrequently, so allow a wider window.
   { url: 'https://acludc.org/feed/', source: 'ACLU DC', maxAgeDays: 60 },
-  { url: 'https://www.dcvote.org/feed/', source: 'DC Vote', maxAgeDays: 60 },
+  // `statehoodOrg`: a statehood organisation, so its posts pass the topic rule whatever
+  // the headline says (relevance-rules.mjs). Set on DC Vote only (2026-11-21). The model
+  // filter still has to say yes first. fetchAllFeeds copies the flag onto each item
+  // fetched from THIS feed as `_statehoodOrg`; the exemption reads that, never the
+  // item's source label, which a <source> tag in any feed could set to "DC Vote".
+  { url: 'https://www.dcvote.org/feed/', source: 'DC Vote', maxAgeDays: 60, statehoodOrg: true },
   // League of Women Voters DC (lwvdc.org/feed/): REMOVED 2026-11-21. Added 2026-07-12
   // unconfirmed, and a bot-blocker returned 403 on 89 of 89 recorded runs, so it never
   // contributed an article. Needs a URL that answers this fetcher before it comes back.
@@ -253,7 +258,15 @@ export async function fetchAllFeeds(feeds = FEEDS, now = Date.now(), kind = 'new
       }
       // The list's own label, always, for a newsletter: an item-level <source> tag must
       // not be able to relabel opinion as coming from somewhere else.
-      articles.push({ ...item, ...(kind === 'newsletter' ? { source: feed.source } : {}), _ts: new Date(item.pubDate).getTime() });
+      articles.push({
+        ...item,
+        ...(kind === 'newsletter' ? { source: feed.source } : {}),
+        _ts: new Date(item.pubDate).getTime(),
+        // Internal, like _ts: set from the feed's configuration, after the spread so
+        // nothing parsed out of the feed can supply it. Never published or archived:
+        // archive.mjs and the run record copy named fields only.
+        _statehoodOrg: feed.statehoodOrg === true,
+      });
     }
   }
 

@@ -20,9 +20,11 @@ const json = (body) => new Response(JSON.stringify(body), { status: 200, headers
 function modelReply(prompt) {
   if (prompt.startsWith('You are a relevance filter')) {
     // Says yes to anything mentioning statehood. The newsletter's title mentions it too,
-    // so if a newsletter ever reached this prompt it would be picked.
+    // so if a newsletter ever reached this prompt it would be picked. It also says yes
+    // to the Medicaid story, the way the real filter did on 2026-11-21, so the topic
+    // rule has something to block.
     const lines = prompt.split('Article titles:\n')[1].split('\n');
-    const yes = lines.map((line) => line.match(/^(\d+): (.*)$/)).filter((m) => m && /statehood/i.test(m[2])).map((m) => Number(m[1]));
+    const yes = lines.map((line) => line.match(/^(\d+): (.*)$/)).filter((m) => m && /statehood|medicaid/i.test(m[2])).map((m) => Number(m[1]));
     return { kind: 'filter', text: JSON.stringify(yes) };
   }
   if (prompt.startsWith('You write a short neutral news-digest summary')) {

@@ -98,6 +98,16 @@ read, and activists checking what's moving this week.
     healthy run; its failure is tracked for the two-day alert. The page shows them in a
     second list, "Newsletters and opinion", below the headlines. WAMU, The GW Hatchet
     and NBC Washington were added as news feeds the same day.
+    **Topic rule and dashes (2026-11-21, built, not yet committed or live):** an article
+    is relevant on a run only if the model filter says yes AND a fixed word rule passes
+    (`scripts/news/relevance-rules.mjs`; DC Vote passes as a statehood organisation, by a
+    flag on its feed configuration and never by an article's source label). The rule
+    only removes, never touches confirmed archive items, drops pending entries whose
+    stored headline it blocks, and each run record keeps the model's verdict and the
+    rule's separately. A rewritten headline restarts an article's count, so the wording
+    that gets confirmed has had two yeses itself. The summary prompt now forbids
+    em-dashes and en-dashes (prompt version 2026-11-21.1), and G3 fails a body that uses
+    either as punctuation.
     The bullets below describe the original single-file design.
   - Manual deploys write **everything except** `api/news.json`. `dist` never contains
     it (asserted before publishing), and the deploy's remove list excludes it.

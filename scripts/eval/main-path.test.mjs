@@ -34,6 +34,11 @@ const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8' 
 // articles list or the archive could see it.
 const NEWSLETTER_MARKS = ['NEWSLETTER-MARKER', 'Full Rights Update', 'lwvdc.substack.com', 'p/marker-'];
 const NEWS_LINK = 'https://51st.news/statehood-bill-advances/';
+const MEDICAID_TITLE = 'D.C. delays Medicaid work requirements, but thousands may still lose their health insurance next year';
+const MEDICAID_LINK = 'https://51st.news/medicaid-work-requirements/';
+const UTILITY_LINK = 'https://51st.news/utility-reforms/';
+const ROUNDUP_TITLE = 'The Needle: Statehood Rally, a Flyover, and More';
+const ROUNDUP_LINK = 'https://51st.news/the-needle/';
 
 const daysAgo = (n) => new Date(Date.now() - n * 24 * 60 * 60 * 1000).toUTCString();
 const rss = (items) =>
@@ -82,6 +87,10 @@ before(async () => {
   routes[FEEDS[0].url] = rss([
     { title: 'D.C. statehood bill advances in the House', link: NEWS_LINK, pubDate: daysAgo(1) },
     { title: 'Where to find the best holiday markets', link: 'https://51st.news/holiday-markets/', pubDate: daysAgo(1) },
+    // The stub model says yes to this one. The topic rule must take it back out.
+    { title: MEDICAID_TITLE, link: MEDICAID_LINK, pubDate: daysAgo(0.5) },
+    // A roundup: skipped in code before the prompt is built.
+    { title: ROUNDUP_TITLE, link: ROUNDUP_LINK, pubDate: daysAgo(0.5) },
   ]);
   routes[NEWSLETTERS[0].url] = rss([
     { title: 'Full Rights Update: statehood NEWSLETTER-MARKER one', link: 'https://lwvdc.substack.com/p/marker-one', pubDate: daysAgo(2) },
@@ -106,7 +115,18 @@ before(async () => {
 
   process.env.NEWS_REMOTE = remote;
   try {
-    await publishFeed(() => ({ feed: { runId: 'bootstrap', summary: null, articles: [] }, archive: emptyArchive() }), {
+    // The archive starts as the live one stood when the topic rule was written: two
+    // entries pending on one model yes each, for headlines the rule blocks. One is still
+    // in the feed, one has left it.
+    const stale = (title, link) => ({ link, title, source: 'The 51st', pubDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), yes: 1, firstSeen: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() });
+    const startingArchive = {
+      ...emptyArchive(),
+      pending: [
+        stale(MEDICAID_TITLE, MEDICAID_LINK),
+        stale('D.C. is poised to pass major utility reforms. Will they get gas and electric bills under control?', UTILITY_LINK),
+      ],
+    };
+    await publishFeed(() => ({ feed: { runId: 'bootstrap', summary: null, articles: [] }, archive: startingArchive }), {
       message: 'bootstrap',
       withArchive: true,
       bootstrap: true,
@@ -146,6 +166,31 @@ test('main path, first run: newsletters publish in their own list and no model i
   assertNoNewsletter(archiveText.replace(/"newsletter:League of Women Voters DC"/, ''), 'the archive file');
 
   assertNoNewsletter(JSON.stringify(run.record.candidates), 'the candidates sent toward the filter');
+
+  // The topic rule: the model said yes to the Medicaid story, the rule blocked it, and it
+  // went nowhere: not displayed, not summarised, not judged, not pending.
+  assert.match(seen[0].prompt, /Medicaid/, 'the filter was asked about it');
+  assert.doesNotMatch(seen[1].prompt, /Medicaid/, 'the summary never saw it');
+  assert.doesNotMatch(seen[2].prompt, /Medicaid/, 'the judge never saw it');
+  assert.doesNotMatch(published('api/news.json') + archiveText, /medicaid/i);
+  const verdict = (link) => {
+    const { modelRelevant, ruleBlocked, relevant } = run.record.candidates.find((c) => c.link === link);
+    return { modelRelevant, ruleBlocked, relevant };
+  };
+  assert.deepEqual(verdict(MEDICAID_LINK), { modelRelevant: true, ruleBlocked: true, relevant: false });
+  assert.deepEqual(verdict(NEWS_LINK), { modelRelevant: true, ruleBlocked: false, relevant: true });
+  assert.deepEqual(verdict('https://51st.news/holiday-markets/'), { modelRelevant: false, ruleBlocked: false, relevant: false });
+  assert.deepEqual(run.record.topicRule, { modelRelevant: 2, blocked: 1 });
+  // Both stale pending entries are gone after one run: the Medicaid one despite a second
+  // model yes (it would have been confirmed on this run without the rule), the utility
+  // one although it is no longer in any feed.
+  assert.doesNotMatch(archiveText, /utility/i);
+  // A roundup is never shown to the model, and the record says why it has no verdict.
+  assert.doesNotMatch(seen[0].prompt, /The Needle/);
+  const roundup = run.record.candidates.find((c) => c.link === ROUNDUP_LINK);
+  assert.deepEqual([roundup.modelRelevant, roundup.notAsked, roundup.relevant], [null, 'roundup', false]);
+  assert.equal(run.record.candidates.find((c) => c.link === NEWS_LINK).notAsked, null);
+  assert.match(run.out, /2 judged relevant by the model; 1 blocked by the topic rule/);
   assert.equal(run.record.newsletters.length, 2);
   // G5 passed on the one news feed; the newsletter feed is recorded but did not count.
   assert.match(run.record.gates[0].detail, new RegExp(`^1/${FEEDS.length} sources ok`));
@@ -208,7 +253,11 @@ exit 1
   // The second yes confirmed the article; still nothing of the newsletter in memory.
   const archive = parseArchive(published('api/news-archive.json'));
   assert.deepEqual(archive.items.map((i) => i.link), [NEWS_LINK]);
+  // The Medicaid story has now had two model yeses and is still nowhere in memory.
   assert.deepEqual(archive.pending, []);
+  // Once confirmed, an article is not asked about again: memory answers, not the model or the rule.
+  const confirmedOnRetry = run.record.candidates.find((c) => c.link === NEWS_LINK);
+  assert.equal(confirmedOnRetry.relevant, true);
   assertNoNewsletter(JSON.stringify([archive.items, archive.pending]), 'archive items and pending after the retry');
 
   const seen = prompts();
@@ -225,6 +274,17 @@ test('main path, third run: the confirmed article skips the filter, and newslett
   const filter = seen.find((p) => p.kind === 'filter');
   assert.doesNotMatch(filter.prompt, /statehood bill advances/, 'confirmed: not judged again');
   for (const p of seen) assertNoNewsletter(p.prompt, `the ${p.kind} prompt on the third run`);
+  // The confirmed article: absent from the filter prompt, and recorded as not asked.
+  const confirmed = run.record.candidates.find((c) => c.link === NEWS_LINK);
+  assert.deepEqual(
+    { modelRelevant: confirmed.modelRelevant, notAsked: confirmed.notAsked, confirmed: confirmed.confirmed, ruleBlocked: confirmed.ruleBlocked, relevant: confirmed.relevant },
+    { modelRelevant: null, notAsked: 'confirmed', confirmed: true, ruleBlocked: false, relevant: true },
+  );
+  // The Medicaid story is still asked about, still blocked, still nowhere in memory.
+  assert.match(filter.prompt, /Medicaid/);
+  const medicaid = run.record.candidates.find((c) => c.link === MEDICAID_LINK);
+  assert.deepEqual([medicaid.modelRelevant, medicaid.ruleBlocked, medicaid.relevant], [true, true, false]);
+  assert.doesNotMatch(JSON.stringify(run.record.candidates), /_statehoodOrg|"_ts"/);
   const feed = JSON.parse(published('api/news.json'));
   assert.deepEqual(feed.articles.map((a) => a.link), [NEWS_LINK]);
   assert.equal(feed.newsletters.length, 2);

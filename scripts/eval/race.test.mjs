@@ -663,10 +663,10 @@ test('production path: an undisturbed run publishes its summary beside exactly t
 });
 
 test('production path: same link, different headline after a retry: headlines publish, the summary is withheld', async () => {
-  // The judge read "Original headline". Before this run's push lands, a rival run records
-  // the same link under another headline. On the retry this run's yes is the second one,
-  // the article is confirmed, and memory's copy of the title is what gets displayed. The
-  // links still match; the words the judge approved a summary against do not.
+  // The judge read "Original headline". Before this run's push lands, rival runs CONFIRM
+  // the same link under another headline. On the retry the article is already confirmed,
+  // so memory's copy of the title is what gets displayed. The links still match; the
+  // words the judge approved a summary against do not.
   await freshMemory();
   const mine = { ...story('retitled'), title: 'Original headline' };
   const rivalCopy = { ...mine, title: 'Rewritten headline' };
@@ -678,7 +678,8 @@ test('production path: same link, different headline after a retry: headlines pu
     onApply: () => {
       if (injected) return;
       injected = true;
-      const rival = applyRun(emptyArchive(), observed([rivalCopy], T0));
+      const once = applyRun(emptyArchive(), observed([rivalCopy], T0));
+      const rival = applyRun(once.archive, observed([rivalCopy], T0 + DAY / 4));
       pushRaw(ARCHIVE_PATH, `${JSON.stringify(rival.archive, null, 2)}\n`, 'rival news push');
     },
   });
@@ -694,6 +695,34 @@ test('production path: same link, different headline after a retry: headlines pu
   assert.equal(reasons[0], null, 'the first attempt saw nothing wrong');
   assert.match(reasons[1], /archive changed/);
   assert.equal(parseArchive(published(ARCHIVE_PATH)).items[0].title, 'Rewritten headline');
+});
+
+test('production path: a rival\'s PENDING copy under another headline cannot change what this run publishes', async () => {
+  // The same race one step earlier: the rival has only one yes on record, for other
+  // wording. A headline that differs restarts the count (archive.mjs), so this run's
+  // article is displayed under the headline the judge read, not confirmed under the
+  // rival's, and its summary still matches.
+  await freshMemory();
+  const mine = { ...story('retitled-pending'), title: 'Original headline' };
+  const rivalCopy = { ...mine, title: 'Rewritten headline' };
+  let injected = false;
+  const { result, summarisedArticles } = await productionRun({
+    runId: 't2',
+    observations: observed([mine], T0 + DAY / 2),
+    onApply: () => {
+      if (injected) return;
+      injected = true;
+      const rival = applyRun(emptyArchive(), observed([rivalCopy], T0));
+      pushRaw(ARCHIVE_PATH, `${JSON.stringify(rival.archive, null, 2)}\n`, 'rival news push');
+    },
+  });
+  assert.equal(result.attempt, 2);
+  const feed = JSON.parse(published(NEWS_PATH));
+  assert.deepEqual(feed.articles, summarisedArticles);
+  assert.equal(feed.summary, 'Judged summary.');
+  const archive = parseArchive(published(ARCHIVE_PATH));
+  assert.deepEqual(archive.items, [], 'no headline has had two yeses');
+  assert.deepEqual(archive.pending.map((p) => [p.title, p.yes]), [['Original headline', 1]]);
 });
 
 test('production path: a withholding newer than the run still wins, and the archive is still written', async () => {

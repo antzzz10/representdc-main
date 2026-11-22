@@ -35,8 +35,9 @@
 import { writeFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { fetchAllFeeds, NEWSLETTERS } from './news/feeds.mjs';
+import { applyTopicRule, keepPendingByTopicRule } from './news/relevance-rules.mjs';
 import { selectNewsletters } from './news/newsletters.mjs';
-import { getClient, filterByRelevance, summarizeArticles, MODEL, PROMPT_VERSION } from './news/summarize.mjs';
+import { getClient, filterByRelevance, isRoundup, summarizeArticles, MODEL, PROMPT_VERSION } from './news/summarize.mjs';
 import { judgeSummary, JUDGE_MODEL, JUDGE_VERSION } from './news/judge.mjs';
 import { closerFor } from './news/closers.mjs';
 import {
@@ -227,6 +228,31 @@ async function main() {
     usage.push({ call: 'filter', attempt: 2, ...filtered.usage });
   }
   record.gates.push(filtered.check);
+
+  // The topic rule (relevance-rules.mjs): a deterministic second check on the model's
+  // yes list, applied before anything is displayed, summarised or remembered. An
+  // article is relevant this run only if the model said yes AND the rule passes. It only
+  // removes, and only among the articles judged this run: confirmed archive items never
+  // reach it. A blocked article gets no yes toward confirmation. The organisation
+  // exemption reads the `_statehoodOrg` flag the fetch put on each item from its feed's
+  // configuration, never the item's source label.
+  const filterUsable = Boolean(filtered.articles);
+  const modelYes = filtered.articles ?? [];
+  const { kept: relevantNow, blocked: ruleBlocked } = applyTopicRule(modelYes);
+  const modelYesLinks = new Set(modelYes.map((a) => a.link));
+  const blockedLinks = new Set(ruleBlocked.map((a) => a.link));
+  // null, not zero, when the filter's reply was unusable: nothing was judged.
+  record.topicRule = filterUsable
+    ? { modelRelevant: modelYes.length, blocked: ruleBlocked.length }
+    : { modelRelevant: null, blocked: null };
+  // Why the model gave no verdict on a candidate, or null if it did.
+  const notAsked = (a) => {
+    if (confirmedLinks.has(a.link)) return 'confirmed';
+    if (isRoundup(a.title)) return 'roundup';
+    if (!filterUsable) return 'filter-unusable';
+    return null;
+  };
+
   record.candidates = candidates.map((a) => ({
     title: a.title,
     source: a.source,
@@ -236,7 +262,15 @@ async function main() {
     link: a.link,
     // `confirmed` means memory answered and the filter was not asked this run.
     confirmed: confirmedLinks.has(a.link),
-    relevant: confirmedLinks.has(a.link) ? true : filtered.articles?.some((f) => f.link === a.link) ?? null,
+    // The model's own verdict. null whenever the model gave none, with the reason in
+    // `notAsked`: already confirmed (memory answered), a roundup skipped before the
+    // prompt, or an unusable reply.
+    modelRelevant: notAsked(a) ? null : modelYesLinks.has(a.link),
+    notAsked: notAsked(a),
+    // True when the model said yes and the topic rule removed it.
+    ruleBlocked: blockedLinks.has(a.link),
+    // The final verdict, as before: what the run treats as relevant.
+    relevant: confirmedLinks.has(a.link) ? true : filtered.articles ? modelYesLinks.has(a.link) && !blockedLinks.has(a.link) : null,
   }));
 
   if (!filtered.check.pass) {
@@ -249,7 +283,10 @@ async function main() {
   // re-applied, unchanged, to a newer copy of the archive if the push is rejected.
   const run = {
     candidates,
-    relevantLinks: filtered.articles.map((a) => a.link),
+    relevantLinks: relevantNow.map((a) => a.link),
+    // Stored pending entries whose headline fails the topic rule are dropped before
+    // this run's verdicts are applied, on every attempt (it travels with `run`).
+    keepPending: keepPendingByTopicRule,
     sourceResults,
     now: runNow,
     windowDaysBySource,
@@ -260,7 +297,9 @@ async function main() {
   // summary, the gates, the judge) works on exactly this list.
   const { articles } = applyRun(archive, run);
   record.articles = articles;
-  console.log(`  ${run.relevantLinks.length} judged relevant this run; ${articles.length} article(s) to display (cap ${MAX_ARTICLES})`);
+  console.log(`  ${modelYes.length} judged relevant by the model; ${ruleBlocked.length} blocked by the topic rule`);
+  for (const a of ruleBlocked) console.log(`    blocked: ${a.title} (${a.source})`);
+  console.log(`  ${run.relevantLinks.length} relevant this run; ${articles.length} article(s) to display (cap ${MAX_ARTICLES})`);
 
   // Summarize, unless there is nothing to summarize or summaries are switched off.
   // `summary` stays null until a candidate has passed every gate AND the judge, so no

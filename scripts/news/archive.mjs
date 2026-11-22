@@ -252,12 +252,22 @@ export function longFailingSources(feedHealth, now, afterDays = FEED_ALERT_AFTER
  * @param run.sourceResults fetchAllFeeds' per-source report
  * @param run.now           the run's own fixed clock, in ms
  * @param run.windowDaysBySource  each feed's own display window, by source name
+ * @param run.keepPending   optional (entry, candidateOrNull) => boolean. Stored pending
+ *                          entries it rejects are dropped BEFORE this run's verdicts are
+ *                          applied. fetch-news.mjs passes the topic rule here, so a yes
+ *                          recorded for a headline the rule blocks cannot count toward
+ *                          confirmation. Confirmed items are never passed to it.
  */
-export function applyRun(archive, { candidates, relevantLinks, sourceResults, now, windowDaysBySource = {} }) {
+export function applyRun(archive, { candidates, relevantLinks, sourceResults, now, windowDaysBySource = {}, keepPending = null }) {
   const relevant = new Set(relevantLinks);
   const items = archive.items.map((item) => ({ ...item }));
   const confirmed = new Set(items.map((item) => item.link));
-  const pending = new Map(archive.pending.map((entry) => [entry.link, { ...entry }]));
+  const candidateByLink = new Map(candidates.map((c) => [c.link, c]));
+  const pending = new Map(
+    archive.pending
+      .filter((entry) => !keepPending || keepPending(entry, candidateByLink.get(entry.link) ?? null))
+      .map((entry) => [entry.link, { ...entry }]),
+  );
   const nowIso = toIso(now);
 
   // Shown this run on the strength of this run's verdict alone, as before memory existed.
@@ -272,13 +282,19 @@ export function applyRun(archive, { candidates, relevantLinks, sourceResults, no
       continue;
     }
 
-    const entry = pending.get(candidate.link) ?? {
+    const stored = pending.get(candidate.link);
+    // Outlets rewrite headlines. The title that gets confirmed, and then shown for 30
+    // days without being looked at again, must be one that has itself had two yeses:
+    // if this run's headline differs from the stored one, the entry takes the current
+    // headline and its count starts again. (firstSeen stays: it dates the link.)
+    const sameHeadline = stored && stored.title === candidate.title;
+    const entry = {
       link: candidate.link,
       title: candidate.title,
       source: candidate.source,
       pubDate: toIso(candidate.pubDate),
-      yes: 0,
-      firstSeen: nowIso,
+      yes: sameHeadline ? stored.yes : 0,
+      firstSeen: stored?.firstSeen ?? nowIso,
     };
     entry.yes += 1;
 

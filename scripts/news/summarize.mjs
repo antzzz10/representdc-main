@@ -19,7 +19,7 @@ import { closerMenu, CLOSER_KEYS } from './closers.mjs';
 import { checkFilterResponse } from './gates.mjs';
 
 export const MODEL = 'claude-haiku-4-5-20251001';
-export const PROMPT_VERSION = '2026-11-04.1';
+export const PROMPT_VERSION = '2026-11-21.1';
 
 export function getClient(apiKey = process.env.ANTHROPIC_API_KEY) {
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
@@ -133,6 +133,7 @@ Rules:
 - Write about the events, not about the coverage. Do not open with "Recent headlines...", "These stories...", "Coverage shows..." or any other reference to the list itself.
 - Do not characterise a pattern, trend, escalation or wider significance that no headline states. One vote is one vote; two stories are two stories. Phrases like "continuing a pattern of", "part of a broader effort", "demonstrating ongoing", "underscoring how" are the failure to avoid — report what happened instead.
 - Plain prose. One paragraph, no headers, no bullet points, no preamble like "Here is a summary."
+- Do not use em-dashes or en-dashes. Use commas, periods or parentheses instead.
 - If the headlines are too thin to summarize substantively, write one shorter, more general sentence rather than guessing.
 
 Then, on a final separate line, output exactly:

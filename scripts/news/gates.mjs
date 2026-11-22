@@ -84,12 +84,17 @@ export function checkNumericGrounding(body, headlines) {
   };
 }
 
-/** G3 — shape: one paragraph of plain prose, no markdown, no preamble. */
+/** G3 — shape: one paragraph of plain prose, no markdown, no preamble, no dashes as punctuation. */
 export function checkFormat(body) {
   const problems = [];
   if (/\n\s*\n/.test(body.trim())) problems.push('more than one paragraph');
   if (/^[-*#>]|\*\*|^\s*\d\./m.test(body)) problems.push('markdown formatting');
   if (/^(here('s| is)|summary:|sure[,!])/i.test(body.trim())) problems.push('preamble');
+  // The site's copy rules forbid dashes as punctuation, and a summary published with
+  // em-dashes on 2026-11-21. The prompt now says so; this is the check that does not
+  // depend on the model listening. An en-dash between two digits is a range ("1874–1967")
+  // and is allowed; every other en-dash, and every em-dash, fails.
+  if (/—/.test(body) || /(?<!\d)–|–(?!\d)/.test(body)) problems.push('em-dash or en-dash used as punctuation');
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   if (words > MAX_BODY_WORDS) problems.push(`${words} words > ${MAX_BODY_WORDS}`);
   if (words < MIN_BODY_WORDS) problems.push(`${words} words < ${MIN_BODY_WORDS} (empty or truncated body)`);
