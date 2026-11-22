@@ -1,0 +1,15 @@
+**DO NOT SHIP**: the rule can omit clearly relevant stories, and a pending item’s blocked headline can still become permanently confirmed.
+
+- **MATERIAL — Common on-topic headlines fail the lexicon.** [relevance-rules.mjs:35](scripts/news/relevance-rules.mjs:35) and [line 86](scripts/news/relevance-rules.mjs:86). A model-approved “House votes to overturn D.C. law,” “D.C. voting rights bill advances,” or “D.C. leaders fight for budget independence” fails. So do “Home-rule law at risk” and “D.C. self‑government under threat”: the expressions require a literal space and ASCII hyphen respectively. These stories disappear from the page and gain no confirmation vote. Expand and evaluate the vocabulary against representative on-topic headlines, including punctuation and Unicode variants; normalize equivalent separators before matching.
+
+- **MATERIAL — A blocked pending headline can still be confirmed.** [fetch-news.mjs:238](scripts/fetch-news.mjs:238), [archive.mjs:275](scripts/news/archive.mjs:275). Suppose a pre-rule pending link has a headline the new rule blocks. Later, the feed changes that link’s headline to one that passes, and the model says yes. The run checks the new headline, but `applyRun` confirms and displays the **old pending headline**. It is then exempt from future filtering. Check the stored pending headline before confirming it, or explicitly reconcile changed metadata under a rule that ensures the text being confirmed passed. Add a test with one link and two different headlines; the existing pending test repeats an unchanged headline.
+
+- **MATERIAL — The organisation exemption uses an item-provided label rather than feed identity.** [feeds.mjs:207](scripts/news/feeds.mjs:207), [relevance-rules.mjs:99](scripts/news/relevance-rules.mjs:99). A DC Vote feed item with a different `<source>` loses the intended exemption; conversely, an item from another feed labelled `DC Vote` receives it. In the latter case, every model yes bypasses the topic rule even though the feed is not flagged. Carry the configured feed identity or flag separately from the display source and use that for the exemption. Test both cases through feed parsing.
+
+- **NOTE — Run records attribute a verdict to roundups the model never saw.** [fetch-news.mjs:253](scripts/fetch-news.mjs:253). `filterByRelevance` removes roundups before constructing the prompt, but the candidate record marks them `modelRelevant: false`. This makes the audit record report a model rejection where no model verdict existed. Record `null` or a separate skipped reason for those candidates.
+
+The dash gate permits ordinary hyphens and digit-to-digit en-dash ranges; the current vetted closers contain neither prohibited dash. If both summary attempts fail G3, the code withholds the summary while continuing with the headlines. I found no catastrophic backtracking in the new topic regex.
+
+This was a read-only, offline review; I did not run the full test suite because its main-path tests write files.
+
+DO NOT SHIP
