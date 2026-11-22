@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T23:27:59.594Z",
-  "runId": "44961858470-1",
+  "updatedAt": "2026-11-22T14:43:08.034Z",
+  "runId": "45034288015-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -172,16 +172,7 @@
       "confirmedAt": "2026-11-21T23:27:24.068Z"
     }
   ],
-  "pending": [
-    {
-      "link": "https://51st.news/dc-utility-bill-reform-grid-act/",
-      "title": "D.C. is poised to pass major utility reforms. Will they get gas and electric bills under control?",
-      "source": "The 51st",
-      "pubDate": "2026-11-19T17:25:36.000Z",
-      "yes": 1,
-      "firstSeen": "2026-11-21T21:18:54.920Z"
-    }
-  ],
+  "pending": [],
   "feedHealth": {
     "The 51st": {
       "failingSince": null,
