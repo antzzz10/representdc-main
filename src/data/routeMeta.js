@@ -24,7 +24,7 @@ export const ROUTE_META = {
   },
   '/the-case': {
     title: pageTitle('What Congress has done to D.C.'),
-    description: "These aren't hypothetical. Congress has blocked D.C. laws and is voting on bills to block more.",
+    description: 'Congress has blocked D.C. laws and is voting on bills to block more.',
   },
   '/statehood-curious': {
     title: pageTitle('Statehood-curious'),
