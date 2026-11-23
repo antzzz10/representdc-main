@@ -14,7 +14,8 @@ function TheCase() {
       <header className="page-hero">
         <div className="container">
           <span className="eyebrow">The evidence</span>
-          <h1>What Congress has blocked</h1>
+          <h1>What Congress has done to D.C.</h1>
+          <p>These aren't hypothetical. Congress has blocked D.C. laws and is voting on bills to block more. Click each category to see specific examples.</p>
         </div>
       </header>
       <section className="impact-section">

@@ -23,8 +23,8 @@ export const ROUTE_META = {
     description: 'Answers to the most common objections to D.C. statehood.',
   },
   '/the-case': {
-    title: pageTitle('What Congress has blocked'),
-    description: 'Congress has used its power to overturn laws passed by D.C. residents.',
+    title: pageTitle('What Congress has done to D.C.'),
+    description: "These aren't hypothetical. Congress has blocked D.C. laws and is voting on bills to block more.",
   },
   '/statehood-curious': {
     title: pageTitle('Statehood-curious'),
