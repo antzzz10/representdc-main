@@ -15,7 +15,6 @@ function TheCase() {
         <div className="container">
           <span className="eyebrow">The evidence</span>
           <h1>What Congress has blocked</h1>
-          <p>These aren't hypothetical. Congress has used its power to overturn laws passed by D.C. residents. Click each category to see specific examples.</p>
         </div>
       </header>
       <section className="impact-section">
@@ -28,7 +27,7 @@ function TheCase() {
           <div className="interim-links">
             <div className="interim-row">
               <Link className="cta-secondary" to="/myths">
-                <span>Read the common objections</span> <Icon name="arrow-right" />
+                <span>Read the myths</span> <Icon name="arrow-right" />
               </Link>
             </div>
           </div>

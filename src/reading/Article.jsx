@@ -106,12 +106,6 @@ function Article() {
               {body}
             </ReactMarkdown>
           </div>
-
-          {piece.sourceUrl && (
-            <div className="article-source-note">
-              Read the original at <Cite href={piece.sourceUrl}>{piece.sourceName}</Cite>.
-            </div>
-          )}
         </div>
       </section>
       <Footer />

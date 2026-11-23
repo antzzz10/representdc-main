@@ -55,7 +55,7 @@ function CategoryCard({ category }) {
               className="view-all-link"
               onClick={(e) => e.stopPropagation()}
             >
-              See all current {category.title.toLowerCase()} bills in tracker <Icon name="arrow-right" size={15} />
+              Track these bills <Icon name="arrow-right" size={15} />
             </a>
           </div>
         </div>

@@ -27,9 +27,8 @@ function StatehoodPartnerMap() {
 
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Meet the movement</span>
           <h1>The Statehood Partner Map</h1>
-          <p>Dozens of organizations, one shared goal. See who's leading, and how to plug in.</p>
+          <p>The organizations working on statehood.</p>
         </div>
       </header>
 
@@ -90,7 +89,6 @@ function StatehoodPartnerMap() {
               <h3 className={`spm-layer-heading spm-layer-${l.key}`}>
                 <span className="spm-layer-dot"></span>{l.label}
               </h3>
-              <p className="spm-layer-desc">{l.desc}</p>
               <div className="spm-card-grid">
                 {DATA[l.key].map((org) => (
                   <div className={`spm-org-card${org.self ? ' spm-org-card-self' : ''}`} id={org.id} key={org.id}>
@@ -100,7 +98,6 @@ function StatehoodPartnerMap() {
                     <div className="spm-org-tags">
                       <span className={`spm-tag-layer spm-layer-${l.key}`}>{l.label}</span>
                       <span className="spm-tag">{CATEGORIES.find((c) => c.key === org.col)?.label}</span>
-                      <span className="spm-tag spm-tag-scope">{org.scope === 'national' ? 'National' : 'Local'}</span>
                     </div>
                     <p>{org.desc}</p>
                     <a className="spm-org-link" href={org.url} target="_blank" rel="noopener noreferrer">

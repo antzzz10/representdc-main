@@ -21,22 +21,18 @@ function HowCongressControlsDC() {
           <span className="eyebrow">For D.C. newcomers</span>
           <h1>How Congress controls D.C.</h1>
           <p>
-            If you just moved here, this is the one thing about D.C. that's different from
-            anywhere else you've lived: the local government you vote for isn't the final word.
+            The local government D.C. residents vote for isn't the final word.
           </p>
         </div>
       </header>
 
       <section className="impact-section">
         <div className="container">
-          <h2 className="section-title">Before 1973, there was barely a local government at all</h2>
+          <h2 className="section-title">Before 1973, there was barely a local government</h2>
           <p className="section-intro">
-            An 1802 charter let D.C. residents elect a council, though the mayor was appointed by
-            the President. That lasted about 70 years before collapsing into a system with no
-            elected government at all: from the 1870s until 1967, a three-person board appointed
-            entirely by the President ran the District. A mayor-commissioner system replaced it in
-            1967, still presidentially appointed, not elected. D.C. residents didn't elect their own
-            mayor and council again until the Home Rule Act of 1973 took effect in 1974.
+            From the 1870s until 1967, a three-person board appointed by the President ran the
+            District. D.C. residents didn't elect their own mayor and council again until the
+            Home Rule Act of 1973 took effect in 1974.
           </p>
           <div className="gov-chart">
             <div className="gov-chart-col">
@@ -68,29 +64,26 @@ function HowCongressControlsDC() {
 
       <section className="impact-section">
         <div className="container">
-          <h2 className="section-title">1973: real authority, with a ceiling</h2>
+          <h2 className="section-title">1973: authority, with a ceiling</h2>
           <p className="section-intro">
-            The Home Rule Act gave D.C. an elected Council (a chairman elected citywide, four
-            at-large members, and one from each of the city's eight wards) plus an elected mayor,
-            with authority to pass local laws and set the District's own budget. But home rule
-            isn't statehood: Congress wrote itself back into the process in three specific ways.
+            The Home Rule Act gave D.C. an elected Council plus an elected mayor, with authority
+            to pass local laws and set the District's own budget.
           </p>
         </div>
       </section>
 
       <section className="explainer-section">
         <div className="container">
-          <h2 className="section-title">The mechanisms Congress kept</h2>
+          <h2 className="section-title">What Congress kept</h2>
           <div className="bill-type-grid">
             <div className="bill-type-card">
               <div className="bill-type-days">30 days</div>
               <div className="bill-type-label">Civil legislation</div>
-              <div className="bill-type-detail">Weekends, holidays and long congressional recesses don't count. Congress can disapprove before the law takes effect.</div>
+              <div className="bill-type-detail">Congress can disapprove before the law takes effect.</div>
             </div>
             <div className="bill-type-card">
               <div className="bill-type-days">60 days</div>
-              <div className="bill-type-label">Criminal-code legislation</div>
-              <div className="bill-type-detail">Longer review window for changes to D.C.'s criminal code</div>
+              <div className="bill-type-label">Changes to the criminal code</div>
             </div>
             <div className="bill-type-card alert">
               <div className="bill-type-days">0 days</div>
@@ -116,11 +109,10 @@ function HowCongressControlsDC() {
             <div className="explainer-step">
               <span className="step-num">2</span>
               <div>
-                <h3>Riders can skip that process entirely</h3>
+                <h3>Riders can skip that process</h3>
                 <p>
-                  Congress has a second lever: attaching a rider to the District's annual federal
-                  appropriations bill, funding legislation D.C. depends on in a way states don't.
-                  In 2025, for example, a rider in the House's D.C. appropriations bill (H.R. 5166)
+                  Congress can also attach a rider to the District's annual federal appropriations
+                  bill. In 2025, a rider in the House's D.C. appropriations bill (H.R. 5166)
                   tried to bar the District from spending its own local funds to enforce its
                   no-turn-on-red law.
                 </p>
@@ -148,40 +140,35 @@ function HowCongressControlsDC() {
           <p className="section-intro">
             D.C. has elected a delegate to the House since 1971. The delegate can introduce
             legislation and vote in committee, but not on the House floor, where bills are
-            actually decided. D.C. has never had a senator.
+            decided. D.C. has never had a senator.
           </p>
           <div className="norton-callout">
             <h3>D.C.'s only voice in the House since 1991</h3>
             <p>
-              Eleanor Holmes Norton has held that one seat for more than three decades, 18 terms as
-              of 2026. Before Congress, she was a civil-rights attorney who took part in the 1964
-              Mississippi Freedom Summer, represented the women of Newsweek in a landmark 1970
-              sex-discrimination complaint, and became the first woman to chair the U.S. Equal Employment Opportunity
-              Commission. She did not seek re-election in 2026, closing out a career spent
-              as D.C.'s only voice in the room, even without a vote on the floor.
+              Eleanor Holmes Norton has held that seat for more than three decades, 18 terms as
+              of 2026. She did not seek re-election in 2026.
             </p>
             <div className="norton-callout-links">
               <a href="https://www.womenshistory.org/education-resources/biographies/eleanor-holmes-norton" target="_blank" rel="noopener noreferrer">
                 Full biography <Icon name="external-link" size={13} />
               </a>
               <a href="https://ballotpedia.org/Eleanor_Holmes_Norton" target="_blank" rel="noopener noreferrer">
-                Congressional record <Icon name="external-link" size={13} />
+                Ballotpedia profile <Icon name="external-link" size={13} />
               </a>
             </div>
           </div>
           <p className="explainer-next">
             {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'Threats to D.C. home rule'} in
-            this Congress: bills, resolutions and budget riders aimed at overriding
-            D.C.'s local laws or limiting its self-government.
+            this Congress.
             {context.length > 0 && ` ${context.join(' · ')}.`}
           </p>
           <div className="interim-links">
             <div className="interim-row">
               <Link className="cta-primary cta-on-light" to="/the-case">
-                <span>See what's already been blocked</span> <Icon name="arrow-right" />
+                <span>See what Congress has blocked</span> <Icon name="arrow-right" />
               </Link>
               <Link className="cta-secondary" to="/myths">
-                <span>Read the common objections</span> <Icon name="arrow-right" />
+                <span>Read the myths</span> <Icon name="arrow-right" />
               </Link>
             </div>
           </div>

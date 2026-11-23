@@ -9,7 +9,7 @@ const TRACKER_URL = 'https://billtracker.representdc.org'
 // One list feeds both the desktop bar and the narrow-screen menu, so the two can't drift.
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
-  { label: 'Congress & D.C.', to: '/how-congress-controls-dc' },
+  { label: 'How Congress controls D.C.', to: '/how-congress-controls-dc' },
   { label: 'The case', to: '/the-case' },
   { label: 'Myths', to: '/myths' },
   { label: 'News & analysis', to: '/news' },
@@ -95,7 +95,7 @@ function Nav() {
   return (
     <nav className="nav" ref={navRef} onBlur={onBlur}>
       <div className="container nav-inner">
-        <Link to="/" className="nav-brand" aria-label="RepresentDC, back to top">
+        <Link to="/" className="nav-brand" aria-label="RepresentDC home">
           <Logo size={26} />
           <Wordmark size={15} />
         </Link>

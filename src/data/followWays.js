@@ -1,5 +1,5 @@
-// The ways to follow RepresentDC, with the wording the owner wrote for each. One source,
-// so the Follow page, the "Stay in the loop" closing block and the cards that point at
+// The ways to follow RepresentDC. The email sentence is the owner's own wording. One source,
+// so the Follow page, the closing block (StayInTheLoop.jsx) and the cards that point at
 // these from other pages cannot drift apart. Lists only ways that exist today, per the
 // site rule. The email card (added 2026-11-17) points at the newsletter's sign-up page on
 // beehiiv. It names no schedule until issues are going out: say "weekly" here once that
@@ -17,14 +17,14 @@ export const EMAIL_WAY = {
 export const TRACKER_WAY = {
   icon: 'landmark',
   title: 'Bill tracker',
-  body: "Bills in Congress that target D.C.'s laws, budget or government, with where each one stands. Checked against Congress.gov daily.",
+  body: 'Bills in Congress that target D.C. Checked daily.',
   href: TRACKER_URL,
   cta: 'Open the tracker',
 }
 
 export const NEWS_WAY = {
   icon: 'newspaper',
-  title: 'Statehood in the news',
+  title: 'News & analysis',
   body: 'Recent coverage of D.C. statehood and home rule, updated daily.',
   to: '/news',
   cta: 'Read the news',
@@ -36,8 +36,8 @@ export const WAYS = [
   NEWS_WAY,
   {
     icon: 'users',
-    title: 'The people organizing',
-    body: "D.C.'s statehood groups run their own newsletters, events and actions. Pick the ones that fit you.",
+    title: 'The Statehood Partner Map',
+    body: "D.C.'s statehood groups run their own newsletters and events.",
     to: '/statehood-partner-map',
     cta: 'See the partner map',
   },

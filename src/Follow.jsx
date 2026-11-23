@@ -36,11 +36,7 @@ function Follow() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <h1>Stay in the loop</h1>
-          <p>
-            Congress can overturn D.C.'s laws and budget, and it introduces bills to do so every
-            session. Follow along in the way that suits you.
-          </p>
+          <h1>Follow</h1>
         </div>
       </header>
       <section className="impact-section">
@@ -51,10 +47,9 @@ function Follow() {
           <BlueskySection handle={BLUESKY_HANDLE} preview={preview} />
           <div className="interim-links">
             <p>
-              Use an AI assistant? The tracker and news data are public:{' '}
+              Public data:{' '}
               <a href="https://billtracker.representdc.org/api/stats.json">bill stats</a> and{' '}
-              <a href="/api/news.json">news</a>. Point your assistant at them and ask where
-              things stand.
+              <a href="/api/news.json">news</a>.
             </p>
           </div>
         </div>

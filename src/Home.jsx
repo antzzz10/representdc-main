@@ -5,7 +5,7 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
-import { contextParts, headlineNoun } from './lib/billProgress'
+import { contextParts } from './lib/billProgress'
 import { track, EVENTS } from './lib/analytics'
 
 // Records which picker card was chosen: one of four fixed labels, nothing else. Handed to
@@ -36,11 +36,7 @@ function Home() {
       {/* Hero Section - Orientation for four distinct entry points, not one urgency-first funnel */}
       <section className="hero" id="top">
         <div className="container">
-          <h1 className="hero-title">
-            D.C. has no vote in Congress.
-            <br />
-            <span className="highlight">Here's what that means for you.</span>
-          </h1>
+          <h1 className="hero-title">D.C. has no vote in Congress.</h1>
           <a href="#picker" className="cta-primary">
             <span>Find your starting point</span> <Icon name="arrow-down" />
           </a>
@@ -55,12 +51,10 @@ function Home() {
             <div className="fact-card">
               <div className="fact-number">0</div>
               <div className="fact-label">Senators representing D.C. residents</div>
-              <div className="fact-detail">Despite paying more federal taxes per capita than any state</div>
             </div>
             <div className="fact-card">
               <div className="fact-number">0</div>
               <div className="fact-label">Voting members of Congress</div>
-              <div className="fact-detail">D.C.'s delegate can introduce bills but cannot vote on final passage</div>
             </div>
             <div className="fact-card highlight-card">
               <div className="fact-number">{showBillCount ? totalBills : '\u00A0'}</div>
@@ -82,52 +76,40 @@ function Home() {
         <div className="container">
           <div className="persona-head">
             <h2>Where do you want to start?</h2>
-            <p>
-              D.C. residents pay federal taxes but have{' '}
-              <span
-                className="gloss"
-                title="Home rule: the limited local self-government Congress granted D.C. in 1973. Congress can still overturn any D.C. law or budget."
-              >
-                no vote in Congress
-              </span>. Pick the path that fits you, or keep scrolling for the full picture.
-            </p>
           </div>
           <div className="persona-grid">
             <Link className="persona-card" to="/how-congress-controls-dc" {...pickerClick('new-to-dc')}>
               <span className="picon"><Icon name="landmark" size={22} /></span>
               <h3>New to D.C.</h3>
-              <p>Didn't know D.C. isn't a state? Start with the basics: what home rule means, and why Congress can overturn D.C.'s own laws.</p>
+              <p>What home rule means, and why Congress can overturn D.C.'s laws.</p>
               <span className="plink">Start the explainer <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card" to="/statehood-curious" {...pickerClick('curious')}>
               <span className="picon"><Icon name="rss" size={22} /></span>
               <h3>Statehood-curious</h3>
-              <p>Already know the problem? See the latest coverage and who's organizing for statehood.</p>
+              <p>The latest coverage and who's organizing for statehood.</p>
               <span className="plink">See what's happening <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card accent" to="/myths" {...pickerClick('questioning')}>
               <span className="picon"><Icon name="help-circle" size={22} /></span>
               <h3>Statehood-questioning</h3>
-              <p>Have doubts or specific objections? Get direct, sourced answers to the most common ones.</p>
+              <p>Answers to the most common objections.</p>
               <span className="plink">Read the myths <Icon name="arrow-right" size={15} /></span>
             </Link>
             <Link className="persona-card accent" to="/take-action" {...pickerClick('activist')}>
               <span className="picon"><Icon name="megaphone" size={22} /></span>
               <h3>Statehood activist</h3>
-              <p>Already convinced? Get talking points, sourced data, and ways to organize. Built for speed.</p>
-              <span className="plink">Open the action hub <Icon name="arrow-right" size={15} /></span>
+              <p>Talking points, data and ways to organize.</p>
+              <span className="plink">Take action <Icon name="arrow-right" size={15} /></span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Explainer - the "New to D.C." landing point: what home rule actually means */}
+      {/* Explainer - the "New to D.C." landing point: what home rule means */}
       <section className="explainer-section" id="explainer">
         <div className="container">
           <h2 className="section-title">How Congress controls D.C.</h2>
-          <p className="section-intro">
-            "Home rule" sounds like self-government. Here's what it actually means, and where it stops.
-          </p>
           <div className="explainer-steps">
             <div className="explainer-step">
               <span className="step-num">1</span>
@@ -149,17 +131,14 @@ function Home() {
                 <h3>Congress keeps the final say</h3>
                 <p>
                   Every law the D.C. Council passes goes to Congress for review before it can take
-                  effect, and Congress retains authority over the District's budget. That standing
-                  authority is behind the {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'threats to D.C. home rule'} in
-                  this Congress: bills, resolutions and budget riders aimed at overriding
-                  D.C.'s local laws or limiting its self-government.
+                  effect, and Congress retains authority over the District's budget.
                 </p>
               </div>
             </div>
             <div className="explainer-step">
               <span className="step-num">3</span>
               <div>
-                <h3>No vote, no recourse</h3>
+                <h3>No vote in Congress</h3>
                 <p>
                   D.C. residents have no senators and no voting House member, so they can't vote out
                   the members of Congress who overturn their laws.
@@ -168,8 +147,7 @@ function Home() {
             </div>
           </div>
           <p className="explainer-next">
-            Want the specifics? <Link to="/the-case">See what Congress has blocked</Link>, category by
-            category, with sources.
+            <Link to="/the-case">See what Congress has blocked</Link>
           </p>
         </div>
       </section>
@@ -183,22 +161,18 @@ function Home() {
               No taxation without representation
             </blockquote>
             <p className="quote-attribution">
-              The rallying cry of the American Revolution, still denied to D.C. residents today
+              The rallying cry of the American Revolution
             </p>
           </div>
 
           <div className="values-grid">
             <div className="value-card">
               <h3>Self-governance</h3>
-              <p>Americans should govern their own communities, not be micromanaged by distant politicians</p>
+              <p>Americans should govern their own communities</p>
             </div>
             <div className="value-card">
               <h3>Equal rights</h3>
               <p>Every American citizen deserves the same democratic representation</p>
-            </div>
-            <div className="value-card">
-              <h3>Accountability</h3>
-              <p>D.C. residents can't vote out the members of Congress who control their laws</p>
             </div>
           </div>
         </div>
@@ -216,7 +190,6 @@ function Home() {
               </span>
             </div>
           </div>
-          {context.length > 0 && <p className="trend-context">{context.join(' · ')}</p>}
           <a href="https://billtracker.representdc.org" className="cta-secondary">
             <span>Explore the bill tracker</span> <Icon name="arrow-right" />
           </a>
@@ -226,10 +199,7 @@ function Home() {
       {/* Solution Section - Soft Introduction */}
       <section className="solution-section" id="solution">
         <div className="container">
-          <h2 className="section-title">The solution: full democracy for D.C.</h2>
-          <p className="section-intro">
-            D.C. statehood isn't a radical idea. It's about ensuring that all Americans have equal representation.
-          </p>
+          <h2 className="section-title">Full democracy for D.C.</h2>
 
           <div className="solution-points">
             <div className="solution-point">

@@ -4,10 +4,6 @@
   padding: var(--s-8) 0 var(--s-7);
 }
 
-.myth-hero .eyebrow {
-  color: var(--gold);
-}
-
 .myth-hero h1 {
   font-size: 2.25rem;
   font-weight: 800;

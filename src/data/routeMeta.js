@@ -4,8 +4,8 @@
 // results, link previews and browser tabs all agree.
 //
 // Titles follow "Page | RepresentDC", drawn from each page's h1 (or its eyebrow where the
-// h1 is a question that doesn't work as a tab title). Descriptions reuse sentences
-// already on the site — the page's own subtitle, or the card that links to it.
+// h1 doesn't work as a tab title). Descriptions say what the page holds in one plain
+// sentence: no question openers, and no words that vouch for the site.
 // Plain JS with no JSX or browser APIs: Node imports this file at build time.
 import { READING, readingRoute } from './reading.js'
 
@@ -19,20 +19,20 @@ export const ROUTE_META = {
     description: 'D.C. residents pay federal taxes but have no vote in Congress.',
   },
   '/myths': {
-    title: pageTitle('Straight answers to statehood questions'),
-    description: 'Have doubts or specific objections? Get direct, sourced answers to the most common ones.',
+    title: pageTitle('Answers to statehood myths'),
+    description: 'Answers to the most common objections to D.C. statehood.',
   },
   '/the-case': {
     title: pageTitle('What Congress has blocked'),
-    description: "These aren't hypothetical. Congress has used its power to overturn laws passed by D.C. residents.",
+    description: 'Congress has used its power to overturn laws passed by D.C. residents.',
   },
   '/statehood-curious': {
-    title: pageTitle('Statehood curious'),
-    description: "Already know the problem? See the latest coverage and who's organizing for statehood.",
+    title: pageTitle('Statehood-curious'),
+    description: "The latest coverage and who's organizing for statehood.",
   },
   '/take-action': {
-    title: pageTitle('Take action hub'),
-    description: 'Already convinced? Get talking points, sourced data, and ways to organize. Built for speed.',
+    title: pageTitle('Take action'),
+    description: 'Talking points, data and ways to organize.',
   },
   '/news': {
     title: pageTitle('News & analysis'),
@@ -40,23 +40,23 @@ export const ROUTE_META = {
   },
   '/how-congress-controls-dc': {
     title: pageTitle('How Congress controls D.C.'),
-    description: "Didn't know D.C. isn't a state? Start with the basics: what home rule means, and why Congress can overturn D.C.'s own laws.",
+    description: "What home rule means, and why Congress can overturn D.C.'s laws.",
   },
   '/statehood-partner-map': {
     title: pageTitle('The Statehood Partner Map'),
-    description: 'The organizations working on statehood, and how to get involved with each.',
+    description: 'The organizations working on statehood.',
   },
   '/about': {
     title: pageTitle('About'),
-    description: "RepresentDC is volunteer-run. No one on this project is paid, and the site isn't a business or nonprofit organization.",
+    description: "RepresentDC is volunteer-run. The site isn't a business or nonprofit organization.",
   },
   '/follow': {
-    title: pageTitle('Stay in the loop'),
-    description: "Congress can overturn D.C.'s laws and budget, and it introduces bills to do so every session. Follow along in the way that suits you.",
+    title: pageTitle('Follow'),
+    description: "Email updates, the bill tracker, news and D.C.'s statehood groups.",
   },
   '/statehood-bill': {
     title: pageTitle('Who is behind the Washington, D.C. Admission Act'),
-    description: 'The Washington, D.C. Admission Act would admit the land outside a shrunken federal district as a state by legislation, the route used for all 37 states admitted after the original 13.',
+    description: 'Who has cosponsored the Washington, D.C. Admission Act, checked daily.',
   },
 }
 

@@ -14,21 +14,21 @@ const DESTINATIONS = [
   { ...NEWS_WAY, icon: 'rss' },
   {
     icon: 'users',
-    title: 'Meet the movement',
-    body: 'The organizations working on statehood, and how to get involved with each.',
+    title: 'The Statehood Partner Map',
+    body: 'The organizations working on statehood.',
     to: '/statehood-partner-map',
   },
   {
     icon: 'book-open',
     title: 'The case for statehood',
-    body: 'What Congress has blocked, and what statehood would change.',
+    body: 'What Congress has blocked.',
     to: '/the-case',
   },
   {
     icon: 'library',
-    title: 'Reading',
-    body: 'Long-form history, analysis, and guest essays, fully sourced and credited.',
-    // The Reading hub is the "Analysis & essays" section of /news (2026-09-12).
+    // Named for where it lands: the "Analysis & essays" section of /news (2026-09-12).
+    title: 'Analysis & essays',
+    body: 'Long-form history and guest writing.',
     to: '/news#analysis',
   },
 ]
@@ -42,7 +42,7 @@ const FIRST_STEPS = [
   {
     icon: 'megaphone',
     title: 'Take action',
-    body: 'Get talking points, sourced data, and ways to organize.',
+    body: 'Talking points, data and ways to organize.',
     to: '/take-action',
   },
 ]
@@ -71,8 +71,8 @@ function StatehoodCurious() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Statehood curious</span>
-          <h1>Already know the problem?</h1>
+          <span className="eyebrow">Statehood-curious</span>
+          <h1>See what's happening</h1>
         </div>
       </header>
       <section className="impact-section">

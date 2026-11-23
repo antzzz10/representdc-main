@@ -12,13 +12,13 @@ function Footer() {
               <h3>RepresentDC tools</h3>
               <div className="footer-links">
                 <a href="https://billtracker.representdc.org">
-                  Anti-DC bill tracker <Icon name="arrow-right" size={15} />
+                  Bill tracker <Icon name="arrow-right" size={15} />
                 </a>
                 <a href="https://candidates.representdc.org">
                   Candidate tracker (for D.C. voters) <Icon name="arrow-right" size={15} />
                 </a>
                 <Link to="/follow">
-                  Stay in the loop <Icon name="arrow-right" size={15} />
+                  Follow <Icon name="arrow-right" size={15} />
                 </Link>
               </div>
             </div>
@@ -43,9 +43,8 @@ function Footer() {
             <div className="footer-section">
               <h3>About this site</h3>
               <p>
-                This is an independent, volunteer-run project created by a proud D.C. resident
-                to track anti-DC legislation and advocate for full democracy for D.C. residents.
-                Not affiliated with any organization.
+                An independent, volunteer-run project to track anti-D.C. legislation and
+                advocate for full democracy for D.C. residents.
               </p>
               <div className="footer-meta-links">
                 <Link className="footer-feedback-link" to="/about">

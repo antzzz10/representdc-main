@@ -77,7 +77,7 @@ try {
     const errors = []
     page.on('pageerror', (e) => errors.push(String(e)))
 
-    await check(`${size} (a) the Reading card lands on Analysis & essays once the feed arrives`, async () => {
+    await check(`${size} (a) the Analysis & essays card lands on its section once the feed arrives`, async () => {
       await page.goto(`${BASE}/statehood-curious`)
       await page.click('a[href="/news#analysis"]')
       await feedArrived(page)

@@ -175,16 +175,14 @@ function StatehoodBill() {
             {shown.map((b) => <ChamberRow key={b.chamber} bill={b} />)}
             {shown.length > 0 && (
               <p className="section-note">
-                Cosponsoring is a statement of support, not a vote. Passing the House ordinarily takes a
-                majority of members voting; passing the Senate a majority, and ending debate there
-                ordinarily takes 60 votes.
+                Cosponsoring is a statement of support, not a vote.
               </p>
             )}
           </section>
 
           {counted.length > 0 && (
             <section aria-labelledby="sb-counts">
-              <h2 id="sb-counts">Recorded cosponsors</h2>
+              <h2 id="sb-counts">Cosponsors</h2>
               <div className="count-grid">
                 {counted.map((b) => <CountCard key={b.chamber} bill={b} />)}
               </div>

@@ -213,13 +213,6 @@
   color: var(--ink);
 }
 
-.hypocrisy-intro {
-  margin: 0 0 1rem 0;
-  font-size: 0.95rem;
-  color: var(--slate-500);
-  font-weight: 600;
-}
-
 .hypocrisy-item {
   background: var(--white);
   border-radius: 6px;

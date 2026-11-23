@@ -38,10 +38,8 @@ function About() {
           <span className="eyebrow">About</span>
           <h1>Who's behind RepresentDC</h1>
           <p>
-            RepresentDC is volunteer-run. No one on this project is paid, and the
-            site isn't a business or nonprofit organization. It's built and kept
-            running on personal time by people who care about DC's lack of
-            representation.
+            RepresentDC is volunteer-run. The site isn't a business or nonprofit
+            organization.
           </p>
         </div>
       </header>
@@ -54,8 +52,15 @@ function About() {
           </div>
           <p className="team-note">
             RepresentDC is open to other volunteers who want to help with
-            development, research, or outreach. Reach out through the feedback
-            form linked in the footer.
+            development, research, or outreach. Reach out through the{' '}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScoQfgfU-vHBN0EXqGp51Vv79oT2iS-1_uPTzoPtpmFlQ58kQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              feedback form
+            </a>
+            .
           </p>
         </div>
       </section>

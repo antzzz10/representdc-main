@@ -14,8 +14,7 @@ function Myths() {
 
       <header className="myth-hero">
         <div className="container">
-          <span className="eyebrow">Statehood, questioned</span>
-          <h1>Straight answers to statehood questions</h1>
+          <h1>Answers to statehood myths</h1>
         </div>
       </header>
 
@@ -36,7 +35,7 @@ function Myths() {
                     <div className="myth-fact-panel">
                       <span className="myth-fact-value">{item.fact.value}</span>
                       <span className="myth-fact-label">{item.fact.label}</span>
-                      <span className="myth-fact-detail">{item.fact.detail}</span>
+                      {item.fact.detail && <span className="myth-fact-detail">{item.fact.detail}</span>}
                     </div>
                   )}
                 </div>
@@ -48,10 +47,10 @@ function Myths() {
             <div className="interim-row">
               {/* The warming skeptic's next step, per decisions/2026-07-20-segment-mapping.md */}
               <Link className="cta-primary cta-on-light" to="/the-case">
-                <span>Seen the claims? Now see the record</span> <Icon name="arrow-right" />
+                <span>See what Congress has blocked</span> <Icon name="arrow-right" />
               </Link>
               <Link className="cta-secondary" to="/news">
-                <span>See the latest in D.C. statehood news</span> <Icon name="arrow-right" />
+                <span>Read the news</span> <Icon name="arrow-right" />
               </Link>
             </div>
           </div>

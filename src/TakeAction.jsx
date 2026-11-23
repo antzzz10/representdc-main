@@ -4,11 +4,10 @@ import Footer from './components/Footer'
 import Icon from './components/Icon'
 import StayInTheLoop from './components/StayInTheLoop'
 import { TRACKER_WAY } from './data/followWays'
-import { ROUTE_META } from './data/routeMeta'
 import './App.css'
 
 // Interim hub for the "Statehood activist" path. It delivers what the home page picker
-// card promises (talking points, sourced data, ways to organize) with pages that exist
+// card promises (talking points, data, ways to organize) with pages that exist
 // today. Same rule as StatehoodCurious.jsx: every card links somewhere real, and a card
 // whose page isn't built is cut, not badged. The fuller toolkit is still to come
 // (decisions/2026-07-28-take-action-matcher-scope.md). Card bodies reuse the wording
@@ -17,27 +16,27 @@ const TOOLS = [
   {
     icon: 'book-open',
     title: 'Talking points',
-    // The Case card on StatehoodCurious.jsx
-    body: 'What Congress has blocked, and what statehood would change.',
+    body: 'What Congress has blocked, category by category.',
     to: '/the-case',
   },
   {
     icon: TRACKER_WAY.icon,
-    title: 'Sourced data',
+    title: 'Bill tracker',
     body: TRACKER_WAY.body,
     href: TRACKER_WAY.href,
   },
   {
     icon: 'scroll-text',
     title: 'Statehood bill',
-    body: ROUTE_META['/statehood-bill'].description,
+    // The statehood bill page's own h1
+    body: 'Who is behind the Washington, D.C. Admission Act.',
     to: '/statehood-bill',
   },
   {
     icon: 'users',
-    title: 'Ways to organize',
-    // The "Meet the movement" card on StatehoodCurious.jsx
-    body: 'The organizations working on statehood, and how to get involved with each.',
+    // The same card as on StatehoodCurious.jsx
+    title: 'The Statehood Partner Map',
+    body: 'The organizations working on statehood.',
     to: '/statehood-partner-map',
   },
 ]
@@ -65,8 +64,7 @@ function TakeAction() {
       <header className="page-hero">
         <div className="container">
           <span className="eyebrow">Statehood activist</span>
-          <h1>Take action hub</h1>
-          <p>Built for people who are already convinced and want to move fast.</p>
+          <h1>Take action</h1>
         </div>
       </header>
       <section className="impact-section">

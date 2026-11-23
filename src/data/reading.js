@@ -6,7 +6,7 @@ export const READING = [
   {
     slug: 'republicans-supported-dc-autonomy',
     title: 'Blast From the Past: Republicans Supported Washington, D.C., Autonomy',
-    dek: 'A history of Republican support for D.C. voting rights and home rule, from the 23rd Amendment through the 1978 Congressional-representation amendment vote.',
+    dek: 'A history of Republican support for D.C. voting rights and home rule.',
     author: 'Miriam Edelman',
     date: '2024-06-11',
     sourceName: 'WashingtonDCNow',

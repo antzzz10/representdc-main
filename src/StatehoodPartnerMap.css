@@ -147,12 +147,6 @@ table.spm-matrix td.spm-cell {
 .spm-layer-heading.spm-layer-middle .spm-layer-dot { background: var(--navy-600); }
 .spm-layer-heading.spm-layer-outer .spm-layer-dot { background: var(--spm-outer); }
 
-.spm-layer-desc {
-  font-size: var(--fs-sm);
-  color: var(--slate-500);
-  margin: 0 0 var(--s-5);
-}
-
 .spm-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -229,12 +223,6 @@ table.spm-matrix td.spm-cell {
   background: var(--navy-tint);
   border-radius: 999px;
   padding: 3px 10px;
-}
-
-.spm-tag-scope {
-  font-family: var(--font-mono);
-  color: var(--slate-500);
-  background: var(--surface-2);
 }
 
 .spm-org-card p {

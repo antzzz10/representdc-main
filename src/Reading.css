@@ -146,15 +146,3 @@
   color: var(--ink);
 }
 
-.article-source-note {
-  max-width: 720px;
-  margin: var(--s-7) auto 0;
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
-  font-size: var(--fs-sm);
-  color: var(--slate-500);
-}
-
-.article-source-note a {
-  color: var(--navy);
-}

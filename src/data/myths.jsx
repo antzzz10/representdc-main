@@ -52,7 +52,6 @@ export const ITEMS = [
     fact: {
       value: '8',
       label: 'states joined via the Tennessee Plan',
-      detail: 'Tennessee, Michigan, Iowa, California, Oregon, Kansas, Minnesota, Alaska.',
     },
   },
   {
@@ -75,14 +74,13 @@ export const ITEMS = [
       <>
         Federal employment is one slice of a working city of roughly{' '}
         <Cite href={SRC.census}>694,000 residents</Cite>. The District's largest single
-        industry isn't government at all. It's{' '}
+        industry is{' '}
         <Cite href={SRC.dataUsa}>professional, scientific, and technical services</Cite>.
       </>
     ),
     fact: {
       value: '18%',
       label: 'work in public administration',
-      detail: 'Management, business, and legal roles employ far more.',
     },
   },
   {
@@ -100,7 +98,6 @@ export const ITEMS = [
     fact: {
       value: '$60,067',
       label: 'in federal tax collected per D.C. resident',
-      detail: 'Highest in the nation: 2.4× second-place Massachusetts (FY2025).',
     },
   },
   {
@@ -132,8 +129,7 @@ export const ITEMS = [
     q: '"Proximity to the Capitol gives D.C. residents influence."',
     a: (
       <>
-        Proximity isn't accountability. Not one voting member of Congress is elected by D.C.
-        residents, so not one answers to them at the ballot box, while Congress retains{' '}
+        No voting member of Congress is elected by D.C. residents, while Congress retains{' '}
         <Cite href={SRC.lawReview}>a veto over the laws they do pass</Cite> locally.
       </>
     ),
@@ -152,7 +148,6 @@ export const ITEMS = [
     fact: {
       value: '129,831',
       label: 'children live in D.C.',
-      detail: 'Up from 126,742 just two years earlier (2022).',
     },
   },
   {
@@ -169,8 +164,7 @@ export const ITEMS = [
     ),
     fact: {
       value: '1 of 54',
-      label: 'National Guard that reports to the President',
-      detail: "Every other state and territory's answers to its own governor instead.",
+      label: 'National Guards reports to the President, not a governor',
     },
   },
   {
@@ -185,8 +179,8 @@ export const ITEMS = [
         the same way: the Framers "chose to set a maximum size for the Federal District, but no
         other size-related restrictions." Whether Congress can admit the rest as a state by
         ordinary legislation is{' '}
-        <Cite href={SRC.constitutionality}>genuinely contested among scholars</Cite>, with little
-        case law either way. What it isn't is settled against statehood.
+        <Cite href={SRC.constitutionality}>contested among scholars</Cite>, with little
+        case law either way.
       </>
     ),
   },
@@ -204,7 +198,6 @@ export const ITEMS = [
     fact: {
       value: '250',
       label: 'public schools operate in D.C.',
-      detail: 'One traditional district plus 66 charter LEAs (SY 2025–26).',
     },
   },
 ]
@@ -221,7 +214,7 @@ export const SOURCES = [
     display: 'census.gov',
   },
   {
-    label: 'IRS Data Book Table 5, "Gross Collections, by Type of Tax and State," FY2025',
+    label: 'IRS Data Book Table 5, "Gross Collections, by Type of Tax and State," fiscal 2025',
     href: SRC.irs,
     display: 'irs.gov',
   },
@@ -242,12 +235,12 @@ export const SOURCES = [
     display: 'everycrsreport.com',
   },
   {
-    label: 'DC Action, "DC KIDS COUNT: Demographics"',
+    label: 'DC Action, "DC KIDS COUNT: Demographics" (child population, 2024)',
     href: 'https://wearedcaction.org/dc-kids-count/key-measures/demographics/',
     display: 'wearedcaction.org',
   },
   {
-    label: 'OSSE EdScape, "Number of LEAs and Schools"',
+    label: 'OSSE EdScape, "Number of LEAs and Schools": one traditional district plus 66 charter local education agencies, school year 2025–26',
     href: 'https://edscape.dc.gov/page/number-leas-and-schools',
     display: 'edscape.dc.gov',
   },
