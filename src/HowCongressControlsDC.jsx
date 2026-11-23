@@ -177,7 +177,7 @@ function HowCongressControlsDC() {
           <div className="interim-links">
             <div className="interim-row">
               <Link className="cta-secondary" to="/the-case">
-                <span>See what's already been blocked</span> <Icon name="arrow-right" />
+                <span>See what Congress has done</span> <Icon name="arrow-right" />
               </Link>
               <Link className="cta-secondary" to="/myths">
                 <span>Read the common objections</span> <Icon name="arrow-right" />

@@ -31,6 +31,7 @@ const SRC = {
   newStatesClause: 'https://www.law.cornell.edu/constitution-conan/article-4/section-3/clause-1/overview-of-admissions-new-states-clause',
   wwi: 'https://home.nps.gov/places/000/district-of-columbia-war-memorial.htm',
   fy25Budget: 'https://www.everycrsreport.com/reports/R48609.html',
+  fy25Cuts: 'https://www.govinfo.gov/content/pkg/CREC-2025-03-14/html/CREC-2025-03-14-pt1-PgS1772.htm',
 }
 
 export const ITEMS = [
@@ -121,8 +122,8 @@ export const ITEMS = [
       </>
     ),
     fact: {
-      value: '$351M',
-      label: 'of its own tax dollars D.C. was ordered not to spend',
+      value: '$1.1B',
+      label: 'in local spending cuts D.C. faced under the fiscal 2025 funding law',
       detail: "FY2025. The Senate passed a fix by voice vote; the House never voted on it.",
     },
   },
@@ -240,6 +241,12 @@ export const SOURCES = [
       'Congressional Research Service R48609, "District of Columbia FY2025 Budget Status: In Brief"',
     href: SRC.fy25Budget,
     display: 'everycrsreport.com',
+  },
+  {
+    label:
+      'Congressional Record, March 14, 2025, Senate, pages S1772 to S1773, "District of Columbia Local Funds Act, 2025"',
+    href: SRC.fy25Cuts,
+    display: 'govinfo.gov',
   },
   {
     label: 'DC Action, "DC KIDS COUNT: Demographics"',

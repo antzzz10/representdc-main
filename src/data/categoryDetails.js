@@ -16,7 +16,7 @@ export const categoryDetails = [
     trackerQuery: 'category=crime',
     description: `For decades, Congress has overridden DC's efforts at criminal justice reform, from mandatory minimums in the 1980s to blocking the revised criminal code in 2023. Despite DC voters electing officials who support police accountability and bail reform, Congress has repeatedly intervened to impose harsher policies rejected by local residents.
 
-One egregious example: In 2023, Congress used a disapproval resolution to block DC's entire revised criminal code from taking effect, the result of 16 years of work by judges, prosecutors, and community advocates. It was the first time in more than 30 years Congress blocked a DC law from taking effect by a disapproval resolution.
+One egregious example: In 2023, Congress used a disapproval resolution to block DC's entire revised criminal code from taking effect, the result of more than 15 years of work by prosecutors, defense attorneys and community advocates. It was the first time in more than 30 years Congress blocked a DC law from taking effect by a disapproval resolution.
 
 DC's incarceration rate is the highest in the nation, driven partly by congressional interventions that override local preferences for reform and restorative justice approaches.`
   },
@@ -68,9 +68,9 @@ The dual attack from both Congress and the executive branch demonstrates extraor
     trackerQuery: '',
     description: `For decades, DC has been denied control over its own locally-raised tax dollars, the only city in America whose budget requires Congressional approval under the Home Rule Act. This fundamental restriction has led to repeated crises, shutdowns, and forced spending cuts.
 
-One egregious example: In March 2025, the House passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a roughly 16 percent hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
+One egregious example: In March 2025, the House passed a continuing resolution that, unlike past CRs, omitted the routine language allowing DC to spend under its already-approved FY 2025 local budget. This omission created a hole in DC's budget by blocking access to about $1.1 billion of locally raised funds and forcing the city to operate at last year's spending level midway through the fiscal year.
 
-The $1.1 billion gap requires cutting 16% of planned spending: money from DC residents and businesses, not federal aid. This generates no savings for the federal government while restricting what DC can do with its own tax dollars. To avoid mass layoffs, Mayor Bowser imposed hiring freezes, suspended raises and overtime, and targeted contracts for cuts affecting schools, public safety, and human services.
+The $1.1 billion gap required cuts to planned spending: money from DC residents and businesses, not federal aid. This generates no savings for the federal government while restricting what DC can do with its own tax dollars. To avoid mass layoffs, Mayor Bowser imposed hiring freezes, suspended raises and overtime, and targeted contracts for cuts affecting schools, public safety, and human services.
 
 The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore DC's authority, and the White House publicly urged the House to approve it. The House never voted on it, and fiscal year 2025 ended on September 30, 2025.
 

@@ -38,7 +38,7 @@ function Home() {
       {/* Problem Statement - Concrete Facts */}
       <section className="facts-section" id="facts">
         <div className="container">
-          <h2 className="section-title">The reality for 700,000 Americans</h2>
+          <h2 className="section-title">The reality for nearly 700,000 Americans</h2>
           <div className="facts-grid">
             <div className="fact-card">
               <div className="fact-number">0</div>
@@ -156,7 +156,7 @@ function Home() {
             </div>
           </div>
           <p className="explainer-next">
-            Want the specifics? <Link to="/the-case">See what Congress has blocked</Link>, category by
+            Want the specifics? <Link to="/the-case">See what Congress has done</Link>, category by
             category, with sources.
           </p>
         </div>
@@ -224,7 +224,7 @@ function Home() {
               <span className="solution-icon"><Icon name="check" /></span>
               <div className="solution-content">
                 <h3>Two senators</h3>
-                <p>Like every other state, D.C. would elect two senators to represent 700,000 residents</p>
+                <p>Like every other state, D.C. would elect two senators to represent nearly 700,000 residents</p>
               </div>
             </div>
             <div className="solution-point">

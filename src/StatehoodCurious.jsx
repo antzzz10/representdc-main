@@ -23,7 +23,7 @@ const DESTINATIONS = [
   {
     icon: 'book-open',
     title: 'The case for statehood',
-    body: 'What Congress has blocked, and what statehood would change.',
+    body: 'What Congress has done to D.C., and what statehood would change.',
     to: '/the-case',
   },
   {
