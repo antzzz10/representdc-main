@@ -112,7 +112,7 @@ export const ITEMS = [
         <Cite href={SRC.delegates}>cannot vote on final passage</Cite> of a bill, they have no
         senators, and{' '}
         <Link to="/how-congress-controls-dc">
-          Congress must approve every local law and budget
+          Congress can overturn any local law and retains authority over the local budget
         </Link>
         , unlike any state.
       </>
@@ -120,7 +120,7 @@ export const ITEMS = [
     fact: {
       value: '$351M',
       label: 'of its own tax dollars D.C. was ordered not to spend',
-      detail: "FY2025. The Senate's fix passed unanimously; the House never took it up.",
+      detail: "FY2025. The Senate passed a fix by voice vote; the House never voted on it.",
     },
   },
   {
@@ -255,8 +255,18 @@ export const SOURCES = [
     display: 'code.dccouncil.gov',
   },
   {
-    label: 'Home Rule Act § 1–204.46 (budget) and § 1–206.02 (congressional review of D.C. laws)',
+    label: 'Home Rule Act § 1–204.46, enactment of the local budget',
     href: SRC.budgetReview,
+    display: 'code.dccouncil.gov',
+  },
+  {
+    label: 'Home Rule Act § 1–206.02, congressional review of D.C. laws',
+    href: SRC.lawReview,
+    display: 'code.dccouncil.gov',
+  },
+  {
+    label: 'Home Rule Act § 1–206.01, "Retention of constitutional authority"',
+    href: 'https://code.dccouncil.gov/us/dc/council/code/sections/1-206.01',
     display: 'code.dccouncil.gov',
   },
   {

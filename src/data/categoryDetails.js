@@ -11,23 +11,23 @@ export const categoryDetails = [
     id: 'criminal-justice',
     icon: 'scale',
     title: 'Criminal justice reform',
-    summary: 'Local police accountability measures blocked or restricted',
+    summary: 'Local police accountability measures targeted for repeal',
     billTrackerCategory: 'crime',
     trackerQuery: 'category=crime',
     description: `For decades, Congress has overridden D.C.'s efforts at criminal justice reform, from mandatory minimums in the 1980s to blocking the revised criminal code in 2023. Despite D.C. voters electing officials who support police accountability and bail reform, Congress has repeatedly intervened to impose harsher policies rejected by local residents.
 
-In 2023, Congress used a disapproval resolution to overturn D.C.'s entire revised criminal code, the result of 16 years of work by judges, prosecutors, and community advocates. It was only the second time in 50 years Congress fully blocked a D.C. law, and the first time the Senate voted to do so.`
+One egregious example: In 2023, Congress used a disapproval resolution to block D.C.'s entire revised criminal code from taking effect, the result of 16 years of work by judges, prosecutors, and community advocates. It was the first time in more than 30 years Congress blocked a D.C. law from taking effect by a disapproval resolution.`
   },
   {
     id: 'healthcare',
     icon: 'heart-pulse',
     title: 'Healthcare decisions',
-    summary: 'Abortion access, death with dignity, and insurance regulations overturned',
+    summary: 'Abortion funding blocked; death with dignity and insurance regulations targeted',
     billTrackerCategory: 'health',
     trackerQuery: 'category=healthcare',
-    description: `Since 1988, Congress has blocked D.C. from using even its own local tax dollars for abortion services through the Dornan Amendment. This pattern extends beyond abortion: Congress has also blocked death with dignity laws, needle exchange programs, and medical marijuana regulations.
+    description: `Since 1988, Congress has blocked D.C. from using even its own local tax dollars for abortion services through the Dornan Amendment. This pattern extends beyond abortion: Congress has also tried to repeal D.C.'s death with dignity law and has blocked needle exchange programs and medical marijuana regulations, treating D.C. residents as test subjects for social policy experiments.
 
-The Dornan/Harris Amendment (renewed annually since 1988) prohibits D.C. from using any funds, even locally-raised tax revenue, for abortion services for low-income residents. No state faces this restriction. In 2011, Congress nearly forced D.C. to shut down its entire government because the city's budget included funding for abortion services.`
+One egregious example: The Dornan/Harris Amendment (renewed annually since 1988) prohibits D.C. from using any funds, even locally-raised tax revenue, for abortion services for low-income residents (now in Public Law 119-75). No state faces this restriction. In 2011, Congress nearly forced D.C. to shut down its entire government because the city's budget included funding for abortion services.`
   },
   {
     id: 'voting',
@@ -36,9 +36,9 @@ The Dornan/Harris Amendment (renewed annually since 1988) prohibits D.C. from us
     summary: 'Local voting laws and electoral reforms challenged',
     billTrackerCategory: 'elections',
     trackerQuery: 'category=elections',
-    description: `Congress has repeatedly interfered with D.C.'s voting and election laws, from blocking ranked-choice voting initiatives to overturning local voter eligibility expansions.
+    description: `Congress has repeatedly targeted D.C.'s voting and election laws, from a proposed ban on ranked-choice voting to a House-passed repeal of a local voter eligibility expansion.
 
-In 2025, H.R. 884 became law, repealing D.C.'s locally-passed law allowing non-citizen residents (green card holders, taxpayers) to vote in local elections for mayor, council, and school board. Congress overruled D.C. voters to decide who could vote in D.C. elections, while those same D.C. voters have no voting representation in Congress itself.`
+One egregious example: In June 2025, the House passed H.R. 884, which would repeal D.C.'s locally-passed law allowing non-citizen residents, including green card holders, to vote in local elections for mayor, council, and school board. The Senate has not voted on it, so D.C.'s law still stands. The House voted to repeal D.C.'s law on who can vote in D.C. elections, while D.C. voters have no voting representation in Congress itself.`
   },
   {
     id: 'traffic',
@@ -49,7 +49,9 @@ In 2025, H.R. 884 became law, repealing D.C.'s locally-passed law allowing non-c
     trackerQuery: 'category=transportation',
     description: `Members of Congress have micromanaged everything from speed cameras to right-turn rules. Despite D.C. experiencing traffic violence at rates far exceeding most jurisdictions, Congress and the executive branch are working to dismantle the city's Vision Zero safety initiatives based on complaints from suburban commuters who don't live in the city.
 
-In September 2025, the House passed H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate all 547 of D.C.'s automated traffic enforcement cameras. These cameras generated $267 million in revenue in fiscal 2025 (funds used for local services) and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating D.C.'s traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.`
+Most egregious recent actions: In September 2025, Rep. Scott Perry introduced H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate D.C.'s automated traffic enforcement cameras. A House committee approved it in March 2026 and sent it to the full House in November 2026. These cameras generated $267 million in revenue in fiscal 2025 (funds used for local services) and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating D.C.'s traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.
+
+Congress and DOT are trying to block proven safety measures to protect drivers passing through from other states, prioritizing convenience over D.C. residents' lives.`
   },
   {
     id: 'budget',
@@ -64,7 +66,7 @@ In March 2025, the House passed a continuing resolution that, unlike past ones, 
 
 The $1.1 billion gap requires cutting 16% of planned spending: money from D.C. residents and businesses, not federal aid. This generates no savings for the federal government while restricting what D.C. can do with its own tax dollars. To avoid mass layoffs, Mayor Bowser imposed hiring freezes, suspended raises and overtime, and targeted contracts for cuts affecting schools, public safety, and human services.
 
-The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore D.C.'s authority, and the White House publicly urged the House to approve it. As of fall 2025, House leaders have repeatedly declined to bring the fix to a vote. Because the city must balance its budget over four years, the withheld $1.1 billion will count as surplus and be locked into reserves if not spent, further limiting flexibility.`
+The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore D.C.'s authority, and the White House publicly urged the House to approve it. The House never voted on it, and fiscal year 2025 ended on September 30, 2025.`
   },
   {
     id: 'marijuana',
@@ -75,16 +77,16 @@ The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore 
     trackerQuery: 'category=marijuana',
     description: `Despite D.C. voters approving marijuana legalization with 70% support in 2014, Congress has blocked the city from implementing voter-approved marijuana policies for over a decade. The annual "Harris Rider" budget provision prevents D.C. from spending any money, federal or local, to regulate or tax marijuana sales, creating a dangerous unregulated "gifting" market.
 
-The Harris Rider, first attached to D.C.'s budget in 2014 and renewed every year since, blocks D.C. from creating the legal marijuana market that voters explicitly approved. This forces D.C. residents into a gray market where marijuana is "gifted" with purchase of other items, completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.`
+One egregious example: The Harris Rider, first attached to D.C.'s budget in 2014 and renewed every year since (now in Public Law 119-75), blocks D.C. from creating the legal marijuana market that voters explicitly approved. This forces D.C. residents into a gray market where marijuana is "gifted" with purchase of other items, completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.`
   },
   {
     id: 'civic-spaces',
     icon: 'landmark',
     title: 'Civic spaces & local autonomy',
-    summary: 'Congress renames D.C. streets and plazas',
+    summary: 'Bills in Congress would rename D.C. streets and plazas, overriding local values and decisions',
     billTrackerCategory: 'civic-spaces',
     trackerQuery: 'category=civic-spaces',
-    description: `Congress regularly exercises authority over D.C.'s civic spaces, renaming streets, plazas, and monuments, in ways that contradict local values and decisions.
+    description: `Congress regularly seeks to exercise authority over D.C.'s civic spaces, with bills to rename streets, plazas, and monuments, in ways that contradict local values and decisions.
 
 In December 2025, Rep. Nancy Mace (R-SC) introduced the Charlie Kirk Freedom of Speech Plaza Act to redesignate Black Lives Matter Plaza, named by D.C. to honor the racial justice movement, as "Charlie Kirk Freedom of Speech Plaza." This would force D.C. to install new street signs and update all official records, overriding a local naming decision that reflects D.C. community values.
 
