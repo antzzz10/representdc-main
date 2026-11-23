@@ -3,50 +3,19 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import BlueskySection from './components/BlueskySection'
+import { WAYS } from './data/followWays'
 import './App.css'
 
-// Lists only ways to follow that exist today, per the site rule. The Bluesky section shows
-// itself once the account has posts. The email card (added 2026-11-17) points at the
-// newsletter's sign-up page on beehiiv. It names no schedule until issues are going out:
-// say "weekly" here once that is true.
+// The cards and their wording live in src/data/followWays.js, shared with the pages that
+// point here. The Bluesky section shows itself once the account has posts.
 const BLUESKY_HANDLE = 'bills.representdc.org'
-
-const WAYS = [
-  {
-    icon: 'mail',
-    title: 'Email updates',
-    body: 'What Congress does to D.C., what D.C. is doing about it, and how you can help, sent to your inbox.',
-    href: 'https://representdc.beehiiv.com/subscribe',
-    cta: 'Sign up',
-  },
-  {
-    icon: 'landmark',
-    title: 'Bill tracker',
-    body: "Bills in Congress that target D.C.'s laws, budget or government, with where each one stands. Checked against Congress.gov daily.",
-    href: 'https://billtracker.representdc.org',
-    cta: 'Open the tracker',
-  },
-  {
-    icon: 'newspaper',
-    title: 'Statehood in the news',
-    body: 'Recent coverage of D.C. statehood and home rule, updated daily.',
-    to: '/news',
-    cta: 'Read the news',
-  },
-  {
-    icon: 'users',
-    title: 'The people organizing',
-    body: "D.C.'s statehood groups run their own newsletters, events and actions. Pick the ones that fit you.",
-    to: '/statehood-partner-map',
-    cta: 'See the partner map',
-  },
-]
 
 function WayCard({ way }) {
   const inner = (
     <>
       <Icon name={way.icon} size={28} />
-      <h3>{way.title}</h3>
+      {/* h2: the cards sit directly under the page's h1 */}
+      <h2>{way.title}</h2>
       <p>{way.body}</p>
       <p className="follow-cta">
         {way.cta} <Icon name="arrow-right" size={15} />

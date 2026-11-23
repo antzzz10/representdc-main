@@ -21,7 +21,7 @@ function CategoryCard({ category }) {
         <div className="category-header-content">
           <span className="category-icon"><Icon name={category.icon} size={24} /></span>
           <div className="category-header-text">
-            <h3>{category.title}</h3>
+            <h2>{category.title}</h2>
             <p className="category-summary">{category.summary}</p>
           </div>
         </div>

@@ -12,6 +12,7 @@
  *   - one page view per path, so tagged links (utm_source and friends) show which
  *     campaign sent a visit;
  *   - clicks on a short list of links we care about (classifyLink below);
+ *   - which of the four home page picker cards was clicked (one of four fixed labels);
  *   - the named events in EVENTS.
  *
  * The safety net is cleanEvent, PostHog's before_send hook. It is an allowlist: an event
@@ -38,7 +39,12 @@ export const EVENTS = {
   OUTBOUND_LINK_OPENED: 'outbound_link_opened',
   /** A visitor used a control on the cosponsor lookup. The control's name only. */
   MEMBER_LOOKUP_USED: 'member_lookup_used',
+  /** A visitor clicked a card in the home page picker. Which of the four cards only. */
+  PICKER_PATH_CHOSEN: 'picker_path_chosen',
 }
+
+/** The four picker cards, in page order. The only values the `path` property may hold. */
+export const PICKER_PATHS = ['new-to-dc', 'curious', 'questioning', 'activist']
 
 const PAGEVIEW = '$pageview'
 const OUR_EVENTS = new Set([PAGEVIEW, ...Object.values(EVENTS)])
@@ -57,6 +63,7 @@ const OWN = {
   page: (v) => typeof v === 'string' && v.startsWith('/') && v.length <= 200,
   host: (v) => typeof v === 'string' && /^[a-z0-9.-]{1,100}$/.test(v),
   control: (v) => v === 'chamber' || v === 'filter' || v === 'state',
+  path: (v) => typeof v === 'string' && PICKER_PATHS.includes(v),
 }
 
 /** PostHog's own properties that are kept as they are: delivery plumbing and device type. */

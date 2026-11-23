@@ -5,7 +5,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { classifyLink, cleanEvent, cleanPageUrl, referringHost, visitTags, EVENTS } from '../src/lib/analytics.js'
+import { classifyLink, cleanEvent, cleanPageUrl, referringHost, visitTags, EVENTS, PICKER_PATHS } from '../src/lib/analytics.js'
 
 const HOST = 'www.representdc.org'
 const here = { host: HOST, pathname: '/the-page' }
@@ -143,6 +143,42 @@ test('our own properties are held to the values we expect', () => {
   assert.deepEqual(sent.properties, { control: 'state' })
   const bad = cleanEvent({ event: EVENTS.OUTBOUND_LINK_OPENED, properties: { control: 'DC', candidate: 'someone' } })
   assert.deepEqual(bad.properties, {})
+})
+
+test('a picker click carries one of four fixed labels and nothing else of ours', () => {
+  assert.deepEqual(PICKER_PATHS, ['new-to-dc', 'curious', 'questioning', 'activist'])
+  for (const path of PICKER_PATHS) {
+    const sent = cleanEvent({ event: EVENTS.PICKER_PATH_CHOSEN, properties: { site: 'main', path } })
+    assert.deepEqual(sent.properties, { site: 'main', path })
+  }
+  // Anything else in that slot is dropped: an address, typed text, a near miss, a non-string.
+  for (const path of ['/take-action', 'Statehood activist', 'Activist', 'activist ', '', 'someone@example.org', 3, null, ['activist'], { toString: () => 'activist' }]) {
+    const sent = cleanEvent({ event: EVENTS.PICKER_PATH_CHOSEN, properties: { path, label: 'Statehood activist', text: 'typed text' } })
+    assert.deepEqual(sent.properties, {})
+  }
+})
+
+test('each picker card on the home page records its own label', () => {
+  const home = readFileSync(new URL('../src/Home.jsx', import.meta.url), 'utf8')
+  const wired = [...home.matchAll(/<Link className="persona-card[^"]*" to="([^"]+)" \{\.\.\.pickerClick\('([^']+)'\)\}>/g)]
+    .map((m) => [m[1], m[2]])
+  assert.deepEqual(wired, [
+    ['/how-congress-controls-dc', 'new-to-dc'],
+    ['/statehood-curious', 'curious'],
+    ['/myths', 'questioning'],
+    ['/take-action', 'activist'],
+  ])
+  // No picker card is left unrecorded, and the label is the only property sent.
+  assert.equal(home.match(/className="persona-card/g).length, wired.length)
+  assert.equal(home.includes("track(EVENTS.PICKER_PATH_CHOSEN, { path }, { leaving: true })"), true)
+})
+
+test('a link to the follow page from a page body is recorded with the existing properties only', () => {
+  // The "Stay in the loop" closing block is a plain link to /follow inside the page.
+  const hit = classifyLink(`https://${HOST}/follow`, { host: HOST, pathname: '/take-action' }, 'page')
+  assert.deepEqual(hit, { event: EVENTS.FOLLOW_PAGE_OPENED, properties: { area: 'page', page: '/take-action' } })
+  const block = readFileSync(new URL('../src/components/StayInTheLoop.jsx', import.meta.url), 'utf8')
+  assert.equal(block.includes('to="/follow"'), true)
 })
 
 test('names every object inherits are not let through', () => {

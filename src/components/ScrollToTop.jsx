@@ -11,7 +11,9 @@ function ScrollToTop() {
     if (location.hash) {
       const el = document.querySelector(location.hash)
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
+        // A reader who has asked for less motion gets an immediate jump.
+        const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+        el.scrollIntoView({ behavior: still ? 'auto' : 'smooth' })
         return
       }
     }

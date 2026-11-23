@@ -3,6 +3,7 @@ import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
+import StayInTheLoop from './components/StayInTheLoop'
 import { ITEMS, SOURCES } from './data/myths'
 import './Myths.css'
 
@@ -45,11 +46,17 @@ function Myths() {
 
           <div className="interim-links">
             <div className="interim-row">
+              {/* The warming skeptic's next step, per decisions/2026-07-20-segment-mapping.md */}
+              <Link className="cta-primary cta-on-light" to="/the-case">
+                <span>Seen the claims? Now see the record</span> <Icon name="arrow-right" />
+              </Link>
               <Link className="cta-secondary" to="/news">
                 <span>See the latest in D.C. statehood news</span> <Icon name="arrow-right" />
               </Link>
             </div>
           </div>
+
+          <StayInTheLoop />
 
           <div className="sources-block">
             <h4>Sources</h4>

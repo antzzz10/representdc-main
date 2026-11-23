@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
+import StayInTheLoop from './components/StayInTheLoop'
 import { useBillStats } from './hooks/useBillStats'
 import { contextParts, headlineNoun } from './lib/billProgress'
 import './App.css'
@@ -176,7 +177,7 @@ function HowCongressControlsDC() {
           </p>
           <div className="interim-links">
             <div className="interim-row">
-              <Link className="cta-secondary" to="/the-case">
+              <Link className="cta-primary cta-on-light" to="/the-case">
                 <span>See what's already been blocked</span> <Icon name="arrow-right" />
               </Link>
               <Link className="cta-secondary" to="/myths">
@@ -184,6 +185,7 @@ function HowCongressControlsDC() {
               </Link>
             </div>
           </div>
+          <StayInTheLoop />
           <div className="sources-block">
             <h4>Sources</h4>
             <div className="sources-list">

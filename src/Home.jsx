@@ -6,6 +6,18 @@ import Footer from './components/Footer'
 import Icon from './components/Icon'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 import { contextParts, headlineNoun } from './lib/billProgress'
+import { track, EVENTS } from './lib/analytics'
+
+// Records which picker card was chosen: one of four fixed labels, nothing else. Handed to
+// the browser to send as the page changes, so the link itself is never held up. Covers a
+// plain click and a middle click that opens a new tab, like the site-wide link listener.
+const pickerClick = (path) => {
+  const record = (e) => {
+    if (e.type === 'auxclick' && e.button !== 1) return
+    track(EVENTS.PICKER_PATH_CHOSEN, { path }, { leaving: true })
+  }
+  return { onClick: record, onAuxClick: record }
+}
 
 function Home() {
   const { totalBills, progress, lastChecked, loading, error } = useBillStats()
@@ -81,25 +93,25 @@ function Home() {
             </p>
           </div>
           <div className="persona-grid">
-            <Link className="persona-card" to="/how-congress-controls-dc">
+            <Link className="persona-card" to="/how-congress-controls-dc" {...pickerClick('new-to-dc')}>
               <span className="picon"><Icon name="landmark" size={22} /></span>
               <h3>New to D.C.</h3>
               <p>Didn't know D.C. isn't a state? Start with the basics: what home rule means, and why Congress can overturn D.C.'s own laws.</p>
               <span className="plink">Start the explainer <Icon name="arrow-right" size={15} /></span>
             </Link>
-            <Link className="persona-card" to="/statehood-curious">
+            <Link className="persona-card" to="/statehood-curious" {...pickerClick('curious')}>
               <span className="picon"><Icon name="rss" size={22} /></span>
               <h3>Statehood-curious</h3>
               <p>Already know the problem? See the latest coverage and who's organizing for statehood.</p>
               <span className="plink">See what's happening <Icon name="arrow-right" size={15} /></span>
             </Link>
-            <Link className="persona-card accent" to="/myths">
+            <Link className="persona-card accent" to="/myths" {...pickerClick('questioning')}>
               <span className="picon"><Icon name="help-circle" size={22} /></span>
               <h3>Statehood-questioning</h3>
               <p>Have doubts or specific objections? Get direct, sourced answers to the most common ones.</p>
               <span className="plink">Read the myths <Icon name="arrow-right" size={15} /></span>
             </Link>
-            <Link className="persona-card accent" to="/take-action">
+            <Link className="persona-card accent" to="/take-action" {...pickerClick('activist')}>
               <span className="picon"><Icon name="megaphone" size={22} /></span>
               <h3>Statehood activist</h3>
               <p>Already convinced? Get talking points, sourced data, and ways to organize. Built for speed.</p>

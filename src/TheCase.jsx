@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import Icon from './components/Icon'
 import CategoryCard from './components/CategoryCard'
+import StayInTheLoop from './components/StayInTheLoop'
 import { categoryDetails } from './data/categoryDetails'
 import './App.css'
 
@@ -22,6 +25,14 @@ function TheCase() {
               <CategoryCard key={category.id} category={category} />
             ))}
           </div>
+          <div className="interim-links">
+            <div className="interim-row">
+              <Link className="cta-secondary" to="/myths">
+                <span>Read the common objections</span> <Icon name="arrow-right" />
+              </Link>
+            </div>
+          </div>
+          <StayInTheLoop />
         </div>
       </section>
       <Footer />

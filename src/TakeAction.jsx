@@ -2,25 +2,61 @@ import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
+import StayInTheLoop from './components/StayInTheLoop'
+import { TRACKER_WAY } from './data/followWays'
+import { ROUTE_META } from './data/routeMeta'
 import './App.css'
 
-const PREVIEWS = [
+// Interim hub for the "Statehood activist" path. It delivers what the home page picker
+// card promises (talking points, sourced data, ways to organize) with pages that exist
+// today. Same rule as StatehoodCurious.jsx: every card links somewhere real, and a card
+// whose page isn't built is cut, not badged. The fuller toolkit is still to come
+// (decisions/2026-07-28-take-action-matcher-scope.md). Card bodies reuse the wording
+// already used for each destination elsewhere on the site.
+const TOOLS = [
   {
-    icon: 'landmark',
-    title: 'Congressional outreach toolkit',
-    body: 'Scripts and talking points for contacting key members of Congress, tailored to where each live bill actually stands.',
+    icon: 'book-open',
+    title: 'Talking points',
+    // The Case card on StatehoodCurious.jsx
+    body: 'What Congress has blocked, and what statehood would change.',
+    to: '/the-case',
   },
   {
-    icon: 'gavel',
-    title: 'State-level statehood advocacy',
-    body: 'How to push for statehood resolutions in state legislatures, and how to offer testimony when state-level statehood bills come up for a vote.',
+    icon: TRACKER_WAY.icon,
+    title: 'Sourced data',
+    body: TRACKER_WAY.body,
+    href: TRACKER_WAY.href,
   },
   {
-    icon: 'hand-coins',
-    title: '"No donation without representation"',
-    body: "Before you give money or time to a candidate, ask where they stand on D.C. statehood, and withhold support from those who haven't committed.",
+    icon: 'scroll-text',
+    title: 'Statehood bill',
+    body: ROUTE_META['/statehood-bill'].description,
+    to: '/statehood-bill',
+  },
+  {
+    icon: 'users',
+    title: 'Ways to organize',
+    // The "Meet the movement" card on StatehoodCurious.jsx
+    body: 'The organizations working on statehood, and how to get involved with each.',
+    to: '/statehood-partner-map',
   },
 ]
+
+function ToolCard({ tool }) {
+  const inner = (
+    <>
+      <Icon name={tool.icon} size={28} />
+      {/* h2: the cards sit directly under the page's h1 */}
+      <h2>{tool.title}</h2>
+      <p>{tool.body}</p>
+    </>
+  )
+  return tool.to ? (
+    <Link className="preview-card preview-card-live" to={tool.to}>{inner}</Link>
+  ) : (
+    <a className="preview-card preview-card-live" href={tool.href}>{inner}</a>
+  )
+}
 
 function TakeAction() {
   return (
@@ -28,7 +64,7 @@ function TakeAction() {
       <Nav />
       <header className="page-hero">
         <div className="container">
-          <span className="eyebrow">Coming soon</span>
+          <span className="eyebrow">Statehood activist</span>
           <h1>Take action hub</h1>
           <p>Built for people who are already convinced and want to move fast.</p>
         </div>
@@ -36,27 +72,9 @@ function TakeAction() {
       <section className="impact-section">
         <div className="container">
           <div className="preview-grid">
-            {PREVIEWS.map((p) => (
-              <div className="preview-card" key={p.title}>
-                <span className="card-badge">Coming soon</span>
-                <Icon name={p.icon} size={28} />
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
-              </div>
-            ))}
+            {TOOLS.map((tool) => <ToolCard key={tool.title} tool={tool} />)}
           </div>
-          {/* Activists shouldn't wait — talking points already exist on The Case */}
-          <div className="interim-links">
-            <p>In the meantime, the talking points are already live:</p>
-            <div className="interim-row">
-              <Link className="cta-secondary" to="/the-case">
-                <span>Talking points on The Case</span> <Icon name="arrow-right" />
-              </Link>
-              <a className="cta-secondary" href="https://billtracker.representdc.org">
-                <span>Track the live bills</span> <Icon name="arrow-right" />
-              </a>
-            </div>
-          </div>
+          <StayInTheLoop />
         </div>
       </section>
       <Footer />

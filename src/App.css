@@ -153,7 +153,7 @@
   color: var(--dc-red);
 }
 
-/* Preview cards — Take Action Hub coming-soon */
+/* Link cards: Take action, Statehood-curious, Follow, News */
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -187,19 +187,9 @@ a.preview-card-live:focus-visible {
   margin-bottom: var(--s-3);
 }
 
-.card-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: var(--ls-label);
-  color: var(--ink);
-  background: var(--gold-soft);
-  padding: 3px 9px;
-  border-radius: var(--r-pill);
-  margin-bottom: var(--s-3);
-}
-
+/* A card title is an h2 when the cards sit directly under the page's h1, an h3 under a
+   section heading. Same look either way. */
+.preview-card h2,
 .preview-card h3 {
   font-size: var(--fs-h3);
   font-weight: 700;
@@ -251,7 +241,65 @@ a.preview-card-live.follow-card {
   flex-wrap: wrap;
 }
 
+/* A primary and a secondary button side by side: .cta-secondary carries its own top
+   margin, so the primary needs the same to sit level with it. */
+.interim-row .cta-primary {
+  margin-top: var(--s-5);
+}
+
+/* Primary CTA on a light surface. .cta-primary alone is white, made for the navy hero. */
+.cta-primary.cta-on-light {
+  background: var(--dc-red);
+  color: var(--white);
+}
+.cta-primary.cta-on-light:hover {
+  background: var(--dc-red-dark);
+}
+
+/* Heading for a second row of cards under a .preview-grid */
+.row-heading {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+  margin: var(--s-7) 0 var(--s-5);
+}
+
+/* "Stay in the loop" closing block (components/StayInTheLoop.jsx): the last thing on a
+   page before its Sources block and the footer. */
+.stay-loop {
+  max-width: 700px;
+  margin: var(--s-7) auto 0;
+  padding: var(--s-6) var(--s-5);
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+/* Doubled class: page stylesheets set their own h2 colour and size (.myth-sec h2). */
+.stay-loop.stay-loop h2 {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  color: var(--white);
+  text-align: center;
+  margin: 0 0 var(--s-2);
+}
+.stay-loop p {
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 520px;
+  margin: 0 auto var(--s-5);
+}
+
 /* News page (trial) */
+/* Sections linked to by fragment (/news#analysis): keep the heading clear of the sticky menu */
+#news,
+#analysis {
+  scroll-margin-top: var(--s-5);
+}
+
 .news-summary {
   background: var(--navy-tint);
   border: 1px solid var(--line);

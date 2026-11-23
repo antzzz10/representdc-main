@@ -22,6 +22,24 @@ function Footer() {
                 </Link>
               </div>
             </div>
+            {/* The home page picker's four paths, under its own heading and labels. */}
+            <div className="footer-section">
+              <h3>Where do you want to start?</h3>
+              <div className="footer-links">
+                <Link to="/how-congress-controls-dc">
+                  New to D.C. <Icon name="arrow-right" size={15} />
+                </Link>
+                <Link to="/statehood-curious">
+                  Statehood-curious <Icon name="arrow-right" size={15} />
+                </Link>
+                <Link to="/myths">
+                  Statehood-questioning <Icon name="arrow-right" size={15} />
+                </Link>
+                <Link to="/take-action">
+                  Statehood activist <Icon name="arrow-right" size={15} />
+                </Link>
+              </div>
+            </div>
             <div className="footer-section">
               <h3>About this site</h3>
               <p>

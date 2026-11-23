@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
 import NewsList, { NewsletterSection } from './components/NewsList'
+import StayInTheLoop from './components/StayInTheLoop'
 import { validNewsItems } from './utils/newsItems'
 import { READING, readingRoute } from './data/reading'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
@@ -28,6 +29,10 @@ const SUMMARY_MAX_COVERAGE_AGE_MS = 14 * DAY_MS
 // Past this, the check line also names the newest story, so an old dateline under a
 // recent check reads as a quiet stretch rather than a stalled page.
 const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
+
+// How far the page may sit from where a jump to a section left it and still count as
+// untouched by the reader (sub-pixel rounding, a late font).
+const HASH_SCROLL_TOLERANCE_PX = 8
 
 // A feed stamp further in the future than clock skew explains is not trustworthy.
 const CLOCK_SKEW_MS = 15 * 60 * 1000
@@ -113,6 +118,67 @@ function NewsAndAnalysis() {
     }
   }, [])
 
+  // A link to a section (/news#analysis, from the Statehood-curious "Reading" card). The
+  // headlines load after the page opens and push that section down, so the page goes to
+  // the section twice: once on arrival and once more when the feed settles (loaded or
+  // failed). Both are immediate jumps, never animated, so the position they produce is
+  // known at once and nothing moves for a reader who has asked for less motion.
+  //
+  // The second jump must not pull back a reader who has already moved. Movement is judged
+  // by position, not by input type, so a dragged scrollbar counts: any scroll before the
+  // feed settles that leaves the page away from where the first jump put it.
+  //
+  // All of this is per navigation (the router gives each one its own key), so arriving
+  // again by a link or by Back/Forward starts afresh. No hash, no scrolling logic.
+  const { hash, key: navKey } = useLocation()
+  const jump = useRef(null)
+  const feedSettled = Boolean(data) || error
+
+  useLayoutEffect(() => {
+    jump.current = null
+    const target = hash ? document.getElementById(hash.slice(1)) : null
+    if (!target) return
+    // On Back/Forward the browser puts the page back where it was last time, a moment
+    // after this runs, which would read as the reader moving. The setting belongs to this
+    // one history entry (an address that names a section), so other pages are untouched.
+    // Put back on leaving, so later pages and entries keep the browser's own behaviour.
+    let previousRestoration = null
+    try {
+      previousRestoration = window.history.scrollRestoration
+      window.history.scrollRestoration = 'manual'
+    } catch {
+      // Not supported: the first jump still happens.
+    }
+    target.scrollIntoView()
+    const state = { y: window.scrollY, moved: false, settled: false }
+    jump.current = state
+    const onScroll = () => {
+      if (!state.settled && Math.abs(window.scrollY - state.y) > HASH_SCROLL_TOLERANCE_PX) {
+        state.moved = true
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (previousRestoration) {
+        try {
+          window.history.scrollRestoration = previousRestoration
+        } catch {
+          // Nothing to restore.
+        }
+      }
+    }
+  }, [navKey, hash])
+
+  // A layout effect, so it runs as the headlines are put on the page and before the
+  // browser reports any scroll of its own caused by the page growing.
+  useLayoutEffect(() => {
+    const state = jump.current
+    if (!state || state.settled || !feedSettled) return
+    state.settled = true
+    if (!state.moved) document.getElementById(hash.slice(1))?.scrollIntoView()
+  }, [navKey, hash, feedSettled])
+
   const checkedAt = validCheckedInstant(data?.lastUpdated)
   // Malformed entries are dropped before anything reads the list (utils/newsItems.js).
   const articles = validNewsItems(data?.articles)
@@ -195,6 +261,7 @@ function NewsAndAnalysis() {
               </Link>
             ))}
           </div>
+          <StayInTheLoop />
         </div>
       </section>
 

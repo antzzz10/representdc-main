@@ -26,6 +26,9 @@ did on arrival.
   Each carries the path it was on and whether the link sat in the site menu, the footer
   or the page.
 - **`member_lookup_used`** on the statehood bill page: which control was used (chamber, filter or state), never the choice made or the name typed.**
+- **`picker_path_chosen`** on the home page (added 2026-11-22): which of the four picker
+  cards was clicked, as one of four fixed labels (`new-to-dc`, `curious`, `questioning`,
+  `activist`). Like the link clicks, it counts clicks, not arrivals.
 - Every event carries `site: 'main'`, because all three sites share one PostHog project.
 
 **These are counts of clicks, not of arrivals, and they run low.** The click is recorded
