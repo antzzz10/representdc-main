@@ -78,6 +78,35 @@ something else first rather than stacking a 4th. See
   critical and a supportive presidential mention in the same content set; see
   `decisions/2026-07-11-content-review-and-audience.md`.
 
+## Plain, short copy (established 2026-11-23)
+
+Andria's rules after a full read of the site ("I really hate finding the duplicative or
+overexplanatory language and the AI tells throughout"). Decision note:
+`decisions/2026-11-23-plain-short-copy.md`. When cutting, prefer deleting to rewriting.
+
+1. **The page never vouches for itself.** No "sourced", "direct", "straight", "fully
+   credited". One short freshness note is fine ("Checked daily").
+2. **Stat boxes: the number and one label.** No third line. A qualifier, year or method
+   goes in the page's Sources list.
+3. **Card descriptions: one sentence, about 12 words,** never repeating the card's title.
+4. **Buttons and link labels: a plain verb and where it goes,** five words or fewer. No
+   questions, no slogans ("Seen the claims? Now see the record" is the example to avoid).
+5. **No question openers** ("Already convinced?", "Have doubts?"). This replaces
+   "Questions posed" in `STRATEGY.md`.
+6. **One name per page,** used in the menu, cards, links and headings.
+7. **Cut repeats inside a section.** The five landing-page sections are still all required.
+8. **Talking points follow the same rules as the rest of the site:** no party labels, no
+   emoji, no slogans.
+9. **Abbreviations are spelled out or dropped** ("Fiscal 2025", never "FY2025" or "LEAs").
+10. **No lines that talk about the page or to the reader about it** ("Here's what that
+    means for you", "Click each category to see...").
+
+**Sourcing and brevity do not conflict.** Every claim still has a verified source, listed
+once in Sources. The copy does not tell the reader that it is sourced.
+
+**A later instruction from Andria replaces an earlier approved line.** Add a dated line to
+the earlier decision note saying so; do not defend old wording because it was approved.
+
 ## Content integrity (non-negotiable — see `DEVELOPMENT-GUIDELINES.md`)
 
 - Every factual claim needs a verified, cited source. Never port placeholder/fabricated

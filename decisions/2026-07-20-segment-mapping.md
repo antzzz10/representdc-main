@@ -36,3 +36,10 @@ the external bill tracker. Mapping proposed and approved as-is.
   segment yet. Revisit when the Take Action Hub gets its full build (Phase 7).
 - Statehood-curious remains an interim page; its full build (news, orgs, case-in-brief,
   eval pipeline) is the next Phase 4 chunk.
+
+## Update, 2026-11-23
+
+The closing line "Seen the claims—now see the record" is retired (Andria: "phrases like
+[this] don't really make any sense"). The Myths page still closes with a link to
+`/the-case`; its label is now "See what Congress has blocked". See
+`2026-11-23-plain-short-copy.md`.

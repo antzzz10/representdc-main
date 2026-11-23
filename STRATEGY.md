@@ -61,7 +61,7 @@ This site uses research-backed persuasion principles to overcome resistance to D
 
 **Implementation**:
 - "Soft" CTAs: "Learn more" not "Support statehood now!"
-- Questions posed, not demands made
+- Questions posed, not demands made *(replaced 2026-11-23: no question openers; see "Plain, short copy" in `DESIGN-GUARDRAILS.md`)*
 - Evidence presented, let users conclude
 
 **Why**: People resist when they feel pushed

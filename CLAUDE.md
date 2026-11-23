@@ -38,6 +38,11 @@ existing; narrating it reads as defensive. Keep that reasoning in code comments 
 `decisions/` note. Same rule bars capacity language, named current officeholders, and
 hardcoded fast-moving numbers in org/partner descriptions.
 
+**Plain, short copy (established 2026-11-23).** Ten rules on length, reassurance words,
+stat boxes, cards, buttons, question openers, page names and abbreviations are in
+`DESIGN-GUARDRAILS.md` under "Plain, short copy". Read them before writing or reviewing
+any reader-facing string. Prefer deleting to rewriting.
+
 **No duplicative hero subheadings (established 2026-09-11, `/reading` hero rewrite).** A
 page-hero's `<h1>` and its `<p>` must each carry distinct information — a subheading that
 restates the headline in different words is padding, not content, and reads as an AI tell.
