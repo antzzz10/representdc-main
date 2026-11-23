@@ -16,7 +16,7 @@ const TOOLS = [
   {
     icon: 'book-open',
     title: 'Talking points',
-    body: 'What Congress has blocked, category by category.',
+    body: 'What Congress has done to D.C., category by category.',
     to: '/the-case',
   },
   {

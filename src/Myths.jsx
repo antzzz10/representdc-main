@@ -47,7 +47,7 @@ function Myths() {
             <div className="interim-row">
               {/* The warming skeptic's next step, per decisions/2026-07-20-segment-mapping.md */}
               <Link className="cta-primary cta-on-light" to="/the-case">
-                <span>See what Congress has blocked</span> <Icon name="arrow-right" />
+                <span>See what Congress has done</span> <Icon name="arrow-right" />
               </Link>
               <Link className="cta-secondary" to="/news">
                 <span>Read the news</span> <Icon name="arrow-right" />
