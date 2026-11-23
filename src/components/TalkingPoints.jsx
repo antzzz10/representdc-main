@@ -158,7 +158,7 @@ function TalkingPoints({ talkingPoints }) {
 
               {talkingPoints.hypocrisy && talkingPoints.hypocrisy.length > 0 && (
                 <div className="hypocrisy-section">
-                  <h4>Hypocrisy points</h4>
+                  <h4>Hypocrisy watch</h4>
                   {talkingPoints.hypocrisy.map((item, index) => (
                     <div key={index} className="hypocrisy-item">
                       <p className="hypocrisy-point">{renderMarkdownLinks(item.point)}</p>

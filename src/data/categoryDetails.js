@@ -16,7 +16,7 @@ export const categoryDetails = [
     trackerQuery: 'category=crime',
     description: `For decades, Congress has overridden D.C.'s efforts at criminal justice reform, from mandatory minimums in the 1980s to blocking the revised criminal code in 2023. Despite D.C. voters electing officials who support police accountability and bail reform, Congress has repeatedly intervened to impose harsher policies rejected by local residents.
 
-One egregious example: In 2023, Congress used a disapproval resolution to block D.C.'s entire revised criminal code from taking effect, the result of more than 15 years of work by prosecutors, defense attorneys and community advocates. It was the first time in more than 30 years Congress blocked a D.C. law from taking effect by a disapproval resolution.`
+In 2023, Congress used a disapproval resolution to block D.C.'s entire revised criminal code from taking effect, the result of more than 15 years of work by prosecutors, defense attorneys and community advocates. It was the first time in more than 30 years Congress blocked a D.C. law from taking effect by a disapproval resolution.`
   },
   {
     id: 'healthcare',
@@ -27,7 +27,7 @@ One egregious example: In 2023, Congress used a disapproval resolution to block 
     trackerQuery: 'category=healthcare',
     description: `Since 1988, Congress has blocked D.C. from using even its own local tax dollars for abortion services through the Dornan Amendment. This pattern extends beyond abortion: Congress has also tried to repeal D.C.'s death with dignity law and has blocked needle exchange programs and medical marijuana regulations, treating D.C. residents as test subjects for social policy experiments.
 
-One egregious example: The Dornan/Harris Amendment (renewed annually since 1988) prohibits D.C. from using any funds, even locally-raised tax revenue, for abortion services for low-income residents (now in Public Law 119-75). No state faces this restriction. In 2011, Congress nearly forced D.C. to shut down its entire government because the city's budget included funding for abortion services.`
+The Dornan/Harris Amendment (renewed annually since 1988) prohibits D.C. from using any funds, even locally-raised tax revenue, for abortion services for low-income residents (now in Public Law 119-75). No state faces this restriction. In 2011, Congress nearly forced D.C. to shut down its entire government because the city's budget included funding for abortion services.`
   },
   {
     id: 'voting',
@@ -38,7 +38,7 @@ One egregious example: The Dornan/Harris Amendment (renewed annually since 1988)
     trackerQuery: 'category=elections',
     description: `Congress has repeatedly targeted D.C.'s voting and election laws, from a proposed ban on ranked-choice voting to a House-passed repeal of a local voter eligibility expansion.
 
-One egregious example: In June 2025, the House passed H.R. 884, which would repeal D.C.'s locally-passed law allowing non-citizen residents, including green card holders, to vote in local elections for mayor, council, and school board. The Senate has not voted on it, so D.C.'s law still stands. The House voted to repeal D.C.'s law on who can vote in D.C. elections, while D.C. voters have no voting representation in Congress itself.`
+In June 2025, the House passed H.R. 884, which would repeal D.C.'s locally-passed law allowing non-citizen residents, including green card holders, to vote in local elections for mayor, council, and school board. The Senate has not voted on it, so D.C.'s law still stands. The House voted to repeal D.C.'s law on who can vote in D.C. elections, while D.C. voters have no voting representation in Congress itself.`
   },
   {
     id: 'traffic',
@@ -49,7 +49,7 @@ One egregious example: In June 2025, the House passed H.R. 884, which would repe
     trackerQuery: 'category=transportation',
     description: `Members of Congress have micromanaged everything from speed cameras to right-turn rules. Despite D.C. experiencing traffic violence at rates far exceeding most jurisdictions, Congress and the executive branch are working to dismantle the city's Vision Zero safety initiatives based on complaints from suburban commuters who don't live in the city.
 
-Most egregious recent actions: In September 2025, Rep. Scott Perry introduced H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate D.C.'s automated traffic enforcement cameras. A House committee approved it in March 2026 and sent it to the full House in November 2026. These cameras generated $267 million in revenue in fiscal 2025 (funds used for local services) and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating D.C.'s traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.
+In September 2025, Rep. Scott Perry introduced H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate D.C.'s automated traffic enforcement cameras. A House committee approved it in March 2026 and sent it to the full House in November 2026. These cameras generated $267 million in revenue in fiscal 2025 (funds used for local services) and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating D.C.'s traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.
 
 Congress and DOT are trying to block proven safety measures to protect drivers passing through from other states, prioritizing convenience over D.C. residents' lives.`
   },
@@ -77,7 +77,7 @@ The Senate passed the District of Columbia Local Funds Act (S. 1077) to restore 
     trackerQuery: 'category=marijuana',
     description: `Despite D.C. voters approving marijuana legalization with 70% support in 2014, Congress has blocked the city from implementing voter-approved marijuana policies for over a decade. The annual "Harris Rider" budget provision prevents D.C. from spending any money, federal or local, to regulate or tax marijuana sales, creating a dangerous unregulated "gifting" market.
 
-One egregious example: The Harris Rider, first attached to D.C.'s budget in 2014 and renewed every year since (now in Public Law 119-75), blocks D.C. from creating the legal marijuana market that voters explicitly approved. This forces D.C. residents into a gray market where marijuana is "gifted" with purchase of other items, completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.`
+The Harris Rider, first attached to D.C.'s budget in 2014 and renewed every year since (now in Public Law 119-75), blocks D.C. from creating the legal marijuana market that voters explicitly approved. This forces D.C. residents into a gray market where marijuana is "gifted" with purchase of other items, completely unregulated, untaxed, and dangerous. Meanwhile, 24 states and neighboring Virginia have legal regulated markets.`
   },
   {
     id: 'civic-spaces',
