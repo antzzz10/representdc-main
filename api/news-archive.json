@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T23:39:25.719Z",
-  "runId": "45084378346-1",
+  "updatedAt": "2026-11-23T18:26:34.966Z",
+  "runId": "45238319225-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -203,8 +203,8 @@
       "lastStatus": "ok"
     },
     "The GW Hatchet": {
-      "failingSince": null,
-      "lastStatus": "ok"
+      "failingSince": "2026-11-23T18:26:12.226Z",
+      "lastStatus": "http-403"
     },
     "NBC Washington": {
       "failingSince": null,
