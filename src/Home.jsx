@@ -136,7 +136,7 @@ function Home() {
               <div>
                 <h3>Congress keeps the final say</h3>
                 <p>
-                  Every law the D.C. Council passes goes to Congress for review before it can take
+                  Almost every law the D.C. Council passes goes to Congress for review before it can take
                   effect, and Congress retains authority over the District's budget. That standing
                   authority is behind the {showBillCount ? `${totalBills} ${headlineNoun(totalBills)}` : 'threats to D.C. home rule'} in
                   this Congress: bills, resolutions and budget riders aimed at overriding
