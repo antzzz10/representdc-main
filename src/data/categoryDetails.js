@@ -51,7 +51,7 @@ In June 2025, the House passed H.R. 884, which would repeal D.C.'s locally-passe
 
 In September 2025, Rep. Scott Perry introduced H.R. 5525 (the "Stop DC CAMERA Act"), which would eliminate D.C.'s automated traffic enforcement cameras. A House committee approved it in March 2026 and sent it to the full House in November 2026. These cameras generated $267 million in revenue in fiscal 2025 (funds used for local services) and enforce safety laws for speed limits, red lights, stop signs, bus lanes, and school zones. Additionally, in January 2026, the Department of Transportation proposed eliminating D.C.'s traffic cameras as part of the upcoming surface transportation bill, calling the program a "revenue trap" rather than a safety measure.
 
-Congress and DOT are trying to block proven safety measures to protect drivers passing through from other states, prioritizing convenience over D.C. residents' lives.`
+Congress and the Department of Transportation are trying to block proven safety measures to protect drivers passing through from other states, prioritizing convenience over D.C. residents' lives.`
   },
   {
     id: 'budget',

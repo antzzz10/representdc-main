@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Icon from './components/Icon'
-import StayInTheLoop from './components/StayInTheLoop'
 import { EMAIL_WAY, NEWS_WAY, TRACKER_WAY } from './data/followWays'
 import './App.css'
 
@@ -84,7 +83,6 @@ function StatehoodCurious() {
           <div className="preview-grid">
             {FIRST_STEPS.map((step) => <Card key={step.title} card={step} as="h3" />)}
           </div>
-          <StayInTheLoop />
         </div>
       </section>
       <Footer />
