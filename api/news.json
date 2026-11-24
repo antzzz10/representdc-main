@@ -25,6 +25,12 @@
       "source": "DC Vote"
     },
     {
+      "title": "After a Dramatic Final Stretch, Robert White Wins D.C. Delegate Race",
+      "link": "https://www.washingtonsun.com/metro/dc/robert-white-dc-congressional-delegate",
+      "pubDate": "2026-11-03T12:00:00.000Z",
+      "source": "The Washington Sun"
+    },
+    {
       "title": "Trump’s Power on Trial as D.C. Faces Political Upheaval",
       "link": "https://www.washingtoninformer.com/trump-midterm-judgment-congress/",
       "pubDate": "2026-11-02T17:15:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.washingtonsun.com/metro/dc-election-polling-places-national-guard",
       "pubDate": "2026-10-27T09:20:00.000Z",
       "source": "The Washington Sun"
-    },
-    {
-      "title": "DC Has More People Than Some States Already Have",
-      "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
-      "pubDate": "2026-10-15T15:37:43.000Z",
-      "source": "DC Vote"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 26
+    "items": 27
   },
   "handAdded": {
-    "id": "add-link-45478570598-1",
-    "at": "2026-11-24T20:14:00.337Z",
-    "link": "https://gwhatchet.com/2026/11/02/staff-editorial-dcs-new-mayor-must-strike-a-balance-between-defending-home-rule-and-tackling-local-issues/"
+    "id": "add-link-45478777544-1",
+    "at": "2026-11-24T20:15:08.729Z",
+    "link": "https://www.washingtonsun.com/metro/dc/robert-white-dc-congressional-delegate"
   }
 }
