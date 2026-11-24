@@ -1,0 +1,17 @@
+**DO NOT SHIP.** The sitemap parser can associate a headline with the wrong link, and broken sitemap or paged-feed responses can be reported as healthy.
+
+1. **MATERIAL — Sitemap parsing can publish a headline with the wrong link.** [feeds.mjs:222](scripts/news/feeds.mjs:222), [feeds.mjs:155](scripts/news/feeds.mjs:155)  
+   `getTag` searches raw XML without excluding comments or respecting element boundaries. For example, a valid entry containing `<!-- <loc>https://www.washingtonsun.com/wrong</loc> --><loc>https://www.washingtonsun.com/right</loc>` returns the commented-out link. A relevant title and valid date then pass the downstream article checks, and repeated confirmation can preserve the wrong association in the archive. The same prefix regex also allows `<news:title_extra>…</news:title_extra><news:title>Real title</news:title>` to be captured as one title. Tests cover ordinary tags but not comments, similarly prefixed elements, or malformed nesting.
+
+2. **MATERIAL — A broken sitemap can count as a healthy, empty source.** [feeds.mjs:203](scripts/news/feeds.mjs:203), [feeds.mjs:209](scripts/news/feeds.mjs:209), [feeds.mjs:339](scripts/news/feeds.mjs:339)  
+   Completeness requires only a `</urlset>` substring; it does not establish that the XML is well formed or that entries parsed successfully. For example, a response with `<urlset><url><loc>https://other.example/x</loc><news:news><news:title>Story</news:title><news:publication_date>2026-11-24T12:00:00Z</news:publication_date></news:news></url></urlset>` loses its only entry to the host check, returns `no-items`, and is converted to `ok`. Likewise, a truncated or malformed entry followed by `</urlset>` can appear empty and healthy. G5 counts it as a successful source and `updateFeedHealth` clears its failure clock. Tests distinguish a missing closing root from an empty sitemap, but do not cover rejected or malformed entries inside an apparently complete root.
+
+3. **MATERIAL — Persistent failures on later Informer pages never trigger the source-health alert.** [feeds.mjs:290](scripts/news/feeds.mjs:290), [feeds.mjs:339](scripts/news/feeds.mjs:339), [archive.mjs:166](scripts/news/archive.mjs:166)  
+   If page 1 succeeds and page 2 returns HTTP 500 every run, the result stays `status: 'ok', partial: true`. G5 reports the source as successful and `updateFeedHealth` resets `failingSince` to `null`, so the two-day alert never fires even though the older coverage that motivated paging is continually missing. A later page whose items all lack usable titles or links also returns `no-items` and ends paging without even setting `partial`; a page with only bad dates is masked when page 1 has a valid date. The tests check the run record for HTTP and obvious malformed responses, but not persistent health tracking or these page-level parsing failures.
+
+4. **NOTE — One `fetch` call does not always mean one request to the Sun.** [feeds.mjs:241](scripts/news/feeds.mjs:241)  
+   Fetch follows redirects by default. If the sitemap responds with a same-host 301 or 302, one run immediately makes another request without the stated ten-second delay. The test mock records only the initial `fetch` call and cannot exercise redirect behavior.
+
+ISO timestamps pass the existing date parsing, archive normalization, and source-window logic. The shared fetcher’s ordinary one-page RSS/Atom and newsletter path showed no separate regression in this diff. I ran only read-only, in-memory probes; I did not run the test suite.
+
+**DO NOT SHIP.**
