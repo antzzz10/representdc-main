@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-23T18:26:34.966Z",
-  "runId": "45238319225-1",
+  "updatedAt": "2026-11-24T17:55:31.408Z",
+  "runId": "45453783986-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -164,7 +164,16 @@
       "confirmedAt": "2026-10-09T22:44:02.211Z"
     }
   ],
-  "pending": [],
+  "pending": [
+    {
+      "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
+      "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
+      "source": "ACLU DC",
+      "pubDate": "2026-11-24T16:00:41.000Z",
+      "yes": 1,
+      "firstSeen": "2026-11-24T17:55:11.415Z"
+    }
+  ],
   "feedHealth": {
     "The 51st": {
       "failingSince": null,
@@ -203,8 +212,8 @@
       "lastStatus": "ok"
     },
     "The GW Hatchet": {
-      "failingSince": "2026-11-23T18:26:12.226Z",
-      "lastStatus": "http-403"
+      "failingSince": null,
+      "lastStatus": "ok"
     },
     "NBC Washington": {
       "failingSince": null,

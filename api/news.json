@@ -1,7 +1,7 @@
 {
-  "runId": "45238319225-1",
-  "lastUpdated": "2026-11-23T18:26:34.966Z",
-  "summary": "Recent election results have revived momentum for D.C. statehood advocacy, while the District simultaneously faces multiple challenges to its local authority, including disputes with the Trump administration over a proposed monument and concerns about interference in municipal processes. Advocates argue that D.C.'s population exceeds that of some states, and they point to restrictions on the District's autonomy as evidence for why statehood is necessary. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "45453783986-1",
+  "lastUpdated": "2026-11-24T17:55:31.408Z",
+  "summary": "Recent election results have energized D.C. statehood advocates, who argue the political landscape has shifted in their favor, while the District simultaneously faces legal challenges over federal interference in local affairs, including a lawsuit with Virginia over a proposed monument and disputes over the appointment process for a vacant council seat. Statehood advocates say that D.C.'s population already exceeds that of some states, and they point to what they characterize as repeated federal overreach into District governance as evidence of why local representation is needed. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
     "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
@@ -12,6 +12,12 @@
   },
   "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
+      "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
+      "pubDate": "2026-11-24T16:00:41.000Z",
+      "source": "ACLU DC"
+    },
     {
       "title": "Election Shakeup Revives D.C.’s Fight for Statehood",
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
