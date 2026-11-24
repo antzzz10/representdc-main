@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T20:03:55.321Z",
-  "runId": "45476703565-1",
+  "updatedAt": "2026-11-24T20:20:23.682Z",
+  "runId": "45479499248-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -244,7 +244,16 @@
       "addedBy": "hand"
     }
   ],
-  "pending": [],
+  "pending": [
+    {
+      "link": "https://thehoya.com/news/gu-institute-signs-letter-demanding-congressional-oversight-for-redirected-funds/",
+      "title": "GU Institute Signs Letter Demanding Congressional Oversight for Redirected Funds",
+      "source": "The Hoya",
+      "pubDate": "2026-11-22T14:19:10.000Z",
+      "yes": 1,
+      "firstSeen": "2026-11-24T20:19:19.142Z"
+    }
+  ],
   "feedHealth": {
     "The 51st": {
       "failingSince": null,
