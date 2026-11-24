@@ -151,13 +151,14 @@
   min-height: calc(var(--s-6) + var(--s-3)); /* 44px touch target */
 }
 
-/* At 1159 px and below the full row of links no longer fits beside the brand (it
+/* At 1199 px and below the full row of links no longer fits beside the brand (it
    overflowed between 769 and ~950 px once "Statehood bill" was added, 2026-11-10, and
    up to ~1070 px once "Follow" was added, 2026-11-13, and to ~1135 px with
-   "Congress & D.C." and the tracker's longer button, 2026-11-16). The
+   "Congress & D.C." and the tracker's longer button, 2026-11-16, and to ~1185 px once
+   "Partners" was added and "Home" left the wide bar, 2026-11-24). The
    bar keeps the brand, the CTA and a menu button; the menu lists every destination,
    including the "Bill tracker" text link the tablet bar used to drop. */
-@media (max-width: 1159.98px) {
+@media (max-width: 1199.98px) {
   .nav-links {
     gap: var(--s-3);
   }
@@ -193,7 +194,7 @@
   }
 }
 
-@media (min-width: 1160px) {
+@media (min-width: 1200px) {
   .nav-menu {
     display: none;
   }

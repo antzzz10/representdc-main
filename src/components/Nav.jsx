@@ -8,12 +8,17 @@ const TRACKER_URL = 'https://billtracker.representdc.org'
 
 // One list feeds both the desktop bar and the narrow-screen menu, so the two can't drift.
 const NAV_ITEMS = [
-  { label: 'Home', to: '/' },
+  // `menuOnly`: in the narrow-screen menu but not the wide bar, where the logo is the
+  // home link and ten items no longer fit beside it (2026-11-24).
+  { label: 'Home', to: '/', menuOnly: true },
   { label: 'How Congress controls D.C.', to: '/how-congress-controls-dc' },
   { label: 'The case', to: '/the-case' },
   { label: 'Myths', to: '/myths' },
   { label: 'News & analysis', to: '/news' },
   { label: 'Statehood bill', to: '/statehood-bill' },
+  // Added 2026-11-24: the partner map was in neither the bar nor the menu, so on a wide
+  // screen, which has no menu button, it could only be found through other pages.
+  { label: 'Partners', to: '/statehood-partner-map' },
   { label: 'Bill tracker', href: TRACKER_URL },
   {
     label: 'Candidates',
@@ -63,7 +68,7 @@ function Nav() {
       if (!navRef.current?.contains(event.target)) setOpenedOn(null)
     }
     // The panel only exists below the breakpoint; widening the window past it closes it.
-    const wide = window.matchMedia('(min-width: 1160px)')
+    const wide = window.matchMedia('(min-width: 1200px)')
     function onWide(event) {
       if (!event.matches) return
       // The menu button vanishes at this width too, so park focus on the brand link.
@@ -100,7 +105,7 @@ function Nav() {
           <Wordmark size={15} />
         </Link>
         <div className="nav-links">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.filter((item) => !item.menuOnly).map((item) => (
             <NavItem key={item.label} item={item} className="nav-link" />
           ))}
           <a className="nav-cta" href={TRACKER_URL}>See the bills</a>

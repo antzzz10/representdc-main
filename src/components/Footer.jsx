@@ -17,6 +17,9 @@ function Footer() {
                 <a href="https://candidates.representdc.org">
                   Candidate tracker (for D.C. voters) <Icon name="arrow-right" size={15} />
                 </a>
+                <Link to="/statehood-partner-map">
+                  Statehood partner map <Icon name="arrow-right" size={15} />
+                </Link>
                 <Link to="/follow">
                   Follow <Icon name="arrow-right" size={15} />
                 </Link>
