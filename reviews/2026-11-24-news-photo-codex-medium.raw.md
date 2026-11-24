@@ -1,0 +1,11 @@
+**DO NOT SHIP based on the supplied review package:** the image asset is missing, so the focused test fails and the image import cannot be resolved here.
+
+- **MATERIAL — Image asset unavailable** ([newsPhoto.js](src/data/newsPhoto.js:13)). The imported JPEG is not present in the supplied files. The test fails with `ENOENT`; a build from this package would also fail to resolve the import. If the asset exists in the actual repository, confirm it is included in the change before shipping. Its contents, dimensions and crop could not be checked here.
+
+- **NOTE — The test can give false confidence** ([news-photo.test.mjs](scripts/eval/news-photo.test.mjs:40)). The unconditional-render check searches source text between the heading and figure; a conditional wrapping both would evade it. The credit checks can also match text in comments or unreachable code. These checks do not establish what React actually renders or whether the CSS reserves space.
+
+- **NOTE — Verify the work’s title in the source attribution** ([newsPhoto.js](src/data/newsPhoto.js:22)). The displayed credit names the author, links to the source and licence, and says “cropped.” CC BY-SA 2.0 also calls for the work’s title if supplied. The Commons page was unavailable under the no-network constraint, so I could not determine whether a supplied title needs to be included. Placing this photograph alongside page content does not by itself require licensing the whole page under share-alike; the obligation applies to adaptations of the photograph.
+
+The caption’s timing is internally consistent: March 30 to April 22 is 23 days, reasonably described as three weeks. The figure and figcaption markup, descriptive alt text, named links, and external-link `rel` attributes are appropriate. The proposed fixed-aspect-ratio frame should reserve image space before loading, including at phone width, so the image itself should not disturb the section jump. I could not visually verify the crop or mobile layout without the asset and complete site.
+
+**DO NOT SHIP** until the image is included or confirmed in the actual change and the attribution title question is checked.
