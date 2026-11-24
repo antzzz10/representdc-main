@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T17:55:31.408Z",
-  "runId": "45453783986-1",
+  "updatedAt": "2026-11-24T20:03:55.321Z",
+  "runId": "45476703565-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -162,18 +162,17 @@
       "pubDate": "2026-08-24T15:05:27.000Z",
       "firstSeen": "2026-10-09T13:26:17.777Z",
       "confirmedAt": "2026-10-09T22:44:02.211Z"
-    }
-  ],
-  "pending": [
+    },
     {
       "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
       "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
       "source": "ACLU DC",
       "pubDate": "2026-11-24T16:00:41.000Z",
-      "yes": 1,
-      "firstSeen": "2026-11-24T17:55:11.415Z"
+      "firstSeen": "2026-11-24T17:55:11.415Z",
+      "confirmedAt": "2026-11-24T20:03:33.099Z"
     }
   ],
+  "pending": [],
   "feedHealth": {
     "The 51st": {
       "failingSince": null,
@@ -216,6 +215,22 @@
       "lastStatus": "ok"
     },
     "NBC Washington": {
+      "failingSince": null,
+      "lastStatus": "ok"
+    },
+    "HillRag": {
+      "failingSince": null,
+      "lastStatus": "ok"
+    },
+    "Howard University News Service": {
+      "failingSince": null,
+      "lastStatus": "ok"
+    },
+    "The Wash": {
+      "failingSince": null,
+      "lastStatus": "ok"
+    },
+    "The Hoya": {
       "failingSince": null,
       "lastStatus": "ok"
     },
