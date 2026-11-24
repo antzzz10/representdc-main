@@ -1,0 +1,11 @@
+**DO NOT SHIP.** The new caveat can make claims the feed does not establish, and missing headline dates can cause the summary to show when the stated rules say it should be hidden.
+
+- **MATERIAL — Missing dates count as January 1, 1970.** [newsSummary.js](src/utils/newsSummary.js:18) passes `null` to `new Date`, which produces a valid epoch timestamp. `validNewsItems` permits `pubDate: null`, so a feed whose only headline has a null date can show the summary and say there have been no new headlines since December 31, 1969 in Washington. The tests cover a missing property and an invalid string, but not `null`.
+
+- **MATERIAL — An undated headline makes the quiet claim unsupported.** [NewsAndAnalysis.jsx](src/NewsAndAnalysis.jsx:177) states that there have been no new headlines since the newest *dated* item, even if another displayed headline has no valid date and could be newer. The same absolute claim can become false after the last scan: a scan 71 hours old still permits the caveat, although a new headline may have appeared since that scan. The wording needs to reflect what the feed and its last check can establish.
+
+- **MATERIAL — A far-future scan timestamp permits the new claim indefinitely.** [newsSummary.js](src/utils/newsSummary.js:33) treats any future `lastUpdated` as fresh, while [NewsAndAnalysis.jsx](src/NewsAndAnalysis.jsx:36) rejects timestamps more than 15 minutes ahead for “Last checked.” With old headlines and a far-future timestamp, the newly permitted summary and quiet claim can therefore remain visible without a trustworthy check date. The future-timestamp freshness behavior existed before, but removing the headline-age cutoff exposes it for old coverage.
+
+- **NOTE — The tests do not exercise the rendered placement and fallback.** [news-summary.test.mjs](scripts/eval/news-summary.test.mjs:59) checks the returned quiet date, but not that the caveat appears inside a visible summary or that “Newest coverage” appears on the checked line when the summary is hidden. A focused rendering test would catch wiring or placement regressions.
+
+All eight supplied utility tests pass. No files were changed.
