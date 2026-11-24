@@ -39,7 +39,7 @@ function numericTokens(text) {
 }
 
 /**
- * A link a reader can follow: parses as a URL, https, with a hostname. A prefix test
+ * A link a reader can follow: parses as a URL, https, with a hostname and no userinfo. A prefix test
  * (/^https:\/\//) accepted "https://" on its own, which is a link to nowhere. Shared by
  * G4, the archive and the newsletters list so the three cannot drift apart.
  */
@@ -51,6 +51,10 @@ export function isHttpsUrl(link) {
   } catch {
     return false;
   }
+  // No username or password part. "https://apnews.com@evil.example/a" parses with the
+  // host evil.example and reads, at a glance, as an AP link. No outlet's article link
+  // carries credentials, so one that does is refused everywhere this check is used.
+  if (url.username !== '' || url.password !== '') return false;
   return url.protocol === 'https:' && url.hostname.length > 0;
 }
 

@@ -1,0 +1,75 @@
+name: Add a news link
+
+# Adds one article to www.representdc.org/news by hand.
+#
+# For stories from outlets whose terms bar scripts (AP, the Washington Post, WTOP,
+# Axios): the scan may not read them, so the owner reads them herself and adds the link
+# here, from the GitHub website or phone app. A person picks the link; nothing fetches
+# the outlet, and no model is involved, so this workflow has no API key.
+#
+# The article goes into the permanent archive as a confirmed item, so every later scan
+# keeps it. If the list of articles on the page changes, the AI summary comes off until
+# the next scan writes a new one (scripts/news/hand-link.mjs).
+
+on:
+  workflow_dispatch:
+    inputs:
+      link:
+        description: 'Link to the article (starts with https://)'
+        type: string
+        required: true
+      title:
+        description: 'Headline, as the outlet wrote it'
+        type: string
+        required: true
+      source:
+        description: 'Outlet name, for example AP or Washington Post'
+        type: string
+        required: true
+      date:
+        description: 'Date published, YYYY-MM-DD. Leave blank for today'
+        type: string
+        required: false
+      dry_run:
+        description: 'Preview only: check the link and say what would change, without changing anything'
+        type: boolean
+        default: false
+
+# The scan's own group (fetch-news.yml), so this never runs while a scan is running: a
+# scan that had already written its summary would otherwise lose it to this edit. Two
+# things to know. GitHub keeps one waiting run per group, so if this is waiting behind a
+# scan and another run joins the queue, this one is cancelled and shows as cancelled:
+# run it again. And Withhold deliberately has its own group (see withhold.yml); it is
+# safe beside this for the same reason it is safe beside a scan: every writer re-reads
+# the branch and re-applies its change before pushing (scripts/news/publish.mjs).
+concurrency:
+  group: news-publish
+  cancel-in-progress: false
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Only what the push needs. The scan also has issues: write for its incident issue;
+    # this workflow opens none, and reports in its own run summary.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+
+      - name: Check the link, add it, and confirm it is live
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Through env, never interpolated into the command: these are typed by hand.
+          NEWS_LINK: ${{ github.event.inputs.link }}
+          NEWS_TITLE: ${{ github.event.inputs.title }}
+          NEWS_SOURCE: ${{ github.event.inputs.source }}
+          NEWS_DATE: ${{ github.event.inputs.date }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+        run: node scripts/news/add-link.mjs

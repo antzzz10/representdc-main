@@ -265,23 +265,57 @@ export async function publishFeed(apply, { message, withArchive = false, baseArc
  * Polls the public URL until it serves this run's id. Returns the outcome rather than
  * throwing: a run that pushed but is not live yet is a real state the record must carry.
  */
-export async function verifyLive(runId, { timeoutMs = 10 * 60 * 1000, intervalMs = 20000, url = LIVE_URL, fetchImpl = fetch } = {}) {
+// `matches` lets a writer that does not own `runId` look for its own mark instead (the
+// add-a-link writer, add-link.mjs). The default is the scan's check, unchanged.
+//
+// Every request is bounded: by `requestTimeoutMs`, and by whatever is left of the
+// deadline. Without that, one connection that opened and then stalled, or a body that
+// never finished arriving, could hold this function open past its own deadline and on to
+// the job's timeout, which kills the run before it can report anything. A request that
+// runs out of time is "not yet", exactly like a network error: poll again.
+const neverLate = (promise, ms, what) =>
+  new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`${what} timed out after ${ms}ms`)), ms);
+    promise.then(
+      (value) => { clearTimeout(timer); resolve(value); },
+      (err) => { clearTimeout(timer); reject(err); },
+    );
+  });
+
+export async function verifyLive(
+  runId,
+  {
+    timeoutMs = 10 * 60 * 1000,
+    intervalMs = 20000,
+    requestTimeoutMs = 15000,
+    url = LIVE_URL,
+    fetchImpl = fetch,
+    matches = (body) => body.runId === runId,
+  } = {},
+) {
   const deadline = Date.now() + timeoutMs;
   let lastSeen = null;
   while (Date.now() < deadline) {
+    const budget = Math.max(1, Math.min(requestTimeoutMs, deadline - Date.now()));
+    const controller = new AbortController();
     try {
-      const res = await fetchImpl(`${url}?cb=${Date.now()}`, { cache: 'no-store' });
+      // The signal stops a well-behaved fetch; the race covers one that ignores it, and
+      // the body read, which has no signal of its own once the headers are in.
+      const res = await neverLate(fetchImpl(`${url}?cb=${Date.now()}`, { cache: 'no-store', signal: controller.signal }), budget, 'request');
       if (res.ok) {
-        const body = await res.json();
+        const body = await neverLate(res.json(), Math.max(1, Math.min(budget, deadline - Date.now())), 'response body');
         lastSeen = body.runId ?? null;
-        if (lastSeen === runId) {
+        if (matches(body)) {
           return { live: true, waitedMs: timeoutMs - (deadline - Date.now()) };
         }
       }
     } catch {
-      // Network blips are expected while Pages rebuilds; keep polling until the deadline.
+      // Network blips and timeouts are expected while Pages rebuilds; keep polling until
+      // the deadline.
+      controller.abort();
     }
-    await new Promise((r) => setTimeout(r, intervalMs));
+    const pause = Math.min(intervalMs, deadline - Date.now());
+    if (pause > 0) await new Promise((r) => setTimeout(r, pause));
   }
   return { live: false, lastSeen };
 }

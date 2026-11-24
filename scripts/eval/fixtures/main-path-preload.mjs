@@ -55,6 +55,10 @@ globalThis.fetch = async (input, init = {}) => {
   }
 
   if (url.startsWith('https://www.representdc.org/api/news.json')) {
+    // MAIN_PATH_LIVE=stale: the public page has not caught up (an older file is served).
+    // MAIN_PATH_LIVE=stall: the connection opens and nothing ever arrives.
+    if (process.env.MAIN_PATH_LIVE === 'stale') return json({ runId: 'an-older-run', summary: null, articles: [] });
+    if (process.env.MAIN_PATH_LIVE === 'stall') return new Promise(() => {});
     const live = execFileSync('git', ['show', 'gh-pages:api/news.json'], { cwd: process.env.NEWS_REMOTE, encoding: 'utf8' });
     return new Response(live, { status: 200, headers: { 'content-type': 'application/json' } });
   }

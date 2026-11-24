@@ -108,6 +108,14 @@ read, and activists checking what's moving this week.
     that gets confirmed has had two yeses itself. The summary prompt now forbids
     em-dashes and en-dashes (prompt version 2026-11-21.1), and G3 fails a body that uses
     either as punctuation.
+    **Add a news link by hand (2026-11-23, built, not yet committed or live):** the
+    owner can add one article herself, for outlets the scan may not read. It becomes a
+    confirmed archive item marked `addedBy: "hand"`, so scans keep it, never send it to
+    the relevance filter and never apply the topic rule to it. The writer leaves `runId`
+    and `lastUpdated` alone and marks its edit in `handAdded`. If the displayed articles
+    change, the summary is removed (`summaryDecision: "link-added-by-hand"`) until the
+    next scan. Code: `scripts/news/hand-link.mjs`, `scripts/news/add-link.mjs`,
+    `.github/workflows/add-news-link.yml`. How to use it is at the end of this file.
     The bullets below describe the original single-file design.
   - Manual deploys write **everything except** `api/news.json`. `dist` never contains
     it (asserted before publishing), and the deploy's remove list excludes it.
@@ -551,3 +559,38 @@ sources. DC-statehood-specific news is evidently sparser than general DC/Congres
    quiet in a way individual run logs don't surface on their own. Not built — the run
    record (90-day artifact) has the raw data (`summaryDecision`, `articles.length`) per
    run; this would need aggregating across runs, which nothing does today.
+
+## How to add a news link by hand (2026-11-23)
+
+Use this for a story from an outlet the scan cannot read, such as AP, the Washington
+Post, WTOP or Axios. It works from the GitHub website and from the GitHub phone app.
+
+1. Open the `representdc-main` repository, go to **Actions**, and choose **Add a news
+   link**. Tap **Run workflow**.
+2. Fill in the boxes: the link, the headline as the outlet wrote it, and the outlet's
+   name. Leave the date blank if the story is from today, or type it as `2026-11-23`.
+   Tick "Preview only" first if you want to see what would happen without changing
+   anything.
+3. Tap **Run workflow**. In a minute or two the run turns green and its summary says
+   "Done. The link is live". If it turns red, open the run and read the summary. Most
+   often it lists what to fix and nothing was changed. If it says "The link WAS saved",
+   the link is in and the public page was just slow: do not add it again.
+
+The summary always starts with "Link goes to:" and the website's real name. Check that
+it is the outlet you meant. A link can be written to look like one site and lead to
+another, and that line shows where it really goes. Links with an @ sign before the site
+name, or that point at a bare number instead of a named site, are refused.
+
+The date: leave it blank for today in Washington. A typed date can be today or earlier,
+never tomorrow.
+
+What to expect:
+
+- The story joins the list on the news page, in date order, and stays for 30 days. It is
+  kept in the news archive for good.
+- The AI summary disappears until the next scan (06:17 and 18:17 UTC), because it was
+  written about the old list.
+- Adding the same link twice does nothing. A story older than 30 days is saved to the
+  archive but does not show on the page.
+- If a run shows as cancelled, a scan was in the queue at the same moment. Run it again.
+
