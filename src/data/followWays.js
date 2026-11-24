@@ -1,7 +1,8 @@
 // The ways to follow RepresentDC. The email sentence is the owner's own wording. One source,
 // so the Follow page, the closing block (StayInTheLoop.jsx) and the cards that point at
 // these from other pages cannot drift apart. Lists only ways that exist today, per the
-// site rule. The email card (added 2026-11-17) points at the newsletter's sign-up page on
+// site rule. The Follow page itself shows the email, Bluesky and partner groups only: it
+// does not point back at this site's own pages (Andria, 2026-11-24). The email card (added 2026-11-17) points at the newsletter's sign-up page on
 // beehiiv. It names no schedule until issues are going out: say "weekly" here once that
 // is true.
 export const TRACKER_URL = 'https://billtracker.representdc.org'
@@ -30,15 +31,13 @@ export const NEWS_WAY = {
   cta: 'Read the news',
 }
 
-export const WAYS = [
-  EMAIL_WAY,
-  TRACKER_WAY,
-  NEWS_WAY,
-  {
-    icon: 'users',
-    title: 'The Statehood Partner Map',
-    body: "D.C.'s statehood groups run their own newsletters and events.",
-    to: '/statehood-partner-map',
-    cta: 'See the partner map',
-  },
+// Statehood groups a reader can follow directly, on the Follow page. Each `id` is an entry
+// in statehoodPartners.js, which supplies the name. Each link is the group's own sign-up
+// or newsletter page, found on the group's own site (checked 2026-11-24). Check again
+// before changing one.
+export const PARTNER_FOLLOWS = [
+  { id: 'dc-vote', cta: 'Join their list', href: 'https://secure.everyaction.com/3ZM6w-dtx0qU65CDjuFhnA2' },
+  { id: 'lwv-dc', cta: 'Read their newsletter', href: 'https://lwvdc.substack.com/' },
+  { id: 'neighbors-united', cta: 'Visit their site', href: 'https://www.the51st.org/' },
+  { id: 'free-dc', cta: 'Sign up', href: 'https://freedcproject.org/sign-up' },
 ]

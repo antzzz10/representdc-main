@@ -1,0 +1,179 @@
+/* Follow page: the email, then Bluesky, then statehood groups to follow directly. */
+
+.follow-email {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-5);
+}
+
+.follow-email-text h2,
+.follow-partners h2 {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 var(--s-3);
+}
+
+.follow-email-text p,
+.follow-partners > p {
+  font-size: var(--fs-lg);
+  color: var(--slate-700);
+  line-height: 1.6;
+  margin: 0 0 var(--s-5);
+}
+
+/* White on the site's red: 5.9:1, passes WCAG AA. */
+.follow-email-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: var(--dc-red);
+  color: var(--white);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  padding: 13px var(--s-6);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.follow-email-button:hover {
+  transform: translateY(-2px);
+}
+
+.follow-email-picture {
+  max-width: 420px;
+  width: 100%;
+  justify-self: center;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md, 10px);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--white);
+}
+
+.follow-email-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
+  padding: var(--s-5);
+}
+
+.follow-email-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.follow-email-stars {
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: var(--navy-600);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.follow-email-stars b {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.follow-email-body {
+  display: grid;
+  gap: var(--s-5);
+  padding: var(--s-5);
+}
+
+.follow-email-block {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.follow-email-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.follow-email-line {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--navy-tint);
+}
+
+.follow-email-line--short {
+  width: 62%;
+}
+
+.follow-partners {
+  margin-top: var(--s-7);
+}
+
+.follow-partners ul {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-3);
+}
+
+.follow-partners li a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-4) var(--s-5);
+  min-height: 44px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease);
+}
+
+.follow-partners li a:hover {
+  border-color: var(--navy);
+}
+
+.follow-partners li strong {
+  font-size: var(--fs-lg);
+}
+
+.follow-partners li span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.follow-partners-all {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+@media (min-width: 768px) {
+  .follow-email {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--s-7);
+  }
+
+  .follow-partners ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
