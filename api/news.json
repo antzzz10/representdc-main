@@ -13,6 +13,12 @@
       "source": "ACLU DC"
     },
     {
+      "title": "Shadow Senator Ankit Jain Makes a Bid for D.C. Council",
+      "link": "https://www.washingtonsun.com/metro/dc/ankit-jain-dc-council-candidacy",
+      "pubDate": "2026-11-20T12:00:00.000Z",
+      "source": "The Washington Sun"
+    },
+    {
       "title": "Election Shakeup Revives D.C.’s Fight for Statehood",
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
       "pubDate": "2026-11-04T21:40:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
       "pubDate": "2026-10-27T12:18:55.000Z",
       "source": "ACLU DC"
-    },
-    {
-      "title": "Robert White Is Rushing to Preserve His Eligibility in the D.C. Delegate Race",
-      "link": "https://www.washingtonsun.com/metro/robert-white-eligibility-dc-delegate-election",
-      "pubDate": "2026-10-27T12:00:00.000Z",
-      "source": "The Washington Sun"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 28
+    "items": 29
   },
   "handAdded": {
-    "id": "add-link-45478990598-1",
-    "at": "2026-11-24T20:16:16.276Z",
-    "link": "https://rollcall.com/2026/11/04/robert-white-new-delegate-statehood/"
+    "id": "add-link-45479176996-1",
+    "at": "2026-11-24T20:17:22.879Z",
+    "link": "https://www.washingtonsun.com/metro/dc/ankit-jain-dc-council-candidacy"
   }
 }
