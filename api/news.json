@@ -49,6 +49,12 @@
       "source": "The GW Hatchet"
     },
     {
+      "title": "Staff editorial: DC’s new mayor must strike a balance between defending home rule and tackling local issues",
+      "link": "https://gwhatchet.com/2026/11/02/staff-editorial-dcs-new-mayor-must-strike-a-balance-between-defending-home-rule-and-tackling-local-issues/",
+      "pubDate": "2026-11-02T12:00:00.000Z",
+      "source": "The GW Hatchet"
+    },
+    {
       "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
       "pubDate": "2026-11-02T06:29:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.dcvote.org/dc-has-more-people-than-some-states-already-have/",
       "pubDate": "2026-10-15T15:37:43.000Z",
       "source": "DC Vote"
-    },
-    {
-      "title": "Nine Attacks on DC’s Local Authority, and How We Responded",
-      "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
-      "pubDate": "2026-10-07T15:05:49.000Z",
-      "source": "DC Vote"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 25
+    "items": 26
   },
   "handAdded": {
-    "id": "add-link-45478363119-1",
-    "at": "2026-11-24T20:12:51.131Z",
-    "link": "https://gwhatchet.com/2026/11/02/candidates-hope-to-build-momentum-for-dc-statehood-as-trump-takeover-exposes-citys-vulnerability/"
+    "id": "add-link-45478570598-1",
+    "at": "2026-11-24T20:14:00.337Z",
+    "link": "https://gwhatchet.com/2026/11/02/staff-editorial-dcs-new-mayor-must-strike-a-balance-between-defending-home-rule-and-tackling-local-issues/"
   }
 }
