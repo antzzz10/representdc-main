@@ -37,6 +37,12 @@
       "source": "The GW Hatchet"
     },
     {
+      "title": "Alum, former DC shadow representative seeks to reclaim post with renewed push for statehood",
+      "link": "https://gwhatchet.com/2026/11/02/alum-former-dc-shadow-representative-seeks-to-reclaim-post-with-renewed-push-for-statehood/",
+      "pubDate": "2026-11-02T12:00:00.000Z",
+      "source": "The GW Hatchet"
+    },
+    {
       "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
       "pubDate": "2026-11-02T06:29:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
       "pubDate": "2026-10-06T19:40:49.000Z",
       "source": "DC Vote"
-    },
-    {
-      "title": "Why we shouldn’t have National Guard Troops in D.C.",
-      "link": "https://www.acludc.org/news/why-we-shouldnt-have-national-guard-troops-in-d-c/",
-      "pubDate": "2026-10-01T13:00:13.000Z",
-      "source": "ACLU DC"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 23
+    "items": 24
   },
   "handAdded": {
-    "id": "add-link-45477890458-1",
-    "at": "2026-11-24T20:10:24.016Z",
-    "link": "https://gwhatchet.com/2026/11/02/dc-prepares-for-fresh-leadership-as-candidates-set-sights-on-open-mayoral-delegate-seats/"
+    "id": "add-link-45478123964-1",
+    "at": "2026-11-24T20:11:42.746Z",
+    "link": "https://gwhatchet.com/2026/11/02/alum-former-dc-shadow-representative-seeks-to-reclaim-post-with-renewed-push-for-statehood/"
   }
 }
