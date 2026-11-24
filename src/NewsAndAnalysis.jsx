@@ -6,6 +6,7 @@ import Icon from './components/Icon'
 import NewsList, { NewsletterSection } from './components/NewsList'
 import StayInTheLoop from './components/StayInTheLoop'
 import { validNewsItems } from './utils/newsItems'
+import { summaryState, CLOCK_SKEW_MS } from './utils/newsSummary'
 import { READING, readingRoute } from './data/reading'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 import './App.css'
@@ -15,27 +16,9 @@ import './Reading.css'
 // It used to fetch the bill tracker's copy cross-origin.
 const NEWS_URL = '/api/news.json'
 
-// A summary older than this stops being shown. Headlines keep their own dates, so they
-// age honestly on their own; a stale digest does not.
-const SUMMARY_MAX_AGE_MS = 72 * 60 * 60 * 1000
-
-const DAY_MS = 24 * 60 * 60 * 1000
-
-// The 72-hour cutoff is keyed on when the summary was written, and the pipeline rewrites
-// it every run — so on a quiet stretch a "fresh" summary described five-week-old news as
-// recent (2026-10, Codex review). This second cutoff keys on the coverage itself.
-const SUMMARY_MAX_COVERAGE_AGE_MS = 14 * DAY_MS
-
-// Past this, the check line also names the newest story, so an old dateline under a
-// recent check reads as a quiet stretch rather than a stalled page.
-const NEWEST_COVERAGE_NOTE_AFTER_MS = 7 * DAY_MS
-
 // How far the page may sit from where a jump to a section left it and still count as
 // untouched by the reader (sub-pixel rounding, a late font).
 const HASH_SCROLL_TOLERANCE_PX = 8
-
-// A feed stamp further in the future than clock skew explains is not trustworthy.
-const CLOCK_SKEW_MS = 15 * 60 * 1000
 
 function formatArticleDate(iso) {
   return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', {
@@ -45,34 +28,11 @@ function formatArticleDate(iso) {
   })
 }
 
-function isFresh(lastUpdated) {
-  const ts = new Date(lastUpdated).getTime()
-  return Number.isFinite(ts) && Date.now() - ts < SUMMARY_MAX_AGE_MS
-}
-
 // lastUpdated advances only when a run gets as far as publishing (withholding preserves
 // it), so during an outage it ages honestly rather than claiming a check that failed.
 function validCheckedInstant(lastUpdated) {
   const ts = new Date(lastUpdated).getTime()
   return Number.isFinite(ts) && ts <= Date.now() + CLOCK_SKEW_MS ? lastUpdated : null
-}
-
-// Near-future dates (a source's clock skew) clamp to now rather than read as "newer than now".
-function newestCoverage(articles = []) {
-  const times = articles.map((a) => new Date(a.pubDate).getTime()).filter(Number.isFinite)
-  if (!times.length) return { newest: null, age: null }
-  const now = Date.now()
-  const newest = Math.min(Math.max(...times), now)
-  return { newest, age: now - newest }
-}
-
-function formatCoverageDate(ts) {
-  return new Date(ts).toLocaleDateString('en-US', {
-    timeZone: 'America/New_York',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
 }
 
 function NewsAndAnalysis() {
@@ -182,12 +142,11 @@ function NewsAndAnalysis() {
   const checkedAt = validCheckedInstant(data?.lastUpdated)
   // Malformed entries are dropped before anything reads the list (utils/newsItems.js).
   const articles = validNewsItems(data?.articles)
-  const { newest, age: coverageAge } = newestCoverage(articles)
-  const showSummary =
-    data?.summary &&
-    isFresh(data.lastUpdated) &&
-    coverageAge !== null &&
-    coverageAge < SUMMARY_MAX_COVERAGE_AGE_MS
+  const { showSummary, quietSince } = summaryState({
+    summary: data?.summary,
+    lastUpdated: data?.lastUpdated,
+    articles,
+  })
 
   return (
     <div className="app">
@@ -211,6 +170,9 @@ function NewsAndAnalysis() {
 
           {showSummary && (
             <div className="news-summary">
+              {quietSince && (
+                <p className="news-summary-quiet">No new statehood headlines since {quietSince}.</p>
+              )}
               <p>{data.summary}</p>
               <span className="news-ai-disclosure">
                 <Icon name="sparkles" size={13} />
@@ -222,9 +184,7 @@ function NewsAndAnalysis() {
           {checkedAt && (
             <p className="news-status news-status--meta">
               Last checked {formatCheckedInstant(checkedAt)}
-              {coverageAge !== null && coverageAge >= NEWEST_COVERAGE_NOTE_AFTER_MS && (
-                <> · Newest coverage: {formatCoverageDate(newest)}</>
-              )}
+              {quietSince && !showSummary && <> · Newest coverage: {quietSince}</>}
             </p>
           )}
 
@@ -234,8 +194,8 @@ function NewsAndAnalysis() {
           )}
 
           {/* A separate list, below the headlines. The summary and its AI disclosure
-              above belong to the headlines only, and the summary's freshness rules read
-              `articles` only: nothing here feeds either. */}
+              above belong to the headlines only, and the summary's rules read `articles`
+              only: nothing here feeds either. */}
           <NewsletterSection newsletters={data?.newsletters} />
         </div>
       </section>

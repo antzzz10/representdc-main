@@ -307,7 +307,7 @@ test('page: the section sits below the headlines, and the summary rules read art
   const disclosure = page.indexOf('news-ai-disclosure');
   assert.ok(disclosure > 0 && disclosure < headlines && headlines < section && section < analysis);
   assert.equal(page.match(/newsletters/g).length, 2, 'used only to render the section');
-  assert.match(page, /const articles = validNewsItems\(data\?\.articles\)\n\s+const \{ newest, age: coverageAge \} = newestCoverage\(articles\)/);
+  assert.match(page, /const articles = validNewsItems\(data\?\.articles\)\n\s+const \{ showSummary, quietSince \} = summaryState\(\{\n\s+summary: data\?\.summary,\n\s+lastUpdated: data\?\.lastUpdated,\n\s+articles,\n\s+\}\)/);
 });
 
 test('page: malformed entries are dropped from both lists instead of crashing the page', async () => {

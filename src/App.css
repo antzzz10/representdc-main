@@ -306,6 +306,11 @@ a.preview-card-live.follow-card {
   margin: 0 0 var(--s-3);
 }
 
+.news-summary .news-summary-quiet {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 .news-ai-disclosure {
   display: inline-flex;
   align-items: center;
