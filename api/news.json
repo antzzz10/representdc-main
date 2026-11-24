@@ -31,6 +31,12 @@
       "source": "Washington Informer"
     },
     {
+      "title": "DC prepares for fresh leadership as candidates set sights on open mayoral, delegate seats",
+      "link": "https://gwhatchet.com/2026/11/02/dc-prepares-for-fresh-leadership-as-candidates-set-sights-on-open-mayoral-delegate-seats/",
+      "pubDate": "2026-11-02T12:00:00.000Z",
+      "source": "The GW Hatchet"
+    },
+    {
       "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
       "pubDate": "2026-11-02T06:29:00.000Z",
@@ -94,11 +100,11 @@
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 22
+    "items": 23
   },
   "handAdded": {
-    "id": "add-link-45477620401-1",
-    "at": "2026-11-24T20:08:49.196Z",
-    "link": "https://www.washingtonsun.com/metro/robert-white-eligibility-dc-delegate-election"
+    "id": "add-link-45477890458-1",
+    "at": "2026-11-24T20:10:24.016Z",
+    "link": "https://gwhatchet.com/2026/11/02/dc-prepares-for-fresh-leadership-as-candidates-set-sights-on-open-mayoral-delegate-seats/"
   }
 }
