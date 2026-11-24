@@ -43,6 +43,12 @@
       "source": "The GW Hatchet"
     },
     {
+      "title": "Candidates hope to build momentum for DC statehood as Trump takeover exposes city’s vulnerability",
+      "link": "https://gwhatchet.com/2026/11/02/candidates-hope-to-build-momentum-for-dc-statehood-as-trump-takeover-exposes-citys-vulnerability/",
+      "pubDate": "2026-11-02T12:00:00.000Z",
+      "source": "The GW Hatchet"
+    },
+    {
       "title": "D.C., Virginia Fight Trump’s 250-Foot Arch",
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
       "pubDate": "2026-11-02T06:29:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.dcvote.org/nine-attacks-on-dcs-local-authority-and-how-we-responded/",
       "pubDate": "2026-10-07T15:05:49.000Z",
       "source": "DC Vote"
-    },
-    {
-      "title": "Where the Fight Stands – Amy Vruno, DC Vote Executive Director",
-      "link": "https://www.dcvote.org/where-the-fight-stands-amy-vruno-dc-vote-executive-director/",
-      "pubDate": "2026-10-06T19:40:49.000Z",
-      "source": "DC Vote"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 24
+    "items": 25
   },
   "handAdded": {
-    "id": "add-link-45478123964-1",
-    "at": "2026-11-24T20:11:42.746Z",
-    "link": "https://gwhatchet.com/2026/11/02/alum-former-dc-shadow-representative-seeks-to-reclaim-post-with-renewed-push-for-statehood/"
+    "id": "add-link-45478363119-1",
+    "at": "2026-11-24T20:12:51.131Z",
+    "link": "https://gwhatchet.com/2026/11/02/candidates-hope-to-build-momentum-for-dc-statehood-as-trump-takeover-exposes-citys-vulnerability/"
   }
 }
