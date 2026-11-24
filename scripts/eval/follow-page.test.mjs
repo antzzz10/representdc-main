@@ -12,12 +12,18 @@ test('every partner on the Follow page is on the partner map, once, with an http
   assert.ok(PARTNER_FOLLOWS.length > 0);
   assert.equal(new Set(PARTNER_FOLLOWS.map((f) => f.id)).size, PARTNER_FOLLOWS.length);
   for (const follow of PARTNER_FOLLOWS) {
-    const partner = partners.find((p) => p.id === follow.id);
+    const matches = partners.filter((p) => p.id === follow.id);
+    assert.equal(matches.length, 1, `${follow.id} should be on the partner map exactly once`);
+    const [partner] = matches;
     assert.ok(partner?.name, `${follow.id} is not on the partner map`);
     assert.notEqual(partner.self, true, 'the page does not list this site as a partner to follow');
     assert.equal(new URL(follow.href).protocol, 'https:');
     assert.ok(follow.cta.trim());
   }
+});
+
+test('the groups and their order are the owner\'s choice', () => {
+  assert.deepEqual(PARTNER_FOLLOWS.map((f) => f.id), ['dc-vote', 'lwv-dc', 'together-for-dc']);
 });
 
 test('the Follow page does not point back at the tracker or the news page', () => {

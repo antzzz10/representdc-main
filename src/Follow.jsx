@@ -10,7 +10,8 @@ import './App.css'
 import './Follow.css'
 
 // Three things, in this order: the email, Bluesky, and statehood groups to follow
-// directly. Nothing here points back at this site's own pages. The email wording and the
+// directly. The only link back to this site is "All statehood partners", to the partner
+// map. The email wording and the
 // partner links live in src/data/followWays.js. The Bluesky section shows itself once
 // the account has posts.
 const BLUESKY_HANDLE = 'bills.representdc.org'
