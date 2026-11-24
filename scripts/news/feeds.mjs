@@ -12,6 +12,9 @@ const USER_AGENT =
   'RepresentDC News Aggregator (www.representdc.org)';
 const FETCH_TIMEOUT_MS = 10000;
 export const DEFAULT_MAX_AGE_DAYS = 30;
+// A feed may ask for later pages of itself (`pages`). Capped, with a pause between pages.
+export const MAX_FEED_PAGES = 3;
+const PAGE_PAUSE_MS = 1000;
 
 /**
  * Feed list carried over from the bill tracker, including its field notes — they record
@@ -20,7 +23,11 @@ export const DEFAULT_MAX_AGE_DAYS = 30;
 export const FEEDS = [
   // News outlets — recent coverage only.
   { url: 'https://51st.news/rss/', source: 'The 51st' },
-  { url: 'https://washingtoninformer.com/feed/', source: 'Washington Informer' },
+  // `pages: 3` (2026-11-24): this feed holds ten items, about 16 hours of stories, and
+  // GitHub has run the scan as much as a day apart, so stories fell out before a scan saw
+  // them. Pages 2 and 3 of the same WordPress feed (?paged=N) reach back about five days.
+  // robots.txt disallows none of it and sets no crawl delay.
+  { url: 'https://washingtoninformer.com/feed/', source: 'Washington Informer', pages: 3 },
   { url: 'https://washingtoncitypaper.com/feed', source: 'Washington City Paper' },
   // NOTUS renamed itself twice in 2026: a planned rebrand to "The Star" was blocked by a
   // trademark suit from a separate, unrelated revived Washington Star newspaper (added
@@ -29,7 +36,14 @@ export const FEEDS = [
   // General national-politics feed, not DC-specific — confirmed valid RSS 2.0
   // (2026-09-29, carried over from the same confirmation on notus.org, 2026-07-12).
   // Relies on the relevance filter more than the DC-focused feeds above.
-  { url: 'https://www.washingtonsun.com/index.rss', source: 'The Washington Sun' },
+  //
+  // 2026-11-24: index.rss now carries ONE item, the newest story, so two scans a day saw
+  // at most two of the Sun's stories and missed the rest (three statehood stories between
+  // Oct 27 and Nov 20 among them). Replaced by the Sun's Google News sitemap, which lists
+  // every story from about the last two days with its title, link and publication time
+  // (45 stories when checked). robots.txt allows it; its crawl delay of 10 seconds is
+  // met by making one request per run.
+  { url: 'https://www.washingtonsun.com/news-sitemap-content.xml', source: 'The Washington Sun', format: 'news-sitemap' },
   // The revived (2026) Washington Star — a separate outlet from the Sun above, see the
   // note there. Confirmed valid RSS 2.0 (2026-09-29), runs on Substack.
   { url: 'https://www.twstar.com/feed', source: 'The Washington Star' },
@@ -55,6 +69,22 @@ export const FEEDS = [
   // - NBC Washington: this exact URL, because robots.txt expressly allows it. The
   //   NBCUniversal terms were only partly read, so this one is not fully cleared.
   { url: 'https://www.nbcwashington.com/?rss=y&most_recent=y', source: 'NBC Washington' },
+  // Added 2026-11-24, after a terms and robots.txt check that day (one request per run
+  // each, which meets every crawl delay below). All four returned 200 with items using
+  // this fetcher's user agent.
+  // - HillRag (Capital Community News): no terms page found; crawl delay 20 seconds.
+  { url: 'https://www.hillrag.com/feed/', source: 'HillRag' },
+  // - Howard University News Service: its About page says its work may be used if the
+  //   journalist and the service are credited. This pipeline shows a headline and a link
+  //   under the service's name and does not show the journalist.
+  { url: 'https://hunewsservice.com/feed/', source: 'Howard University News Service' },
+  // - The Wash (American University): no terms page found; crawl delay 10 seconds.
+  { url: 'https://thewash.org/feed/', source: 'The Wash' },
+  // - The Hoya (Georgetown University): no site terms page found; crawl delay 6 seconds.
+  { url: 'https://thehoya.com/feed/', source: 'The Hoya' },
+  // Checked the same day, NOT added: Washington Blade (its terms bar republishing its RSS
+  // feed without permission, so ask first) and The Well News (terms page returned 403 and
+  // was not read).
   // Advocacy org blogs — publish infrequently, so allow a wider window.
   { url: 'https://acludc.org/feed/', source: 'ACLU DC', maxAgeDays: 60 },
   // `statehoodOrg`: a statehood organisation, so its posts pass the topic rule whatever
@@ -185,29 +215,176 @@ export function parseItems(xml) {
   return items;
 }
 
+/** A Google News sitemap: `<urlset>` of `<url>` entries, each with a `<news:news>` block. */
+export function looksLikeNewsSitemap(body) {
+  const head = body.slice(0, 2000).toLowerCase();
+  if (/<!doctype html|<html[\s>]/.test(head)) return false;
+  return /<urlset[\s>]/.test(head);
+}
+
+export function newsSitemapIsComplete(body) {
+  return /<\/urlset>/i.test(body);
+}
+
+// Attributes on a tag, allowing a quoted value to hold a `>`.
+const ATTRS = `(?:\\s(?:"[^"]*"|'[^']*'|[^>"'])*)?`;
+
 /**
- * Fetches one feed. Never throws: returns a status the run record and G5 can read.
- * Statuses: ok | http-<code> | not-a-feed | no-items | error-<message>
+ * A sitemap's text with CDATA sections turned into ordinary escaped text and comments
+ * removed, in that order, so a `<url>` or `<!--` that is only text inside a CDATA title is
+ * never read as markup, and a tag inside a comment is never read at all.
  */
-export async function fetchFeed({ url, source }) {
+function plainXml(xml) {
+  return xml
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, (m, text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+    .replace(/<!--[\s\S]*?-->/g, '');
+}
+
+/** The text of `<tag>` inside `xml`, only when that exact tag appears exactly once. */
+function onlyTag(xml, tag) {
+  const matches = [...xml.matchAll(new RegExp(`<${tag}${ATTRS}>([\\s\\S]*?)<\\/${tag}>`, 'g'))];
+  const opens = xml.match(new RegExp(`<${tag}[\\s>/]`, 'g')) ?? [];
+  return matches.length === 1 && opens.length === 1 ? matches[0][1].trim() : '';
+}
+
+/**
+ * Reads a Google News sitemap into the same shape parseItems returns. Takes the story's
+ * address, its `<news:title>` and its `<news:publication_date>`, nothing else.
+ *
+ * Strict on purpose, because a title shown beside the wrong link is worse than a missed
+ * story (Codex, medium and high, 2026-11-24):
+ * - comments are removed first, so a commented-out `<loc>` cannot be read, and the file
+ *   has to end with a real `</urlset>`, not one inside a comment;
+ * - `sound` is false when the entries do not open and close one for one, or one entry
+ *   starts inside another. A missing `</url>` would otherwise join one story's address
+ *   to the next story's title and date. Nothing is taken from an unsound file;
+ * - an entry needs exactly one `<loc>`, one `<news:title>` and one
+ *   `<news:publication_date>`, matched by their full names;
+ * - an address on a different host from the sitemap, or not https, is dropped: the
+ *   sitemap rules do not allow one, and the page shows these links under the outlet's name.
+ *
+ * `entries` is how many entries the file held, so a caller can tell a file whose every
+ * entry was refused from an empty one.
+ */
+export function readNewsSitemap(xml, sitemapUrl) {
+  const host = new URL(sitemapUrl).hostname;
+  const clean = plainXml(xml);
+  // `<url/>` counts as an entry that opens and never closes, so it makes the file unsound.
+  const opens = (clean.match(/<url[\s>/]/g) ?? []).length;
+  const closes = (clean.match(/<\/url>/g) ?? []).length;
+  const blocks = [...clean.matchAll(new RegExp(`<url${ATTRS}>([\\s\\S]*?)<\\/url>`, 'g'))].map((m) => m[1]);
+  const sound =
+    !clean.includes('<!--') &&
+    /<\/urlset>\s*$/.test(clean) &&
+    opens === closes &&
+    blocks.length === opens &&
+    blocks.every((raw) => !/<url[\s>/]/.test(raw));
+  if (!sound) return { sound: false, entries: opens, items: [] };
+
+  const items = [];
+  for (const raw of blocks) {
+    // An address is not prose: only its XML escapes are undone, not typographic entities.
+    const link = onlyTag(raw, 'loc').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    const title = decodeEntities(onlyTag(raw, 'news:title'));
+    const pubDate = onlyTag(raw, 'news:publication_date');
+    let linkHost = null;
+    try {
+      const parsed = new URL(link);
+      if (parsed.protocol === 'https:' && !parsed.username && !parsed.password) linkHost = parsed.hostname;
+    } catch {
+      // not an address: dropped below
+    }
+    if (title && linkHost === host) items.push({ title, link, pubDate, source: '' });
+  }
+  return { sound: true, entries: opens, items };
+}
+
+export function parseNewsSitemap(xml, sitemapUrl) {
+  return readNewsSitemap(xml, sitemapUrl).items;
+}
+
+/**
+ * One document, checked. Never throws. `blocks` is how many items the document held
+ * before any were refused, for the paging check in fetchFeed.
+ */
+async function fetchDocument(url, format) {
   try {
     const res = await fetch(url, {
       headers: { 'User-Agent': USER_AGENT },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+      // A sitemap is asked for once and a redirect is not followed: the one outlet read
+      // this way asks for ten seconds between requests, and a followed redirect is a
+      // second request straight away. A moved sitemap shows up as http-301 instead.
+      ...(format === 'news-sitemap' ? { redirect: 'manual' } : {}),
     });
-    if (!res.ok) return { source, url, status: `http-${res.status}`, items: [] };
+    if (!res.ok) return { status: `http-${res.status}`, items: [], blocks: 0 };
 
     const body = await res.text();
-    if (!looksLikeFeed(body)) return { source, url, status: 'not-a-feed', items: [] };
-    if (!feedIsComplete(body)) return { source, url, status: 'malformed-feed', items: [] };
-
-    const items = parseItems(body).map((a) => ({ ...a, source: a.source || source }));
+    if (format === 'news-sitemap') {
+      if (!looksLikeNewsSitemap(body)) return { status: 'not-a-feed', items: [], blocks: 0 };
+      if (!newsSitemapIsComplete(body)) return { status: 'malformed-feed', items: [], blocks: 0 };
+      const { sound, entries, items } = readNewsSitemap(body, url);
+      // Entries present but none usable is a broken file, not a quiet outlet.
+      if (!sound || (entries > 0 && items.length === 0)) return { status: 'malformed-feed', items: [], blocks: entries };
+      // No entries at all also counts as failing. A news sitemap covers about two days of
+      // a daily outlet, so an empty one is far more likely broken than quiet, and a file
+      // of unrecognised tags with no entries would otherwise pass as a healthy source
+      // (Codex, 2026-11-24).
+      if (entries === 0) return { status: 'no-entries', items: [], blocks: 0 };
+      return { status: 'ok', items, blocks: entries };
+    }
+    if (!looksLikeFeed(body)) return { status: 'not-a-feed', items: [], blocks: 0 };
+    if (!feedIsComplete(body)) return { status: 'malformed-feed', items: [], blocks: 0 };
+    const items = parseItems(body);
+    const blocks = (body.match(/<item[\s>]|<entry[\s>]/g) ?? []).length;
     // A feed that parses but holds nothing is still a working source; it just has no
     // items. Distinguished from not-a-feed so the report can tell them apart.
-    return { source, url, status: items.length ? 'ok' : 'no-items', items };
+    return { status: items.length ? 'ok' : 'no-items', items, blocks };
   } catch (err) {
-    return { source, url, status: `error-${err.message}`, items: [] };
+    return { status: `error-${err.message}`, items: [], blocks: 0 };
   }
+}
+
+/** Page N of a WordPress feed: the same address with `paged=N`. */
+export function pageUrl(url, page) {
+  const paged = new URL(url);
+  paged.searchParams.set('paged', String(page));
+  return paged.toString();
+}
+
+/**
+ * Fetches one feed. Never throws: returns a status the run record and G5 can read.
+ * Statuses: ok | http-<code> | not-a-feed | malformed-feed | no-items | error-<message> |
+ * partial-page-<n>-<why> (a paged feed whose later page could not be read) | no-entries
+ * (a news sitemap with nothing in it, which counts as failing).
+ * `format: 'news-sitemap'` reads a Google News sitemap instead of RSS or Atom. `pages`
+ * also reads pages 2..N of a WordPress feed (at most MAX_FEED_PAGES).
+ */
+export async function fetchFeed({ url, source, format, pages = 1, pagePauseMs = PAGE_PAUSE_MS }) {
+  const first = await fetchDocument(url, format);
+  const items = [...first.items];
+  let status = first.status;
+
+  // Later pages only add to a first page that worked. A later page that cannot be read
+  // makes the source `partial-page-N-<why>`: the stories already read are still used, but
+  // the source counts as failing, so the run record and the two-day alert show that the
+  // older stories, the reason for paging, are not being read (Codex, 2026-11-24). Only a
+  // page with no items at all ends paging quietly.
+  const lastPage = format === 'news-sitemap' ? 1 : Math.min(Math.max(1, Math.trunc(pages) || 1), MAX_FEED_PAGES);
+  for (let page = 2; first.status === 'ok' && page <= lastPage; page++) {
+    if (pagePauseMs > 0) await new Promise((resolve) => setTimeout(resolve, pagePauseMs));
+    const next = await fetchDocument(pageUrl(url, page), format);
+    if (next.status === 'no-items' && next.blocks === 0) break;
+    const dated = next.items.filter((a) => Number.isFinite(new Date(a.pubDate).getTime()));
+    const why = next.status === 'no-items' ? 'unreadable-items' : next.status !== 'ok' ? next.status : dated.length === 0 ? 'bad-dates' : null;
+    if (why) {
+      status = `partial-page-${page}-${why}`;
+      break;
+    }
+    items.push(...next.items);
+  }
+
+  return { source, url, status, items: items.map((a) => ({ ...a, source: a.source || source })) };
 }
 
 /** Fetches every feed and applies each one's freshness window. */
