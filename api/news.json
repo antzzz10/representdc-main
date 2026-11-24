@@ -25,6 +25,12 @@
       "source": "DC Vote"
     },
     {
+      "title": "Can DC’s new delegate get Congress to care about statehood?",
+      "link": "https://rollcall.com/2026/11/04/robert-white-new-delegate-statehood/",
+      "pubDate": "2026-11-04T12:00:00.000Z",
+      "source": "Roll Call"
+    },
+    {
       "title": "After a Dramatic Final Stretch, Robert White Wins D.C. Delegate Race",
       "link": "https://www.washingtonsun.com/metro/dc/robert-white-dc-congressional-delegate",
       "pubDate": "2026-11-03T12:00:00.000Z",
@@ -89,22 +95,16 @@
       "link": "https://www.washingtonsun.com/metro/robert-white-eligibility-dc-delegate-election",
       "pubDate": "2026-10-27T12:00:00.000Z",
       "source": "The Washington Sun"
-    },
-    {
-      "title": "As Early Voting Begins in D.C., Some Prepare for Federal Interference",
-      "link": "https://www.washingtonsun.com/metro/dc-election-polling-places-national-guard",
-      "pubDate": "2026-10-27T09:20:00.000Z",
-      "source": "The Washington Sun"
     }
   ],
   "newsletters": [],
   "archive": {
     "initialized": true,
-    "items": 27
+    "items": 28
   },
   "handAdded": {
-    "id": "add-link-45478777544-1",
-    "at": "2026-11-24T20:15:08.729Z",
-    "link": "https://www.washingtonsun.com/metro/dc/robert-white-dc-congressional-delegate"
+    "id": "add-link-45478990598-1",
+    "at": "2026-11-24T20:16:16.276Z",
+    "link": "https://rollcall.com/2026/11/04/robert-white-new-delegate-statehood/"
   }
 }
