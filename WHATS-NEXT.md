@@ -150,6 +150,23 @@ donation without representation"**
 
 ## New since last update
 
+- **Statehood bill: sort cosponsors by sign-on date (queued by Andria 2026-11-24).** On
+  the member list at `/statehood-bill`, "Sort by" already has "Most recently signed on".
+  Still to add: "Earliest signed on" (least recent first).
+- **Time trends on statehood support (queued by Andria 2026-11-24).** Direction: more
+  easy, interesting visuals built from data the site already generates and archives,
+  not new lookups each time. Two asked for by name: original cosponsors of the statehood
+  bills by Congress, 2013 to 2025 (figures exist from the issue 1 draft, checked against
+  Congress.gov on 2026-11-23), and cosponsors month by month over the last year (can be
+  built from each cosponsor's sign-on date). Places suggested, for her to choose:
+  1. `/statehood-bill`, above the member list: the month-by-month line for this Congress.
+  2. `/statehood-bill`, lower: original cosponsors by Congress, House and Senate.
+  3. Home page, "The solution" section: the by-Congress chart as the one visual.
+  4. `/the-case` or `/statehood-curious`: the same chart with one line of context.
+  5. The email update's "The number" section and Bluesky posts: the same charts as images.
+  6. `/news`: headlines per month from the news archive, once it holds a few months.
+  Needs a design pass before building (2026-11-23 rule), and a check that every figure
+  is stored with its date and source so a chart never needs a fresh lookup.
 - **Myths & FAQ categorization:** the combined myth/FAQ list (8 myths + 2 FAQs as of
   2026-07-25) is still a flat list — fine at this size, but revisit grouping if it
   grows toward 15–20+ items. Two options already proposed and one recommended

@@ -1,0 +1,9 @@
+**MATERIAL — The new route test can silently miss pages.** [site-nav.test.mjs:15](scripts/eval/site-nav.test.mjs:15) only recognizes routes with `path` immediately followed by `element`, both in the exact quoted form used today. For example, adding `<Route element={<NewPage />} path="/new-page" />` would leave that page out of `pages`; the existing count and partner-map checks would still pass. The link regexes also scan source text rather than the actual list and rendered links, so a match in a comment or unused object can count as a link. The current routes are recognized, but the test does not reliably enforce its stated guarantee for future changes.
+
+**NOTE — Automatic redirects can bypass the Hatchet pause.** [feeds.mjs:314](scripts/news/feeds.mjs:314) follows redirects automatically for RSS feeds. If a Hatchet page redirects to the same host, the redirected request can happen immediately, without the 6.5-second pause. I could not establish whether its feed currently redirects without network access.
+
+The navigation breakpoint changes are consistent across the supplied CSS and JavaScript at ordinary integer widths. The existing open, Escape, focus-return and resize handlers are unchanged, and Home remains the first menu item and the brand’s destination. The supplied files do not establish whether other project files depend on the old breakpoint or Home’s former bar position; this folder is a partial snapshot, not a Git checkout.
+
+For the Hatchet, four pauses add **26 seconds** to a successful five-page fetch. Each document has its own 10-second timeout, so five slow requests could take approximately **76 seconds** including pauses. Feeds run sequentially; the full job’s duration and any outer timeout cannot be verified from this snapshot. The navigation tests pass locally. The feed tests could not start because `scripts/news/gates.mjs` is absent from the supplied snapshot.
+
+**DO NOT SHIP**
