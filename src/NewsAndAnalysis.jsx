@@ -8,6 +8,7 @@ import StayInTheLoop from './components/StayInTheLoop'
 import { validNewsItems } from './utils/newsItems'
 import { summaryState, CLOCK_SKEW_MS } from './utils/newsSummary'
 import { READING, readingRoute } from './data/reading'
+import { NEWS_PHOTO } from './data/newsPhoto'
 import { formatCheckedInstant } from './utils/formatCheckedInstant'
 import './App.css'
 import './Reading.css'
@@ -160,6 +161,36 @@ function NewsAndAnalysis() {
       <section className="impact-section" id="news">
         <div className="container">
           <h2 className="section-heading">In the news</h2>
+
+          {/* Always here, with or without the AI summary, so the top of the page is never
+              bare. Its size is fixed by CSS, so nothing below it moves when it loads. */}
+          <figure className="news-photo">
+            <div className="news-photo-frame">
+              <img
+                src={NEWS_PHOTO.src}
+                width={NEWS_PHOTO.width}
+                height={NEWS_PHOTO.height}
+                alt={NEWS_PHOTO.alt}
+                decoding="async"
+              />
+            </div>
+            <figcaption>
+              <span className="news-photo-caption">{NEWS_PHOTO.caption}</span>
+              <span className="news-photo-credit">
+                Photo:{' '}
+                <a href={NEWS_PHOTO.credit.sourceUrl} target="_blank" rel="noopener noreferrer">
+                  &ldquo;{NEWS_PHOTO.credit.title}&rdquo;
+                  <span className="news-photo-sr"> (opens in a new tab)</span>
+                </a>{' '}
+                by {NEWS_PHOTO.credit.name},{' '}
+                <a href={NEWS_PHOTO.credit.licenceUrl} target="_blank" rel="noopener noreferrer">
+                  {NEWS_PHOTO.credit.licence}
+                  <span className="news-photo-sr"> (opens in a new tab)</span>
+                </a>
+                , {NEWS_PHOTO.credit.changes}.
+              </span>
+            </figcaption>
+          </figure>
 
           {error && (
             <p className="news-status">

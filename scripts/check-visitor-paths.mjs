@@ -131,6 +131,24 @@ try {
       assert.equal(await page.evaluate(() => window.scrollY), 0)
     })
 
+    await check(`${size} the news page shows its photo, caption and credit, and the photo does not move the page when it loads`, async () => {
+      await page.goto(`${BASE}/news`)
+      const frame = page.locator('.news-photo-frame')
+      await frame.waitFor()
+      const before = await frame.boundingBox()
+      await page.waitForFunction(() => document.querySelector('.news-photo img')?.naturalWidth > 0)
+      await page.waitForSelector('.news-item, .news-list a')
+      const after = await frame.boundingBox()
+      assert.equal(Math.round(after.height), Math.round(before.height), 'the frame keeps its height')
+      assert.ok(after.height > 100)
+      assert.match(await page.locator('.news-photo-caption').innerText(), /three weeks before/)
+      const credit = await page.locator('.news-photo-credit').innerText()
+      assert.match(credit, /Elvert Barnes/)
+      assert.match(credit, /CC BY-SA 2\.0/)
+      assert.equal(await page.locator('.news-photo-credit a').count(), 2)
+      assert.ok((await page.locator('.news-photo img').getAttribute('alt')).length > 30)
+    })
+
     await check(`${size} (d) each picker card opens its page`, async () => {
       const cards = [
         ['New to D.C.', '/how-congress-controls-dc'],

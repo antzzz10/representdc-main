@@ -270,6 +270,70 @@ a.preview-card-live:focus-visible {
   scroll-margin-top: var(--s-5);
 }
 
+/* The photo at the top of the News page (src/data/newsPhoto.js). The frame has a fixed
+   shape, so the headlines below do not move when the picture arrives. The caption is
+   ordinary text under the picture, not laid over it, so it is readable at any size. */
+.news-photo {
+  margin: var(--s-4) 0 var(--s-6);
+}
+
+.news-photo-frame {
+  /* Wide and short on a large screen, so the first headlines stay in view under it. */
+  aspect-ratio: 3 / 1;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.news-photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Keeps the marquee's words in view when the picture is cropped. */
+  object-position: 50% 66%;
+}
+
+.news-photo figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin-top: var(--s-3);
+}
+
+.news-photo-caption {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.news-photo-credit {
+  font-size: var(--fs-xs);
+  color: var(--slate-700);
+}
+
+/* Read aloud, not shown: says a credit link opens a new tab. */
+.news-photo-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.news-photo-credit a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .news-photo-frame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 .news-summary {
   background: var(--navy-tint);
   border: 1px solid var(--line);
