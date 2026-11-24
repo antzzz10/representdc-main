@@ -13,7 +13,7 @@ const USER_AGENT =
 const FETCH_TIMEOUT_MS = 10000;
 export const DEFAULT_MAX_AGE_DAYS = 30;
 // A feed may ask for later pages of itself (`pages`). Capped, with a pause between pages.
-export const MAX_FEED_PAGES = 3;
+export const MAX_FEED_PAGES = 5;
 const PAGE_PAUSE_MS = 1000;
 
 /**
@@ -65,7 +65,11 @@ export const FEEDS = [
   { url: 'https://wamu.org/feed/', source: 'WAMU' },
   // - The GW Hatchet: no terms of use found; robots.txt allows crawling with a crawl
   //   delay of 6 seconds, which one request per run respects.
-  { url: 'https://gwhatchet.com/feed/', source: 'The GW Hatchet' },
+  //   `pages: 5` (2026-11-24): the Hatchet publishes a whole issue at once, 30 to 40
+  //   stories on a Monday, and its feed holds ten, so most of an issue was gone before a
+  //   scan ran (four statehood stories on Nov 2 were missed that way). Five pages hold 50
+  //   stories. The pause between pages is its crawl delay plus a margin.
+  { url: 'https://gwhatchet.com/feed/', source: 'The GW Hatchet', pages: 5, pagePauseMs: 6500 },
   // - NBC Washington: this exact URL, because robots.txt expressly allows it. The
   //   NBCUniversal terms were only partly read, so this one is not fully cleared.
   { url: 'https://www.nbcwashington.com/?rss=y&most_recent=y', source: 'NBC Washington' },

@@ -277,7 +277,7 @@ test('paged feed: a first page that fails asks for nothing more, and an empty la
 });
 
 test('paged feed: the page count is capped, and a nonsense count means one page', async () => {
-  const routes = Object.fromEntries([1, 2, 3, 4, 5].map((n) => [n === 1 ? 'https://example.org/feed/' : `https://example.org/feed/?paged=${n}`, rss([`p${n}`])]));
+  const routes = Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map((n) => [n === 1 ? 'https://example.org/feed/' : `https://example.org/feed/?paged=${n}`, rss([`p${n}`])]));
   const many = await withFetch(routes, () => fetchFeed({ url: 'https://example.org/feed/', source: 'X', pages: 50, pagePauseMs: 0 }));
   assert.equal(many.asked.length, MAX_FEED_PAGES);
   for (const pages of [0, -2, 'lots', null, 1.9]) {
@@ -297,5 +297,8 @@ test('the source list: the Washington Sun is read from its news sitemap, and pag
     assert.ok(feed.format === undefined || feed.format === 'news-sitemap', feed.source);
     assert.ok(feed.pages === undefined || (Number.isInteger(feed.pages) && feed.pages >= 2 && feed.pages <= MAX_FEED_PAGES), feed.source);
   }
+  const hatchet = FEEDS.find((f) => f.source === 'The GW Hatchet');
+  assert.equal(hatchet.pages, 5, 'the Hatchet publishes an issue of 30 to 40 stories at once');
+  assert.ok(hatchet.pagePauseMs >= 6000, 'its robots.txt asks for 6 seconds between requests');
   assert.equal(new Set(FEEDS.map((f) => f.source)).size, FEEDS.length, 'feed health is kept by source name');
 });
