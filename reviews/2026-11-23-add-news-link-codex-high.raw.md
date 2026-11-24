@@ -1,0 +1,15 @@
+**MATERIAL — Malformed feed data can be overwritten instead of refused.** [hand-link.mjs](scripts/news/hand-link.mjs:160) treats a missing or non-array `articles` field as an empty list. For example, if `news.json` is valid JSON but its `articles` field has been corrupted, a hand add can publish a reconstructed list and replace the malformed evidence. It can also silently lose previously displayed unconfirmed articles, which are not necessarily in the confirmed archive. Validate the feed shape before composing an edit and refuse the write if the existing article list is malformed.
+
+**MATERIAL — A misleading URL can be permanently published under a trusted source name.** [hand-link.mjs](scripts/news/hand-link.mjs:69) accepts `https://apnews.com@evil.example/a`: the actual host is `evil.example`, but the input can look like an AP link and the separately entered source can say AP. The page then publishes it, and the archive retains it without later relevance review. Reject URL usernames and passwords, and show the parsed destination hostname in the preview or confirmation so the owner can check it. Consider a reasonable URL length limit as well.
+
+**NOTE — A future calendar date is accepted and silently changed.** [hand-link.mjs](scripts/news/hand-link.mjs:82) applies clock-skew tolerance to a calendar date. At 23:00 UTC on November 23, for example, `2026-11-24` is accepted and stored as November 23 at 23:00. The permanent archive consequently records a different day from the one entered. Compare calendar days without the instant-level tolerance and reject a future day.
+
+**NOTE — Encoded control characters bypass the text check.** [hand-link.mjs](scripts/news/hand-link.mjs:48) checks controls before decoding entities. `AP&#27;[31m`, for example, is accepted with an escape character in the source, which reaches the archive, feed, commit message and output. Check the decoded text for controls before normalizing whitespace; add an encoded-control test.
+
+**NOTE — Live verification can wait past its stated deadline.** [publish.mjs](scripts/news/publish.mjs:278) has no timeout on an individual fetch or response body. A stalled request after a successful push can therefore occupy the workflow until its 20-minute job timeout, without reporting that the link was saved. Bound each request by the remaining deadline with an abort signal, and test a fetch that never resolves. This limitation also existed in the scan’s verification path.
+
+The existing end-to-end test confirms that the summary prompt contains the hand-added headline, but [add-link.test.mjs](scripts/eval/add-link.test.mjs:530) does not assert that the judge prompt contains it. Add that assertion to substantiate the exact-set invariant.
+
+The shared concurrency group, fresh-state retry, archive marker and withholding paths otherwise preserved the reviewed invariants in the traced scenarios. I performed read-only validation probes; I did not run the suite because its tests create temporary files, and the environment is read-only. No files were changed.
+
+DO NOT SHIP
