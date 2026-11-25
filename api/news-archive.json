@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T17:24:43.021Z",
-  "runId": "45664218038-1",
+  "updatedAt": "2026-11-25T17:33:31.133Z",
+  "runId": "45665802799-1",
   "items": [
     {
       "link": "https://www.washingtoninformer.com/democrats-congress-dc-statehood/",
@@ -242,6 +242,14 @@
       "firstSeen": "2026-11-24T20:17:22.879Z",
       "confirmedAt": "2026-11-24T20:17:22.879Z",
       "addedBy": "hand"
+    },
+    {
+      "link": "https://www.washingtonsun.com/metro/dc/trump-admin-100-million-southwest-federal-center",
+      "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
+      "source": "The Washington Sun",
+      "pubDate": "2026-11-24T21:34:36.000Z",
+      "firstSeen": "2026-11-25T02:34:48.662Z",
+      "confirmedAt": "2026-11-25T17:32:31.763Z"
     }
   ],
   "pending": [
@@ -254,20 +262,20 @@
       "firstSeen": "2026-11-24T20:19:19.142Z"
     },
     {
-      "link": "https://www.washingtonsun.com/metro/dc/trump-admin-100-million-southwest-federal-center",
-      "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
-      "source": "The Washington Sun",
-      "pubDate": "2026-11-24T21:34:36.000Z",
-      "yes": 1,
-      "firstSeen": "2026-11-25T02:34:48.662Z"
-    },
-    {
       "link": "https://wamu.org/story/26/11/23/if-you-can-keep-it-congressional-oversight-part-2/",
       "title": "If You Can Keep It: Congressional oversight, part 2",
       "source": "WAMU",
       "pubDate": "2026-11-23T13:30:59.000Z",
       "yes": 1,
       "firstSeen": "2026-11-25T02:34:48.662Z"
+    },
+    {
+      "link": "https://gwhatchet.com/2026/11/16/perspective-trumps-dc-takeover-played-a-part-in-republicans-midterm-losses/",
+      "title": "Perspective: Trump’s DC takeover played a part in Republicans’ midterm losses",
+      "source": "The GW Hatchet",
+      "pubDate": "2026-11-16T05:30:51.000Z",
+      "yes": 1,
+      "firstSeen": "2026-11-25T17:32:31.763Z"
     }
   ],
   "feedHealth": {

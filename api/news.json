@@ -1,7 +1,7 @@
 {
-  "runId": "45664218038-1",
-  "lastUpdated": "2026-11-25T17:24:43.021Z",
-  "summary": "Robert White won the D.C. delegate race, and advocates say the recent elections have created momentum for statehood efforts. Shadow Senator Ankit Jain is making a bid for D.C. Council, while the ACLU DC has highlighted key talking points about D.C. statehood for the public. D.C. and Virginia have sued the Trump administration over a proposed monument project. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "45665802799-1",
+  "lastUpdated": "2026-11-25T17:33:31.133Z",
+  "summary": "Recent midterm election results have energized D.C. statehood advocates, with Robert White winning the delegate race and candidates emphasizing statehood in their bids for local office, including Shadow Senator Ankit Jain's campaign for D.C. Council. The Trump administration's proposals affecting the District, including a request for funding to expedite Southwest D.C. redevelopment and plans for a triumphal arch that D.C. and Virginia are challenging in court, have prompted discussion about the city's political vulnerability and autonomy. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
     "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
@@ -10,12 +10,18 @@
     "judge": "pass",
     "judgeVersion": "2026-09-12.1",
     "promptVersion": "2026-11-25.1",
-    "writtenAt": "2026-11-25T17:24:43.020Z",
-    "writtenByRun": "45664218038-1",
-    "fingerprint": "7b2ddeb5fc044a203ef67d30ab8372faebe94a5d8e6f386c27a2472ef5cf7992"
+    "writtenAt": "2026-11-25T17:33:31.133Z",
+    "writtenByRun": "45665802799-1",
+    "fingerprint": "6a30d5a15abfc28a7b8201d5f8976ae5e58e9da9ee60f18faa2c0ccbe0ae7301"
   },
   "summaryDecision": "judge-pass",
   "articles": [
+    {
+      "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
+      "link": "https://www.washingtonsun.com/metro/dc/trump-admin-100-million-southwest-federal-center",
+      "pubDate": "2026-11-24T21:34:36.000Z",
+      "source": "The Washington Sun"
+    },
     {
       "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
       "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
@@ -27,6 +33,12 @@
       "link": "https://www.washingtonsun.com/metro/dc/ankit-jain-dc-council-candidacy",
       "pubDate": "2026-11-20T12:00:00.000Z",
       "source": "The Washington Sun"
+    },
+    {
+      "title": "Perspective: Trump’s DC takeover played a part in Republicans’ midterm losses",
+      "link": "https://gwhatchet.com/2026/11/16/perspective-trumps-dc-takeover-played-a-part-in-republicans-midterm-losses/",
+      "pubDate": "2026-11-16T05:30:51.000Z",
+      "source": "The GW Hatchet"
     },
     {
       "title": "Election Shakeup Revives D.C.’s Fight for Statehood",
@@ -93,18 +105,6 @@
       "link": "https://www.washingtonsun.com/metro/dc-virginia-sue-trump-administration-triumphal-arch",
       "pubDate": "2026-10-31T14:40:07.000Z",
       "source": "The Washington Sun"
-    },
-    {
-      "title": "At-Large D.C. Council Member White to Resign, While D.C. Democrats Allege Interference in Process to Appoint a Successor",
-      "link": "https://www.washingtoninformer.com/robert-white-resigning-dc-council/",
-      "pubDate": "2026-10-30T21:07:35.000Z",
-      "source": "Washington Informer"
-    },
-    {
-      "title": "Three Things to Know When Voting in D.C.",
-      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
-      "pubDate": "2026-10-27T12:18:55.000Z",
-      "source": "ACLU DC"
     }
   ],
   "newsletters": [],
@@ -112,6 +112,6 @@
   "summaryWithheldScan": null,
   "archive": {
     "initialized": true,
-    "items": 29
+    "items": 30
   }
 }
