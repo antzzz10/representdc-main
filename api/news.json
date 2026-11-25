@@ -1,11 +1,17 @@
 {
-  "runId": "45479499248-1",
-  "lastUpdated": "2026-11-24T20:20:23.682Z",
+  "runId": "45533939585-1",
+  "lastUpdated": "2026-11-25T02:36:01.874Z",
   "summary": null,
   "summarySource": null,
   "summaryCheck": null,
   "summaryDecision": "judge-flag",
   "articles": [
+    {
+      "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
+      "link": "https://www.washingtonsun.com/metro/dc/trump-admin-100-million-southwest-federal-center",
+      "pubDate": "2026-11-24T21:34:36.000Z",
+      "source": "The Washington Sun"
+    },
     {
       "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
       "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
@@ -13,10 +19,10 @@
       "source": "ACLU DC"
     },
     {
-      "title": "GU Institute Signs Letter Demanding Congressional Oversight for Redirected Funds",
-      "link": "https://thehoya.com/news/gu-institute-signs-letter-demanding-congressional-oversight-for-redirected-funds/",
-      "pubDate": "2026-11-22T14:19:10.000Z",
-      "source": "The Hoya"
+      "title": "If You Can Keep It: Congressional oversight, part 2",
+      "link": "https://wamu.org/story/26/11/23/if-you-can-keep-it-congressional-oversight-part-2/",
+      "pubDate": "2026-11-23T13:30:59.000Z",
+      "source": "WAMU"
     },
     {
       "title": "Shadow Senator Ankit Jain Makes a Bid for D.C. Council",
@@ -89,12 +95,6 @@
       "link": "https://www.washingtonsun.com/metro/dc-virginia-sue-trump-administration-triumphal-arch",
       "pubDate": "2026-10-31T14:40:07.000Z",
       "source": "The Washington Sun"
-    },
-    {
-      "title": "At-Large D.C. Council Member White to Resign, While D.C. Democrats Allege Interference in Process to Appoint a Successor",
-      "link": "https://www.washingtoninformer.com/robert-white-resigning-dc-council/",
-      "pubDate": "2026-10-30T21:07:35.000Z",
-      "source": "Washington Informer"
     }
   ],
   "newsletters": [],
