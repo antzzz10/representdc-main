@@ -290,8 +290,9 @@ a.preview-card-live:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Keeps the marquee's words in view when the picture is cropped. */
-  object-position: 50% 66%;
+  /* Keeps both the ANTHEM sign and the marquee under it in view when the picture is
+     cropped: the marquee alone does not show where it is (Andria, 2026-11-24). */
+  object-position: 50% 44%;
 }
 
 .news-photo figcaption {
