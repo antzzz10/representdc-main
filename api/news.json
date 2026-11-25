@@ -1,28 +1,26 @@
 {
-  "runId": "45533939585-1",
-  "lastUpdated": "2026-11-25T02:36:01.874Z",
-  "summary": null,
-  "summarySource": null,
-  "summaryCheck": null,
-  "summaryDecision": "judge-flag",
+  "runId": "45664218038-1",
+  "lastUpdated": "2026-11-25T17:24:43.021Z",
+  "summary": "Robert White won the D.C. delegate race, and advocates say the recent elections have created momentum for statehood efforts. Shadow Senator Ankit Jain is making a bid for D.C. Council, while the ACLU DC has highlighted key talking points about D.C. statehood for the public. D.C. and Virginia have sued the Trump administration over a proposed monument project. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "summarySource": {
+    "closerKey": "representation",
+    "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
+  },
+  "summaryCheck": {
+    "judge": "pass",
+    "judgeVersion": "2026-09-12.1",
+    "promptVersion": "2026-11-25.1",
+    "writtenAt": "2026-11-25T17:24:43.020Z",
+    "writtenByRun": "45664218038-1",
+    "fingerprint": "7b2ddeb5fc044a203ef67d30ab8372faebe94a5d8e6f386c27a2472ef5cf7992"
+  },
+  "summaryDecision": "judge-pass",
   "articles": [
-    {
-      "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
-      "link": "https://www.washingtonsun.com/metro/dc/trump-admin-100-million-southwest-federal-center",
-      "pubDate": "2026-11-24T21:34:36.000Z",
-      "source": "The Washington Sun"
-    },
     {
       "title": "Three Things to Tell Your Family and Friends About D.C. Statehood",
       "link": "https://www.acludc.org/news/three-things-to-tell-your-family-and-friends-about-d-c-statehood/",
       "pubDate": "2026-11-24T16:00:41.000Z",
       "source": "ACLU DC"
-    },
-    {
-      "title": "If You Can Keep It: Congressional oversight, part 2",
-      "link": "https://wamu.org/story/26/11/23/if-you-can-keep-it-congressional-oversight-part-2/",
-      "pubDate": "2026-11-23T13:30:59.000Z",
-      "source": "WAMU"
     },
     {
       "title": "Shadow Senator Ankit Jain Makes a Bid for D.C. Council",
@@ -95,9 +93,23 @@
       "link": "https://www.washingtonsun.com/metro/dc-virginia-sue-trump-administration-triumphal-arch",
       "pubDate": "2026-10-31T14:40:07.000Z",
       "source": "The Washington Sun"
+    },
+    {
+      "title": "At-Large D.C. Council Member White to Resign, While D.C. Democrats Allege Interference in Process to Appoint a Successor",
+      "link": "https://www.washingtoninformer.com/robert-white-resigning-dc-council/",
+      "pubDate": "2026-10-30T21:07:35.000Z",
+      "source": "Washington Informer"
+    },
+    {
+      "title": "Three Things to Know When Voting in D.C.",
+      "link": "https://www.acludc.org/news/three-things-to-know-when-voting-in-d-c/",
+      "pubDate": "2026-10-27T12:18:55.000Z",
+      "source": "ACLU DC"
     }
   ],
   "newsletters": [],
+  "summaryWithheldRuns": 0,
+  "summaryWithheldScan": null,
   "archive": {
     "initialized": true,
     "items": 29
