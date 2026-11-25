@@ -56,10 +56,10 @@ function published(path) {
 }
 
 /** One real run of the script. Returns its exit code, output and run record. */
-function runScript(name) {
+function runScript(name, extraEnv = {}) {
   const cwd = join(scratch, name);
   mkdirSync(cwd);
-  const env = { ...process.env, NEWS_REMOTE: remote, MAIN_PATH_LOG: log, MAIN_PATH_FEEDS: feedsFile, ANTHROPIC_API_KEY: 'test-key-not-real' };
+  const env = { ...process.env, ...extraEnv, NEWS_REMOTE: remote, MAIN_PATH_LOG: log, MAIN_PATH_FEEDS: feedsFile, ANTHROPIC_API_KEY: 'test-key-not-real' };
   for (const key of ['GITHUB_TOKEN', 'GITHUB_OUTPUT', 'GITHUB_RUN_ID', 'DRY_RUN', 'NEWS_ARCHIVE_BOOTSTRAP', 'NEWS_SUMMARY_ENABLED']) delete env[key];
   const result = spawnSync(process.execPath, ['--import', PRELOAD, SCRIPT], { cwd, env, encoding: 'utf8', timeout: 120000 });
   const recordPath = join(cwd, 'run-record.json');
@@ -260,8 +260,16 @@ exit 1
   assert.equal(confirmedOnRetry.relevant, true);
   assertNoNewsletter(JSON.stringify([archive.items, archive.pending]), 'archive items and pending after the retry');
 
+  // The headlines are the ones the first run's summary passed the judge for, so the
+  // second run keeps that summary instead of writing a new one: no summary or judge
+  // call. A kept summary goes through the same publish step, so the withholding that
+  // landed mid-push still wins over it (asserted above: feed.summary is null).
   const seen = prompts();
-  assert.deepEqual(seen.map((p) => p.kind), ['filter', 'summary', 'judge']);
+  assert.deepEqual(seen.map((p) => p.kind), ['filter']);
+  assert.equal(run.record.summaryDecision, 'judge-pass-kept');
+  assert.match(run.record.summaryKept.fromRun, /^local-\d+$/, 'the run that wrote it');
+  assert.deepEqual(run.record.attempts, []);
+  assert.equal(run.record.summaryWithheldRuns, 0, 'a withholding by hand is not a flagged draft');
   for (const p of seen) assertNoNewsletter(p.prompt, `the ${p.kind} prompt on the second run`);
 });
 
@@ -289,4 +297,45 @@ test('main path, third run: the confirmed article skips the filter, and newslett
   assert.deepEqual(feed.articles.map((a) => a.link), [NEWS_LINK]);
   assert.equal(feed.newsletters.length, 2);
   assert.equal(parseArchive(published('api/news-archive.json')).items.length, 1);
+});
+
+test('main path, fourth run: a flagged draft is retried with the checker\'s notes, and the retry passes', () => {
+  writeFileSync(log, '');
+  const run = runScript('run4', { MAIN_PATH_JUDGE: 'flag-first' });
+  assert.equal(run.status, 0, run.out);
+  const seen = prompts().filter((p) => p.kind !== 'filter');
+  assert.deepEqual(seen.map((p) => p.kind), ['summary', 'judge', 'summary', 'judge']);
+  assert.doesNotMatch(seen[0].prompt, /An earlier draft was turned down/, 'the first attempt has nothing to learn from');
+  // The retry is shown the rejected draft, the words flagged and why.
+  assert.match(seen[2].prompt, /An earlier draft was turned down by a fact-checker/);
+  assert.match(seen[2].prompt, /Earlier draft: 'A statehood bill moved forward in Congress/);
+  assert.match(seen[2].prompt, /- 'moved forward in Congress': No headline says the bill moved\./);
+  assert.match(seen[3].prompt, /Advocates and District officials pressed their case/, 'the judge is given the new draft');
+  assert.deepEqual(run.record.attempts.map((a) => a.judge.overall), ['flag', 'pass']);
+  assert.deepEqual(run.record.attempts[0].judge.flagged, [{ criterion: 'J1', quote: 'moved forward in Congress', why: 'No headline says the bill moved.' }]);
+  assert.equal(run.record.summaryDecision, 'judge-pass');
+  assert.equal(run.record.summaryWithheldRuns, 0);
+  assert.equal(run.record.summaryNotKept, 'no summary on the page');
+});
+
+test('main path, fifth and sixth runs: drafts flagged on two scans in a row are counted, and the count is carried in the feed', () => {
+  writeFileSync(log, '');
+  const fifth = runScript('run5', { MAIN_PATH_JUDGE: 'flag-all' });
+  assert.equal(fifth.status, 0, fifth.out);
+  assert.equal(fifth.record.outcome, 'summary-withheld');
+  assert.equal(fifth.record.summaryDecision, 'judge-flag');
+  assert.equal(fifth.record.summaryWithheldRuns, 1);
+  assert.equal(JSON.parse(published('api/news.json')).summaryWithheldRuns, 1);
+  // Both attempts were flagged, and the second had been told about the first.
+  const seen = prompts().filter((p) => p.kind === 'summary');
+  assert.equal(seen.length, 2);
+  assert.match(seen[1].prompt, /An earlier draft was turned down/);
+
+  const sixth = runScript('run6', { MAIN_PATH_JUDGE: 'flag-all' });
+  assert.equal(sixth.status, 0, sixth.out);
+  assert.equal(sixth.record.summaryWithheldRuns, 2);
+  const feed = JSON.parse(published('api/news.json'));
+  assert.equal(feed.summaryWithheldRuns, 2);
+  assert.equal(feed.summary, null);
+  assert.deepEqual(feed.articles.map((a) => a.link), [NEWS_LINK], 'the headlines still publish');
 });

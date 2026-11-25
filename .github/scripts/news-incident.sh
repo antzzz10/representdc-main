@@ -25,7 +25,16 @@
 # 7. REASON is untrusted text (it can carry raw API error bodies), so the body heredoc gets
 #    a random delimiter, and issue_number is emitted only if it is purely numeric.
 #
-# Called by fetch-news.yml with OUTCOME, DECISION, REASON, DRY_RUN, RUN_URL, GH_TOKEN.
+# 8. A flagged summary is the design working, so one flagged scan says nothing. But the
+#    owner kept finding the summary missing for days by looking at the page (2026-11-25).
+#    Two flagged scans since a summary last published (WITHHELD_RUNS, counted by the run
+#    and carried in the feed) is one email, deduped like every other incident. It clears
+#    with a "recovered" email only when a summary is back on the page (OUTCOME published),
+#    not on a run that merely had nothing to summarise. A value that is not a whole
+#    number counts as 0: this alert is a courtesy, and must not fire on garbage.
+#
+# Called by fetch-news.yml with OUTCOME, DECISION, WITHHELD_RUNS, REASON, DRY_RUN, RUN_URL,
+# GH_TOKEN.
 set -uo pipefail   # deliberately NOT -e: see rule 3.
 
 LABEL="news-incident"
@@ -36,6 +45,9 @@ DECISION="${DECISION:-}"
 # One line, bounded: it lands in an email, an issue body and an output heredoc.
 REASON="$(printf '%s' "${REASON:-}" | tr '\r\n' '  ' | cut -c1-400)"
 PAGE="https://www.representdc.org/news"
+WITHHELD_RUNS="${WITHHELD_RUNS:-0}"
+[[ "$WITHHELD_RUNS" =~ ^[0-9]{1,6}$ ]] || WITHHELD_RUNS=0
+WITHHELD_ALERT_AFTER=2
 
 notify="none"
 subject=""
@@ -76,8 +88,23 @@ if [ "$OUTCOME" = "summary-withheld" ]; then
   esac
 fi
 
+# A flagged summary on scan after scan (rule 8).
+REPEATED_TITLE="News pipeline: summary flagged on repeated scans"
+REPEATED=0
+if [ "$OUTCOME" = "summary-withheld" ] && [ "$OPERATIONAL" = "0" ] && [ "$WITHHELD_RUNS" -ge "$WITHHELD_ALERT_AFTER" ]; then
+  REPEATED=1
+fi
+
 # A judge flag or a gate withholding is the design working, not a fault.
-if [ "$OPERATIONAL" = "1" ]; then
+if [ "$REPEATED" = "1" ]; then
+  KEY="withheld"
+  TITLE="$REPEATED_TITLE"
+  BODY="The AI summary has been left off the news page on ${WITHHELD_RUNS} scans since one last published,
+because the checker flagged each draft (reason: ${DECISION}). The page is showing the
+photo and the headlines, which is safe. Each scan tries again.
+
+Run log, with the drafts and what was flagged: $RUN_URL"
+elif [ "$OPERATIONAL" = "1" ]; then
   KEY="degraded"
   TITLE="News pipeline: summaries are failing"
   BODY="Summaries are not being produced (reason: ${DECISION}). The page is publishing
@@ -119,6 +146,7 @@ fi
 
 ALL_TITLES=(
   "News pipeline: summaries are failing"
+  "News pipeline: summary flagged on repeated scans"
   "News pipeline: published but not live"
   "News pipeline: nothing published"
   "News pipeline: run failed"
@@ -150,6 +178,12 @@ if [ -z "$KEY" ]; then
   # Healthy. Close anything open and say so once — recovery is worth one email, because it
   # tells her she can stop thinking about it.
   for open_title in "${ALL_TITLES[@]}"; do
+    # Rule 8: the flagged-summary incident is over only when a summary is back on the
+    # page. A run with no articles, with summaries switched off, or with one more flagged
+    # draft is not that, so it leaves the incident open and says nothing.
+    if [ "$open_title" = "$REPEATED_TITLE" ] && [ "$OUTCOME" != "published" ]; then
+      continue
+    fi
     number=$(find_open_issue "$open_title")
     [ -z "$number" ] && continue
     [ "$number" = "?" ] && continue

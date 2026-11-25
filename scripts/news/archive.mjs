@@ -406,6 +406,18 @@ export function composePublication({ payload, summarisedArticles, run, current, 
     feed = { ...feed, summary: null, summarySource: null, summaryCheck: null };
   }
 
+  // A kept summary (fetch-news.mjs, summary-memory.mjs) is the text already on the page,
+  // left where it is. So it is published only while the branch still shows that exact
+  // text. If a withholding, a link added by hand or anything else removed or changed it
+  // after this run read the feed, it is not put back. Rule 3 below does not cover this:
+  // a withholding is stamped when it starts, which can be before this run started, and
+  // pushed after this run read the summary (Codex, 2026-11-25). Checked here because
+  // this runs against the branch as it is at every push attempt.
+  if (feed.summary && payload.summaryDecision === 'judge-pass-kept' && current?.summary !== feed.summary) {
+    reason = 'the summary this run meant to keep is no longer on the page, so it was not put back';
+    feed = { ...feed, summary: null, summarySource: null, summaryCheck: null, summaryDecision: 'kept-summary-gone' };
+  }
+
   const archive = {
     version: fresh.archive.version,
     updatedAt: payload.lastUpdated,

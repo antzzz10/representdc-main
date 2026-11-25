@@ -48,7 +48,8 @@ import {
   checkArticles,
   MAX_ARTICLES,
 } from './news/gates.mjs';
-import { publishFeed, verifyLive, readPublishedArchive, readSeedArchive } from './news/publish.mjs';
+import { publishFeed, verifyLive, readPublishedState, readSeedArchive } from './news/publish.mjs';
+import { reusableSummary, withheldStreak, summaryFingerprint, WITHHELD_ALERT_AFTER } from './news/summary-memory.mjs';
 import {
   applyRun,
   composePublication,
@@ -80,6 +81,10 @@ const SUMMARIES_ENABLED = process.env.NEWS_SUMMARY_ENABLED !== 'false';
 const RUN_ID = process.env.GITHUB_RUN_ID
   ? `${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT ?? '1'}`
   : `local-${Date.now()}`;
+
+// One id per scan, the same for every attempt of the same workflow run, so a run that is
+// run again cannot be counted as two flagged scans (summary-memory.mjs, withheldStreak).
+const SCAN_ID = process.env.GITHUB_RUN_ID ? String(process.env.GITHUB_RUN_ID) : RUN_ID;
 
 const startedAt = new Date();
 const usage = [];
@@ -152,8 +157,14 @@ async function main() {
   // empty or seed-only archive written over the record. The one exception is the
   // explicit bootstrap flag with no archive and no marker, which starts from the seed.
   let archive;
+  // The feed beside the archive, as the branch holds it now. Read for two things only:
+  // whether the summary on the page can be kept, and how many scans in a row have gone
+  // without one (summary-memory.mjs).
+  let publishedFeed = null;
   try {
-    const onBranch = await readPublishedArchive({ bootstrap: BOOTSTRAP });
+    const state = await readPublishedState({ bootstrap: BOOTSTRAP });
+    const onBranch = state.archive;
+    publishedFeed = state.feed;
     if (onBranch === null) {
       archive = loadSeed();
       console.log(`\nNEWS_ARCHIVE_BOOTSTRAP: no archive on gh-pages, starting from the seed (${archive.items.length} items)`);
@@ -306,11 +317,15 @@ async function main() {
   // code path can publish text that was merely generated.
   let summary = null;
   let closer = null;
-  // Stable enum, recorded whether or not anything publishes: judge-pass, judge-flag,
-  // judge-incomplete, judge-no-text, judge-unparseable, judge-api-failure, gate-withheld,
-  // no-articles, summaries-disabled. (The published file can also say archive-changed:
-  // see the publish step.)
+  // Stable enum, recorded whether or not anything publishes: judge-pass,
+  // judge-pass-kept, judge-flag, judge-incomplete, judge-no-text, judge-unparseable,
+  // judge-api-failure, gate-withheld, no-articles, summaries-disabled. (The published
+  // file can also say archive-changed: see the publish step.)
   let decision = 'no-articles';
+  // When the summary being published was written and by which run. Set with `summary`,
+  // and carried in the feed so a later scan can tell whether it may be kept.
+  let summaryWrittenAt = null;
+  let summaryWrittenBy = null;
   if (!articles.length) {
     record.reason = 'no relevant articles';
   } else if (!SUMMARIES_ENABLED) {
@@ -318,10 +333,39 @@ async function main() {
     record.reason = 'NEWS_SUMMARY_ENABLED=false';
   } else {
     const headlines = articles.map((a) => a.title);
+
+    // A summary that already passed the judge for exactly these headlines is kept, not
+    // rewritten: writing a new one every scan threw away good text and gave the page a
+    // fresh chance to lose its summary with no change in the news. The conditions are in
+    // reusableSummary; anything short of all of them writes a new one below. The text
+    // kept is the text the judge passed, byte for byte, and it still goes through the
+    // same publish step as a new one, so a withholding or a changed list still wins.
+    const kept = reusableSummary({
+      current: publishedFeed,
+      articles,
+      now: runNow,
+      judgeVersion: JUDGE_VERSION,
+      promptVersion: PROMPT_VERSION,
+    });
+    record.summaryKept = kept.summary ? { writtenAt: kept.writtenAt, fromRun: kept.fromRun } : null;
+    record.summaryNotKept = kept.summary ? null : kept.why;
+    if (kept.summary) {
+      summary = kept.summary;
+      closer = kept.closer;
+      summaryWrittenAt = kept.writtenAt;
+      summaryWrittenBy = kept.fromRun;
+      decision = 'judge-pass-kept';
+      console.log(`  summary kept: headlines unchanged since it passed the judge (written ${kept.writtenAt})`);
+    } else {
+      console.log(`  writing a new summary: ${kept.why}`);
+    }
+
+    // What the second attempt is told about the first (summarize.mjs, feedbackBlock).
+    let feedback = null;
     for (let attempt = 1; attempt <= 2 && summary === null; attempt += 1) {
       let result;
       try {
-        result = await summarizeArticles(client, articles);
+        result = await summarizeArticles(client, articles, Date.now(), feedback);
       } catch (err) {
         // Once the headlines are ready, no generation failure — including a retry after
         // the judge rejected the first attempt — may cost the reader the feed.
@@ -348,6 +392,10 @@ async function main() {
       // malformed body is.
       if (!gates.filter((g) => g.gate !== 'G1').every((g) => g.pass)) {
         decision = 'gate-withheld';
+        feedback = {
+          body: result.body,
+          problems: gates.filter((g) => g.gate !== 'G1' && !g.pass).map((g) => ({ quote: '', why: g.detail })),
+        };
         if (attempt === 1) console.warn('  retrying summary once');
         continue;
       }
@@ -377,16 +425,19 @@ async function main() {
         overall: verdict.overall,
         flagged: verdictList
           .filter((v) => v && typeof v === 'object' && !v.pass)
-          .map((v) => ({ criterion: v.criterion, quote: v.quote })),
+          .map((v) => ({ criterion: v.criterion, quote: v.quote, why: typeof v.why === 'string' ? v.why : null })),
       };
       console.log(`  ${verdict.overall === 'pass' ? '✓' : '✗'} judge: ${verdict.overall}`);
 
       if (verdict.overall === 'pass') {
         closer = closerFor(result.key);
         summary = `${result.body} ${closer.text}`.replace(/\s+/g, ' ').trim();
+        summaryWrittenAt = new Date().toISOString();
+        summaryWrittenBy = RUN_ID;
         decision = 'judge-pass';
       } else {
         decision = `judge-${verdict.overall}`;
+        feedback = { body: result.body, problems: record.attempts.at(-1).judge.flagged };
         if (attempt === 1) console.warn('  retrying summary once');
       }
     }
@@ -405,6 +456,14 @@ async function main() {
   record.summaryDecision = decision;
   setOutput('summary_decision', decision);
 
+  // Flagged scans since a summary last published. Worked out against the branch as it
+  // is at each push, from the summary actually being written (below), so it describes
+  // what was published and not what this run hoped to publish. A run whose own summary
+  // was dropped at the push is not a flagged scan: only a run with no summary of its own
+  // counts.
+  const streakFor = (current, publishedSummary) =>
+    withheldStreak(current, summary ? null : decision, publishedSummary, SCAN_ID);
+
   const payload = {
     runId: RUN_ID,
     lastUpdated: new Date().toISOString(),
@@ -412,7 +471,18 @@ async function main() {
     summarySource: closer ? { closerKey: closer.key, closerSource: closer.source } : null,
     // Carried in the published file so the invariant in publishFeed() can be checked
     // against what is actually being written, not against what this process believes.
-    summaryCheck: summary ? { judge: 'pass', judgeVersion: JUDGE_VERSION } : null,
+    // `promptVersion`, `writtenAt` and `writtenByRun` are what a later scan reads to
+    // decide whether this summary may be kept (summary-memory.mjs).
+    summaryCheck: summary
+      ? {
+          judge: 'pass',
+          judgeVersion: JUDGE_VERSION,
+          promptVersion: PROMPT_VERSION,
+          writtenAt: summaryWrittenAt,
+          writtenByRun: summaryWrittenBy,
+          fingerprint: summaryFingerprint(summary, articles),
+        }
+      : null,
     summaryDecision: decision,
     articles,
     // The separate list. Not part of anything the summary or the judge saw, and not
@@ -423,6 +493,7 @@ async function main() {
   if (DRY_RUN) {
     console.log(`\nDRY_RUN — would publish:\n${JSON.stringify(payload, null, 2)}`);
     record.summaryPublished = summary;
+    record.summaryWithheldRuns = streakFor(publishedFeed, summary).runs;
     // Not "published": nothing was pushed and nothing was verified live. Saying
     // otherwise would put a false "it's live" line in the review issue.
     finish('dry-run', summary ? 'summary generated, nothing pushed' : 'no summary generated, nothing pushed');
@@ -448,7 +519,11 @@ async function main() {
         runId: RUN_ID,
       });
       if (composed.reason) record.reason = composed.reason;
-      return { feed: composed.feed, archive: composed.archive };
+      const streak = streakFor(current, composed.feed.summary);
+      return {
+        feed: { ...composed.feed, summaryWithheldRuns: streak.runs, summaryWithheldScan: streak.scan },
+        archive: composed.archive,
+      };
     },
     { message: `Update news feed — ${payload.lastUpdated}`, withArchive: true, baseArchive: archive, bootstrap: BOOTSTRAP },
   );
@@ -459,6 +534,13 @@ async function main() {
   record.articles = result.payload?.articles ?? articles;
   record.archive = { confirmed: result.archive?.items.length ?? null, pending: result.archive?.pending.length ?? null };
   record.published = { pushed: Boolean(result.pushed), attempt: result.attempt ?? null };
+  // The count as it was written to the branch, handed to the workflow: after
+  // WITHHELD_ALERT_AFTER flagged scans the owner gets one email instead of finding the
+  // gap on the page (news-incident.sh).
+  const withheldRuns = Number.isInteger(result.payload?.summaryWithheldRuns) ? result.payload.summaryWithheldRuns : 0;
+  record.summaryWithheldRuns = withheldRuns;
+  setOutput('summary_withheld_runs', String(withheldRuns));
+  if (withheldRuns >= WITHHELD_ALERT_AFTER) console.warn(`  summary flagged on ${withheldRuns} scans since one last published`);
 
   const live = await verifyLive(RUN_ID);
   record.live = live;

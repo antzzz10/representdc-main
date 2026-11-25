@@ -360,7 +360,8 @@ test('summary prompt: tells the model not to use dashes, under a new prompt vers
   };
   await summarizeArticles(client, [{ title: 'House votes on D.C. bill', source: 'The 51st', pubDate: '2026-11-20T12:00:00Z' }]);
   assert.match(prompt, /\n- Do not use em-dashes or en-dashes\. Use commas, periods or parentheses instead\.\n/);
-  assert.equal(PROMPT_VERSION, '2026-11-21.1');
+  // Bumped on 2026-11-25, when the rules about elections, titles and who acted were added.
+  assert.equal(PROMPT_VERSION, '2026-11-25.1');
 });
 
 test('closers: no vetted closing sentence contains a dash', () => {

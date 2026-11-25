@@ -180,7 +180,7 @@ test('fetch-news.mjs: newsletter items go to the newsletters list and nowhere el
   assert.match(code, /fetchAllFeeds\(NEWSLETTERS, Date\.now\(\), 'newsletter'\)/);
   assert.match(code, /splitCandidates\(archive, candidates\)/);
   assert.match(code, /filterByRelevance\(client, toFilter\)/);
-  assert.match(code, /summarizeArticles\(client, articles\)/);
+  assert.match(code, /summarizeArticles\(client, articles, Date\.now\(\), feedback\)/);
   assert.match(code, /judgeSummary\(client, result\.body, articles\)/);
   assert.match(code, /checkArticles\(articles, summary \? articles\.map/);
   // `newsletters` itself appears only in the import path, where it is decided, where it

@@ -87,6 +87,8 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           OUTCOME: ${{ steps.run.outputs.outcome }}
           DECISION: ${{ steps.run.outputs.summary_decision }}
+          # Scans in a row whose summary was flagged, counting this one.
+          WITHHELD_RUNS: ${{ steps.run.outputs.summary_withheld_runs }}
           REASON: ${{ steps.run.outputs.reason }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: bash .github/scripts/news-incident.sh

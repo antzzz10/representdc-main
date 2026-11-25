@@ -167,8 +167,20 @@ function readFeed(dir) {
  * Returns null only when `bootstrap` is set and there is no archive and no marker.
  */
 export async function readPublishedArchive({ bootstrap = false } = {}) {
+  return (await readPublishedState({ bootstrap })).archive;
+}
+
+/**
+ * The archive (as readPublishedArchive gives it) and the feed beside it, from one
+ * checkout. A run reads the feed to see whether the summary on the page can be kept and
+ * how many scans in a row have gone without one (summary-memory.mjs). Read-only, and
+ * only a starting point: what is written is still decided against the branch as it is
+ * at each push (publishFeed).
+ */
+export async function readPublishedState({ bootstrap = false } = {}) {
   const { dir } = await checkoutBranch('gh-pages');
-  return readArchiveOrRefuse(dir, readFeed(dir), bootstrap);
+  const feed = readFeed(dir);
+  return { archive: readArchiveOrRefuse(dir, feed, bootstrap), feed };
 }
 
 /**

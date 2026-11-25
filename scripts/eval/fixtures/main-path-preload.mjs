@@ -28,10 +28,22 @@ function modelReply(prompt) {
     return { kind: 'filter', text: JSON.stringify(yes) };
   }
   if (prompt.startsWith('You write a short neutral news-digest summary')) {
+    // A second attempt, told what was flagged, writes something else.
+    if (prompt.includes('An earlier draft was turned down')) {
+      return { kind: 'summary', text: 'Advocates and District officials pressed their case for statehood this week, and supporters said they would keep asking members of Congress to back the bill.\nCLOSER: laws' };
+    }
     return { kind: 'summary', text: 'A statehood bill moved forward in Congress as advocates and District officials pressed their case this week.\nCLOSER: laws' };
   }
-  const verdicts = ['J1', 'J2', 'J3', 'J4'].map((criterion) => ({ criterion, pass: true, quote: null, why: 'supported' }));
-  return { kind: 'judge', text: JSON.stringify({ verdicts, overall: 'pass' }) };
+  // MAIN_PATH_JUDGE=flag-first: the judge flags a draft that says the bill moved, and
+  // passes one that does not. MAIN_PATH_JUDGE=flag-all: it flags every draft.
+  const paragraph = prompt.split('Paragraph to check:')[1] ?? '';
+  const flag = process.env.MAIN_PATH_JUDGE === 'flag-all' || (process.env.MAIN_PATH_JUDGE === 'flag-first' && /moved forward/.test(paragraph));
+  const verdicts = ['J1', 'J2', 'J3', 'J4'].map((criterion) =>
+    flag && criterion === 'J1'
+      ? { criterion, pass: false, quote: 'moved forward in Congress', why: 'No headline says the bill moved.' }
+      : { criterion, pass: true, quote: null, why: 'supported' },
+  );
+  return { kind: 'judge', text: JSON.stringify({ verdicts, overall: flag ? 'flag' : 'pass' }) };
 }
 
 globalThis.fetch = async (input, init = {}) => {
