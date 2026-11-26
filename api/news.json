@@ -1,6 +1,6 @@
 {
-  "runId": "45665802799-1",
-  "lastUpdated": "2026-11-25T17:33:31.133Z",
+  "runId": "45738291127-1",
+  "lastUpdated": "2026-11-26T01:50:06.580Z",
   "summary": "Recent midterm election results have energized D.C. statehood advocates, with Robert White winning the delegate race and candidates emphasizing statehood in their bids for local office, including Shadow Senator Ankit Jain's campaign for D.C. Council. The Trump administration's proposals affecting the District, including a request for funding to expedite Southwest D.C. redevelopment and plans for a triumphal arch that D.C. and Virginia are challenging in court, have prompted discussion about the city's political vulnerability and autonomy. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
@@ -14,7 +14,7 @@
     "writtenByRun": "45665802799-1",
     "fingerprint": "6a30d5a15abfc28a7b8201d5f8976ae5e58e9da9ee60f18faa2c0ccbe0ae7301"
   },
-  "summaryDecision": "judge-pass",
+  "summaryDecision": "judge-pass-kept",
   "articles": [
     {
       "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
@@ -112,6 +112,6 @@
   "summaryWithheldScan": null,
   "archive": {
     "initialized": true,
-    "items": 30
+    "items": 31
   }
 }
