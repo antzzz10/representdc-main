@@ -1,7 +1,7 @@
 {
-  "runId": "46036650006-1",
-  "lastUpdated": "2026-11-27T16:49:06.346Z",
-  "summary": "Recent midterm election results have energized D.C. statehood advocates, with Robert White winning the delegate race and candidates emphasizing statehood in their bids for local office, including Shadow Senator Ankit Jain's campaign for D.C. Council. The Trump administration's proposals affecting the District, including a request for funding to expedite Southwest D.C. redevelopment and plans for a triumphal arch that D.C. and Virginia are challenging in court, have prompted discussion about the city's political vulnerability and autonomy. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
+  "runId": "46093342965-1",
+  "lastUpdated": "2026-11-28T01:30:22.954Z",
+  "summary": "Robert White was elected D.C. delegate, and advocates say recent election results have created new momentum for D.C. statehood. Shadow Senator Ankit Jain is running for D.C. Council, while a sweeping permitting overhaul has passed the Senate and moved to the House. Without statehood, D.C. residents have no senators, and their one delegate to the House cannot vote on the House floor.",
   "summarySource": {
     "closerKey": "representation",
     "closerSource": "https://www.everycrsreport.com/reports/IF11443.html"
@@ -10,11 +10,11 @@
     "judge": "pass",
     "judgeVersion": "2026-09-12.1",
     "promptVersion": "2026-11-25.1",
-    "writtenAt": "2026-11-25T17:33:31.133Z",
-    "writtenByRun": "45665802799-1",
-    "fingerprint": "6a30d5a15abfc28a7b8201d5f8976ae5e58e9da9ee60f18faa2c0ccbe0ae7301"
+    "writtenAt": "2026-11-28T01:30:22.953Z",
+    "writtenByRun": "46093342965-1",
+    "fingerprint": "093b0cd2d9dddedb9ffbc255a1cd470969f097cce3c3c876d4701cfc9015c12b"
   },
-  "summaryDecision": "judge-pass-kept",
+  "summaryDecision": "judge-pass",
   "articles": [
     {
       "title": "Trump Admin Wants $100 Million to Expedite Southwest D.C. Redevelopment",
@@ -33,6 +33,12 @@
       "link": "https://www.washingtonsun.com/metro/dc/ankit-jain-dc-council-candidacy",
       "pubDate": "2026-11-20T12:00:00.000Z",
       "source": "The Washington Sun"
+    },
+    {
+      "title": "Sweeping permitting overhaul passes Senate, on to House",
+      "link": "https://rollcall.com/2026/11/19/sweeping-permitting-overhaul-passes-senate-on-to-house",
+      "pubDate": "2026-11-19T22:27:55.000Z",
+      "source": "Roll Call"
     },
     {
       "title": "Perspective: Trump’s DC takeover played a part in Republicans’ midterm losses",
@@ -99,12 +105,6 @@
       "link": "https://www.washingtoninformer.com/trump-arch-lawsuit-dc/",
       "pubDate": "2026-11-02T06:29:00.000Z",
       "source": "Washington Informer"
-    },
-    {
-      "title": "D.C., Virginia Sue Trump Adminstration Over Proposed Triumphal Arch",
-      "link": "https://www.washingtonsun.com/metro/dc-virginia-sue-trump-administration-triumphal-arch",
-      "pubDate": "2026-10-31T14:40:07.000Z",
-      "source": "The Washington Sun"
     }
   ],
   "newsletters": [],
